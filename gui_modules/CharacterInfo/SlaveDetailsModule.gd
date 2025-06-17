@@ -101,7 +101,7 @@ func unique_sprite_choose():
 	
 
 func make_random_portrait():
-	unpress_buttons()
+#	unpress_buttons()
 	person = input_handler.interacted_character
 	if person != null:
 		person.make_random_portrait()

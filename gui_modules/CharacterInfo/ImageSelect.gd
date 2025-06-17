@@ -187,27 +187,29 @@ func _on_search_text_changed( text ):
 func _on_removeportrait_pressed():
 	if mode == 'portrait':
 		person.set_stat('player_selected_icon', false)
-		person.set_stat('icon_image','default') #not sure cause icon_image default value is empty, not 'default'
+		person.set_stat('icon_image','')
+		person.set_stat('dynamic_portrait', true)
+		person.update_prt()
 	elif mode == 'body':
 		person.set_stat('body_image', 'default')
 		person.set_stat('player_selected_body', false)
-	person.update_prt()
 	self.visible = false
 	updatepage()
 
-func _on_reverseportrait_pressed():
-	var tmp = person.get_stat('unique')
-	if tmp != null and !(tmp in ['dog', 'horse']): #not working for thjere is no imageportait attribute
-		person.imageportait = globals.characters.characters[tmp].imageportait
-		self.visible = false
-		person.imagefull = null
-		updatepage()
-	else:
-		person.set_stat('body_image', 'default')
-		person.set_stat('player_selected_icon', false)
-		person.set_stat('player_selected_body', false)
-		person.set_stat('icon_image','default') #not sure cause icon_image default value is empty, not 'default'
-		updatepage()
+#not in use?
+#func _on_reverseportrait_pressed():
+#	var tmp = person.get_stat('unique')
+#	if tmp != null and !(tmp in ['dog', 'horse']): #not working for thjere is no imageportait attribute
+#		person.imageportait = globals.characters.characters[tmp].imageportait
+#		self.visible = false
+#		person.imagefull = null
+#		updatepage()
+#	else:
+#		person.set_stat('body_image', 'default')
+#		person.set_stat('player_selected_icon', false)
+#		person.set_stat('player_selected_body', false)
+#		person.set_stat('icon_image','')
+#		updatepage()
 
 
 

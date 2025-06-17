@@ -1273,7 +1273,7 @@ func create(temp_race, temp_gender, temp_age):
 	parent.get_ref().get_racial_features(statlist.race)
 	get_random_name()
 	get_random_colors()
-	random_icon()
+	random_icon()#mind, that for now this func do nothing!
 	
 	for i in ResourceScripts.descriptions.bodypartsdata:
 		var tval = get_stat(i)
@@ -1532,9 +1532,11 @@ func translate(text, number = -1):
 
 
 func make_random_portrait():
-	statlist.icon_image = ResourceScripts.rnd_main.setrandom(parent.get_ref()) 
-	if statlist != null && statlist.icon_image != null && !statlist.icon_image.empty(): # this if sets the matching body image
+	var random_portrait = ResourceScripts.rnd_main.setrandom(parent.get_ref())
+	if statlist != null && random_portrait != null && !random_portrait.empty(): 
+		statlist.icon_image = random_portrait
 		statlist.dynamic_portrait = false
+		#this if sets the matching body image
 		var fullImagePath = statlist.icon_image.replacen(input_handler.globalsettings.portrait_folder, input_handler.globalsettings.body_folder)
 		if File.new().file_exists(fullImagePath):
 			statlist.body_image = fullImagePath 

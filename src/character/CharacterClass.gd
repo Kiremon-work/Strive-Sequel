@@ -2181,6 +2181,8 @@ func update_portrait(ragdoll): # for ragdolls
 
 func check_portrait():
 	var path = get_stat('icon_image')
+	if !path:
+		return false
 	if !(path.is_abs_path() or path.is_rel_path()): #portrait is not path - so it must exist
 		return true 
 	if File.new().file_exists(path): 
@@ -2191,8 +2193,8 @@ func check_portrait():
 func update_prt():
 	if get_stat("unique") == null or get_stat("player_selected_icon"):
 		return
-	if get_stat("player_selected_body"):
-		return
+#	if get_stat("player_selected_body"):#why chack this in portrait update?
+#		return
 	var prt_name: String
 	var variation = "default"
 	if has_work_rule('nudity'):
