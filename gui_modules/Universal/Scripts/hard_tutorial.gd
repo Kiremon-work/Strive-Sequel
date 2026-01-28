@@ -635,6 +635,7 @@ func prepare_general_tut():
 	globals.equip_char(character, 'chest_base_cloth', {ArmorBaseCloth = 'cloth', ArmorTrim = 'wood'})
 	globals.equip_char(character, 'legs_base_cloth', {ArmorBaseCloth = 'cloth', ArmorTrim = 'wood'})
 	character.xp_module.base_exp = 150
+	character.add_trait('literacy')
 	globals.common_effects([{code = 'make_story_character', value = 'tutorial_servant'}])
 	character = ResourceScripts.game_party.get_unique_slave('tutorial_servant')
 	globals.equip_char(character, 'staff', 't1')
