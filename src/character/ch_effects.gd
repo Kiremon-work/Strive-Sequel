@@ -43,6 +43,31 @@ func deserialize(savedict):
 	effects_temp_stored = savedict.effects_temp_stored.duplicate()
 	effects_temp_globals = savedict.effects_temp_globals.duplicate()
 
+func fix_serialize():
+	var effs = effects_pool.get_effects_for_char(parent.get_ref().id, true)
+	for eff in effs:
+		if eff is temp_e_global:
+			var f = false
+			for rec in effects_temp_globals:
+				if rec.id == eff.id:
+					f = true
+					break
+			if !f:
+				print("global effect %s / %s is removed as not applied to its owner" % [eff.id, str(eff.template_id)])
+				eff.is_applied = false
+		else:
+			var stid = 'default'
+			if eff.template.has('stack'): 
+				stid = eff.template.stack
+			if effects_temp_stored.has(stid):
+				var stack = effects_pool.get_stack_by_id(effects_temp_stored[stid])
+				if !stack.has_effect(eff.id):
+					print("stacked effect %s / %s / %s is removed as not applied to its owner - no effect" % [eff.id, stid, str(eff.template_id)])
+					eff.is_applied = false
+			else:
+				print("stacked effect %s / %s is removed as not applied to its owner - no stack" % [eff.id, stid])
+				eff.is_applied = false
+
 
 func add_eff_to_stack(e_id, timestamp = null):
 	var eff = effects_pool.get_effect_by_id(e_id)
@@ -68,27 +93,31 @@ func add_eff_to_stack(e_id, timestamp = null):
 			effects_temp_real[stack_code] = stack
 			stack.owner = parent.get_ref().id
 	stack.add_effect(e_id, timestamp)
+	
+	return stack.has_effect(e_id)
+
 
 
 func add_stored_effect(code, dict = {}):
 	var data = Effectdata.effect_table[code]
 	var eff
 	var id
+	var applied = true
 	match data.type:
 		'simple':
 			effects_stored.push_back({id = code, timestamp = get_timestamp()})
 		'base':
 			eff = effects_pool.e_createfromtemplate(code, parent.get_ref().id)
 			id = effects_pool.add_effect(eff)
-			add_eff_to_stack(id)
+			applied = add_eff_to_stack(id)
 		'trigger':
 			eff = effects_pool.e_createfromtemplate(code, parent.get_ref().id)
 			id = effects_pool.add_effect(eff)
-			add_eff_to_stack(id)
+			applied = add_eff_to_stack(id)
 		'temp_s':
 			eff = effects_pool.e_createfromtemplate(code, parent.get_ref().id)
 			id = effects_pool.add_effect(eff)
-			add_eff_to_stack(id)
+			applied = add_eff_to_stack(id)
 		'temp_global':
 			eff = effects_pool.e_createfromtemplate(code, parent.get_ref().id)
 			id = effects_pool.add_effect(eff)
@@ -96,7 +125,7 @@ func add_stored_effect(code, dict = {}):
 			if input_handler.combat_node != null and !Effectdata.effect_nolog.has(code):
 				input_handler.combat_node.combatlogadd(Effectdata.get_apply_message(parent.get_ref(), code))
 	
-	if data.type != 'simple':
+	if data.type != 'simple' and applied:
 		eff.owner = parent.get_ref().id
 		eff.calculate_args(dict)
 		eff.apply()

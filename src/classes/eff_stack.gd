@@ -163,3 +163,7 @@ func get_apply_message():
 func get_update_message(): #for inhereted classes
 	var tres = tr('LOGEFFECTRENEW')
 	return tres % [tr('EFFECTNAME_' + code.to_upper()), get_applied_object().get_short_name()]
+
+
+func has_effect(eff):
+	return effects.has(eff)
