@@ -392,7 +392,13 @@ func _input(event):
 			if event.is_action_pressed("ESC") and !hard_tutorial.is_in_menu():
 				hard_tutorial.tutorial_menu()
 			pass_event = event is InputEventMouseMotion
-			if event.is_action_released("LMB") or event.is_action_pressed("LMB"):
+			if event.is_action_released("RMB"):
+				if hard_tutorial.is_RMB_pass():
+					pass_event = true
+					#this is not right, as such signal should be emited per action, not event passing
+					#but for now it will do
+					hard_tutorial.emit_signal("close_by_RMB")
+			elif event.is_action("LMB"):
 				var action
 				if event.is_pressed(): action = "pressed"
 				else: action = "released"

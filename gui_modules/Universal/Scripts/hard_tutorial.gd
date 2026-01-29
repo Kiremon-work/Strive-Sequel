@@ -46,15 +46,11 @@ var tutorials = {
 		{
 			buttons = ['food_mode'],
 			text = "TUTORIAL_TRAINING5",
-			panel_pos = Vector2(733,50)
+			panel_pos = Vector2(850,50)
 		},{
 			buttons = ['ff_meat'],
 			text = "TUTORIAL_TRAINING6",
-			panel_pos = Vector2(733,50)
-		},{
-			buttons = ['ff_vegetables'],
-			text = "TUTORIAL_TRAINING7",
-			panel_pos = Vector2(733,50)
+			panel_pos = Vector2(850,50)
 		},
 		#3
 		{
@@ -112,6 +108,8 @@ var tutorials = {
 	work_intermedia = [
 		{
 			buttons = ['char_close_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_WORK0",
 			panel_pos = Vector2(733,150)
 		}
@@ -131,6 +129,8 @@ var tutorials = {
 			panel_pos = Vector2(733,150)
 		},{
 			buttons = ['upgrade_close_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_WORK4",
 			panel_pos = Vector2(733,150)
 		},{
@@ -140,15 +140,17 @@ var tutorials = {
 		},{
 			buttons = ['building_work'],
 			text = "TUTORIAL_WORK6",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['daisy_work'],
 			text = "TUTORIAL_WORK7",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['close_work'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_WORK8",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['finish_turn'],
 			text = "TUTORIAL_WORK9",
@@ -169,18 +171,20 @@ var tutorials = {
 		},{
 			buttons = ['service_work'],
 			text = "TUTORIAL_WORK13",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['daisy_work'],
 			text = "TUTORIAL_WORK14",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		}
 	],
 	leveling_intermedia = [
 		{
 			buttons = ['close_work'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_LEVELING0",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(500,150)
 		}
 	],
 	leveling = [
@@ -204,6 +208,8 @@ var tutorials = {
 			delay = 1.0
 		},{
 			buttons = ['inv_close_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_LEVELING5",
 			panel_pos = Vector2(733,150)
 		},{
@@ -341,7 +347,6 @@ var tutorials = {
 			listen = ['combat_turn_signal'],
 			no_highlight = true,
 			condition_func = "check_turn_master",
-			text = 'TUTORIAL_COMBAT18',
 			panel_pos = Vector2(100,50)
 		},{
 			buttons = ['combat_skill_1'],
@@ -358,7 +363,6 @@ var tutorials = {
 			listen = ['combat_turn_signal'],
 			no_highlight = true,
 			condition_func = "check_turn_servent",
-			text = 'TUTORIAL_COMBAT21',
 			panel_pos = Vector2(100,50)
 		},{
 			buttons = ['combat_skill_2'],
@@ -367,7 +371,7 @@ var tutorials = {
 			delay = 0.5
 		},{
 			buttons = ['combat_ally'],
-			text = 'TUTORIAL_COMBAT23',
+			text = 'TUTORIAL_COMBAT22',
 			panel_pos = Vector2(733,50)
 		},{
 			buttons = ['tut_full_screen'],
@@ -382,7 +386,6 @@ var tutorials = {
 			listen = ['combat_rewards_signal'],
 			no_highlight = true,
 			tut_func = "add_combat_reward_char",
-			text = 'TUTORIAL_COMBAT25',
 			panel_pos = Vector2(100,50)
 		},{
 			buttons = ['combat_close'],
@@ -396,6 +399,8 @@ var tutorials = {
 			delay = 0.5
 		},{
 			buttons = ['slave_info_close_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = 'TUTORIAL_COMBAT28',
 			panel_pos = Vector2(733,50),
 			delay = 2.0
@@ -459,10 +464,12 @@ var tut_menu
 var listeners = [
 	#{source, sig, fun}
 ]
+signal close_by_RMB
 
 func _init():
 	tut_panel = input_handler.get_spec_node(input_handler.NODE_HARD_TUTORIAL_PANEL)
 	tut_panel.hide()
+	input_handler.register_btn_source('close_by_RMB_sig', self, null, null, null, 'close_by_RMB')
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE and is_instance_valid(tut_panel):
@@ -718,3 +725,10 @@ func prepare_tutorial(tut_name):
 
 func is_tut_active():
 	return cur_tut != null
+
+func is_RMB_pass():
+	if is_tut_active():
+		var step_info = tutorials[cur_tut][cur_step]
+		if step_info.has('pass_RMB'):
+			return step_info.pass_RMB
+	return false
