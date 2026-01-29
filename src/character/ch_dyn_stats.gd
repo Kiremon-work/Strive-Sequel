@@ -55,17 +55,20 @@ func deserialize(savedict):
 
 
 func fix_serialize():
+	.fix_serialize()
 	for tr in traits_stored.duplicate():
 		if Traitdata.traits.has(tr): 
 			continue
 		traits_stored.erase(tr)
 	for prof in professions.keys():
-		remove_all_temp_effects_tag('class_' + prof)
+		#commented code below fixed some error in profs data manipulation that caused loss of classes persistent effects. since this error was lond ago - there is little value in keeping this fix. and more to it - it causes errors with togglable auras (cause they are classes persistent effects) loading. 
+#		remove_all_temp_effects_tag('class_' + prof)
 		if classesdata.professions.has(prof): 
-			var data = classesdata.professions[prof]
-			if data.has('persistent_effects'):
-				for eff in data.persistent_effects:
-					add_stored_effect(eff)
+			continue
+#			var data = classesdata.professions[prof]
+#			if data.has('persistent_effects'):
+#				for eff in data.persistent_effects:
+#					add_stored_effect(eff)
 		else:
 			professions.erase(prof)
 
@@ -171,6 +174,7 @@ func generate_data(stop_at = variables.DYN_STATS_FULL, forced = false):
 	
 	rebuild = variables.DYN_STATS_FULL
 	parent.get_ref().update_capped_stats()
+	
 
 
 

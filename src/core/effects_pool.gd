@@ -152,6 +152,18 @@ func get_n_effects_linked_to(char_id, eff_n):
 	return res
 
 
+func get_effects_for_char(id, stored = false):
+	var res = []
+	for e in effects.values():
+		if !e.is_applied:
+			 continue
+		if stored and !e.is_stored:
+			continue
+		if e.owner is String and e.owner == id:
+			res.push_back(e)
+	return res
+
+
 func serialize():
 	cleanup()
 	var tmp = {}
