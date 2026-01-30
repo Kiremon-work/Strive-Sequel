@@ -18,7 +18,7 @@ func get_full_screen():
 	return self
 
 func show_tut(txt, pos):
-	$panel/Label.bbcode_text = txt
+	$panel/Label.bbcode_text = globals.TextEncoder(txt)
 	$panel.rect_global_position = pos
 	raise()
 	$panel.show()

@@ -1296,6 +1296,8 @@ var GFX_sprites = {
 	void_barrage = "res://assets/sfx/hit_animation/void_barrage.tscn",
 	wind_wall = "res://assets/sfx/hit_animation/wind_wall.tscn",
 	warmarch = "res://assets/sfx/hit_animation/warmarch.tscn",
+	aura_firearr = "res://assets/sfx/hit_animation/aura_firearr.tscn",
+	aura_arcaneblade = "res://assets/sfx/hit_animation/aura_arcaneblade.tscn",
 	}
 
 var GFX_particles = {
