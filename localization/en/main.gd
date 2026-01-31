@@ -729,7 +729,6 @@ Otherwise: +3 Physics""",
 	ITEMSLOTNECK = "Neck",
 	ITEMSLOTTOOL = "Tool",
 	ITEMREQNONUNIQUE = "Can only be applied to non-unique slaves",
-#	ITEMREQSMASTERY = "Masteries levels not matched or already know this skill",
 	ITEMREQSMASTERYLIT = "Masteries levels not matched, no Literacy proficiency or already know this skill",
 	ITEMREQSLITERACY = "Proficiency in Literacy is required for reading",
 	ITEMLEATHER_COLLAR = "Leather Collar",
@@ -5773,7 +5772,6 @@ Proceed? (original save file will stay untouched, but won't work with the curren
 	TUTORIAL_TRAINING17 = "On the second tab, you can find special proficiencies that provide additional enhancements to a character.",
 	TUTORIAL_TRAINING18 = "These proficiencies take time and money to complete, but they do not make the character unavailable for other work.",
 	TUTORIAL_TRAINING19 = "Confirm the unlock.",
-
 	TUTORIAL_WORK0 = "You can leave this menu by closing it using the button in the top-right corner. Many windows can also be closed with a right-click.",
 	TUTORIAL_WORK1 = "Select the Mansion button to access your building upgrades.",
 	TUTORIAL_WORK2 = "This menu contains various improvements for your mansion. Each upgrade requires resources and work time to complete.",
@@ -5789,7 +5787,6 @@ Proceed? (original save file will stay untouched, but won't work with the curren
 	TUTORIAL_WORK12 = "Return to the Work menu.",
 	TUTORIAL_WORK13 = "Even though you selected her as a waitress, you must first reassign her from crafting to service work.",
 	TUTORIAL_WORK14 = "Here you can review additional rules and benefits of service work. While working, characters generate experience and a stat related to their task each turn.",
-
 	TUTORIAL_LEVELING0 = "Speaking of experience, let's look at another way to gain it.",
 	TUTORIAL_LEVELING1 = "Select Inventory to view your possessions.",
 	TUTORIAL_LEVELING2 = "Select your Master as the active character to manage.",
@@ -5804,7 +5801,6 @@ Proceed? (original save file will stay untouched, but won't work with the curren
 	TUTORIAL_LEVELING11 = "Unlocking the Fighter class grants mastery points. Use them to unlock combat or magic masteries that provide combat skills. Unlock the Leadership mastery.",
 	TUTORIAL_LEVELING12 = "There are two types of mastery points. Universal points can be used for either combat or magic masteries, while specialized points are restricted to one type.",
 	TUTORIAL_LEVELING13 = "Masteries also provide minor passive stat bonuses, so keep those in mind.",
-
 	TUTORIAL_COMBAT0 = "Now let's leave the mansion.",
 	TUTORIAL_COMBAT1 = "You can find the navigation panel at the top. For now, only the local city of Aliron is available.",
 	TUTORIAL_COMBAT2 = "Select the notice board to view available repeatable quests.",
@@ -12028,25 +12024,25 @@ You remind her as you're still deep inside that she should call you what you are
 	HALLOWEEN_EVENT2 = """{color=aqua|Anastasia: — Isn't it that story about a girl being eaten by a wolf?! Why me of all people...}
 
 {color=magenta|Zephyra: — Her naivety would certainly play a role here if she met some wrongdoers. And to her misfortune she indeed came across them. A couple of bandits saw her walking alone through the woods and readily approached her.}""",
-	HALLOWEEN_EVENT3 = """{color=gray_text_dialogue|Bandit: — Well there, pretty, where are you heading?}
+	HALLOWEEN_EVENT3 = """{color=aqua|Bandit: — Well there, pretty, where are you heading?}
 
 {color=aqua|Anastasia: *Gulp* — I'm going to my sickly grandma, I'm bringing her meat buns...}
 
-{color=gray_text_dialogue|Bandit: — Wow, did you hear that? A woman and food delivery for us, two in one! You must have heard of us coming here dressed like this?}
+{color=aqua|Bandit: — Wow, did you hear that? A woman and food delivery for us, two in one! You must have heard of us coming here dressed like this?}
 
 {color=aqua|Anastasia: — I-I don't understand what you mean. Please, let me go...}
 
-{color=gray_text_dialogue|Bandit: — No, this clearly won't do. We shall consider it if you do something for us. How about showing your giant breasts?}""",
+{color=aqua|Bandit: — No, this clearly won't do. We shall consider it if you do something for us. How about showing your giant breasts?}""",
 	HALLOWEEN_EVENT4 = """{color=aqua|Anastasia: — No, let me go, get your hands away from me! What even is this set up?!}
 
-{color=gray_text_dialogue|Bandit: — Stay quiet silly girl, none can help you in these dark woods!}
+{color=aqua|Bandit: — Stay quiet silly girl, none can help you in these dark woods!}
 
 {color=magenta|Zephyra: — Such a sorrowful sight would make any hero rush to save her, but the help came from a source she wouldn't expect.}""",
 	HALLOWEEN_EVENT5 = """{color=yellow|Cali: — Watcha doing you bastards!? I, bandit punisher, Ca-I mean, Big Good Wolf will not let you go unpunished for this!}
 
 {color=yellow|Cali: — Ryaaaaa!}
 
-{color=gray_text_dialogue|Bandit: — Wha— Aaarrgh! Noo, don't kill us!}
+{color=aqua|Bandit: — Wha— Aaarrgh! Noo, don't kill us!}
 
 {color=magenta|Zephyra: — As a true beast, the wolf jumped at the bandits which ran in fear of being eaten. }""",
 	HALLOWEEN_EVENT6 = """{color=aqua|Anastasia: — Woah, you really have no shame wearing that..?}
@@ -17262,6 +17258,11 @@ Zephyra freezes as she sees your deed. Her face spells your doom. The time stops
 	AMELIA_PROPOSAL_DESCRIPT = "Amelia looks at you with a reserved satisfaction, betrayed by her slight visible shaking.",
 	KURO_QUEST_FINISHED_TEXT = "That's one proposal you might seriously regret. That's why I'm going to make you keep it. ",
 	KURO_QUEST_FINISHED_DESCRIPTION = "Kuro looks at you unlike you have always saw her. Her expression is almost dreamlike...",
+	MAE_PROPOSAL_FINISHED_TEXT = "M-me? Your wife?.. I never thought someone would choose me like that... If you truly want it, then I will stay by your side.",
+	MAE_PROPOSAL_FINISHED_DESCRIPT = "Mae freezes for a moment. Her tail sways nervously before she lowers her gaze, smiling with quiet sincerity.",
+	MAE_PROPOSAL_UNFINISHED_TEXT = "I-I'm sorry... I don't think I can accept something like this yet, it feels too early for me.",
+	MAE_PROPOSAL_UNFINISHED_DESCRIPT = "Mae fidgets with her fingers, avoiding your eyes.",
+		
 	HIRE_LINE1 = "...Pleased to meet you, [Master].",
 	HIRE_LINE2 = "Please, take care of me, [Master].",
 	HIRE_LINE3 = "So you are my new [Master]! Pleased to meet you!",
@@ -19131,10 +19132,10 @@ Offspring will inherit only this parent's stats.""",
 	HELEVIEL_BAR_SS = "Take an opportunity over Heleviel during her work hours",
 	HELEVIEL_FOREST_SS = "Commit a public indecency with a reformed elven priestess.",
 	HELEVIEL_WEDDING_SS = "Become a new life for former elven high priestess.",
-	MAE_BEHIND_SS = " .", #2fix
-	MAE_RITUAL_SS = " .", #2fix
-	MAE_NORTHERN_SS = " .", #2fix
-	MAE_WEDDING_SS = " .", #2fix
+	MAE_BEHIND_SS = "Give Mae an opportunity to become a druid.",
+	MAE_RITUAL_SS = "Make Mae perform a spirit binding ritual in a special way.",
+	MAE_NORTHERN_SS = "Complete Mae's adoption for frivolous sexual acts.",
+	MAE_WEDDING_SS = "Become Mae's husband.",
 	DAISY_CLOTHES_AMELIA_NEW_LEADER_REPLY_1 = """You explain to Alise that one of your slaves needs a change of clothes.
 
 {color=yellow|— Why, yes, proper servants' attire is one of our specialties. You know, the right clothes make a big difference even for less ideal bodies, naturally we have tailors who can adjust for any required body type. But what are you looking for, anyway?}""",
@@ -20749,7 +20750,6 @@ Heleviel raises a brow, but it's too late to back out.""",
 	HELEVIEL_SNOWSET_EVENT_5B = """Heleviel closes her eyes in meditation, before composing herself to deliver a clear, steady speech.
 
 {color=yellow|Heleviel: — This is a boon. A custom of goodwill. And I want to thank you, not only for the gift, but for the hands and hearts behind it that chose to make it here. Your work and benevolence deserve my sincerest blessing, which I deliver to you. You have my gratitude, and more than anyone, [name], who is the reason that I'm here. Merry Christmas!}""",
-	
 	MAE_QUEST_INITIATE_START = """After a few days of living at your place, Mae, a beastkin shaman who joined you after the obscene ritual, finally approaches you. She rubs her legs together, looking down before she finally speaks up.
 
 {color=yellow|Mae: — H-hi, how's your day?}""",
@@ -20769,7 +20769,6 @@ Judging by Mae's tone, she still isn't quite used to the luxury of a city mansio
 	MAE_QUEST_INITIATE_REQUEST_OPTION_1 = "Alright, I can show you around",
 	MAE_QUEST_INITIATE_REQUEST_OPTION_2 = "Maybe once I have time",
 	MAE_QUEST_INITIATE_CLOSE = "{color=yellow|Mae: — Thank you, I hope it won't take you too long...}",
-
 	MAE_MARKET_START = """You lead Mae to the market, slowly guiding her through various stalls as she observes her surroundings with wide eyes.
 
 {color=yellow|Mae: — Wow, it's only been a couple of years since I visited last time, but things have changed so much...}""",
@@ -20779,7 +20778,7 @@ Judging by Mae's tone, she still isn't quite used to the luxury of a city mansio
 
 On a velvet cloth sits a pile of glossy, amber-skinned fruits, each one perfectly round and faintly warm as if it was just picked.
 
-{color=gray_text_dialogue|Fruit Vendor: — Sunplums! Fresh shipment, rare this season! Price is firm.}
+{color=aqua|Fruit Vendor: — Sunplums! Fresh shipment, rare this season! Price is firm.}
 
 Mae takes one look at the sign and immediately pulls her hand back.
 
@@ -20791,7 +20790,7 @@ She stares a moment longer, swallowing, then looks at you with a hesitant, embar
 	MAE_MARKET_FRUIT_OPTION_MOVE = "We better move on",
 	MAE_MARKET_FRUIT_BUY = """You reach for your coin pouch without making a big deal out of it.
 
-{color=gray_text_dialogue|Fruit Vendor: — Good choice. Mind the juice, it stains.}
+{color=aqua|Fruit Vendor: — Good choice. Mind the juice, it stains.}
 
 The vendor wraps it in thin paper and passes it over. Mae accepts it with both hands like it's a gift.""",
 	MAE_MARKET_FRUIT_STEAL = """You scan the vendor's posture, the flow of people, the way the stall's edge creates a blind spot. The vendor turns to argue with another customer about weights and measures.
@@ -20837,7 +20836,6 @@ The beastkin explained their home location and went on with their errands.
 	MAE_MARKET_SHELIA_RESPONSE_OPTION_2 = "I think this can help your training",
 	MAE_MARKET_SHELIA_RESPONSE_1 = "{color=yellow|Mae: — Y-yeah, I wonder what they really think of me now that I'm back being like this...}",
 	MAE_MARKET_SHELIA_RESPONSE_2 = "{color=yellow|Mae: — You think so? I guess it would be nice to be more useful to you.}",
-
 	MAE_FRIEND_VISIT_1 = """You visit a small dormitory. Mae approaches the young beastkin boy lying in bed, weak and feeble. When she finishes her inspection, she turns to you.
 
 {color=yellow|Mae: — It seems he is possessed by a nasty spirit. It's unusual, spirits are weak outside their natural habitat and don't like densely populated cities... I think I can take care of it with a ritual, but I don't have the necessary brew for it. W-would you help me out with this, [name]?}""",
@@ -20849,7 +20847,6 @@ The beastkin explained their home location and went on with their errands.
 
 As you leave, she gives you a recipe for the potion she wants you to make. It doesn't seem difficult, but it will take a bit of time.""",
 	MAE_POTION_READY = "{color=yellow|Mae: — You've done it? Thank you. Now we can go back to Shelia's house.}",
-
 	MAE_FRIEND_VISIT_2_START = """As Mae reaches the child's bed, she prepares the potion by pouring it into a cup. She slowly makes him drink it before taking out a wood-carved talisman she has been preparing over the last few days.
 
 {color=yellow|Mae: — C-can you leave us alone for a bit? I need to concentrate, and it would help if no one was watching.}""",
@@ -20864,7 +20861,7 @@ The boy breathes heavily but seems more active than before, slowly coming to his
 
 The broken window catches the attention of the guards outside, and after a short time you are approached by them for questioning.
 
-{color=gray_text_dialogue|Guard: — Your mayorship? We heard loud noises and something barged through the window.}
+{color=aqua|Guard: — Your mayorship? We heard loud noises and something barged through the window.}
 
 Despite your best efforts, you are unable to follow after Mae wherever she was taken, and the guards seem to have no idea either.
 
@@ -20872,7 +20869,6 @@ At least to your and Shelia's relief, her ritual actually worked, and by the end
 	MAE_FRIEND_VISIT_2_OPTION_WISDOM = "[Wisdom Challenge] Observe the patterns of the tracks left by Mae",
 	MAE_FRIEND_VISIT_2_OPTION_CLOSE = "Close",
 	MAE_FRIEND_VISIT_2_TRACK_SUCCESS = "You spend additional time studying the mess Mae made and asking witnesses what they saw. This helps you narrow down the possible direction she moved in and will greatly help with the search.",
-
 	MAE_SEARCH_COMPLETE_START = """A whole day has been spent trying to find Mae. Many strangers reported seeing her roaming through town and causing chaos, noting that she looked drugged or delusional, but she never stayed around for long, as if trying to escape others' eyes.
 
 Finally you've managed to find her not far from your mansion, in an isolated dead end, sitting against the wall. Her eyes are wide and watering as she sees you.
@@ -20884,26 +20880,26 @@ Her body visibly shakes as she looks exhausted from suppressing the entity fight
 	MAE_SEARCH_COMPLETE_OPTION_2 = "How can I help you?",
 	MAE_SEARCH_COMPLETE_VOICE_1 = """{color=yellow|Mae: — I-it can't take me, but... it wants to...}
 
-{color=red|Voice: — If you didn't come after me you foul beastkin! I'll spill your dirty secrets that pester your mind now.}
+{color=aqua|Voice: — If you didn't come after me you foul beastkin! I'll spill your dirty secrets that pester your mind now.}
 
 {color=yellow|Mae: — N-no, please... don't listen!}""",
-	MAE_SEARCH_COMPLETE_VOICE_2 = """{color=red|Voice: — Your poor and useless being only good for this suffering, no money, no home, so pathetic!}
+	MAE_SEARCH_COMPLETE_VOICE_2 = """{color=aqua|Voice: — Your poor and useless being only good for this suffering, no money, no home, so pathetic!}
 
 Mae closes her eyes and covers her face with her paws in shame as you are the sole observer of her humiliation.
 
 {color=yellow|Mae: — T-that's nothing I can help with!}
 
-{color=red|Voice: — And also fat! Just look at how obese you are! That's what you were trying to hide, that you eat too much! And just changing your diet would change anything!}""",
+{color=aqua|Voice: — And also fat! Just look at how obese you are! That's what you were trying to hide, that you eat too much! And just changing your diet would change anything!}""",
 	MAE_SEARCH_COMPLETE_VOICE_3 = """Under the stress of the situation and your scrutinizing gaze, Mae's voice finally grows more irritated, her body tensing.
 
 {color=yellow|Mae: — E-enough... shut up! This is all a lie, you are just a parasite, feeding... on suffering...}
 
 The spirit completely ignores her pleas. It seems to act purely on instinct, with no sentience beyond putting Mae down with its taunts.
 
-{color=red|Voice: — That orgy is still on your dirty mind you slut, the way everyone was looking at your flabby body. They were looking at your gigantic tits and fat ass!}""",
-	MAE_SEARCH_COMPLETE_VOICE_4A = "{color=red|Voice: — And you can't stop thinking how your pussy was ravished by this man every...}",
-	MAE_SEARCH_COMPLETE_VOICE_4B = "{color=red|Voice: — And you can't stop thinking how lewd it was being surrounded by cocks...}",
-	MAE_SEARCH_COMPLETE_VOICE_4C = """A loud cry erupts from Mae as her body is enveloped in blue light. After only a moment the voice is gone, and she falls to the ground, panting heavily. Her eyes are full of tears.""",
+{color=aqua|Voice: — That orgy is still on your dirty mind you slut, the way everyone was looking at your flabby body. They were looking at your gigantic tits and fat ass!}""",
+	MAE_SEARCH_COMPLETE_VOICE_4A = "{color=aqua|Voice: — And you can't stop thinking how your pussy was ravished by this man every...}",
+	MAE_SEARCH_COMPLETE_VOICE_4B = "{color=aqua|Voice: — And you can't stop thinking how lewd it was being surrounded by cocks...}",
+	MAE_SEARCH_COMPLETE_VOICE_4C = "A loud cry erupts from Mae as her body is enveloped in blue light. After only a moment the voice is gone, and she falls to the ground, panting heavily. Her eyes are full of tears.",
 	MAE_SEARCH_COMPLETE_OPTION_HELP = "*Help her get up*",
 	MAE_SEARCH_COMPLETE_OPTION_STAND = "*Let her do it by herself*",
 	MAE_SEARCH_COMPLETE_HELP = "You gently pick Mae up and put her on her feet. She doesn't say anything as you take her back to the mansion, but you can clearly feel her ache to forget everything that happened.",
@@ -20934,7 +20930,6 @@ Judging by her blush, it wasn't so much about her insecurity and more about the 
 It doesn't seem like Mae buys your lie, but it comforts her that you choose to pretend nothing happened.""",
 	MAE_SEARCH_COMPLETE_FINAL_2 = "{color=yellow|Mae: — Thank you... uhm, I hope we can forget about this happening soon.}",
 	MAE_SEARCH_COMPLETE_FINAL_3 = "{color=yellow|Mae: — Y-you really think so? Potential in things like this... feels inappropriate to me. But if you are saying so, maybe it's more normal than I thought... Thank you, [name], I feel a little better now I guess.}",
-	
 	MAE_CITY_QUEST_NAME = "Mae's Request",
 	MAE_CITY_QUEST_SUMMARY = "Mae asks for help adjusting to the city, leading to a market outing, a ritual request, and a sudden crisis.",
 	MAE_CITY_QUEST_STAGE_0 = "Take Mae to the market in Aliron.",
@@ -20943,18 +20938,14 @@ It doesn't seem like Mae buys your lie, but it comforts her that you choose to p
 	MAE_CITY_QUEST_STAGE_25 = "Tell Mae about potion.",
 	MAE_CITY_QUEST_STAGE_3 = "Return to Shelia's home with Mae.",
 	MAE_CITY_QUEST_STAGE_4 = "Search for Mae in Aliron.",
-	
 	MAE_MARKET_OPTION = "Food Market",
 	MAE_SHELIA_OPTION = "Shelia's home",
 	MAE_POTION_OPTION = "Shelia's home",
-	
 	MAE_POTION_READY_OPTION = "Your potion is finally crafted.",
-	
 	MAE_POTION_TASK_NAME = "Brew Mae's Ritual Potion",
 	MAE_POTION_TASK_DESC = "Prepare the ritual brew Mae needs for the exorcism.",
 	MAE_SEARCH_TASK_NAME = "Search for Mae",
 	MAE_SEARCH_TASK_DESC = "Scour Aliron for any sign of Mae's whereabouts.",
-	
 	MAE_DRUID_EVENT_START = """Mae finds you in the afternoon, seemingly excited about something.
 
 {color=yellow|Mae: — H-hey, [name]... I was browsing through your library, and I found a note saying you know a druid from the elven forest. I was wondering... could you take me to them?}""",
@@ -20963,7 +20954,6 @@ It doesn't seem like Mae buys your lie, but it comforts her that you choose to p
 	MAE_DRUID_EVENT_FOLLOWUP = "{color=yellow|Mae: — I heard about druids from Savra. They are connected to nature too, but they learn and study it instead of simply reaching out to it. I wonder if I could learn something from them.}",
 	MAE_DRUID_EVENT_FOLLOWUP_OPTION_1 = "I'll see what I can do.",
 	MAE_DRUID_EVENT_FOLLOWUP_OPTION_2 = "Fine... if I can find the time.",
-	
 	MAE_DRUID_LORIEN_INTRO = """You take Mae to Lorien, who meets you cautiously at his observatory. As you introduce Mae, she bows respectfully.
 
 {color=yellow|Mae: — Hello, Sir Lorien... I know this is inappropriate, but I truly want to learn more about your ways of nature and magic.}""",
@@ -20991,17 +20981,14 @@ Mae looks at you with hopeful, pleading eyes.
 	MAE_DRUID_LORIEN_REINITIATE = "You meet Lorien again. His offer still stands.",
 	MAE_DRUID_LORIEN_OFFER_OPTION_PAY_HIGH_SHORT = "Fine, I'll pay (2,000 gold)",
 	MAE_DRUID_LORIEN_OFFER_OPTION_PAY_LOW_SHORT = "Fine, I'll pay (500 gold)",
-	
 	MAE_DRUID_RETURN = """After a few days, Mae finally returns to the mansion from her training. She seems genuinely happy to see you again.
 
 {color=yellow|Mae: — [name]! Thank you so much. I learned so many new things...}""",
 	MAE_DRUID_RETURN_OPTION_1 = "I think you can thank me better than that...",
 	MAE_DRUID_RETURN_OPTION_2 = "I've been missing you too.",
 	MAE_DRUID_RETURN_OPTION_3 = "Then it's better for you to get to work.",
-#	MAE_DRUID_RETURN_SEX = "You draw Mae close, and the quiet gratitude between you turns into a heated embrace.",
 	MAE_DRUID_RETURN_AFFECTION = "Mae smiles at you. The air around her feels more mature now.",
 	MAE_DRUID_RETURN_WORK = "Mae nods quietly and leaves for her room, slightly disappointed.",
-	
 	MAE_SPIRIT_QUEST_INITIATE = """Mae approaches you in the morning, asking for a favor.
 
 {color=yellow|Mae: — Good morning, [name]. It's time for me to revisit our village. I need to complete my next ritual of spiritual connection, so... if you don't mind taking me there, I was hoping for your company.}""",
@@ -21011,12 +20998,10 @@ Mae looks at you with hopeful, pleading eyes.
 	MAE_SPIRIT_QUEST_INITIATE_RESPONSE_1 = "{color=yellow|Mae: — Thank you. I'm ready whenever you are, so just say when.}",
 	MAE_SPIRIT_QUEST_INITIATE_RESPONSE_2 = "{color=yellow|Mae: — W-what are you saying? It's not like that. I'm still embarrassed about it. Please don't bring it up when we're there. I feel like I'll die of shame.}",
 	MAE_SPIRIT_QUEST_INITIATE_RESPONSE_3 = "{color=yellow|Mae: — I see. I'll be waiting then. It's not urgent, but it has to be done eventually.}",
-	
-	MAE_SPIRIT_FOLLOW_START = """As Mae cautiously walks into familiar surroundings, you notice there are slightly fewer people around than usual. You see Savra returning from the forest. She invites you into the hut, ready to hear Mae's story.""",
+	MAE_SPIRIT_FOLLOW_START = "As Mae cautiously walks into familiar surroundings, you notice there are slightly fewer people around than usual. You see Savra returning from the forest. She invites you into the hut, ready to hear Mae's story.",
 	MAE_SPIRIT_FOLLOW_SAVRA = """{color=aqua|Savra: — So, how was it, going back to city life after living with us?}
 
 {color=yellow|Mae: — A bit awkward, but nothing too bad, I suppose.}""",
-	
 	MAE_SPIRIT_FOLLOW_SAVRA_2 = """
 {color=yellow|Mae: — Well I was wondering if it is time for me to do a spirit-binding ritual.}
 
@@ -21025,7 +21010,7 @@ Mae looks at you with hopeful, pleading eyes.
 {color=aqua|Savra: — You must go into the woods, to the special ground I showed you during our winter tour. Wait until midnight, when the moon is up.}
 
 Mae nods eagerly. She carefully notes Savra's instructions before leaving.""",
-	MAE_SPIRIT_FOLLOW_MIDNIGHT = """{color=yellow|Mae: — To tell the truth, I'm a bit nervous... can you come with me? Even though I know the woods, I would hate to run into a wild animal.}""",
+	MAE_SPIRIT_FOLLOW_MIDNIGHT = "{color=yellow|Mae: — To tell the truth, I'm a bit nervous... can you come with me? Even though I know the woods, I would hate to run into a wild animal.}",
 	MAE_SPIRIT_FOLLOW_OPTION_1 = "I was afraid you wouldn't ask.",
 	MAE_SPIRIT_FOLLOW_OPTION_2 = "I can't exactly leave someone useless like you alone, I suppose.",
 	MAE_SPIRIT_FOLLOW_OPTION_3 = "This is really turning into a pain in the ass...",
@@ -21034,20 +21019,19 @@ Mae nods eagerly. She carefully notes Savra's instructions before leaving.""",
 
 {color=yellow|Mae: — T-thanks... sorry. I hope I'll become more useful in the future.}""",
 	MAE_SPIRIT_FOLLOW_RESPONSE_3 = "Mae looks away and rubs her hands in frustration without saying anything.",
-	
 	MAE_SPIRIT_RITUAL_START = """As Mae begins preparing the ritual, the night air thickens until mist fills most of your vision.
 
 A familiar figure appears, as if woven from the fog itself.""",
-	MAE_SPIRIT_RITUAL_STAG_INTRO = """{color=green|White Stag: — You... the new shaman came to make a deal with one of the guardian spirits?}
+	MAE_SPIRIT_RITUAL_STAG_INTRO = """{color=aqua|White Stag: — You... the new shaman came to make a deal with one of the guardian spirits?}
 
 The White Stag studies Mae closely. She shivers under its gaze.
 
-{color=green|White Stag: — This won't do. You are weak. Your spirit is not sufficient to become a shaman. Tell Savra I oppose it.}
+{color=aqua|White Stag: — This won't do. You are weak. Your spirit is not sufficient to become a shaman. Tell Savra I oppose it.}
 
 Mae's face goes pale, but she steadies herself as the White Stag turns to leave.""",
 	MAE_SPIRIT_RITUAL_STAG_CHALLENGE = """{color=yellow|Mae: — W-wait. I'm not weak. I studied a lot to become a shaman. You can't just reject me like that.}
 
-{color=green|White Stag: — You cannot study nature, child. You can only become one with it, and I don't see that in you.}
+{color=aqua|White Stag: — You cannot study nature, child. You can only become one with it, and I don't see that in you.}
 
 Mae looks even more worried now, glancing at you as you watch in silence.""",
 	MAE_SPIRIT_RITUAL_OPTION_PROGRESS = "She has been making big progress with her sensuality.",
@@ -21055,21 +21039,19 @@ Mae looks even more worried now, glancing at you as you watch in silence.""",
 	MAE_SPIRIT_RITUAL_OPTION_BARGAIN = "Surely there's something we can do for you to change your mind.",
 	MAE_SPIRIT_RITUAL_STAG_ACCEPT = """The White Stag takes another long look at Mae, and its expression shifts.
 
-{color=green|White Stag: — Fine. There is some truth in that. Your body's vitality can compensate for your lack of competence, at least in the eyes of some.}""",
+{color=aqua|White Stag: — Fine. There is some truth in that. Your body's vitality can compensate for your lack of competence, at least in the eyes of some.}""",
 	MAE_SPIRIT_RITUAL_STAG_HIDE = """The White Stag pauses, considering your offer.
 
-{color=green|White Stag: — Very well. There may be a spirit or two still willing to bond with you. Bring me an Ancestral Hide. That way, we will know you are serious.}
+{color=aqua|White Stag: — Very well. There may be a spirit or two still willing to bond with you. Bring me an Ancestral Hide. That way, we will know you are serious.}
 
 The White Stag disappears into the mist, leaving you alone together.""",
-	
-	MAE_SPIRIT_RITUAL_STAG_HIDE_2 = """{color=yellow|Mae: — Ancestral Hide, huh... it can be made with rare leather and a simple magical rite. I hope it doesn't bother you too much.}""",
+	MAE_SPIRIT_RITUAL_STAG_HIDE_2 = "{color=yellow|Mae: — Ancestral Hide, huh... it can be made with rare leather and a simple magical rite. I hope it doesn't bother you too much.}",
 	MAE_SPIRIT_HIDE_RETURN = """Mae summons the White Stag again and hands over the item you crafted.
 
-{color=green|White Stag: — So you have returned. You kept your part of the deal, so I will keep mine. In truth, while your mind is far from ideal, your body is a worthy offer for a contract.}""",
-#	MAE_SPIRIT_HIDE_REMINDER = "You still need to craft the Ancestral Hide before Mae can continue the ritual.",
-	MAE_SPIRIT_WHITE_STAG_CONTINUATION_1 = """{color=green|White Stag: — I have a guardian spirit that expressed willingness to bond with you. Hearthtusk has a reputation as a strong, loyal companion you can rely on.}
-	{color=green|White Stag: — And there is another who showed interest. Velhorn, a rowdy satyr spirit who wishes to be your associate.}""",
-	MAE_SPIRIT_WHITE_STAG_CONTINUATION_2 = "{color=green|White Stag: — And... surprisingly, you have also caught the interest of Noctara, a wise owl spirit.}",
+{color=aqua|White Stag: — So you have returned. You kept your part of the deal, so I will keep mine. In truth, while your mind is far from ideal, your body is a worthy offer for a contract.}""",
+	MAE_SPIRIT_WHITE_STAG_CONTINUATION_1 = """{color=aqua|White Stag: — I have a guardian spirit that expressed willingness to bond with you. Hearthtusk has a reputation as a strong, loyal companion you can rely on.}
+	{color=aqua|White Stag: — And there is another who showed interest. Velhorn, a rowdy satyr spirit who wishes to be your associate.}""",
+	MAE_SPIRIT_WHITE_STAG_CONTINUATION_2 = "{color=aqua|White Stag: — And... surprisingly, you have also caught the interest of Noctara, a wise owl spirit.}",
 	MAE_SPIRIT_WHITE_STAG_CONTINUATION_3 = "Mae makes a decision in her mind, but still addresses you quietly, unsure of her own voice.",
 	MAE_SPIRIT_WHITE_STAG_MAE_OWL = "{color=yellow|Mae: — Do you think an owl spirit would suit me?..}",
 	MAE_SPIRIT_WHITE_STAG_MAE_SAFE = "{color=yellow|Mae: — I think Hearthtusk would suit me... it's not much of a choice, but it feels safe.}",
@@ -21080,7 +21062,7 @@ The White Stag disappears into the mist, leaving you alone together.""",
 	MAE_SPIRIT_CHOICE_NOCTARA = "Yes. A wise guardian spirit seems right for you.",
 	MAE_SPIRIT_CHOICE_RESULT = """Mae nods and tells the White Stag her choice.
 
-{color=green|White Stag: — So be it. Finish the ritual, and it will be done.}
+{color=aqua|White Stag: — So be it. Finish the ritual, and it will be done.}
 
 The White Stag vanishes into the mist the same way it arrived.""",
 	MAE_SPIRIT_AFTER_CHOICE = """{color=yellow|Mae: — It's almost done, but I need a place with stronger power... I know some ancient ruins nearby that feel like the right spot.}
@@ -21120,20 +21102,19 @@ Hesitant at first, she quickly gives in to the idea of attempting something diff
 	MAE_ANCIENT_JUNGLE_RITUAL_FINISH = "As the ritual ends, a dim light surrounds Mae.",
 	MAE_ANCIENT_JUNGLE_RITUAL_HEARTHTUSK = """A warm, steady presence settles around Mae, like a heartbeat beneath the earth. Strength answers her call, quiet and loyal, promising endurance and protection on the paths ahead.
 
-{color=green|Hearthtusk: — Your roots will run deep, and your steps will not break. I will stand with you when the ground itself resists.}
+{color=aqua|Hearthtusk: — Your roots will run deep, and your steps will not break. I will stand with you when the ground itself resists.}
 
 {color=yellow|Mae: — I feel it... steady and warm. I will not falter. I promise.}""",
 	MAE_ANCIENT_JUNGLE_RITUAL_VELHORN = """Soft laughter echoes through the ruins as wild energy coils around her spirit. Passion and impulse bind together, urging Mae to live boldly and learn through experience rather than restraint.
 
-{color=green|Velhorn: — Live loudly, feel deeply, and do not deny what stirs within you. Through passion, your spirit will grow strong.}
+{color=aqua|Velhorn: — Live loudly, feel deeply, and do not deny what stirs within you. Through passion, your spirit will grow strong.}
 
 {color=yellow|Mae: — My heart is racing... but it feels right. I won't be afraid of myself anymore.}""",
 	MAE_ANCIENT_JUNGLE_RITUAL_NOCTARA = """The light dims as calm wisdom descends, feathered and patient. Insight takes root in silence, offering clarity, foresight, and watchful guidance through shadowed nights.
 
-{color=green|Noctara: — In silence, truth reveals its wings. I grant you sight beyond fear and patience beyond doubt.}
+{color=aqua|Noctara: — In silence, truth reveals its wings. I grant you sight beyond fear and patience beyond doubt.}
 
 {color=yellow|Mae: — It's so calm now... I will listen, and I will learn.}""",
-	
 	MAE_SPIRIT_VISIT_SAVRA = """Mae and you return to the village as dawn slips between the trees. Savra listens in silence while Mae recounts the ritual, her voice steady despite everything she endured. When Mae finishes, Savra closes her eyes for a long moment, then nods.
 
 {color=aqua|Savra: — You have done well. Binding a guardian spirit is no small feat, especially for one walking your path. You are no longer just my apprentice.}
@@ -21150,7 +21131,6 @@ Mae turns to you, searching your face before speaking.
 	MAE_SPIRIT_VISIT_SAVRA_RESPONSE = """Mae's ears perk up, and she nods eagerly.
 
 {color=yellow|Mae: — Thank you. With you by my side, I think I can handle whatever awaits us there.}""",
-	
 	MAE_NORTHERN_TRIBE_START = """You arrive at the northern forest tribe by late afternoon. The settlement looks familiar in many ways, wooden huts woven with vines and charms, stone totems half-covered in moss. Still, the air feels different, heavier somehow.
 
 As you walk the main path, Mae slows her pace. Several young male beastkin linger nearby, pretending to keep busy, but their eyes keep drifting toward her. When Mae glances back, they quickly look away, ears flicking nervously.
@@ -21169,18 +21149,18 @@ Mae nods politely, concern flashing across her face.
 
 {color=yellow|Mae: — He looks like Leon.}
 
-{color=red|Shaman: — Hah. You're not wrong. I'm Rakar, his older brother. The one who stayed behind to grow old with spirits instead of blades. Thank Rundas you came.}""",
+{color=aqua|Shaman: — Hah. You're not wrong. I'm Rakar, his older brother. The one who stayed behind to grow old with spirits instead of blades. Thank Rundas you came.}""",
 	MAE_NORTHERN_TRIBE_REQUEST = """Rakar gestures for you to sit, his tone calm, almost casual despite the situation.
 
-{color=red|Rakar: — I won't waste your time. I've been ill lately. Nothing dramatic, but enough that I can't safely perform rituals. Because of that, the coming-of-age rites for our young males have been delayed.}
+{color=aqua|Rakar: — I won't waste your time. I've been ill lately. Nothing dramatic, but enough that I can't safely perform rituals. Because of that, the coming-of-age rites for our young males have been delayed.}
 
 Mae's expression tightens with concern.
 
 {color=yellow|Mae: — Those rituals are important for them...}""",
-	MAE_NORTHERN_TRIBE_REQUEST_2 = """{color=red|Rakar: — Exactly. Spirits can grow impatient, and so can young men. They want to become proper warriors and hunters. That is why I asked for help. Savra spoke highly of you, Mae. I also see you recently bound a guardian spirit.}
+	MAE_NORTHERN_TRIBE_REQUEST_2 = """{color=aqua|Rakar: — Exactly. Spirits can grow impatient, and so can young men. They want to become proper warriors and hunters. That is why I asked for help. Savra spoke highly of you, Mae. I also see you recently bound a guardian spirit.}
 
 {color=yellow|Mae: — I did... but I'm still learning.}""",
-	MAE_NORTHERN_TRIBE_REQUEST_3 = """{color=red|Rakar: — I want you to lead the coming-of-age festival in my place. The customs must be fulfilled, and I would rather trust a careful outsider than rush it myself in this state.}
+	MAE_NORTHERN_TRIBE_REQUEST_3 = """{color=aqua|Rakar: — I want you to lead the coming-of-age festival in my place. The customs must be fulfilled, and I would rather trust a careful outsider than rush it myself in this state.}
 
 Mae exhales slowly, glancing at you, then nods.
 
@@ -21189,31 +21169,30 @@ Mae exhales slowly, glancing at you, then nods.
 	MAE_NORTHERN_TRIBE_REQUEST_OPTION_2 = "Don't rush into promises.",
 	MAE_NORTHERN_TRIBE_OFFER = """Rakar clears his throat, leaning back with a tired, honest sigh.
 
-{color=red|Rakar: — The coming-of-age rite for our tribe is... communal. It is a ritual of vitality and unity. Mae would stand at the center, with the initiates and a companion.}
+{color=aqua|Rakar: — The coming-of-age rite for our tribe is... communal. It is a ritual of vitality and unity. Mae would stand at the center, with the initiates and a companion.}
 
 {color=yellow|Mae: — C-communal...? You mean... like that?}
 
-{color=red|Rakar: — I believe you performed something similar not too long ago.}""",
+{color=aqua|Rakar: — I believe you performed something similar not too long ago.}""",
 	MAE_NORTHERN_TRIBE_OFFER_2 = """Mae blushes, the memory flashing across her face.
 
-{color=red|Rakar: — But I can tell you may have adopted a different way of life among [race]. If you want, I will allow you to handle it differently.}""",
+{color=aqua|Rakar: — But I can tell you may have adopted a different way of life among [race]. If you want, I will allow you to handle it differently.}""",
 	MAE_NORTHERN_TRIBE_OFFER_OPTION_1 = "[Sexual Factor]That ritual sounds fun, Mae. Let's do it. (one time)",
 	MAE_NORTHERN_TRIBE_OFFER_OPTION_2 = "We should pass on it.",
 	MAE_NORTHERN_TRIBE_OFFER_OPTION_3 = "Have we missed something?",
 	MAE_NORTHERN_RITUAL_ACCEPT = """{color=yellow|Mae: — W-well... I guess it's a custom.}
 
-{color=red|Rakar: — Very good. I knew I could count on new blood. Let me instruct you...}""",
+{color=aqua|Rakar: — Very good. I knew I could count on new blood. Let me instruct you...}""",
 	MAE_NORTHERN_RITUAL_REFUSE = """{color=yellow|Mae: — No... s-sorry. I don't think I can do that.}
 
 Rakar looks disappointed, but Mae's nervousness keeps him from pushing.""",
-#	MAE_NORTHERN_RITUAL_SCENE = "The ritual begins, and Mae takes her place at the center of the gathering.",
 	MAE_NORTHERN_RITUAL_AFTER = """The next day, you and Mae visit Rakar one last time before leaving.
 
-{color=red|Rakar: — Ah, what a splendid coming-of-age ritual you provided. I'm sure they won't forget it.}
+{color=aqua|Rakar: — Ah, what a splendid coming-of-age ritual you provided. I'm sure they won't forget it.}
 
 {color=yellow|Mae: — Y-yeah... it wasn't too bad. I guess I'm getting used to this. Are you sure you'll recover with time?}
 
-{color=red|Rakar: — Of course. I still have years ahead of me. By the way, I have a small parting gift for you.}""",
+{color=aqua|Rakar: — Of course. I still have years ahead of me. By the way, I have a small parting gift for you.}""",
 	MAE_NORTHERN_RITUAL_GIFT = """Rakar hands Mae an ornate leather headdress.
 
 {color=yellow|Rakar: — Good luck on your adventures, and don't forget your duties.}
@@ -21223,34 +21202,34 @@ As you leave the hut, Mae turns to you.
 {color=yellow|Mae: — Thank you, [name]. Without you, I wouldn't have been able to do any of that. You really helped me grow as a person.}""",
 	MAE_NORTHERN_DECLINE = """Rakar looks very disappointed, perhaps more than someone as old and wise as he seems should be.
 
-{color=red|Rakar: — That's a shame... maybe you could give me just a quick glimpse of your luxurious chest, then? I was really hoping to be honored during the ceremony...}
+{color=aqua|Rakar: — That's a shame... maybe you could give me just a quick glimpse of your luxurious chest, then? I was really hoping to be honored during the ceremony...}
 
 {color=yellow|Mae: — Huh...? What!?}
 
-{color=red|Rakar: — It's a joke. Don't worry. Do it however you want. I'll leave it to you.}""",
+{color=aqua|Rakar: — It's a joke. Don't worry. Do it however you want. I'll leave it to you.}""",
 	MAE_NORTHERN_DECLINE_2 = """As you leave the hut, Mae speaks quietly to you.
 
 {color=yellow|Mae: — I can do the ritual that was performed for me when I was accepted into the tribe. I think that will be enough.}""",
-	MAE_NORTHERN_DECLINE_FESTIVAL = """After preparing for the festival, it proceeds without issue. Mae holds herself steady and dignified, with almost no stuttering, as her status demands.""",
+	MAE_NORTHERN_DECLINE_FESTIVAL = "After preparing for the festival, it proceeds without issue. Mae holds herself steady and dignified, with almost no stuttering, as her status demands.",
 	MAE_NORTHERN_DECLINE_GIFT = """The next day, you and Mae visit Rakar one last time before leaving.
 
-{color=red|Rakar: — You did a good job. Not quite what I hoped to see, but it served its purpose.}
+{color=aqua|Rakar: — You did a good job. Not quite what I hoped to see, but it served its purpose.}
 
 {color=yellow|Mae: — Thank you. Are you sure you'll recover with time?}
 
-{color=red|Rakar: — Of course. I still have years ahead of me. By the way, I have a small parting gift for you.}""",
+{color=aqua|Rakar: — Of course. I still have years ahead of me. By the way, I have a small parting gift for you.}""",
 	MAE_NORTHERN_MISSED = """{color=yellow|Mae: — Hmm. Can you tell me more about your illness?}
 
 Mae listens as Rakar describes his symptoms, and as he goes on, her face brightens.
 
 {color=yellow|Mae: — Oh... I know what this is. Lorien taught me about it. You haven't been eating only cooked meat recently, have you?}
 
-{color=red|Rakar: — Well, it's been difficult for me to eat raw food at my age...}""",
+{color=aqua|Rakar: — Well, it's been difficult for me to eat raw food at my age...}""",
 	MAE_NORTHERN_MISSED_AFTER = """After spending more time helping Rakar with herbs and dietary advice, his condition improves notably.
 
 In less than two days, Rakar is already looking better.
 
-{color=red|Rakar: — At this rate, I can hold the festival myself. My condition has improved thanks to your help. That was something you learned from the elves? Their way of uniting with nature is something to behold. Now, I have a small parting gift for you.}""",
+{color=aqua|Rakar: — At this rate, I can hold the festival myself. My condition has improved thanks to your help. That was something you learned from the elves? Their way of uniting with nature is something to behold. Now, I have a small parting gift for you.}""",
 	MAE_SEX_BEHIND_1 = """You stand behind her, the warmth of her back pressing against your chest. The tribalistic bra she wore moments ago lies discarded on the wooden floor, along with her simple loincloth. Your arms wrap around her soft, chubby form, hands coming to rest on her heavy breasts. They fill your palms completely, the creamy fur surprisingly silky against your skin. Her nipples stiffen immediately at your touch, small points of hardness that you roll between your thumb and forefinger.
 
 She trembles, a shiver running through her entire body, but doesn't pull away. Instead, she arches slightly into your touch, her dreamy eyes half-closed, lips parted in silent pleasure. Your hands continue their exploration, kneading the soft flesh, feeling the weight of her tits as they sway gently with each movement.
@@ -21292,7 +21271,7 @@ The build-up was a coiling heat in her gut, a tightening of every muscle. Her sq
 	MAE_SEX_RITUAL_3 = """{color=yellow|Mae: — Aaah! I'm!... Cumming!!}
 
 A gush of fluid flooded her hand, her thighs, dripping onto the altar beneath her. Her whole body seized, muscles clamping down, a tremor running from her clenched toes up through her plump body to the tips of her ears. Her head fell back, her long brown hair brushing against the cold stone, another silent cry hanging on her lips.""",
-	MAE_SEX_RITUAL_4 = """{color=green|Velhorn: — Well now, why stop here little tanuki? You want to have a bit more fun for our little bonding session, don't you? }
+	MAE_SEX_RITUAL_4 = """{color=aqua|Velhorn: — Well now, why stop here little tanuki? You want to have a bit more fun for our little bonding session, don't you? }
 
 The pleasure was still ebbing, a warm, languid tide, when something beneath her came alive.Shadows detached themselves from the corners of the room, flowing like liquid across the floor. They were vines, thick as her wrist, covered in a dark, moss-like fuzz. They moved with an impossible, silent grace.
 
@@ -21311,7 +21290,7 @@ Mae's back arched off the stone. It filled her completely, stretching her pussy 
 As her body adjusted, another vine, thinner but just as determined, probed at the tight ass. It circled the rim, smearing its slick sap around her hole. Mae tensed, a fresh wave of panic washing over her. It pushed, insistent and unyielding. The burn was sharp as her sphincter was forced open, yielding inch by inch to the invasive vine. It filled her ass, a strange, full pressure that mingled with the overwhelming sensation in her cunt.""",
 	MAE_SEX_RITUAL_7 = """The two vines found a rhythm. As one pulled back, the other pushed forward, a relentless assault that sawed through her. Her plump body was rocked between them, her tits bouncing with the force of their fucking. She lost herself in pleasure as her both holes were used. Her body betrayed her, responding to the rough treatment with a renewed wave of heat.
 
-{color=green|Velhorn: — Come on, she wants you to join, her mouth is still free.}
+{color=aqua|Velhorn: — Come on, she wants you to join, her mouth is still free.}
 
 You moved without a delay, your own cock hard and heavy in your grip. You approached her head, looming over her bound form. Her soft, pink lips were parted, panting around the silent moans. You grabbed a fistful of her long brown hair, tilting her head back. Her reddish eyes, wide and glazed, stared up at you.
 
@@ -21395,21 +21374,18 @@ Her body jerks, her legs kicking out, her hips bucking wildly as you continue to
 You pull out slowly, watching as your cum leaks from her ass, down her thighs. She's a mess, but she's your mess. You lower her to the bed, her body limp with exhaustion and satisfaction.
 
 {color=yellow|Mae: — [name], I love you...}""",
-	
 	MAE_LORIEN_OPTION = "Meet Lorien with Mae",
 	MAE_SPIRIT_FOLLOW_OPTION = "Follow after Mae",
 	MAE_SPIRIT_VISIT_SAVRA_OPTION = "Visit Savra",
 	MAE_SPIRIT_RITUAL_OPTION = "Let Mae prepare for the spirit ritual",
 	MAE_SPIRIT_RITUAL_OPTION_REMINDER = "Return when you have the Ancestral Hide",
 	MAE_NORTHERN_TRIBE_OPTION = "Make it in",
-	
 	QUEST_MAE_SPIRIT_RITUAL_TEXT = "Ritual Grounds",
 	QUEST_MAE_SPIRIT_RITUAL_DESC = "A misty clearing where Mae can attempt her spirit-binding ritual.",
 	QUEST_MAE_ANCIENT_JUNGLE_TEXT = "Ancient Jungle Ruins",
 	QUEST_MAE_ANCIENT_JUNGLE_DESC = "Ancient ruins hidden in the jungle, steeped in ritual power.",
 	QUEST_MAE_NORTHERN_TRIBE_TEXT = "Northern Forest Tribe",
 	QUEST_MAE_NORTHERN_TRIBE_DESC = "A distant beastkin tribe waiting for Mae's guidance.",
-	
 	MAE_SPIRIT_QUEST_NAME = "Mae's Guardian Spirit",
 	MAE_SPIRIT_QUEST_SUMMARY = "Mae must complete a spirit-binding ritual and answer a call from another tribe.",
 	MAE_SPIRIT_QUEST_STAGE_0 = "Return to Mae's village for the spirit ritual.",
@@ -21418,16 +21394,14 @@ You pull out slowly, watching as your cum leaks from her ass, down her thighs. S
 	MAE_SPIRIT_QUEST_STAGE_2 = "Complete the ritual in the ancient jungle ruins.",
 	MAE_SPIRIT_QUEST_STAGE_4 = "Report back to Savra.",
 	MAE_SPIRIT_QUEST_STAGE_5 = "Travel to the northern forest tribe.",
-	
 	MATERIALANCESTRAL_HIDE = "Ancestral Hide",
 	MATERIALANCESTRAL_HIDEDESCRIPT = "A ceremonial hide prepared with rare mythic leather and a simple rite. It carries the weight of an old pact.",
-	
 	ITEMORNATE_LEATHER_HEADDRESS = "Ornate Leather Headdress",
 	ITEMORNATE_LEATHER_HEADDRESSDESCRIPT = "A ceremonial headdress gifted by a northern tribe. It hums faintly with old magic.",
 	TRAITSPIRIT_BOAR = "Guardian Spirit: Hearthtusk",
-	TRAITSPIRIT_BOARDESCRIPT = "Allies in the same column recover 10 HP at the end of the global turn.",
+	TRAITSPIRIT_BOARDESCRIPT = "Physics factor +1, HP max +15, DEF +10\nAllies in the same column recover 10 HP at the end of the global turn.",
 	TRAITSPIRIT_SATYR = "Guardian Spirit: Velhorn",
-	TRAITSPIRIT_SATYRDESCRIPT = "Restore 4 mana after casting a spell on an ally or yourself.",
+	TRAITSPIRIT_SATYRDESCRIPT = "Sex Factor +1, Authority Factor +1, MATK +3, MDEF +5\nRestore 4 mana after casting a spell on an ally or yourself.",
 	TRAITSPIRIT_OWL = "Guardian Spirit: Noctara",
-	TRAITSPIRIT_OWLDESCRIPT = " ",
+	TRAITSPIRIT_OWLDESCRIPT = "Wits Factor +1, Wits bonus +10, XP bonus +20%"
 }

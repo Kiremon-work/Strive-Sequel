@@ -741,6 +741,8 @@ var TranslationDict = {
 	ITEMSLOTNECK = """Шея""",
 	ITEMSLOTTOOL = """Инструмент""",
 	ITEMREQNONUNIQUE = """Может применяться только к неуникальным рабам""",
+	ITEMREQSMASTERYLIT = """Masteries levels not matched, no Literacy proficiency or already know this skill""", # MISSING TRANSLATION
+	ITEMREQSLITERACY = """Proficiency in Literacy is required for reading""", # MISSING TRANSLATION
 	ITEMREQSMASTERY = """Уровни мастерства не совпадают или навык уже известен""",
 	ITEMLEATHER_COLLAR = """Кожаный ошейник""",
 	ITEMLEATHER_COLLARDESCRIPT = """Простой кожаный ошейник, обозначающий собственность.""",
@@ -18124,6 +18126,10 @@ KURO_CHURCH_NOTE2 = """Джинни с тревогой смотрит на ва
 	AMELIA_PROPOSAL_DESCRIPT = """Амелия смотрит на вас со сдержанным удовлетворением, которое выдается ее легким видимым дрожанием""",
 	KURO_QUEST_FINISHED_TEXT = """Это предложение, о котором ты можете серьезно пожалеть. Поэтому я заставлю тебя сдержать его. """,
 	KURO_QUEST_FINISHED_DESCRIPTION = """Куро смотрит на вас так, как вы всегда ее не видели. Ее выражение лица почти мечтательное...""",
+	MAE_PROPOSAL_FINISHED_TEXT = """M-me? Your wife?.. I never thought someone would choose me like that... If you truly want it, then I will stay by your side.""", # MISSING TRANSLATION
+	MAE_PROPOSAL_FINISHED_DESCRIPT = """Mae freezes for a moment. Her tail sways nervously before she lowers her gaze, smiling with quiet sincerity.""", # MISSING TRANSLATION
+	MAE_PROPOSAL_UNFINISHED_TEXT = """I-I'm sorry... I don't think I can accept something like this yet, it feels too early for me.""", # MISSING TRANSLATION
+	MAE_PROPOSAL_UNFINISHED_DESCRIPT = """Mae fidgets with her fingers, avoiding your eyes.""", # MISSING TRANSLATION
 
 	#ChatNode
 	

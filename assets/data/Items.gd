@@ -4116,7 +4116,7 @@ var recipes = {
 		resultamount = 1,
 		resultitemtype = 'material',
 		resultitem = 'ancestral_hide',
-		workunits = 0.2,
+		workunits = 25,
 		worktype = 'tailor',
 		unique = true
 	},
