@@ -271,6 +271,8 @@ var TranslationDict = {
 	NEWGAMESETTINGFREE_UPGRADE = """Бесплатные улучшения""",
 	NEWGAMESETTINGMATERIALS = """Стартовые материалы""",
 	NEWGAMESETTINGMONEY = """Стартовое золото""",
+	NEWGAMESETTINGHARD_MONSTERS = """Harder enemy combat AI""", # MISSING TRANSLATION
+	SETTINGHARD_MONSTERS_DESCRIPT = """Enemy combat AI will be more advanced""", # MISSING TRANSLATION
 	
 	SETTINGSKIP_PROLOGUE_DESCRIPT = """Начните историю с начала первого акта.""",
 	SETTINGGF_ONLY_UPG_DESCRIPT = """Улучшать можно только фактор роста на рынке""",
@@ -3118,6 +3120,8 @@ Bleeding: Take 10% of Maximum HP as neutral damage per turn.""",
 	TRAITMASTER_ALCHEMISTDESCRIPT = "Созданные алхимические предметы имеют как минимум обычное качество.",
 	TRAITMASTER_SMITH = "Мастер-кузнец",
 	TRAITMASTER_SMITHDESCRIPT = "Созданные предметы имеют как минимум обычное качество.",
+	TRAITMASTER_TAILOR = """Master Tailor""", # MISSING TRANSLATION
+	TRAITMASTER_TAILORDESCRIPT = """Crafted Tailor items are at least Normal quality.""", # MISSING TRANSLATION
 	TRAITFARMERDESCRIPT = """Фермерство на 50% эффективнее.""",
 	TRAITBREEDERDESCRIPT = """Позволяет размножаться с любой расой.
 Дебаффы беременности слабее.

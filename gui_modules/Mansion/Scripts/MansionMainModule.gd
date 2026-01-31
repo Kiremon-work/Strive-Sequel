@@ -952,7 +952,7 @@ func test_mode():
 
 		ResourceScripts.game_progress.completed_quests.append("princess_search")
 		ResourceScripts.game_progress.completed_quests.append("sword_artifact_quest")
-#		input_handler.interactive_message('mae_spirit_quest_initiate', '', {})
+		#input_handler.interactive_message('kuro3_init_1', '', {})
 
 		#ResourceScripts.game_progress.decisions.append("fred_bribe_taken")
 		
