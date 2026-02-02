@@ -51,7 +51,6 @@ custom_colors/font_color_fg = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 4 )
 
 [node name="Visuals" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 43.0
@@ -329,6 +328,7 @@ margin_bottom = 145.0
 ticks_on_borders = true
 
 [node name="Gameplay2" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 45.0
@@ -436,6 +436,7 @@ __meta__ = {
 }
 
 [node name="diff_hard_monsters" type="CheckBox" parent="TabContainer/Gameplay2/Scroll/Box"]
+visible = false
 margin_top = 264.0
 margin_right = 429.0
 margin_bottom = 304.0
