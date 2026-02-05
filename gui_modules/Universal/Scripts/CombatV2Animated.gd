@@ -697,7 +697,8 @@ func enemy_turn(char_changed = true):
 		castskill = fighter.ai._get_action(true)
 		target = fighter.ai._get_target(castskill)
 	if target == null:
-		checkwinlose()
+		if !checkwinlose():
+			print("AI ERROR")
 		return
 	target = get_char_by_pos(target)
 
@@ -741,7 +742,7 @@ func env_turn(char_changed = true):
 
 #rangetypes melee, any, backmelee
 
-func UpdateSkillTargets(caster, skill, glow_skip = false):
+func UpdateSkillTargets(caster, skill, glow_skip = false, ignore_stealth = false):
 #	var skill = Skilldata.get_template(activeaction, caster)
 	var fighter = caster
 	var targetgroups = skill.target
@@ -761,8 +762,8 @@ func UpdateSkillTargets(caster, skill, glow_skip = false):
 	#assuming no player skills are battlefield-scale
 	if targetgroups == 'enemy' or targetgroups == 'all':
 		var t_targets
-		if rangetype == 'any': t_targets = get_enemy_targets_all(fighter)
-		if rangetype == 'melee': t_targets = get_enemy_targets_melee(fighter)
+		if rangetype == 'any': t_targets = get_enemy_targets_all(fighter, ignore_stealth)
+		if rangetype == 'melee': t_targets = get_enemy_targets_melee(fighter, ignore_stealth)
 		for t in t_targets:
 			if skill.has('targetreqs') and !t.checkreqs(skill.targetreqs):
 				continue
@@ -1545,7 +1546,15 @@ func SelectSkill(skill, user_act = true):
 	allowaction = true
 	$Button.disabled = false
 	if allowedtargets.ally.size() == 0 and allowedtargets.enemy.size() == 0:
-		checkwinlose();
+		if checkwinlose():
+			return
+		else:
+			UpdateSkillTargets(activecharacter, skill, false, true)
+			if allowedtargets.ally.size() == 0 and allowedtargets.enemy.size() == 0:
+				if checkwinlose():
+					return
+				else:
+					print("SKILL TARGET ERROR")
 	if skill.has('cursor'): 
 		customcursor = skill.cursor
 	else: 
