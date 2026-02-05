@@ -1791,15 +1791,6 @@ var scenedict = {
 		{code = 'leave', reqs = [], text = "DIALOGUELEAVE", bonus_effects = []}
 		],
 	},
-	dungeon_teleporter = {
-		text = tr("DUNGEON_TELEPORTER"),
-		tags = [],
-		image = 'dungeon_magic_barrier',
-		bonus_effects = [],
-		options = [
-		{code = 'leave', reqs = [], text = "DIALOGUELEAVE", bonus_effects = []}
-		],
-	},
 	
 	character_lovers = {
 		text = tr("CHARLOVERS"),
