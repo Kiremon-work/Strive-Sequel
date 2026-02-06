@@ -375,7 +375,7 @@ func update_resources():
 			globals.connecttexttooltip(newbutton, tr(task.name))
 			
 	
-	person = get_parent().active_person
+#	person = get_parent().active_person
 	var gatherable_resources = []
 	
 	var location_type
