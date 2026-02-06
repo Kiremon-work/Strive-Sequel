@@ -52,7 +52,14 @@ var selected_groups = []
 var group_to_rename
 var group_move_chars = []
 var mass_select_press_effect = false
+var can_teleport = false
 
+onready var info_btn_teleport = $InfoPanel/buttons/Teleport
+onready var info_btn_separator = $InfoPanel/buttons/separator
+onready var info_btn_send = $InfoPanel/buttons/Sendbutton
+onready var info_btn_forget = $InfoPanel/buttons/Forget
+onready var info_btns = $InfoPanel/buttons
+onready var info_teleport_menu = $InfoPanel/teleport_menu
 
 func _unhandled_input(event):
 #func _input(event):
@@ -245,13 +252,14 @@ func _ready():#2add button connections
 	$Back.connect('pressed', self, 'close')
 	$mode.connect('pressed', self, 'from_loc_set')
 	$FromLocList/Sendbutton.connect('pressed', self, 'from_loc_set')
-	$InfoPanel/Sendbutton.connect('pressed', self, 'confirm_travel')
+	info_btn_send.connect('pressed', self, 'confirm_travel')
+	info_btn_teleport.connect('pressed', self, 'switch_teleport_menu')
 	$zoom.min_value = map_zoom_min
 	$zoom.max_value = map_zoom_max
 #	$zoom.connect("value_changed", self, 'zoom_change')
 #	$zoom/minus.connect("pressed", self, 'zoom_change_step', [ -1])
 #	$zoom/plus.connect("pressed", self, 'zoom_change_step', [ 1])
-	$InfoPanel/Forget.connect("pressed", self, "forget_location")
+	info_btn_forget.connect("pressed", self, "forget_location")
 #	match_state()
 	input_handler.connect("mass_select_in_act", self, "off_mass_select_effect")
 	input_handler.register_btn_source('travel_master', self, 'tut_get_master')
@@ -292,7 +300,7 @@ func tut_get_location():
 			if btn.get_meta('location', "") == loc_id:
 				return btn
 func tut_get_send_confirm():
-	return $InfoPanel/Sendbutton
+	return info_btn_send
 func tut_get_back_btn():
 	return $Back
 
@@ -409,7 +417,7 @@ func build_locations_list():
 		if !cdata.has(id): 
 			continue #should add here currently nonexisted marking location link to delete
 		
-		var temp = {id = id, area = tdata.area, type = cdata[id].type, heroes = [], quest = false, teleporter = cdata[id].teleporter}
+		var temp = {id = id, area = tdata.area, type = cdata[id].type, heroes = [], quest = false}
 		if temp.type == "capital":
 			if adata.has("capital_code"):
 				if globals.is_capital_closed(adata.capital_code):
@@ -509,9 +517,9 @@ func build_info(loc = null):
 	var adata = ResourceScripts.game_world.areas[tdata.area]
 	
 	var location_selected = get_location_data(loc)
-	$InfoPanel/Forget.visible = (!location.tags.has('quest') and location_selected.type in ['dungeon', 'encounter'])
+	info_btn_forget.visible = (!location.tags.has('quest') and location_selected.type in ['dungeon', 'encounter'])
 #	if to_loc != null:
-#		$InfoPanel/Forget.visible = false
+#		info_btn_forget.visible = false
 	
 	#build info
 	$InfoPanel/Label.text = tr(location.name)
@@ -618,13 +626,27 @@ func build_info(loc = null):
 	$InfoPanel/VBoxContainer/CharScroll.visible = f
 	$InfoPanel/VBoxContainer/Label2.visible = f
 	
+	info_teleport_menu.hide()
+	
 	$InfoPanel.visible = true
-	if from_loc != 'adv_mode' and to_loc != null and loc == to_loc:
-		$InfoPanel/Sendbutton.visible = true
+	var not_temporal_info = (to_loc != null and loc == to_loc)
+	info_btns.visible = not_temporal_info
+	if from_loc != 'adv_mode' and not_temporal_info and !selected_chars.empty():
+		info_btn_send.visible = true
 		$InfoPanel/time.visible = true
 		$InfoPanel/time.text = "Travel time - %d t" % globals.calculate_travel_time(from_loc, to_loc).time
+		
+		can_teleport = false
+		for sort_loc in sorted_locations:
+			if sort_loc.id == selected_loc:
+				can_teleport = info_teleport_menu.make_list(sort_loc.heroes, self, "cast_teleport")
+				break
+		info_btn_teleport.visible = can_teleport
+		info_btn_separator.visible = !can_teleport
 	else:
-		$InfoPanel/Sendbutton.visible = false
+		info_btn_send.visible = false
+		info_btn_teleport.visible = false
+		info_btn_separator.visible = false
 		$InfoPanel/time.visible = false
 
 
@@ -640,8 +662,6 @@ func make_panel_for_location(panel, loc):
 			panel.get_node("Label").set("custom_colors/font_color", variables.hexcolordict.yellow)
 		if  data.has('active') and data.active == false:
 			text += "(!)"
-		if data.has('teleporter') and data.teleporter:
-			text += "(T)"
 		set_loc_text(panel, text)
 #		panel.get_node("Label").text = text
 		if loc.has('captured'):
@@ -838,10 +858,13 @@ func update_selected_to_location():
 
 
 func update_confirm():
-	if selected_groups.empty() and selected_chars.empty():
-		$InfoPanel/Sendbutton.visible = false
-#	else:
-#		$InfoPanel/Sendbutton.visible = true
+	if !$InfoPanel.visible: return
+	if selected_chars.empty():#selected_groups.empty()
+		info_btn_send.visible = false
+		info_btn_teleport.visible = false
+		info_btn_separator.visible = false
+	elif !info_btn_send.visible:
+		build_info()
 
 
 func map_area_press(area):
@@ -882,7 +905,7 @@ func area_press(area, mode):
 	else:
 		selected_area = area
 	
-	selected_loc = null
+#	selected_loc = null
 	update_selected_area()
 	set_focus_area()
 	match_state()
@@ -1014,7 +1037,7 @@ func location_press(location, mode):
 			else:
 				selected_loc = location
 				set_focus_location(location)
-			build_info(selected_loc)
+			build_info(selected_loc)#should it be here?
 			match_state()
 		'to':
 			if to_loc == location:
@@ -1044,7 +1067,8 @@ func match_state():
 			$mode.visible = false
 #			$FromLocList/Sendbutton/Label.text = 'Send'
 #		$FromLocList/Sendbutton.visible = true
-		$InfoPanel/Sendbutton.visible = false
+		info_btn_send.visible = false
+		info_btn_teleport.visible = false
 	else:
 		$ToLocList.visible = true
 		if from_loc == 'adv_mode':
@@ -1108,7 +1132,7 @@ func reset_from():
 	build_info(null)
 
 
-func confirm_travel():
+func confirm_travel(by_teleport = false):
 	if from_loc == to_loc:
 		return
 	var flocdata = ResourceScripts.world_gen.get_location_from_code(from_loc)
@@ -1116,12 +1140,11 @@ func confirm_travel():
 		var person = characters_pool.get_char_by_id(chid)
 		person.remove_from_task()
 		person.process_event(variables.TR_MOVE)
-		if ResourceScripts.game_globals.instant_travel == false and !flocdata.teleporter :
+		if ResourceScripts.game_globals.instant_travel == false and !by_teleport :
 			person.set_travel_to(from_loc, to_loc)
 		else:
 #			person.set_work('') #not needed after remove from task
 			person.instant_travel(to_loc)
-	flocdata.teleporter = false
 	input_handler.PlaySound("ding")
 	globals.emit_signal("slave_departed")
 	selected_chars.clear()
@@ -1346,3 +1369,12 @@ func open_group_menu(group_name, loc_id):
 	})
 	$FromLocList/ContextMenu.open_with_actions(group_name, actions, get_viewport().get_mouse_position())
 
+func switch_teleport_menu():
+	info_teleport_menu.visible = !info_teleport_menu.visible
+
+func cast_teleport(chid):
+	info_teleport_menu.hide()
+	var caster = characters_pool.get_char_by_id(chid)
+	var skill = Skilldata.get_template('teleport', caster)
+	caster.pay_cost(skill.cost)
+	confirm_travel(true)

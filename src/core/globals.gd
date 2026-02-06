@@ -1250,8 +1250,6 @@ func calculate_travel_time(location1, location2): #2remade to new mechanic
 			time += adata1.travel_time + adata2.travel_time
 	
 	time = max(1, time - variables.stable_boost_per_level * ResourceScripts.game_res.upgrades.stables)
-	if ldata1.teleporter:
-		time = 0
 	return {time = time}
 
 func check_recipe_resources(temprecipe):
