@@ -863,6 +863,8 @@ func save_scene_to_gallery(scene):
 			if scene.has("additionally_open"):
 				for addition in scene.additionally_open:
 					input_handler.update_progress_data(progress_field, addition)
+	if scene.has("unlocked_char_sprites"):
+		input_handler.update_progress_data("unique_sprites", scene.unlocked_char_sprites)
 
 
 func select_scene_variation_based_on_data(scene):
