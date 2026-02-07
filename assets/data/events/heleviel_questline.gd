@@ -472,6 +472,8 @@ var data = {
 
 		],
 		character = "heleviel_waitress",
+		save_scene_to_gallery = true,
+		unlocked_char_sprites = {heleviel = ["waitress"]},
 		tags = [
 			"dialogue_scene",
 			"master_translate"
@@ -2295,6 +2297,7 @@ var data = {
 		],
 		music = "heleviel_theme", 
 		save_scene_to_gallery = true,
+		unlocked_char_sprites = {heleviel = ["waitress"]},
 		tags = [
 			"dialogue_scene",
 			"master_translate"

@@ -218,7 +218,8 @@ var progress_data = {
 	ero_scenes = [],
 	gallery_seq = [],
 	characters = [],#'amelia','duncan','sigmund','myr'
-	monochrome = []
+	monochrome = [],
+	unique_sprites = {}#daisy = [], cali = []
 } setget save_progress_data
 
 #var combat_advance = false #if any result in combat cause advance
@@ -290,11 +291,27 @@ func update_progress_data(field, value):
 	if !progress_data.has(field):
 		print("Warning: progress data has no '", str(field), "' field.")
 		return
-	if typeof(value) != TYPE_STRING:
-		return
-	if progress_data[field].has(value):
-		return
-	progress_data[field].push_back(value)
+	if field == 'unique_sprites':
+		if typeof(value) != TYPE_DICTIONARY:
+			return
+		var operating_dict = progress_data[field]
+		var has_new_sprites = false
+		for chara in value:
+			if !operating_dict.has(chara):
+				operating_dict[chara] = []
+			for sprite in value[chara]:
+				if operating_dict[chara].has(sprite):
+					continue
+				operating_dict[chara].append(sprite)
+				has_new_sprites = true
+		if !has_new_sprites:
+			return
+	else:
+		if typeof(value) != TYPE_STRING:
+			return
+		if progress_data[field].has(value):
+			return
+		progress_data[field].push_back(value)
 	store_progress()
 
 
@@ -306,6 +323,8 @@ func store_progress():
 	file.store_string(text)
 	file.close()
 
+func is_unique_sprite_unlocked(chara, sprite):
+	return progress_data['unique_sprites'].has(chara) and progress_data['unique_sprites'][chara].has(sprite)
 
 
 func _notification(what):
