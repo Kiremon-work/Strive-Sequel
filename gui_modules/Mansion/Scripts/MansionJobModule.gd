@@ -127,7 +127,7 @@ func update_characters():
 			newbutton.disabled = true 
 			globals.connecttexttooltip(newbutton, tr("SELECT_SLOT_FIRST_LABEL"))
 		if !ch.is_worker() and !mode_farm:
-			if !(selected_job != null and selected_job.has("code") and selected_job.code == person.get_work()):
+			if !(selected_job != null and selected_job.has("code") and selected_job.code == ch.get_work()):
 				newbutton.disabled = true
 			globals.connecttexttooltip(newbutton, ch.translate("[name]" + " " + tr("LACKS_BASIC_SERV_LABEL"))) #change translation
 		if selected_job != null and selected_job.has("code"):

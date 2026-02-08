@@ -449,7 +449,10 @@ var data = {
 			{
 				code = 'mae_potion_ready', 
 				text = "MAE_POTION_READY_OPTION", 
-				reqs = [{type = "active_quest_stage", value = "mae_city_quest", stage = "stage25"}], 
+				reqs = [
+					{type = "active_quest_stage", value = "mae_city_quest", stage = "stage2"},
+					{type = "has_material", material = "spirit_potion", operant = "gte", value = 1}
+					], 
 				dialogue_argument = 1, 
 				remove_after_first_use = true
 			}, 
