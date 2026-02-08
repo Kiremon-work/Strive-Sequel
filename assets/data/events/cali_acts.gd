@@ -287,7 +287,6 @@ var data = {
 	cali_act2_simple_collar_3 = {
 		image = null, tags = ['dialogue_scene'],
 		reqs = [], unique_character = "cali",
-		save_scene_to_gallery = true,
 		unlocked_char_sprites = {cali = ["collar"]},
 		text = [{text = "CALI_ACT2_SIMPLE_COLLAR_3", reqs = []}],
 		options = [ {
@@ -309,7 +308,6 @@ var data = {
 	cali_act2_simple_collar_2_2 = { 
 		image = null, tags = ['dialogue_scene'],
 		reqs = [], unique_character = "cali",
-		save_scene_to_gallery = true,
 		unlocked_char_sprites = {cali = ["collar"]},
 		text = [{text = "CALI_ACT2_SIMPLE_COLLAR_2_2", reqs = []}],
 		options = [ {
@@ -356,7 +354,6 @@ var data = {
 	cali_act2_exquisite_collar_2 = { 
 		image = null, tags = ['dialogue_scene'],
 		reqs = [], unique_character = "cali",
-		save_scene_to_gallery = true,
 		unlocked_char_sprites = {cali = ["collar"]},
 		text = [{text = "CALI_ACT2_EXQUISITE_COLLAR_2", reqs = []}],
 		options = [ {
