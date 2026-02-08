@@ -392,6 +392,16 @@ var materiallist = {
 		tier = '',
 		tags = ['no_random'],
 	},
+	spirit_potion = { #fix
+		code = 'spirit_potion',
+		name = '',
+		descript = '',
+		icon = load("res://assets/images/iconsitems/item_leathermythic.png"),
+		price = 1,
+		type = 'quest',
+		tier = '',
+		tags = ['no_random'],
+	},
 	
 #	beer = {
 #		code = 'beer',
@@ -4096,6 +4106,22 @@ var recipes = {
 		resultitem = 'vesperine_cage',
 		workunits = 0.15,
 		worktype = 'smith',
+		unique = true
+	},
+	spirit_potion = { #fix
+		code = 'spirit_potion',
+		materials = {leathermythic = 10},
+		items = {},
+		unlockreqs = [
+			{type = "active_quest_stage", value = "mae_city_quest", stage = "stage2"},
+			{type = 'has_material', operant = 'lt', value = 1, material = 'spirit_potion'}
+		],
+		crafttype = 'basic',
+		resultamount = 1,
+		resultitemtype = 'material',
+		resultitem = 'spirit_potion',
+		workunits = 0.2,
+		worktype = 'alchemy',
 		unique = true
 	},
 	ancestral_hide = {

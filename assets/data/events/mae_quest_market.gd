@@ -281,17 +281,17 @@ var data = {
 						value = "mae_city_quest",
 						stage = "stage2"
 					},
-					{
-						code = "add_special_task_for_location",
-						location = "aliron",
-						amount = 60, #?
-						descript = "MAE_POTION_TASK_DESC",
-						name = "MAE_POTION_TASK_NAME",
-						max_workers = 3, #?
-						icon = "res://assets/Textures_v2/MANSION/quest_task.png",
-						workstat = "wits", #?
-						args = [{code = "progress_quest", value = "mae_city_quest", stage = "stage25"}]
-					},
+#					{
+#						code = "add_special_task_for_location",
+#						location = "aliron",
+#						amount = 60, #?
+#						descript = "MAE_POTION_TASK_DESC",
+#						name = "MAE_POTION_TASK_NAME",
+#						max_workers = 3, #?
+#						icon = "res://assets/Textures_v2/MANSION/quest_task.png",
+#						workstat = "wits", #?
+#						args = [{code = "progress_quest", value = "mae_city_quest", stage = "stage25"}]
+#					},
 					{code = "update_city"}
 				]
 			}
@@ -300,7 +300,7 @@ var data = {
 	mae_potion_ready = {
 		image = null,
 		tags = ["dialogue_scene"],
-		reqs = [{type = "active_quest_stage", value = "mae_city_quest", stage = "stage25"}],
+		reqs = [],
 		character = "mae",
 		text = "MAE_POTION_READY",
 		options = [
