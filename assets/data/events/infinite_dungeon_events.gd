@@ -51,7 +51,6 @@ var data = {
 		tags = ["dialogue_scene", 'master_translate'],
 		reqs = [],
 		character = "amelia_halloween",
-		save_scene_to_gallery = true,
 		unlocked_char_sprites = {amelia = ["halloween"]},
 		text = [
 			{text = "AMELIA_INFINITE_4_1", reqs = [], previous_dialogue_option = 1, bonus_effects = []},
