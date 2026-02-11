@@ -452,7 +452,8 @@ var data = {
 				reqs = [
 
 				],
-				dialogue_argument = 1
+				dialogue_argument = 1,
+				change_dialogue_type = 2
 			},
 			{
 				code = "heleviel_quest_13",
@@ -1958,6 +1959,7 @@ var data = {
 
 						],
 						dialogue_argument = 1,
+						change_dialogue_type = 2,
 						type = "next_dialogue"
 					}
 				]
