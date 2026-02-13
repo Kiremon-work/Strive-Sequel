@@ -5815,7 +5815,7 @@ Proceed? (original save file will stay untouched, but won't work with the curren
 	TUTORIAL_COMBAT4 = "All quests provide item rewards and guild reputation. Reputation can be used to purchase special guild services. Trouble Solving requires traveling to a procedurally generated location.",
 	TUTORIAL_COMBAT5 = "Open the map menu to learn how to send characters to a new location.",
 	TUTORIAL_COMBAT6 = "Select two characters who will travel to complete the task.",
-	TUTORIAL_COMBAT7 = "Click the Send button.",
+#	TUTORIAL_COMBAT7 = "Click the Send button.",
 	TUTORIAL_COMBAT8 = "In the location list, find the special quest location you need to visit.",
 	TUTORIAL_COMBAT9 = "Click Send to begin traveling.",
 	TUTORIAL_COMBAT10 = "Once characters are on the route, you must advance time for them to arrive.",

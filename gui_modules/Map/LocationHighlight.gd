@@ -6,6 +6,7 @@ var code
 
 onready var controller = get_parent().get_parent()
 var mouse_in_me = false
+var gray_shader = load("res://assets/gray_shader.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,9 +64,15 @@ func UnLight():
 
 
 func highlight(modulate_color):
-	modulate = modulate_color
+	self_modulate = modulate_color
 
 
 tool func highlight_set(value):
 	HighlightColor = value
 	highlight(value)
+
+func check_gray():
+	if !controller.if_location_in_list(name):
+		get_node("Sprite").material = gray_shader
+	else:
+		get_node("Sprite").material = null
