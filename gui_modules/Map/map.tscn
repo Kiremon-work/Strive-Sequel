@@ -63,31 +63,6 @@ light_mask = 512
 position = Vector2( 923, 1191 )
 texture = ExtResource( 23 )
 
-[node name="Sprite" type="Sprite" parent="map" groups=["highlight_ignore"]]
-position = Vector2( 285, -805 )
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 37 )
-
-[node name="Sprite2" type="Sprite" parent="map" groups=["highlight_ignore"]]
-position = Vector2( -424, -617 )
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 35 )
-
-[node name="Sprite3" type="Sprite" parent="map" groups=["highlight_ignore"]]
-position = Vector2( 363, -363 )
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 36 )
-
-[node name="Sprite4" type="Sprite" parent="map" groups=["highlight_ignore"]]
-position = Vector2( -454, -1121 )
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 38 )
-
-[node name="Sprite5" type="Sprite" parent="map" groups=["highlight_ignore"]]
-position = Vector2( -182, 276 )
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 48 )
-
 [node name="plains" type="Polygon2D" parent="map"]
 modulate = Color( 0.968627, 0.980392, 0.764706, 0.211765 )
 light_mask = 512
@@ -150,7 +125,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 795, -166, 780, -122, 773, -94, 750, -74, 760, -53, 754, -39, 757, -12, 780, 7, 818, 19, 839, 33, 844, 46, 827, 64, 844, 88, 838, 113, 826, 147, 797, 183, 769, 212, 753, 209, 742, 216, 739, 231, 750, 243, 771, 256, 783, 260, 776, 275, 779, 285, 804, 306, 825, 330, 833, 360, 828, 383, 861, 398, 845, 452, 844, 472, 836, 517, 827, 542, 808, 566, 803, 599, 804, 631, 776, 664, 720, 696, 661, 733, 579, 769, 514, 776, 465, 770, 419, 786, 369, 753, 313, 740, 271, 717, 258, 688, 217, 738, 149, 796, 100, 791, 57, 795, -8, 816, -46, 803, -240, 808, -342, 824, -364, 801, -414, 795, -449, 803, -483, 791, -539, 788, -607, 795, -626, 784, -641, 747, -706, 743, -724, 679, -797, 625, -850, 524, -833, 448, -875, 438, -882, 418, -877, 384, -847, 359, -854, 312, -925, 304, -993, 315, -1047, 339, -1078, 249, -1115, 207, -1102, 74, -1108, 38, -1133, 31, -1146, 16, -1140, -15, -1129, -40, -1152, -77, -1131, -107, -1040, -75, -939, -57, -860, -64, -836, -70, -835, -86, -829, -95, -812, -101, -800, -115, -802, -129, -775, -150, -787, -173, -795, -179, -792, -186, -785, -187, -793, -208, -802, -213, -796, -234, -797, -238, -795, -244, -787, -253, -779, -259, -778, -265, -784, -263, -786, -266, -783, -272, -777, -274, -782, -278, -780, -283, -782, -291, -774, -296, -765, -300, -759, -316, -737, -295, -718, -283, -707, -281, -689, -274, -675, -259, -662, -244, -636, -238, -625, -219, -581, -177, -521, -169, -436, -167, -396, -147, -384, -126, -342, -87, -292, -93, -221, -127, -159, -119, -48, -95, 11, -120, 68, -130, 146, -128, 215, -99, 340, -62, 456, -64, 564, -93, 646, -135, 685, -146, 707, -171, 672, -196, 683, -213, 694, -197, 742, -193, 766, -181 )
 
 [node name="aliron" type="Polygon2D" parent="map"]
-modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
+self_modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 light_mask = 512
 position = Vector2( 130, -248 )
 scale = Vector2( 0.656029, 0.656029 )
@@ -158,6 +133,12 @@ polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -79
 script = ExtResource( 40 )
 HighlightColor = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 area = "plains"
+
+[node name="Sprite" type="Sprite" parent="map/aliron"]
+show_behind_parent = true
+position = Vector2( 236.27, -849.048 )
+scale = Vector2( 1.00605, 1.00605 )
+texture = ExtResource( 37 )
 
 [node name="Area2D" type="Area2D" parent="map/aliron"]
 light_mask = 0
@@ -168,7 +149,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -798, 336, -814, 340, -831, 342, -848, 341, -865, 336, -883, 329, -899, 320, -913, 309, -926, 295, -937, 281, -945, 265, -950, 250, -952, 234, -953, 212, -951, 193, -945, 174, -934, 161, -924, 151, -910, 142, -895, 136, -879, 132, -860, 132, -840, 136, -819, 143, -802, 151, -788, 163, -775, 175, -764, 186, -757, 198, -752, 208, -748, 216, -745, 226, -744, 240, -744, 256, -745, 270, -749 )
 
 [node name="elf_capital" type="Polygon2D" parent="map"]
-modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
+self_modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 light_mask = 512
 position = Vector2( -611, -563 )
 scale = Vector2( 0.658442, 0.658442 )
@@ -176,6 +157,12 @@ polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -79
 script = ExtResource( 40 )
 HighlightColor = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 area = "forests"
+
+[node name="Sprite" type="Sprite" parent="map/elf_capital"]
+show_behind_parent = true
+position = Vector2( 238.442, -847.455 )
+scale = Vector2( 1.00237, 1.00237 )
+texture = ExtResource( 38 )
 
 [node name="Area2D" type="Area2D" parent="map/elf_capital"]
 light_mask = 0
@@ -186,7 +173,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -798, 336, -814, 340, -831, 342, -848, 341, -865, 336, -883, 329, -899, 320, -913, 309, -926, 295, -937, 281, -945, 265, -950, 250, -952, 234, -953, 212, -951, 193, -945, 174, -934, 161, -924, 151, -910, 142, -895, 136, -879, 132, -860, 132, -840, 136, -819, 143, -802, 151, -788, 163, -775, 175, -764, 186, -757, 198, -752, 208, -748, 216, -745, 226, -744, 240, -744, 256, -745, 270, -749 )
 
 [node name="beastkin_capital" type="Polygon2D" parent="map"]
-modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
+self_modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 light_mask = 512
 position = Vector2( -586, -41 )
 scale = Vector2( 0.679426, 0.679426 )
@@ -194,6 +181,12 @@ polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -79
 script = ExtResource( 40 )
 HighlightColor = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 area = "forests"
+
+[node name="Sprite" type="Sprite" parent="map/beastkin_capital"]
+show_behind_parent = true
+position = Vector2( 238.437, -847.774 )
+scale = Vector2( 0.971408, 0.971408 )
+texture = ExtResource( 35 )
 
 [node name="Area2D" type="Area2D" parent="map/beastkin_capital"]
 light_mask = 0
@@ -204,7 +197,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -798, 336, -814, 340, -831, 342, -848, 341, -865, 336, -883, 329, -899, 320, -913, 309, -926, 295, -937, 281, -945, 265, -950, 250, -952, 234, -953, 212, -951, 193, -945, 174, -934, 161, -924, 151, -910, 142, -895, 136, -879, 132, -860, 132, -840, 136, -819, 143, -802, 151, -788, 163, -775, 175, -764, 186, -757, 198, -752, 208, -748, 216, -745, 226, -744, 240, -744, 256, -745, 270, -749 )
 
 [node name="dwarf_capital" type="Polygon2D" parent="map"]
-modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
+self_modulate = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 light_mask = 512
 position = Vector2( 202.743, 212.409 )
 scale = Vector2( 0.67619, 0.67619 )
@@ -212,6 +205,12 @@ polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -79
 script = ExtResource( 40 )
 HighlightColor = Color( 0.929412, 0.0745098, 0.0745098, 0.301961 )
 area = "mountains"
+
+[node name="Sprite" type="Sprite" parent="map/dwarf_capital"]
+show_behind_parent = true
+position = Vector2( 237, -850.958 )
+scale = Vector2( 0.976057, 0.976057 )
+texture = ExtResource( 36 )
 
 [node name="Area2D" type="Area2D" parent="map/dwarf_capital"]
 light_mask = 0
@@ -222,7 +221,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -798, 336, -814, 340, -831, 342, -848, 341, -865, 336, -883, 329, -899, 320, -913, 309, -926, 295, -937, 281, -945, 265, -950, 250, -952, 234, -953, 212, -951, 193, -945, 174, -934, 161, -924, 151, -910, 142, -895, 136, -879, 132, -860, 132, -840, 136, -819, 143, -802, 151, -788, 163, -775, 175, -764, 186, -757, 198, -752, 208, -748, 216, -745, 226, -744, 240, -744, 256, -745, 270, -749 )
 
 [node name="empire_capital" type="Polygon2D" parent="map"]
-modulate = Color( 0.929412, 0.215686, 0.0745098, 0.364706 )
+self_modulate = Color( 0.929412, 0.215686, 0.0745098, 0.364706 )
 light_mask = 512
 position = Vector2( -344.947, 860.612 )
 scale = Vector2( 0.688995, 0.688995 )
@@ -230,6 +229,12 @@ polygon = PoolVector2Array( 284, -755, 298, -764, 310, -773, 320, -786, 329, -79
 script = ExtResource( 40 )
 HighlightColor = Color( 0.929412, 0.215686, 0.0745098, 0.364706 )
 area = "empire"
+
+[node name="Sprite" type="Sprite" parent="map/empire_capital"]
+show_behind_parent = true
+position = Vector2( 236.5, -848.5 )
+scale = Vector2( 0.957917, 0.957917 )
+texture = ExtResource( 48 )
 
 [node name="Area2D" type="Area2D" parent="map/empire_capital"]
 light_mask = 0
@@ -682,6 +687,7 @@ text = "Location name"
 valign = 1
 
 [node name="Sendbutton" type="TextureButton" parent="FromLocList"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5

@@ -284,11 +284,11 @@ var tutorials = {
 			ban_mass_select = true,
 			text = 'TUTORIAL_COMBAT6',
 			panel_pos = Vector2(733,150)
-		},{
-			buttons = ['travel_send'],
-			ban_mass_select = true,
-			text = 'TUTORIAL_COMBAT7',
-			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['travel_send'],
+#			ban_mass_select = true,
+#			text = 'TUTORIAL_COMBAT7',
+#			panel_pos = Vector2(733,150)
 		},{
 			buttons = ['travel_to_loc'],
 			ban_mass_select = true,

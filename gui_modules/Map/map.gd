@@ -170,8 +170,6 @@ func set_focus_area():
 #	$map.global_position = data.position
 	
 	for area in $map.get_children():
-		if area.is_in_group('highlight_ignore'):
-			continue
 		if area.name == selected_area:
 			area.highlight(area.HighlightColor)
 		else:
@@ -181,8 +179,6 @@ func set_focus_area():
 func set_focus_location(loc):
 #	loc_locked = true
 	for area in $map.get_children():
-		if area.is_in_group('highlight_ignore'):
-			continue
 		if area.name == loc or area.name == selected_area:
 			area.highlight(area.HighlightColor)
 		else:
@@ -196,8 +192,6 @@ func unselect_location():
 		unselect_area()
 		return
 	for area in $map.get_children():
-		if area.is_in_group('highlight_ignore'):
-			continue
 		if area.name == selected_area:
 			area.highlight(area.HighlightColor)
 		else:
@@ -259,7 +253,7 @@ func _input(event):
 func _ready():#2add button connections
 	$Back.connect('pressed', self, 'close')
 	$mode.connect('pressed', self, 'from_loc_set')
-	$FromLocList/Sendbutton.connect('pressed', self, 'from_loc_set')
+#	$FromLocList/Sendbutton.connect('pressed', self, 'from_loc_set')
 	info_btn_send.connect('pressed', self, 'confirm_travel')
 	info_btn_teleport.connect('pressed', self, 'switch_teleport_menu')
 	$zoom.min_value = map_zoom_min
@@ -273,7 +267,7 @@ func _ready():#2add button connections
 	input_handler.register_btn_source('travel_master', self, 'tut_get_master')
 	input_handler.register_btn_source('travel_servant', self, 'tut_get_servant')
 	input_handler.register_btn_source('travel_chars_highlight', self, null, self, 'tut_get_chars_highlight')
-	input_handler.register_btn_source('travel_send', self, 'tut_get_send')
+#	input_handler.register_btn_source('travel_send', self, 'tut_get_send')
 	input_handler.register_btn_source('travel_to_loc', self, 'tut_get_location')
 	input_handler.register_btn_source('travel_confirm', self, 'tut_get_send_confirm')
 	input_handler.register_btn_source('travel_back', self, 'tut_get_back_btn')
@@ -296,8 +290,8 @@ func tut_get_chara(character):
 			for btn in loc_group.get_node('offset/LocList').get_children():
 				if btn.get_meta('character', "") == character.id:
 					return btn
-func tut_get_send():
-	return $FromLocList/Sendbutton
+#func tut_get_send():
+#	return $FromLocList/Sendbutton
 func tut_get_location():
 	var loc_id
 	for id in ResourceScripts.game_world.areas['plains'].questlocations:
@@ -409,6 +403,9 @@ func open():
 	input_handler.node_children_visible(get_parent(), self, false)
 	ResourceScripts.core_animations.UnfadeAnimation(self, 0.2)
 	set_focus_area()
+	for area in $map.get_children():
+		if area.has_method('check_gray'):
+			area.check_gray()#strictly after build_locations_list()
 	input_handler.ActivateTutorial("TUTORIALLIST3")
 
 
@@ -993,6 +990,7 @@ func try_switch_selected_loc(loc_id):
 		if selected_loc == null:
 			reset_from()
 		else:
+			from_loc_set()
 			match_state()
 
 func try_append_selected_group(group_name):
@@ -1077,11 +1075,11 @@ func match_state():
 		$ToLocList.visible = false
 		if selected_loc == null:
 #			$FromLocList/Sendbutton/Label.text = 'Adv.Mode'
-			$FromLocList/Sendbutton.visible = false
+#			$FromLocList/Sendbutton.visible = false
 			$mode/Label.text = 'Adv. Mode'
 			$mode.visible = true
 		else:
-			$FromLocList/Sendbutton.visible = true
+#			$FromLocList/Sendbutton.visible = true
 			$mode.visible = false
 #			$FromLocList/Sendbutton/Label.text = 'Send'
 #		$FromLocList/Sendbutton.visible = true
@@ -1095,7 +1093,7 @@ func match_state():
 			$mode.visible = true
 		else:
 			$FromLocList.visible = true
-			$FromLocList/Sendbutton.visible = false
+#			$FromLocList/Sendbutton.visible = false
 			$mode.visible = false
 
 
@@ -1107,11 +1105,15 @@ func from_loc_set():
 	if selected_loc == null:
 		selected_loc = 'adv_mode'
 		update_location_chars()
+	else:
+		for loc_data in sorted_locations:
+			if loc_data.id == selected_loc:
+				selected_area = loc_data.area
+				break
 	from_loc = selected_loc
 #	loc_locked = false
-#	selected_area = null
-	set_focus_area()
 	build_to_locations()
+	set_focus_area()
 	build_info()
 	match_state()
 
