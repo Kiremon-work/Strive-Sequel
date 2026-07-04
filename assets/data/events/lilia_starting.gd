@@ -119,8 +119,6 @@ var data = {
 		save_scene_to_gallery = true,
 		scene_type = "ero_scene",
 		text = [{text = "LILIA_SEX_SCENE_1_1", reqs = []}],
-		common_effects = [{code = 'unique_character_changes', value = 'lilia', args = [
-			{code = 'tag', operant = 'remove', value = 'no_sex'}]},],
 		options = [ {
 			code = 'lilia_sex_scene_1_2', text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
 		} ]
@@ -491,8 +489,6 @@ var data = {
 		save_scene_to_gallery = true,
 		unlocked_gallery_seq = "lilia_sex_2",
 		custom_background = "lilia_sex_2_1",
-		common_effects = [{code = 'unique_character_changes', value = 'lilia', args = [
-			{code = 'tag', operant = 'remove', value = 'no_sex'}]}],
 		options = [ {
 			code = 'lilia_mansion_4', text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
 		}, ]

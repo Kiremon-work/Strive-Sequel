@@ -70,10 +70,8 @@ func open_cheats_menu():
 	gui_controller.cheat_panel.open()
 
 
-func text_changed(text):
-	if ResourceScripts.game_globals.cheat_code == text:
-		$TabContainer/Cheats/EnterCodeMenu/Activate.disconnect("pressed", self, "go_for_code")
-		$TabContainer/Cheats/EnterCodeMenu/Activate.connect("pressed", self, "activate_cheats")
+func text_changed(_text):
+	pass
 
 	# $TabContainer/Cheats/EnterCodeMenu/Activate.disabled = !ResourceScripts.game_progress.cheat_code == text
 
@@ -85,6 +83,13 @@ func activate_cheats():
 
 
 func go_for_code():
+	if OS.has_feature('editor'):
+		$TabContainer/Cheats/EnterCodeMenu/LineEdit.text = ResourceScripts.game_globals.cheat_code
+		activate_cheats()
+		return
+	if $TabContainer/Cheats/EnterCodeMenu/LineEdit.text == ResourceScripts.game_globals.cheat_code:
+		activate_cheats()
+		return
 	OS.shell_open("https://www.patreon.com/posts/new-password-18830450")
 
 

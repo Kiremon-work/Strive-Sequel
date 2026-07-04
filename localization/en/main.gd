@@ -15,6 +15,7 @@ var TranslationDict = {
 	MENUGALLERY = "Gallery",
 	MENUQUIT = "Quit",
 	MENUCHANGELOG = "Change log",
+	MENUMODLISTSAFETY = "Mod List Reset",
 	GALLERYNAME = "Gallery",
 	GALLERYSTORY = "Story",
 	GALLERYERO = "Ero",
@@ -36,6 +37,7 @@ var TranslationDict = {
 	MODCLOSE = "Close",
 	MODSORT = "Sort",
 	MODOPENEDITOR = "Open Editor (Alpha Version)",
+	MODLISTGAMEVERSIONRESET = "The enabled mod list was made for game version %s, but the current game version is %s.\n\nFor safety, the old mods.ini was backed up to:\n%s\n\nA new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.",
 	MENUCREDITSNAME = "Credits",
 	MENUCREDITSDESC = """Game design, writing, programming: Maverik 
 
@@ -363,6 +365,7 @@ but still will keep all your characters, items and inventory. Use this mode to l
 	LMMWORK = "Work",
 	BTNLEVELING = "Leveling",
 	BTNDATE = "Date",
+	DATECONFIRM = "Confirm dating [name]?",
 	BTNCHAT = "Chat",
 	BTNRELATIONS = "Relations",
 	BTNCUSTOMIZATION = "Customization",
@@ -2650,7 +2653,7 @@ You won't be able to finish turn if your total number of characters is bigger th
 	TRAITSTANDING_LOVE_PEST = "Love Pest",
 	TRAITSTANDING_LOVE_PESTDESCRIPT = "Experience gained from the sex minigame is increased by 25%.",
 	TRAITSTANDING_HOUSEMATE = "Housemate",
-	TRAITSTANDING_HOUSEMATEDESCRIPT = "Health and Mana regeneration are increased by 10%.",
+	TRAITSTANDING_HOUSEMATEDESCRIPT = "",
 	TRAITSTANDING_SWORN_SERVANT = "Sworn Servant",
 	TRAITSTANDING_SWORN_SERVANTDESCRIPT = "Productivity is increased by 10%.",
 	TRAITSTANDING_BELOVED = "Beloved",
@@ -3747,6 +3750,22 @@ Authority: +""",
 	DATING_PHYSF_BONUS_2 = """
 
 While this was an unpleasant expirience for [name], it will certainly teach [him] to be afraid of your anger.""",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""",
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""",
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""",
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""",
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""",
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""",
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""",
 	DATING_SEX_OFFER_1 = """
 
 {color=green|It seems [name] does not mind to continue this encounter...}""",
@@ -16232,7 +16251,7 @@ You can feel heat radiating off of her, and you can't help but respond in kind. 
 
 {color=yellow|— Did you know... That foxes mate for life? *Giggle*}""",
 	ZEPHYRA_BATH_4 = "Your fingers dig into her soft hips as you guide her onto you. Her warmth envelops your dick as you pierce her hymen. Zephyra cries out in pleasure, her tight walls squeezing around your rod as she takes in the full length of your penis. She gasps and moans, her body flexing and arching with every thrust.",
-	ZEPHYRA_BATH_5 = """You pick up the pace, pounding harder and faster into her petite butt. Zephyra's moans turn into cries of pleasure as she orgasms, coming apart in your arms. The sensation of her spasming insides is too much to bear and you come inside of her, painting her walls with your seed.
+	ZEPHYRA_BATH_5 = """You pick up the pace, pounding harder and faster against her petite butt. Zephyra's moans turn into cries of pleasure as she orgasms, coming apart in your arms. The sensation of her spasming insides is too much to bear and you come inside of her, painting her walls with your seed.
 
 However, you don't feel quite satisfied yet. You resume slamming into her backside as her lewd cries fill the bath...""",
 	ZEPHYRA_BATH_6 = """As you both catch your breath, you hold her close, relishing the feeling of her soft skin against yours. She snuggles closely and wraps her tail around you, closing her eyes in tranquility.

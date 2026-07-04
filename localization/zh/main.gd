@@ -15,6 +15,7 @@ var TranslationDict = {
 	MENUGALLERY = """画廊""",
 	MENUQUIT = """退出""",
 	MENUCHANGELOG = """更新日志""",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	GALLERYNAME = """画廊""",
 	GALLERYSTORY = """剧情""",
 	GALLERYERO = """涩情""",
@@ -36,6 +37,12 @@ var TranslationDict = {
 	MODCLOSE = """关闭""",
 	MODSORT =  """排序""",
 	MODOPENEDITOR = """打开编辑器（测试版）""",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	MENUCREDITSNAME = """Credits""",
 	MENUCREDITSDESC = """Game design, writing, programming: Maverik 
 
@@ -8293,6 +8300,7 @@ SEXACTION_TAILJOB_REACTION_1 = """[name2]对{^这种刺激:[names1]的努力:[na
 	ENEMYSMALL_BANDIT = """Small Bandit""", # MISSING TRANSLATION
 	ENEMYLILITH_BOSS_1 = """阿什米代""",
 	ENEMYLILITH_BOSS_2 = """阿什米代""",
+	ENEMYASHMEDAI_TENTACLE = """Tentacle Appendage""", # MISSING TRANSLATION
 	ENEMYWHITE_STAG = """白鹿""",
 	ENEMYWHITE_STAG_HUMAN = """神秘人""",
 	ENEMYSMOTHERING_KUDZU = """窒息葛藤""",

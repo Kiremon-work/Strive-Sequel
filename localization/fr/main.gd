@@ -24,6 +24,7 @@ var TranslationDict = {
 	MENUGALLERY = "Galerie",
 	MENUQUIT = "Quitter",
 	MENUCHANGELOG = "Journal des modifications",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	#Gallery
 	GALLERYNAME = "Galerie",
 	GALLERYSTORY = "Histoire",
@@ -47,6 +48,12 @@ var TranslationDict = {
 	MODCLOSE = "Fermer",
 	MODSORT = "Tri",
 	MODOPENEDITOR = "Open Editor (Alpha Version)",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	#MENUCREDITS
 	MENUCREDITSNAME = "Crédits",
 	MENUCREDITSDESC = """Game design, écriture, programmation : Maverik /

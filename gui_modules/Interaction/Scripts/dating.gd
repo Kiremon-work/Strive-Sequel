@@ -1560,35 +1560,38 @@ func calculateresults():
 
 #	var eff = effects_pool.e_createfromtemplate(Effectdata.effect_table['date_bonus'])
 #	person.apply_effect(effects_pool.add_effect(eff))
-	var obedience = 100
-	var authority = 0
-	var consent = 0
-	var loyalty = 0
-	var text = ('Encounter Ended.'
-	+ "\nMood: " + str(endmood)
-	+ "\nFear: " + str(endfear)
+	var affection = 0
+	var respect = 0
+	var text = (tr("DATING_ENOCOUNTER_ENDED_1")
+	+ tr("DATING_MOOD_1") + str(endmood)
+	+ tr("DATING_FEAR_1") + str(endfear)
 	)
-	if endmood >= endfear:
-#		loyalty = ceil(endmood/4) + max(0,(master.get_stat('charm_factor')) - 3) * 5
-		loyalty = 6 + master.get_stat('charm_factor') * 2 +  person.get_stat('tame_factor') * 2
-		text += (tr("DATING_POSITIVE_MODE_1")
-		+ tr("DATING_LOYALTY_1") + str(loyalty) + tr("DATING_CHARMF_BONUS_1") + str( max(0,(master.get_stat('charm_factor')) - 3) * 5) + ")"
-		+ tr("DATING_AUTHORITY_BONUS_1") + str(authority)
-		+ tr("DATING_AUTHORITY_BONUS_2")
-		)
-
-		person.add_stat("loyalty", loyalty)
-
+	if endmood > endfear / 2.0:
+		affection = int(min(floor(endmood / 4.0), 25))
+		if endfear < 10:
+			respect = -globals.rng.randi_range(15, 25)
+		text += tr("DATING_AFFECTIONATE_RESULT_1")
+		if endfear < 10:
+			text += tr("DATING_LOW_FEAR_WARNING")
 	else:
-		loyalty = 6 + master.get_stat('charm_factor') + person.get_stat('authority_factor') 
-		text += (tr("DATING_FEARFUL_1")
-		+ tr("DATING_OBEDIENCE_1") + str(obedience)
-		+ tr("DATING_AUTHORITY_1") + str(authority) + tr("DATING_PHYSF_BONUS_1") + str(master.get_stat("physics_factor")*4)+")"
-		+ tr("DATING_PHYSF_BONUS_2")
-		)
-#		person.add_stat("loyalty", loyalty)
-	
-#	person.add_stat("obedience", obedience)
+		affection = int(min(floor(endmood / 2.0), 20))
+		if endfear < endmood * 2.5:
+			respect = int(min(floor(endfear / 2.0), 40))
+		else:
+			respect = int(min(endfear, 25))
+		text += tr("DATING_FEARFUL_RESULT_1")
+
+	if affection != 0:
+		person.add_stat("affection", affection)
+		text += tr("DATING_RESULT_AFFECTION_GAIN") + str(affection)
+	if respect > 0:
+		person.add_stat("respect", respect)
+		text += tr("DATING_RESULT_RESPECT_GAIN") + str(respect)
+	elif respect < 0:
+		person.add_stat("respect", respect)
+		text += tr("DATING_RESULT_RESPECT_LOSS") + str(abs(respect))
+	if affection == 0 && respect == 0:
+		text += tr("DATING_RESULT_NO_CHANGE")
 
 	if person.get_stat('consent') >= 2:
 		text += "\n\n{color=aqua|" + person.get_short_name() + "}: " + person.translate(input_handler.get_random_chat_line(person, 'date_sex_offer')) + tr("DATING_SEX_OFFER_1")

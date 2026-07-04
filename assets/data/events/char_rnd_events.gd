@@ -3485,10 +3485,10 @@ var data = {
 			"dialogue_scene",
 			"active_character_translate"
 		],
-		image = "no_image",
+		image = "lilia_sick",
 		text = [
 			{
-				text = "lilia_sick",
+				text = "CHARRND_LAYING",
 				reqs = [
 
 				]
