@@ -2653,7 +2653,7 @@ You won't be able to finish turn if your total number of characters is bigger th
 	TRAITSTANDING_LOVE_PEST = "Love Pest",
 	TRAITSTANDING_LOVE_PESTDESCRIPT = "Experience gained from the sex minigame is increased by 25%.",
 	TRAITSTANDING_HOUSEMATE = "Housemate",
-	TRAITSTANDING_HOUSEMATEDESCRIPT = "",
+	TRAITSTANDING_HOUSEMATEDESCRIPT = " ",
 	TRAITSTANDING_SWORN_SERVANT = "Sworn Servant",
 	TRAITSTANDING_SWORN_SERVANTDESCRIPT = "Productivity is increased by 10%.",
 	TRAITSTANDING_BELOVED = "Beloved",
@@ -2854,7 +2854,7 @@ Damage +15%, Health +20.""",
 	FAMEDESC_PRICE_BONUS = "Character's Value",
 	FAMEDESC_UPKEEP = "Subordinate weekly upkeep",
 	FAMEDESC_LOYALTY_BONUS = "Loyalty for trainee",
-	FAMEDESC_RECRUIT_BONUS = "Recruitment efficiency",
+	FAMEDESC_MANHUNT_BONUS = "Manhunt bonus",
 	PRICEDESC_TRAITS_POS = "Positive traits",
 	PRICEDESC_TRAITS_NEG = "Negative traits",
 	PRICEDESC_CUMULATIVE = "Cumulative bonus %s of",
@@ -7776,7 +7776,7 @@ SEXACTION_TITJOB_ONGOING_1 = "[name1] give[s/1] [a /2]titjob[/s2] to [name2].",
 	SEXACTION_TAILJOB_ONGOING_SCALY_MASTERED_2 = "[name1] var[ies/y1] {^the grip:the speed:the pressure} with expert ease, [his1] {^sleek:smooth} tail {^drawing:coaxing} {^moans:gasps:whimpers} from [name2].",
 	SEXACTION_TAILJOB_SKILL_NOVICE_LOW_1 = "[name2] {^shift[s/2]:fidget[s/2]} slightly, {^huffing:making a small noise} as [name1]'s {^rough:uneven} grip {^catch[es/2]:drag[s/2]} awkwardly.",
 	SEXACTION_TAILJOB_SKILL_NOVICE_HIGH_1 = "[name2] let[s/2] out {^a small:a soft} {^gasp:moan}, unable to help {^it:himself} even with [name1]'s clumsy grip.",
-	SEXACTION_TAILJOB_SKILL_SKILLED_LOW_1 = "[name2] {^begin[s/2]:start[s/2]} to {^settle in:loosen up} as [name1]'s rhythm {^find[s/2]:settle[s/2] into} a steady groove.",
+	SEXACTION_TAILJOB_SKILL_SKILLED_LOW_1 = "[name2] {^begin[s/2]:start[s/2]} to {^settle in:loosen up} as [name1]'s rhythm {^find[s/2]:settle[s/2] into} a steady way.",
 	SEXACTION_TAILJOB_SKILL_SKILLED_HIGH_1 = "[name2] {^moan[s/2]:gasp[s/2]} at [name1]'s confident strokes, [his2] body {^flushing:tensing} as [he2] feel[s/2] the difference.",
 	SEXACTION_TAILJOB_SKILL_MASTERED_LOW_1 = "[name1] take[s/1] [his1] time, {^patient:unhurried}, {^building:coaxing} soft {^moans:sounds} from [name2] with each deliberate stroke.",
 	SEXACTION_TAILJOB_SKILL_MASTERED_HIGH_1 = "[name1] know[s/1] exactly what [he1]'s doing, and [name2] {^can barely contain [his2] moans:struggle[s/2] to hold back a moan}.",
@@ -20199,7 +20199,7 @@ In the next moment she's gone in her usual manner.""",
 	LIRA_DIALOGUE_START = "{color=yellow|Lira: — Is there anything you need, [master]?}",
 	LIRA_LOST_OPT_SURE = "Sure, you can stick around",
 	LIRA_LOST_OPT_PRICE = "My help can only come at a price",
-	LIRA_LOST_REPLY_SURE = "{color=yellow|— Bless you, once we get out of this groove I'll show you the way.}",
+	LIRA_LOST_REPLY_SURE = "{color=yellow|— Bless you, once we get out of this grove I'll show you the way.}",
 	LIRA_LOST_REPLY_PRICE = "{color=yellow|— T—that's... I don't have any money on me.}",
 	LIRA_LOST_OPT_FREE = "Nevermind, I'll help for free",
 	LIRA_LOST_OPT_SOMETHING = "I'm sure you have something of value...",
@@ -29205,6 +29205,555 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 
 {color=yellow|Lira: — We did it... Like animals, aren't we? I never thought I'd find pleasure in something like this with you, [master].}""",
 
+
+
+
+	# Act 4 - Sebastian railroad quest
+	ACT4_SEBASTIAN_RAILROAD_NAME = "The Steel Road",
+	ACT4_SEBASTIAN_RAILROAD_SUMMARY = "Sebastian of the Trading Guild is pursuing a railroad project into the dwarven lands.",
+	ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN = "Find a dwarven technician who can advise Sebastian on the railroad route.",
+	ACT4_SEBASTIAN_STAGE_REPORT_TECHNICIAN = "Report the selected dwarven technician to Sebastian in the Empire Capital.",
+	ACT4_SEBASTIAN_STAGE_WAIT_PREPARATION = "Wait while Sebastian prepares the railroad survey materials.",
+	ACT4_SEBASTIAN_STAGE_INVESTIGATE_TROUBLE = "Speak with the selected technician in the Dwarven Capital about the railroad trouble.",
+	ACT4_SEBASTIAN_STAGE_INVESTIGATE_KHARZUG = "Investigate Kharzug Deep for the missing railroad surveyors.",
+	ACT4_SEBASTIAN_STAGE_CLEAR_LOWER_TOMB = "Search the lower tomb beneath Kharzug Deep and remove the danger there.",
+	ACT4_SEBASTIAN_STAGE_RETURN_TO_TECHNICIAN = "Return to the selected technician in the Dwarven Capital with news from Kharzug Deep.",
+	ACT4_SEBASTIAN_STAGE_REPORT_KHARZUG = "Report the outcome at Kharzug Deep to Sebastian in Aliron.",
+	ACT4_SEBASTIAN_STAGE_SPEAK_TO_CHURCH = "Visit Celena's church in Aliron about Sebastian's offer.",
+	ACT4_SEBASTIAN_STAGE_RETURN_GINNY_REFUSAL = "Return to Sebastian after Ginny refuses to surrender Celena's church.",
+	ACT4_SEBASTIAN_STAGE_OFFER_ALTERNATIVE_SITE = "Offer Ginny Sebastian's alternative site for Celena's church.",
+	ACT4_SEBASTIAN_STAGE_PERSUADE_PARISHIONERS = "Assign workers in Aliron to convince parishioners to support the church relocation.",
+	ACT4_SEBASTIAN_STAGE_PARISHIONERS_PERSUADED = "Visit Ginny after the parishioners have been persuaded.",
+	ACT4_SEBASTIAN_STAGE_NEW_CHURCH_SITE = "Visit Celena's church at the new location.",
+	ACT4_SEBASTIAN_STAGE_FIND_WAREHOUSE_OWNER = "Find the owner of the warehouse near Celena's church.",
+	ACT4_SEBASTIAN_STAGE_BUY_WAREHOUSE = "Return to the warehouse owner and buy the alternative property.",
+	ACT4_SEBASTIAN_STAGE_REPORT_WAREHOUSE_SOLUTION = "Report the warehouse solution to Ginny at Celena's church.",
+	ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION = "Wait for Sebastian to contact you again.",
+	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = "Report Kharzug Deep to Sebastian",
+	ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH = "Visit Celena's church",
+	ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN = "Return to Sebastian",
+	ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH = "Visit the new church",
+	ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE = "Visit the warehouse",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_HARA = "Ask Hara about the railroad",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KARGUN = "Find a technician",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KARGUN_RETURN = "Return to Kargun",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN = "Speak with the technician",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG = "Investigate Kharzug Deep",
+	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB = "Search the lower tomb",
+	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL = "Visit Central Square",
+	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_REPORT_TECHNICIAN = "Report to Sebastian",
+	ACT4_SEBASTIAN_PARISHIONER_TASK_NAME = "Convince Parishioners",
+	ACT4_SEBASTIAN_PARISHIONER_TASK_DESC = "Assign workers to convince Celena's parishioners to support moving the church.",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_1 = """As you pass through one of the broader streets of the imperial capital, you notice an eccentric, rich-looking man in a tophat leading a small party along the avenue. The familiar look of the dwarf officials with him makes you slow your steps.
+
+The Dwarf King walks beside him, accompanied by two armored guards and a court scribe carrying a case of documents.
+
+The man gestures toward the warehouses, paved roads, and busy loading yards around them as if every stone had been placed there to support his argument.""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_2 = """You slow down just as the man stops near a newly built cargo office. A few imperial clerks wait nearby with rolled maps, ready to present them when called upon.
+
+{color=yellow|The man: — Your Majesty, I assure you, the Trading Guild does not bring you here for fantasy, but for planning. The Empire has already shown what proper roadwork, logistics, and centralized labor can accomplish. What we propose now is simply the next stage.}
+
+The Dwarf King folds his arms, his beard bound with the same royal metal clasps you remember from his court.
+
+{color=aqua|Dwarf King: — A road above ground is one thing. A steel path into my mountains is another.}
+
+The man gives a practiced nod, as if the objection had arrived exactly where he expected it.""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_3 = """{color=yellow|The man: — Precisely why it deserves attention. A railroad is not merely a road. It is a pinnacle of technological advancement, a fixed promise between two lands. Ore, machinery, grain, timber, passengers, soldiers if required, relief supplies if needed... all moved faster than carts, safer than caravans, and with schedules that can be written months in advance.}
+
+The word soldiers makes the king's guards exchange a look, though the man moves past it without changing tone.
+
+{color=yellow|The man: — Your kingdom has engineers with talents the Empire respects. The Empire has capital, legal reach, and industrial capacity. Together, we could make the mountain route the greatest commercial artery on the continent.}""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_4 = """The Dwarf King notices you watching from nearby. Recognition sharpens his expression. Whether he is pleased to see you is much less clear.
+
+{color=aqua|Dwarf King: — [name] of Aliron. Convenient. You have already dealt with my court and seen enough of this Empire's habits. What is your opinion on this proposal?}
+
+The man turns toward you as well, his smile brightening with polite curiosity.
+
+{color=yellow|The man: — Ah, the mayor of Aliron. Sebastian, representative of the Trading Guild. Your reputation travels almost as well as our future trains might.}""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_SUPPORT = """Sebastian's smile widens, but he is professional enough not to look triumphant.
+
+{color=yellow|Sebastian: — Sensible and admirably forward-looking. Naturally, every clause would need proper review, but history favors those willing to build before others finish arguing over old walls.}
+
+The Dwarf King studies you for a moment, then gives a low grunt.
+
+{color=aqua|Dwarf King: — Hmph. Consideration is not agreement. But if there is profit, leverage, and respect in it, I will hear it.}""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_CAUTION = """Sebastian accepts the criticism with an elegant nod, though the slight pause before his answer shows that he felt it.
+
+{color=yellow|Sebastian: — A fair concern. Every advancement frightens people before it serves them. That is why the Trading Guild prefers surveys, controlled routes, proper maintenance, and visible accounting. Caution is healthy, so long as it does not become paralysis.}
+
+The Dwarf King's eyes narrow, but his expression suggests that your warning has only sharpened his interest rather than ended it.
+
+{color=aqua|Dwarf King: — Then your engineers had better be as steady as your speech is charming. My mountains are not a place for careless experiments.}""",
+	ACT4_SEBASTIAN_PROPOSAL_DKING_MERGE = """Sebastian claps his hands once, not loudly enough to seem crude, but enough to reclaim the rhythm of the meeting.
+
+{color=yellow|Sebastian: — Excellent. Then let us proceed from slogans to numbers. Your Majesty, I have prepared route estimates, projected toll schedules, and several models of shared oversight. I promise at least one of them is less terrifying than it sounds.}
+
+The joke earns nothing from the Dwarf King, but Sebastian does not seem discouraged. The clerks begin unrolling maps across a portable table, pinning the corners down against the wind while the king, his scribe, and his guards gather closer.
+
+For now, no agreement is made. Still, as you continue through the capital, the idea lingers behind you: a steel road from the Empire into the mountains, presented as progress, profit, and peace all at once.
+
+Whether it will become any of those things remains much less certain.""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_1 = """As you pass through one of the broader streets of the imperial capital, you notice an eccentric, rich-looking man in a tophat leading a small party along the avenue. The familiar look of the dwarf officials with him makes you slow your steps.
+
+Bolthar walks beside him, accompanied by two coalition veterans and a younger dwarf carrying a folder of stamped documents.
+
+The man gestures toward the warehouses, paved roads, and busy loading yards around them as if every stone had been placed there to support his argument.""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_2 = """You slow down just as the man stops near a newly built cargo office. A few imperial clerks wait nearby with rolled maps, ready to present them when called upon.
+
+{color=yellow|The man: — Lord Bolthar, the Trading Guild understands that your people have undergone a necessary transition. New governments need stability, revenue, and visible proof that tomorrow will not simply be yesterday with a different seal stamped on the orders. That is exactly why our proposal is timely.}
+
+Bolthar studies him with open caution. One of his escorts watches the imperial clerks more than the man, as if expecting the real threat to come from the paperwork.
+
+{color=aqua|Bolthar: — You speak as if laying iron into our mountains is charity.}
+
+The man gives a light laugh, friendly enough to avoid insult.""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_3 = """{color=yellow|The man: — I would never insult you by pretending commerce is charity. A railroad is profit disciplined into progress. It is the pinnacle of technological advancement the Empire can offer: reliable movement of goods, citizens, soldiers if required, relief supplies if needed...}
+
+At the mention of soldiers, Bolthar grows visibly colder. The man seems to notice, but does not retreat from the point.
+
+{color=yellow|The man: — Trade binds more firmly than treaties when done properly. Your mines and workshops need buyers. The Empire needs metal, machinery, and secure passage through the mountains. Everyone gains something tangible.}""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_4 = """Bolthar notices you watching from nearby. For a moment the stiffness in his expression gives way to recognition.
+
+{color=aqua|Bolthar: — [name], you are more familiar with the human world than us. What do you think of this?}
+
+The man turns toward you as well, his smile brightening with polite curiosity.
+
+{color=yellow|The man: — Ah, the mayor of Aliron. Sebastian, representative of the Trading Guild. Your reputation travels almost as well as our future business might.}""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_SUPPORT = """Sebastian's smile widens, but he is professional enough not to look triumphant.
+
+{color=yellow|Sebastian: — Sensible and admirably forward-looking. Naturally, every clause would need proper review, but history favors those willing to build before others finish arguing over old walls.}
+
+Bolthar glances toward his escort. The younger dwarf with the documents looks tempted by the argument, while the veterans remain harder to read.
+
+{color=aqua|Bolthar: — Consideration is not agreement. But our people need routes that do not belong to the old palace families. We will hear the terms in full.}""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_CAUTION = """Sebastian accepts the criticism with an elegant nod, though the slight pause before his answer shows that he felt it.
+
+{color=yellow|Sebastian: — A fair concern. Every advancement frightens people before it serves them. Caution is healthy, so long as it does not become paralysis.}
+
+Bolthar's expression hardens. This time, his escort seems to agree with him before he speaks.
+
+{color=aqua|Bolthar: — We did not survive one disaster just to invite another. If your offer is honest, your engineers had better prove it.}""",
+	ACT4_SEBASTIAN_PROPOSAL_BOLTHAR_MERGE = """Sebastian claps his hands once, not loudly enough to seem crude, but enough to reclaim the rhythm of the meeting.
+
+{color=yellow|Sebastian: — Excellent. Then let us proceed from slogans to numbers. Lord Bolthar, I have prepared route estimates, projected toll schedules, and several models of shared oversight. I promise at least one of them is less terrifying than it sounds.}
+
+The joke earns little from Bolthar, but Sebastian does not seem discouraged. The clerks begin unrolling maps across a portable table, pinning the corners down against the wind while Bolthar and his escort gather closer.
+
+For now, no agreement is made. Still, as you continue through the capital, the idea lingers behind you: a steel road from the Empire into the mountains, presented as progress, profit, and peace all at once.
+
+Whether it will become any of those things remains much less certain.""",
+	ACT4_SEBASTIAN_PROJECT_OFFER_1 = """As the dwarven party leaves with the clerks and their maps, Sebastian lingers behind. For a moment he watches them go, tapping one gloved finger against the head of his cane.
+
+Then he turns back to you with a smile that looks far too ready to be accidental.
+
+{color=yellow|Sebastian: — Mayor [name]. A fortunate coincidence, or perhaps simply good timing. Either way, I was hoping to speak with you without official ears listening to every breath.}""",
+	ACT4_SEBASTIAN_PROJECT_OFFER_2 = """{color=yellow|Sebastian: — You heard the proposal. A railroad into the dwarven lands. An idea large enough to frighten cautious men and enrich practical ones.}
+
+He steps closer, lowering his voice just enough to make the offer feel private.
+
+{color=yellow|Sebastian: — If you lend your name and effort to this project, there will be profit. Considerable profit.}""",
+	ACT4_SEBASTIAN_PROJECT_OFFER_3 = """{color=yellow|Sebastian: — For now, something simple. The Trading Guild can provide capital and imperial technicians, but this line cannot be built by outsiders alone. We need someone from the dwarven side who understands stone, pressure and old tunnels. A suitable technician. Preferably one talented enough to be useful and independent enough not to be buried under procedure.}
+
+{color=yellow|Sebastian: — Scout the Dwarven Capital. Ask around the workshops, guild yards, and palace-adjacent offices. Find me someone who knows the right people and places.}""",
+	ACT4_SEBASTIAN_HARA_MANSION_1 = """You explain Sebastian's proposal to Hara: an imperial Trading Guild project to build a railroad into the dwarven lands.
+
+Hara listens without interrupting. The longer you speak, the more her expression shifts from caution to interest.
+
+{color=yellow|Hara: — A railroad? Into the mountains?}""",
+	ACT4_SEBASTIAN_HARA_MANSION_2 = """Hara folds her arms, thinking through the problem faster than she bothers to speak.
+
+{color=yellow|Hara: — That is not just laying metal on the ground. The stone shifts. Old tunnels breathe strangely. Some passages were sealed for good reason, and some foundations look solid until you put weight on them for a year.}
+
+She looks up at you.
+
+{color=yellow|Hara: — Which means they absolutely need someone who knows what not to trust.}""",
+	ACT4_SEBASTIAN_HARA_MANSION_ACCEPT = """{color=yellow|Hara: — Of course I will help. If some imperial merchant is going to bring engines near our halls, I would rather be there before someone clever makes a stupid mistake.}
+
+She gives a short, confident nod.
+
+{color=yellow|Hara: — Tell Sebastian I will inspect his route. And tell him that if he argues with me about stonework, I will charge extra.}""",
+	ACT4_SEBASTIAN_HARA_CAPITAL_1 = """In the Dwarven Capital, you ask after Hara among the workshops and trade offices. It does not take long before someone points you toward a noisy work yard near one of the older stone lifts.
+
+You find her arguing with two workers over a cracked support bracket. By the time you approach, she has already taken the tool from one of them and started fixing it herself.""",
+	ACT4_SEBASTIAN_HARA_CAPITAL_2 = """{color=yellow|Hara: — If you tighten it like that, it will hold just long enough to fail when someone important is standing under it. Give me that.}
+
+The workers notice you first. Hara follows their gaze, then stops with the bracket still in her hand.
+
+{color=yellow|Hara: — [name]? What brought you here?}""",
+	ACT4_SEBASTIAN_HARA_CAPITAL_3 = """You explain Sebastian's proposal and the need for a dwarven technician who can scout possible routes into the mountains.
+
+Hara listens, frowning at first, but the frown turns thoughtful before you finish.""",
+	ACT4_SEBASTIAN_HARA_CAPITAL_4 = "{color=yellow|Hara: — A railroad into the mountains... That's not a piece of tech that I've dealt with yet, sounds fun!}",
+	ACT4_SEBASTIAN_HARA_CAPITAL_ACCEPT = "{color=yellow|Hara: — Tell your Trading Guild man that I will hear the details. }",
+	ACT4_SEBASTIAN_KARGUN_INTRO_1 = """You spend time asking through the Dwarven Capital's workshops for someone willing to speak about a possible railroad route.
+
+Most engineers refuse the moment they hear the Empire is involved. Others become very busy, very deaf, or suddenly offended by your questions.""",
+	ACT4_SEBASTIAN_KARGUN_INTRO_2 = """Eventually, a workshop foreman sends you to an older dwarf working beside a half-disassembled drilling rig. His beard is streaked with metal dust, and several younger workers keep a careful distance while he adjusts a cracked pressure valve.
+
+{color=yellow|Older Dwarf: — If you loosen it there, the whole rig will spit steam into your face. Turn the lower wheel first, then complain if it still hates you.}
+
+One of the workers notices you and murmurs something to him. The older dwarf looks over, measuring you with a blunt, unfamiliar stare.
+
+{color=yellow|Older Dwarf: — You need something, outsider?}""",
+	ACT4_SEBASTIAN_KARGUN_INTRO_3 = """The older dwarf gives you a short, impatient nod.
+
+{color=yellow|Kargun: — Name is Kargun. Watcha want?}
+
+You explain Sebastian's proposal and the need for a dwarven technician who can scout possible routes into the mountains.
+
+Kargun listens with a heavy frown. At first it looks like another refusal, but the longer you speak, the more his attention shifts from you to the problem itself.""",
+	ACT4_SEBASTIAN_KARGUN_INTRO_4 = """{color=yellow|Kargun: — A railroad into the mountains... Hmph. That's not just carts with iron manners. Engines mean weight, heat, vibration, smoke, pressure. Put that near old stone without sense and the mountain will answer.}
+
+For a moment, you think the problem has caught him.
+
+Then he snorts and turns back toward the drilling rig.
+
+{color=yellow|Kargun: — Interesting way to ruin a mountain, maybe. Still not my problem. I have work that already pays me and machinery that already knows how to disappoint me.}""",
+	ACT4_SEBASTIAN_KARGUN_OFFER_HUB = """Kargun keeps one hand on the cracked pressure valve, but he does not tell you to leave. Not quite.
+
+{color=yellow|Kargun: — If your tophat merchant wants a dwarf to babysit imperial ambition, he can find someone easier to impress.}""",
+	ACT4_SEBASTIAN_KARGUN_WITS = """You tell him that this is exactly why Sebastian needs someone difficult to impress. A railroad into the mountains is not ordinary imperial construction. It is weight, heat, pressure, old stone, sealed passages, unstable grades, and machinery forced to obey terrain that was never designed for it.
+
+Anyone can reject it from a doorway. Very few people could look at the plan and know whether it is impossible, brilliant, or merely stupid in a way that can be fixed.
+
+Kargun goes still.
+
+{color=yellow|Kargun: — Hmph.}
+
+He says it like an objection, but his eyes have already moved away from you and toward something only he can see: lines, loads, pressure points, tunnels, engines, and arguments waiting to happen.
+
+{color=yellow|Kargun: — New engine weight against old mountain cuts... Heat control in narrow stone... Vibration through deep supports...}
+
+He grimaces, annoyed at his own interest.
+
+{color=yellow|Kargun: — Damn it.}""",
+	ACT4_SEBASTIAN_KARGUN_PAY = """You point out that no one is asking him to work for imperial gratitude. If Sebastian wants a proper assessment, then Sebastian can afford proper compensation, and you are willing to guarantee the first payment yourself.
+
+Kargun eyes the offered gold with open suspicion, then with less suspicion.
+
+{color=yellow|Kargun: — Five hundred just to hear the details?}
+
+You confirm it.
+
+He takes the payment and tucks it away with the careful speed of a man who dislikes waste more than pride.
+
+{color=yellow|Kargun: — Expensive nonsense is still nonsense. But paid nonsense gets an hour.}""",
+	ACT4_SEBASTIAN_KARGUN_LATER = """You decide not to press him further right now.
+
+Kargun gives a short grunt and turns back to the drilling rig.
+
+{color=yellow|Kargun: — Good. Come back if your merchant learns how to make this worth my time.}""",
+	ACT4_SEBASTIAN_KARGUN_RETURN = """You return to the workshop yard where Kargun is still working beside the drilling rig. Either the machine has broken again, or he has found new things to hate about it.
+
+He notices you before you speak.
+
+{color=yellow|Kargun: — Back again? Either stubborn or paid by the hour.}""",
+	ACT4_SEBASTIAN_KARGUN_ACCEPT = """Kargun wipes his hands on a stained cloth and gives the drilling rig one last irritated glance.
+
+{color=yellow|Kargun: — I will hear the details. Not because I trust your merchant, and not because I like imperial toys. If someone is going to drag engines toward our halls, I want to know how stupid the plan is before the stone does.}
+
+He picks up a roll of plans from the workbench and tucks it under one arm.
+
+{color=yellow|Kargun: — Tell your Trading Guild man I will hear him out once. If he wastes my time, I will bill him for that too.}""",
+	ACT4_SEBASTIAN_REPORT_TECHNICIAN_1 = """You find Sebastian in one of the Trading Guild's temporary offices near the imperial capital's cargo yards. The room is crowded with ledgers, sealed letters, and route sketches, though Sebastian himself looks as composed as ever.
+
+He glances up from a stack of correspondence the moment you enter.
+
+{color=yellow|Sebastian: — Mayor [name]. I was beginning to suspect the mountains had decided to keep you.}""",
+	ACT4_SEBASTIAN_REPORT_TECHNICIAN_2 = """You tell him that you found a dwarven technician willing to hear the details of the railroad project.
+
+Sebastian's smile brightens with immediate satisfaction.
+
+{color=yellow|Sebastian: — Excellent. That is precisely the kind of progress I hoped you would bring me. The Trading Guild can purchase tools, hire surveyors, and drown half the Empire in paperwork, but local expertise is much harder to acquire honestly.}""",
+	ACT4_SEBASTIAN_REPORT_TECHNICIAN_3 = """{color=yellow|Sebastian: — Please accept my thanks. I will need some time to prepare the proper materials before bringing your technician into a formal meeting. Maps, estimates, access rights, liability clauses... all the little details that make great ideas survivable.}
+
+He taps the end of his cane lightly against the floor, already thinking several steps ahead.
+
+{color=yellow|Sebastian: — For now, consider your part handled. I will send word once the project is ready to move forward.}""",
+	ACT4_SEBASTIAN_MANSION_VISIT_1 = """A servant announces an unexpected visitor shortly after morning business begins. When you come to receive him, Sebastian is already waiting in the hall, hat in one hand and cane tucked neatly beneath the other.
+
+He looks as polished as ever, though the easy confidence in his smile sits a little tighter than before.
+
+{color=yellow|Sebastian: — Mayor [name]. I hope my arrival has not disrupted anything important.}""",
+	ACT4_SEBASTIAN_MANSION_VISIT_2 = """Sebastian settles his hat beneath one arm and lowers his voice.
+
+{color=yellow|Sebastian: — I usually prefer to let letters suffer the indignity of travel on my behalf, but speed seemed worth the expense this time. A mages guild teleportation service brought me most of the way. Horribly priced, aggressively punctual, and still preferable to spending days in a carriage.}""",
+	ACT4_SEBASTIAN_MANSION_VISIT_3 = """{color=yellow|Sebastian: — In any case, this is a business trip rather than a social call. I received a letter from our technician.}
+
+For the first time since arriving, his practiced smile falters into something more openly troubled.
+
+{color=yellow|Sebastian: — The letter is brief, and rather deliberately so. Our technician writes that complications have appeared around the excavation work.}""",
+	ACT4_SEBASTIAN_MANSION_VISIT_4 = """{color=yellow|Sebastian: — I would like to ask for your help. My hands are rather full keeping the traders side from turning nervous. Besides, whatever is happening there is likely better suited to you given your experience with the... underground.}
+
+He offers you the folded letter, still marked by travel creases and a faint smell of dust.
+
+{color=yellow|Sebastian: — Go to the dwarven kingdom, speak with our technician, and find out what kind of trouble has found its way into my otherwise beautifully organized project.}""",
+	ACT4_SEBASTIAN_TROUBLE_HARA_1 = """You find Hara near one of the administrative workshops, half-buried in rolled maps, loose survey notes, and a dismantled measuring device that looks far too delicate for the way she is handling it.
+
+She spots you before you can call her name and immediately waves you closer with a wrench.
+
+{color=yellow|Hara: — Hey! Good, you're here. I was wondering whether Sebastian's fancy letter would actually reach you, or whether some courier would drop it into a hole and call that delivery.}""",
+	ACT4_SEBASTIAN_TROUBLE_HARA_2 = """Hara kicks a stool out from under the table and climbs onto it so she can point at one of the route sketches properly.
+
+{color=yellow|Hara: — This is where the mess started. Kharzug Deep. Small settlement, old mining roads, some abandoned lower works nearby. Good place for early excavation if you like dust, bad lighting, and stone that makes interesting noises when you hit it.}
+
+She taps the mark with the wrench.
+
+{color=yellow|Hara: — A survey group went there to check the ground and old passages. Then nothing. No proper report, no runner, no message through the local offices. Nobody has come back.}""",
+	ACT4_SEBASTIAN_TROUBLE_HARA_3 = """{color=yellow|Hara: — And before you ask, yes, I would love to go poke at it myself. But if I disappear too, then nobody left here knows enough to tell the officials which tunnels are safe, which ones are lies, and which ones are waiting to become expensive graves.}
+
+She lowers her voice.
+
+{color=yellow|Hara: — Also, some of Sebastian's people already went after them. Not the clerk sort. Shady sort. They have not come back either.}""",
+	ACT4_SEBASTIAN_TROUBLE_HARA_4 = """{color=yellow|Hara: — I think something down there is making people vanish, and I think sending more engineers before we know what it is would be stupid.}
+
+She folds the map and presses it into your hands.
+
+{color=yellow|Hara: — Find the survey group if you can, find out what happened if you cannot. Shouldn't be too hard for you, right?}""",
+	ACT4_SEBASTIAN_TROUBLE_KARGUN_1 = """You find Kargun in a stone records room near the workshop yards. Several maps lie open across the table before him, weighed down by tools, stone samples, and one cup of cold tea he does not seem to remember making.
+
+{color=yellow|Kargun: — Took you long enough. }""",
+	ACT4_SEBASTIAN_TROUBLE_KARGUN_2 = """{color=yellow|Kargun: — Kharzug Deep. Old settlement past the regular trade roads. Miners, stonecutters, a few stubborn families who never learned when to move somewhere sensible. The route survey needed the lower approaches checked, so a group went there.}
+
+Kargun jabs one thick finger against a marked point on the map.
+
+{color=yellow|Kargun: — Nobody came back. No runner. No bird. No message through the offices. Settlement has gone quiet too.}""",
+	ACT4_SEBASTIAN_TROUBLE_KARGUN_3 = """{color=yellow|Kargun: — I am not going there myself. If something is wrong with the route, I am the one who knows enough to keep every other fool from digging into wrong stone while you are gone.}
+
+Kargun folds his arms, glowering at the map as if the lines personally offended him.
+
+{color=yellow|Kargun: — Besides, Sebastian already sent some of his own men after the first group. Quiet types. They have not returned either.}""",
+	ACT4_SEBASTIAN_TROUBLE_KARGUN_4 = """{color=yellow|Kargun: — I think people who go there stop reporting back. That is enough thinking for now.}
+
+He rolls a copy of the map and holds it out to you.
+
+{color=yellow|Kargun: — Go to Kharzug Deep. Find out what happened to the survey group.}""",
+	ACT4_SEBASTIAN_KHARZUG_ARRIVE_1 = """By the time you reach Kharzug Deep, the settlement appears lifeless.
+
+The outer lamps are dark. Only a few scattered windows still show light, and even those burn low behind shutters that have been barred from the inside. """,
+	ACT4_SEBASTIAN_KHARZUG_ARRIVE_2 = """You move deeper into the settlement, passing abandoned tools, overturned crates, and doors marked by fresh scratches. Somewhere ahead, something scrapes against stone, then goes quiet before you can place it.
+
+Just as you reach the central road, a dwarf stumbles out from a side alley behind you.
+
+{color=yellow|Survivor: — Run! The dead are coming through again!}
+
+Before you can question him, shapes lurch from the gloom between the houses.""",
+	ACT4_SEBASTIAN_KHARZUG_AFTER_UNDEAD_1 = "The last undead body collapses in the road, twitching once before going still. The surviving dwarf remains pressed against a wall, breathing hard, his weapon shaking in both hands.",
+	ACT4_SEBASTIAN_KHARZUG_AFTER_UNDEAD_2 = """{color=yellow|Survivor: — You are not with the survey group... damn it. Thought maybe someone came back.}
+
+He wipes dust and blood from his face, forcing himself to speak before panic can take him again.
+
+{color=yellow|Survivor: — It started after the excavation team arrived. They found something under the old lower works. Not a vein, not a passage. A tomb. Sealed stone, old carvings, and a cave beast nest dug right through part of it.}""",
+	ACT4_SEBASTIAN_KHARZUG_AFTER_UNDEAD_3 = """{color=yellow|Survivor: — First we heard the beasts. Then the dead came out. The settlement broke before we understood what was happening.}
+
+He points toward the dark mountain road beyond the settlement.
+
+{color=yellow|Survivor: — The entrance is past the lower works. If anyone from the first group is still alive, they are there.}""",
+	ACT4_SEBASTIAN_KHARZUG_TOMB_1 = """You push deeper into the lower tomb, past broken stone seals and clawed passages where the cave beasts had torn through old masonry. The air is cold enough to sting your lungs, and every sound carries too far.
+
+Ahead, the undead gathered in the chamber suddenly recoil. One by one they scatter into side passages, dragging weapons and broken limbs away from you as if something stronger than hunger has taught them fear.""",
+	ACT4_SEBASTIAN_KHARZUG_TOMB_2 = """At the center of the chamber, one of Sebastian's men lies against a cracked pillar. His clothes are too plain for a merchant guard and too well cut for a hired miner. Blood darkens one side of his coat, and one hand still grips a knife he no longer has the strength to use.
+
+Beyond him stands a woman in torn dark clothing, pale, unsteady, and surrounded by the remains of disturbed burial stones. Dark veins of magic pulse beneath her skin in uneven flashes, as if something inside her is pulling her body by invisible strings. Her face is twisted with anger, and a low, ragged groan crawls from her throat as she turns toward you.
+
+The wounded man raises a shaking hand toward her.
+
+{color=aqua|Shady Agent: — Her... it was her...}
+
+He coughs, fighting for one last breath.
+
+{color=aqua|Shady Agent: — She did this...}
+
+His hand drops.""",
+	ACT4_SEBASTIAN_KHARZUG_TOMB_3 = """The woman bares her teeth and answers with another broken groan. For a moment, her eyes flare with a light that does not look like her own. The air around her twists cold, and the anger in her face becomes something violently focused.
+
+She gives you no chance to speak.""",
+	ACT4_SEBASTIAN_KHARZUG_TOMB_VICTORY_1 = """The woman collapses among the broken burial stones and does not rise again.
+
+For a time, you wait with your weapon ready, listening for the scrape of returning undead. None comes. The tomb remains cold and foul, but the restless movement that filled it before the fight seems to have vanished with her death.""",
+	ACT4_SEBASTIAN_KHARZUG_TOMB_VICTORY_2 = """The dead agent offers no more answers, and the woman cannot explain herself now. Still, the pieces fit well enough on the surface: a hidden tomb, undead swarming from below, and an evil-looking stranger at the center of it all.
+
+If she was not the necromancer behind this, then whatever truth remains has buried itself deeper than the bodies around you.""",
+	ACT4_SEBASTIAN_RETURN_HARA = """You return to the Dwarven Capital with the news from Kharzug Deep. The technician listens carefully as you explain the dark settlement, the lower tomb, Sebastian's dead agent, and the hostile woman you defeated beneath the old works.
+
+Hara goes quiet for several seconds, which may be the strongest sign that she understands how bad the situation was.
+
+{color=yellow|Hara: — So the excavation punched into a tomb, cave beasts made the hole worse, and then undead started crawling through. Great. Terrible, but great. I mean terrible. Mostly terrible. You probably saved the whole route from becoming a graveyard with rail ties, so go back to Sebastian directly, all right? He will want the report, and I need time to make this route less stupid before anyone else touches it.}""",
+	ACT4_SEBASTIAN_RETURN_KARGUN = """You return to the Dwarven Capital with the news from Kharzug Deep. The technician listens carefully as you explain the dark settlement, the lower tomb, Sebastian's dead agent, and the hostile woman you defeated beneath the old works.
+
+Kargun listens without interrupting, his expression growing harder with every detail.
+
+{color=yellow|Kargun: — Tomb under the lower works. Beast breach through old stone. Undead after that. Hmph.}
+
+He looks down at the maps, then slowly marks Kharzug Deep with a heavy black cross.
+
+{color=yellow|Kargun: — You did good work. Better than sending another pack of surveyors to die. I will tell Sebastian the immediate danger is handled. Go back to him directly. He will want the report, and I need time to make this route less stupid before anyone else touches it.}""",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_1 = """You find Sebastian in Aliron, standing near the town hall steps with a travel cloak over one arm and a small folder tucked beneath the other. He looks as if he has been waiting just long enough to make waiting seem intentional.
+
+{color=yellow|Sebastian: — Mayor [name]. Good. I was beginning to wonder whether the dwarven roads had taken offense to you personally.}""",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_2 = """Sebastian glances past you toward the street, then lowers his voice to something fit for business that should not become public gossip.
+
+{color=yellow|Sebastian: — Our personnel has been more informative than cheerful. Yet, you've taken care of it. Admirable!}""",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_RESPONSE_1 = "{color=yellow|Sebastian: — Admirable modesty, or alarming confidence. Either way, I am grateful the distinction did not prevent results.}",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_RESPONSE_2 = "{color=yellow|Sebastian: — I believe you. Official reports have a talent for making terror sound like poor scheduling.}",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_RESPONSE_3 = """{color=yellow|Sebastian: — Ah, of course, you have certainly performed quite a task for our benefit.}
+
+He opens the folder beneath his arm, removes a sealed purse, and offers it to you without ceremony.
+
+{color=yellow|Sebastian: — Five hundred gold. Consider it hazard pay, discretion pay, and a small encouragement to continue making my problems shorter.}""",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_3 = "{color=yellow|Sebastian: — The affected families will be compensated, the route precautions will be revised, and in public we will call this a regrettable excavation hazard with unusually hostile symptoms.}",
+	ACT4_SEBASTIAN_CHURCH_OFFER_1 = """Sebastian tucks the folder beneath his arm, but does not leave.
+
+{color=yellow|Sebastian: — Since we are already speaking plainly, there is another matter. Aliron has been more cooperative than I dared hope, which is always a pleasant surprise in a town with this many locked doors and family claims.}""",
+	ACT4_SEBASTIAN_CHURCH_OFFER_2 = "{color=yellow|Sebastian: — A few of your local nobles and wealthier citizens have proven willing to discuss practical arrangements. Storage rights, workshop leases, transfer yards, respectable little properties that can become useful without frightening anyone too quickly. Some of it serves immediate Trading Guild needs. Some of it may become important if the railroad expands in this direction later. }",
+	ACT4_SEBASTIAN_CHURCH_OFFER_3 = """Sebastian's pleasant expression does not change, but his answer comes a little more carefully than before.
+
+{color=yellow|Sebastian: — There is one local property I would like your help with. Celena's church. Placement, mostly. It sits too cleanly between several routes that matter now and several more that may matter later. }""",
+	ACT4_SEBASTIAN_CHURCH_OFFER_4 = "{color=yellow|Sebastian: — Naturally, I am not suggesting anything crude. My associates prefer tidy arrangements, compensation, alternative premises if needed, and signatures from everyone who must later claim they were never pressured. But the church is just ideal.}",
+	ACT4_SEBASTIAN_CHURCH_OFFER_ACCEPT = "{color=yellow|Sebastian: — Excellent. I trust you to sort this out quickly and efficiently. You have more local weight than I do, and considerably less imperial smell.}",
+	ACT4_SEBASTIAN_CHURCH_VISIT = """As you enter the church, Ginny hurries toward you before you have crossed half the nave. Her usual welcome never comes. A severe-looking man waits near the front pews with a leather document case open beside him.
+
+{color=yellow|Ginny: — Mayor [name], I'm glad you're here. These people want us to surrender the church. They keep calling it an arrangement, but every new paper sounds less like a request than the last one. They say we can move elsewhere, but they cannot tell me what happens to the people who come here while they decide. I know this building isn't grand, but it is ours, and people know where to find us.}""",
+	ACT4_SEBASTIAN_CHURCH_PROTECT_1 = """Relief breaks through Ginny's worried expression.
+
+{color=yellow|Ginny: — Thank you. I didn't know whether being mayor meant you would have to support them. I should have trusted you.}
+
+The man by the pews closes his document case and approaches.""",
+	ACT4_SEBASTIAN_CHURCH_PROTECT_2 = """{color=aqua|Trading Guild Representative: — No one is attempting to deprive Aliron of religious services. My associates require a structure with reliable street access, sufficient floor space, sound masonry, a loading approach, and room that can be adapted without rebuilding from the foundations. This property happens to satisfy those demands.}
+
+He offers you a prepared list of requirements, complete with measurements and access notes.
+
+As you study it, another property comes to mind: a warehouse only a few streets from the church. It is less prominent, but its size, construction, and road access appear to satisfy nearly every point on the page.""",
+	ACT4_SEBASTIAN_CHURCH_PROTECT_4 = "{color=aqua|Trading Guild Representative: — If you can provide an equivalent property with a willing owner and a clean title, I am authorized to present it for consideration. Until then, the temple remains the strongest candidate.}",
+	ACT4_SEBASTIAN_CHURCH_PRESSURE_1 = """Ginny's worry hardens into something steadier when she realizes you are not here to protect the church from Sebastian's offer.
+
+{color=yellow|Ginny: — No, this isn't right, we shouldn't put material needs above our spirit.}""",
+	ACT4_SEBASTIAN_CHURCH_PRESSURE_3 = "{color=yellow|Ginny: — I'm sorry, I will not sign it, this church is all that I... we, as followers have.}",
+	ACT4_SEBASTIAN_RETURN_GINNY_REFUSAL_1 = """Sebastian receives the news with the expression of a man listening to rain against a window: faintly inconvenienced, not remotely surprised.
+
+{color=yellow|Sebastian: — She declined. How principled of her. Unfortunately, we came at a stall.}""",
+	ACT4_SEBASTIAN_RETURN_GINNY_REFUSAL_2 = "{color=yellow|Sebastian: — You are mayor, [name]. Find something to do about it. Persuade, redirect, make the alternative look less like a defeat. }",
+	ACT4_SEBASTIAN_RETURN_GINNY_REFUSAL_3 = "{color=yellow|Sebastian: — A quieter district has an unused assembly hall with enough rooms for services, storage, and charitable work. We got it pretty cheaply and this should convince Ginny to move. Present it to her and persuade by whatever means.}",
+	ACT4_SEBASTIAN_OFFER_ALTERNATIVE_SITE_1 = """{color=yellow|Ginny: — Prepared by Sebastian? Then it was never only a possibility. He expected us to be moved from the beginning.}
+
+She takes the address and reads it twice.
+
+{color=yellow|Ginny: — I know it, it's not a bad building it's a lot more secluded... This place is where people come when they are looking for help. You are a mayor, should be on the side of locals.}""",
+	ACT4_SEBASTIAN_GINNY_DOMINATOR = """The spell catches in the quiet from stranger eyes. Ginny's eyes lose their focus for a moment, and the paper lowers in her hand.
+
+{color=yellow|Ginny: — Yes. The new location will serve. I will tell the others that Celena's work can continue there.}""",
+	ACT4_SEBASTIAN_GINNY_INSIST_FAIL_1 = """Ginny opens her mouth to answer, but the worshipers behind her step forward before she can speak.
+
+{color=aqua|Parishioner: — Mayor or not, you don't get to order her out of here while the rest of us stand quiet.}
+
+Another parishioner takes the paper from Ginny and looks it over with open suspicion.
+
+{color=yellow|Ginny: — I cannot agree while everyone who depends on this church believes I abandoned them.}""",
+	ACT4_SEBASTIAN_GINNY_INSIST_FAIL_2 = "You retreat for now. Perhaps you should wait for a better opportunity to continue.",
+	ACT4_SEBASTIAN_PARISHIONERS_READY = "The church's issue has been on your mind for the last day. Then you realize there's only one way to deal with it: if Ginny refuses to move, then her flock should join your cause. It's time to work on it.",
+	ACT4_SEBASTIAN_PARISHIONER_TASK_DONE = "Your work over the minds of the citizens has beared its fruits. Many parishioners have been persuaded, coecered or bribed to your side. Now it's time to present it to Ginny.",
+	ACT4_SEBASTIAN_GINNY_PARISHIONERS_PERSUADED = """Ginny looks exhausted when you find her. Several parishioners stand nearby, and none of them interrupt when she steps forward.
+
+{color=yellow|Ginny: — I don't know what happened, but the visitors... have been suggesting to move out for last few days. I suppose if people ask me to do it, I'll have to accept it. I've signed the papers but so you know, it's all the same to me, I'll continue to worship Celena at the new place. }""",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPENING_1 = """The new church is already being arranged when Ginny arrives. Fresh benches line the main room, the side chambers have been cleared for supplies and sleeping mats, and two unfamiliar nuns move between crates with practiced calm.
+
+Sebastian stands near the entrance with his travel cloak over one arm, looking pleased enough that he almost remembers to hide it.""",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPENING_2 = """Ginny slows just inside the doorway, clutching a small bundle of prayer cloths to her chest.
+
+{color=yellow|Ginny: — Oh. It is... bigger than I thought. Cleaner, too. I don't know why that makes me nervous. It shouldn't, should it?}""",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPENING_3 = """{color=yellow|Ginny: — I think so. I mean, I hope so. People are already coming in, and if they need me to smile first, then I can do that.}
+
+{color=yellow|Sebastian: — There. A church with shelves, beds, breathing room, and fewer arguments over wagon access. Everyone improves their position if they stop staring at the door they came through.}
+
+Ginny looks toward the two unfamiliar nuns. One of them gives her a quick little bow before returning to the supplies.
+
+{color=yellow|Ginny: — Sebastian said they will help with the poor and the sick. That is good, isn't it? I know I should be grateful. I am grateful. I just... need a little time.}""",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPENING_4 = """{color=yellow|Sebastian: — I am pleased when a plan stops being a plan and becomes furniture. And yes, this is finished. I am leaving Aliron for now.}
+
+He adjusts his gloves, still smiling.
+
+{color=yellow|Sebastian: — My thanks, Mayor [name]. You have made matters easier than they might have been.}""",
+	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_1 = """You find the warehouse a few streets from the church, set back from the main road behind a broad loading yard. The brickwork is weathered but sound, and two carts could reach its doors without blocking the street.
+
+Its owner is inside counting bundled inventory. He looks up as you enter, surprised to receive the mayor rather than another supplier.
+
+{color=yellow|Warehouse Owner: — Mayor [name]? If this is about the loose gutter, I already paid someone to fix it. He has merely chosen not to arrive yet.}""",
+	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_2 = "{color=yellow|Warehouse Owner: — Trading Guild? No. First I've heard of any interest from them. I have been considering selling, though. Business has been moving closer to the eastern yards, and this place is more space than I need now. Three thousand gold, and I will sign it over without making either of us spend a month pretending to bargain.}",
+	ACT4_SEBASTIAN_WAREHOUSE_PURCHASE = """The owner checks the payment carefully, then produces a folded deed from a locked drawer beneath his accounts.
+
+{color=yellow|Warehouse Owner: — Then it is yours. I will clear the remaining stock and have the keys delivered before the end of the day.}""",
+	ACT4_SEBASTIAN_WAREHOUSE_LATER = "{color=yellow|Warehouse Owner: — Fair enough. I am not advertising it yet, so the price will remain three thousand when you return. After that, I make no promises.}",
+	ACT4_SEBASTIAN_REVISIT_WAREHOUSE_OWNER = """The warehouse owner is at the same desk, working through another stack of accounts. He recognizes you and sets his pen aside.
+
+{color=yellow|Warehouse Owner: — Back about the warehouse? My price is still three thousand gold.}""",
+	ACT4_SEBASTIAN_WAREHOUSE_PURCHASE_RETURN = """The owner counts the payment, retrieves the deed from his locked drawer, and signs the transfer.
+
+{color=yellow|Warehouse Owner: — It is yours. I will clear the remaining stock and have the keys delivered before the end of the day.}""",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_SOLUTION_1 = "Ginny is reorganizing donation baskets when you return. She puts them aside as soon as she sees you, searching your expression for an answer.",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_SOLUTION_2 = "{color=yellow|Ginny: — You bought it? For us? I mean, not for us, but so we can stay... Thank you, Mayor. Truly. I was afraid every solution they offered would begin with us leaving.}",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_SOLUTION_3 = """After the news reached Sebastian, he doesn't waste time arriving to meet you with his negotiator a step behind him, already carrying a fresh set of papers.
+
+{color=yellow|Sebastian: — Mayor [name]. Ginny. I was told there had been progress, though I confess I expected fewer property purchases made without me.}""",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_SOLUTION_4 = """Sebastian reviews the warehouse deed and the negotiator's requirement sheet. His smile tightens when he realizes how closely they match.
+
+{color=yellow|Sebastian: — It is less visible, farther from the central road, and notably absent from several plans I had already begun to enjoy.}
+
+{color=aqua|Trading Guild Negotiator: — It satisfies every requirement we submitted, sir. The loading yard is larger than the church approach.}""",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_SOLUTION_5 = """{color=yellow|Sebastian: — Yes, thank you. I had reached that regrettable conclusion myself. Very well, Mayor [name]. My associates will use the warehouse, and Celena's church will remain exactly where it is.}
+
+Sebastian leaves, although you can feel his steps are heavier than usual.
+
+{color=yellow|Ginny: — Thank you, mayor [name]. I hope it didn't cause you too much trouble, I'll be praying for your safety.}""",
+	ACT4_SEBASTIAN_OPTION_CONSIDER = "It sounds like an opportunity both sides should consider.",
+	ACT4_SEBASTIAN_OPTION_CAREFUL = "I would be careful. Unknown technology can bring dangers no one understands yet.",
+	ACT4_SEBASTIAN_PROJECT_OFFER_OPTION_1 = "What exactly do you want from me?",
+	ACT4_SEBASTIAN_PROJECT_OFFER_OPTION_2 = "You move quickly from proposal to business.",
+	ACT4_SEBASTIAN_PROJECT_OFFER_OPTION_3 = "I am listening.",
+	ACT4_SEBASTIAN_HARA_OPTION_HELP = "Would you be willing to help?",
+	ACT4_SEBASTIAN_HARA_OPTION_PROBLEMS = "It sounds like you already know the problems.",
+	ACT4_SEBASTIAN_TECHNICIAN_OPTION_1 = "I came looking for a technician.",
+	ACT4_SEBASTIAN_HARA_CAPITAL_OPTION_2 = "There is a railroad project I wanted to ask you about.",
+	ACT4_SEBASTIAN_HARA_CAPITAL_OPTION_3 = "That was easier than expected.",
+	ACT4_SEBASTIAN_HARA_CAPITAL_OPTION_4 = "So you will help?",
+	ACT4_SEBASTIAN_KARGUN_OPTION_RAILROAD = "There is a railroad project I wanted to ask about.",
+	ACT4_SEBASTIAN_KARGUN_OPTION_WITS = "[Wits Factor 5] This could be a new engineering challenge, not just imperial ambition.",
+	ACT4_SEBASTIAN_KARGUN_OPTION_PAY = "[Pay 500 gold] Would proper compensation make it worth your time?",
+	ACT4_SEBASTIAN_KARGUN_OPTION_LATER = "I will come back later.",
+	ACT4_SEBASTIAN_MANSION_VISIT_OPTION_1 = "Trouble?",
+	ACT4_SEBASTIAN_MANSION_VISIT_OPTION_2 = "You came all the way here for that?",
+	ACT4_SEBASTIAN_TROUBLE_OPTION_THINK = "What do you think happened?",
+	ACT4_SEBASTIAN_TROUBLE_OPTION_INVESTIGATE = "So you want me to investigate Kharzug Deep.",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_OPTION_1 = "It was nothing difficult.",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_OPTION_2 = "This made me sweat.",
+	ACT4_SEBASTIAN_REPORT_KHARZUG_OPTION_3 = "You should pay me for taking care of your problems.",
+	ACT4_SEBASTIAN_CHURCH_OFFER_OPTION_1 = "What do you need from me?",
+	ACT4_SEBASTIAN_CHURCH_OFFER_OPTION_2 = "This sounds like more than ordinary business.",
+	ACT4_SEBASTIAN_CHURCH_OFFER_OPTION_3 = "I'll see what can be done.",
+	ACT4_SEBASTIAN_CHURCH_OFFER_OPTION_4 = "I guess I better ask Ginny first.",
+	ACT4_SEBASTIAN_CHURCH_VISIT_OPTION_1 = "This church is staying where it is. I'll protect it.",
+	ACT4_SEBASTIAN_CHURCH_VISIT_OPTION_2 = "You should consider their offer if it benefits the city.",
+	ACT4_SEBASTIAN_CHURCH_PROTECT_OPTION_1 = "There is another property nearby that meets these terms.",
+	ACT4_SEBASTIAN_CHURCH_PROTECT_OPTION_2 = "No one signs anything until I review the alternative.",
+	ACT4_SEBASTIAN_CHURCH_PRESSURE_OPTION_1 = "Sebastian's offer is the best arrangement you are going to get.",
+	ACT4_SEBASTIAN_CHURCH_PRESSURE_OPTION_2 = "The city needs you to be practical about this.",
+	ACT4_SEBASTIAN_RETURN_GINNY_OPTION_1 = "Then give me somewhere else to send her.",
+	ACT4_SEBASTIAN_RETURN_GINNY_OPTION_2 = "You already had another site in mind, didn't you?",
+	ACT4_SEBASTIAN_GINNY_DOMINATOR_OPTION = "[Dominator] There's on point wasting time.",
+	ACT4_SEBASTIAN_GINNY_INSIST_OPTION = "As a mayor I demand you to accept it, there's no way around it.",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPTION_1 = "Will this be enough?",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPTION_2 = "I hope Celena's work can continue here.",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPTION_3 = "You seem pleased with yourself.",
+	ACT4_SEBASTIAN_NEW_CHURCH_OPTION_4 = "So this is finished?",
+	ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_1 = "Has anyone from the Trading Guild approached you about this place?",
+	ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_2 = "Are you interested in selling the warehouse?",
+	ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_PAY = "[Pay 3000 gold] I'll buy the warehouse.",
+	ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_LATER = "I need time to consider it.",
+	ACT4_SEBASTIAN_REVISIT_WAREHOUSE_OPTION_PAY = "[Pay 3000 gold] I'll buy it.",
+	ACT4_SEBASTIAN_REVISIT_WAREHOUSE_OPTION_LATER = "I still need more time.",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_1 = "I bought another warehouse that meets every requirement.",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_2 = "The Trading Guild can have its property without taking the church.",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_3 = "The warehouse meets your requirements. Use it and leave the church alone.",
+	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_4 = "You asked me to solve this. I did. Take the warehouse.",
 
 
 }

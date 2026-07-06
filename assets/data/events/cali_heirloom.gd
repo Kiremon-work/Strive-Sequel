@@ -25,9 +25,12 @@ var data = {
 		text = [ {text = "CALI_HEIRLOOM_3", reqs = []} ], 
 		options = [ {
 			code = 'cali_heirloom_4', text = "CALI_HEIRLOOM_3_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 5},
+				{code = "affect_unique_character", name = "cali", type = "stat", stat = "respect", value = 5}],
 		},
 		{
 			code = 'cali_heirloom_4', text = "CALI_HEIRLOOM_3_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -15}],
 		} ],
 	},
 	cali_heirloom_4 = {
@@ -38,6 +41,7 @@ var data = {
 			{text = "CALI_HEIRLOOM_4_1", reqs = [], previous_dialogue_option = 2},],
 		options = [ {
 			code = 'cali_heirloom_5', text = "CALI_HEIRLOOM_4_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 20}],
 		},
 		{
 			code = 'cali_heirloom_finish', text = "CALI_HEIRLOOM_4_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
@@ -149,9 +153,12 @@ var data = {
 		text = [ {text = "CALI_FARMER_2", reqs = []} ], 
 		options = [ {
 			code = 'cali_farmer_3', text = "CALI_FARMER_2_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 5}],
 		},
 		{
 			code = 'cali_farmer_3', text = "CALI_FARMER_2_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 15},
+				{code = "affect_unique_character", name = "cali", type = "stat", stat = "respect", value = 10}],
 		} ],
 	},
 	cali_farmer_3 = {
@@ -394,13 +401,16 @@ var data = {
 #		},
 		{
 			code = 'cali_william_11', text = "CALI_WILLIAM_4_OPTION_2", reqs = [{type = "decision", value = "cali_heirloom_bargain", check = true}, {type = "decision", value = "cali_keep", check = false},], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 10}],
 		},
 		{
 			code = 'cali_william_10', text = "CALI_WILLIAM_4_OPTION_3", reqs = [{type = "decision", value = "cali_heirloom_bargain", check = true}, {type = "decision", value = "cali_keep", check = false},], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		},
 		{
 			code = 'cali_grat_1', text = "CALI_WILLIAM_3_OPTION_2", reqs = [{type = 'has_money', value = 5000}], dialogue_argument = 2, type = 'next_dialogue',
-			bonus_effects = [{code = 'money_change', operant = '-', value = 5000}, {code = 'decision', value = 'cali_heirloom_good'},{code = 'progress_quest', value = 'cali_heirloom_quest', stage = 'stage8'},{code = 'update_city'}, {code = 'add_timed_event', args = [{type = 'action_to_date', date = [1,1], hour = 2, action = 'quest'}], value = {quest = 'cali_heirloom_quest', stage = 'stage9'}}],
+			bonus_effects = [{code = 'money_change', operant = '-', value = 5000}, {code = 'decision', value = 'cali_heirloom_good'},{code = 'progress_quest', value = 'cali_heirloom_quest', stage = 'stage8'},{code = 'update_city'}, {code = 'add_timed_event', args = [{type = 'action_to_date', date = [1,1], hour = 2, action = 'quest'}], value = {quest = 'cali_heirloom_quest', stage = 'stage9'}},
+				{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 15}],
 		},
 		{
 			code = 'close', text = "CALI_WILLIAM_3_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue', bonus_effects = [{code = 'update_city'}]
@@ -413,15 +423,20 @@ var data = {
 		reqs = [],
 		text = [{text = "CALI_WILLIAM_4", reqs = [], previous_dialogue_option = 1}],
 		options = [ {
-			code = 'cali_william_5', text = "CALI_WILLIAM_4_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',},
+			code = 'cali_william_5', text = "CALI_WILLIAM_4_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -30},
+				{code = "affect_unique_character", name = "cali", type = "stat", stat = "respect", value = -15}],},
 		{
 			code = 'cali_william_11', text = "CALI_WILLIAM_4_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 10}],
 		},
 		{
 			code = 'cali_william_10', text = "CALI_WILLIAM_4_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		},
 		{
 			code = 'cali_william_6', text = "CALI_WILLIAM_4_OPTION_4", reqs = [], dialogue_argument = 4, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 10}],
 		},
 		 ],
 	},
@@ -451,9 +466,11 @@ var data = {
 		character = "$cali",
 		text = [{text = "CALI_WILLIAM_7", reqs = []}],
 		options = [ {
-			code = 'cali_william_8', text = "CALI_WILLIAM_7_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',},
+			code = 'cali_william_8', text = "CALI_WILLIAM_7_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 5}],},
 		{
 			code = 'cali_william_8', text = "CALI_WILLIAM_7_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 25}],
 		},
 		],
 	},
@@ -664,13 +681,16 @@ var data = {
 		text = [ {text = "CALI_GRAT_1", reqs = []} ], 
 		options = [ {
 			code = 'cali_grat_2', text = "CALI_GRAT_1_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 20}],
 			},
 			{
 			code = 'cali_grat_4', text = "CALI_GRAT_1_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -10}],
 			},
 			{
 			code = 'cali_grat_5', text = "CALI_GRAT_1_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
-			} 
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -15}],
+			}
 		],
 	},
 	cali_grat_2 = {
@@ -725,7 +745,7 @@ var data = {
 		character = "$cali",
 		text = [ {text = "CALI_GRAT_5", reqs = []} ], 
 		options = [ {
-			code = 'cali_grat_1', text = "CALI_GRAT_5_OPTION_1", reqs = [], dialogue_argument = 2, type = 'next_dialogue'
+			code = 'cali_grat_1', text = "CALI_GRAT_5_OPTION_1", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
 			},
 			{
 			code = 'cali_grat_6', text = "CALI_GRAT_5_OPTION_2", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
@@ -752,13 +772,16 @@ var data = {
 		text = [ {text = "CALI_GRAT_7", reqs = []} ], 
 		options = [ {
 			code = 'cali_grat_8', text = "CALI_GRAT_7_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 25}],
 			},
 			{
 			code = 'cali_grat_8', text = "CALI_GRAT_7_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 			},
 			{
 			code = 'cali_grat_8', text = "CALI_GRAT_7_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
-			} 
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 10}],
+			}
 		],
 	},
 	cali_grat_8 = {
@@ -944,9 +967,11 @@ var data = {
 		text = [ {text = "CALI_FINALE_1", reqs = []} ], 
 		options = [ {
 			code = 'cali_finale_2', text = "CALI_FINALE_1_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 10}],
 		},
 		{
 			code = 'cali_finale_2', text = "CALI_FINALE_1_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "respect", value = 10}],
 		} ],
 	},
 	cali_finale_2 = {

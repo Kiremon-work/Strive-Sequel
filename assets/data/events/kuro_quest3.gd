@@ -564,6 +564,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 10}
 				]
 			},
 			{
@@ -1142,6 +1145,10 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = 30},
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 20}
 				]
 			},
 			{
@@ -1151,6 +1158,10 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -40},
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = -30}
 				]
 			}
 		],
@@ -1332,6 +1343,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 10}
 				]
 			},
 			{
@@ -1341,6 +1355,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = -20}
 				]
 			},
 			{

@@ -7,10 +7,13 @@ var data = {
 		text = [{text = "CALI_ACT1_1", reqs = []}],
 		options = [ {
 			code = 'cali_act1_2_12', text = "CALI_ACT1_1_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -15}],
 		}, {
 			code = 'cali_act1_2_12', text = "CALI_ACT1_1_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		}, {
 			code = 'cali_act1_2_3', text = "CALI_ACT1_1_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -30}],
 		}, ]
 	},
 
@@ -378,10 +381,13 @@ var data = {
 		text = [{text = "CALI_ACT3_MAGIC_1", reqs = []}],
 		options = [ {
 			code = 'cali_act3_magic_2_1AND2', text = "CALI_ACT3_MAGIC_1_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		}, {
 			code = 'cali_act3_magic_2_1AND2', text = "CALI_ACT3_MAGIC_1_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		}, {
 			code = 'cali_act3_magic_2_3', text = "CALI_ACT3_MAGIC_1_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -5}],
 		}, ]
 	},
 
@@ -764,8 +770,10 @@ var data = {
 		custom_background = "cali_touching_1",
 		options = [ {
 			code = 'cali_act4_mast_4', text = "CALI_ACT4_MAST_3_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -10}],
 		}, {
-			code = 'cali_act4_mast_4_leave', text = "DIALOGUELEAVE", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 1
+			code = 'cali_act4_mast_4_leave', text = "DIALOGUELEAVE", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 1,
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 5}],
 		}, ]
 	},
 
@@ -891,10 +899,13 @@ var data = {
 		text = [{text = "CALI_ACT5_PET_4", reqs = [], }],
 		options = [ {
 			code = 'cali_act5_pet_5', text = "CALI_ACT5_PET_4_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -10}],
 		}, {
 			code = 'cali_act5_pet_5', text = "CALI_ACT5_PET_4_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -5}],
 		}, {
 			code = 'cali_act5_pet_5_3', text = "CALI_ACT5_PET_4_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -25}],
 		}, ],
 	},
 
@@ -924,9 +935,9 @@ var data = {
 		reqs = [], character = "$cali",
 		text = [{text = "CALI_ACT5_PET_6", reqs = [], }],
 		options = [ {
-			code = 'cali_act5_pet_7', text = "CALI_ACT5_PET_6_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 2
+			code = 'cali_act5_pet_7', text = "CALI_ACT5_PET_6_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 2,
 		}, {
-			code = 'cali_act5_pet_7', text = "CALI_ACT5_PET_6_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue', change_dialogue_type = 2
+			code = 'cali_act5_pet_7', text = "CALI_ACT5_PET_6_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue', change_dialogue_type = 2,
 		}, {
 			code = 'cali_act5_pet_7_gone', text = "CALI_ACT5_PET_6_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
 		}, ],

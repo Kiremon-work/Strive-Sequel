@@ -585,7 +585,7 @@ func build_traitlist_for_char(person, node):
 func build_training_traitlist(person, node):
 	input_handler.ClearContainer(node, ['Button'])
 	for tr in person.get_traits_by_tag('training') + person.get_traits_by_tag('servant_training'):
-		if tr == 'untrained':
+		if tr in ['untrained', 'training_broke_in']:
 			continue
 		var upgrade_data = Traitdata.traits[tr]
 		var button = input_handler.DuplicateContainerTemplate(node, 'Button')
@@ -2050,7 +2050,7 @@ func roll_characters():
 	for ch_id in input_handler.active_location.group.values():
 		var scout = characters_pool.get_char_by_id(ch_id)
 		if scout != null:
-			manhunt_values.push_back(scout.get_stat('manhunt'))
+			manhunt_values.push_back(scout.get_stat('manhunt') + scout.get_fame_bonus('manhunt_bonus'))
 	manhunt_values.sort()
 	var manhunt_bonus = 0.0
 	for i in range(max(manhunt_values.size() - 2, 0), manhunt_values.size()):
@@ -2114,7 +2114,7 @@ func roll_hirelings(loc, recruiter = null):
 		if locdata1.has('diff_roll'):
 			t_diff = locdata1.diff_roll
 	if recruiter != null:
-		t_diff += recruiter.get_stat('manhunt')
+		t_diff += recruiter.get_stat('manhunt') + recruiter.get_fame_bonus('manhunt_bonus')
 	
 	
 	if racedata is Array and !racedata.empty():

@@ -8,6 +8,7 @@ Added animation to combat skills
 Improved handling of other languages and incorrect syntax
 Renamed multiple key locations and areas to have less abstract names
 Multiple combat fixes
+Fame now provides Manhunt stat instead of recruitment bonus
 Fixed sexuals_bonus mod still existing on some items and effects
 Fixed character upkeep values being too low 
 Fixed Rouge and Mae wedding dress sprites

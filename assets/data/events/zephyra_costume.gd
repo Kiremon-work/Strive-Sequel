@@ -11,7 +11,8 @@ var data = {
 			}, {
 				code = 'zephyra_costume_3', reqs = [], text = tr("ZEPHYRA_COSTUME_2_OPTION_2"), type = 'next_dialogue', dialogue_argument = 2
 			},{
-				code = 'zephyra_costume_3_3', reqs = [], text = tr("ZEPHYRA_COSTUME_2_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3
+				code = 'zephyra_costume_3_3', reqs = [], text = tr("ZEPHYRA_COSTUME_2_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3,
+				bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -10}],
 			},]
 		}, {
 			image = null, music = "zephyra_theme",tags = ['dialogue_scene','master_translate'], 
@@ -52,7 +53,8 @@ var data = {
 		}, {
 			code = 'zephyra_costume_5_2', reqs = [], text = tr("ZEPHYRA_COSTUME_4_OPTION_2"), type = 'next_dialogue', dialogue_argument = 2
 		},{
-			code = 'zephyra_costume_3_3', reqs = [], text = tr("ZEPHYRA_COSTUME_4_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3
+			code = 'zephyra_costume_3_3', reqs = [], text = tr("ZEPHYRA_COSTUME_4_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3,
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -20}],
 		},]
 	},
 	
@@ -125,11 +127,13 @@ var data = {
 			{code = 'unique_variation', operant = '=', value = "miko"},
 			{code = 'body_image', operant = '=', value = "zephyra_miko_body"},
 			{code = 'icon_image', operant = '=', value = "res://assets/images/portraits/zephyra_miko_prt.png"}]},
-			{code = 'update_prts'},],
+			{code = 'update_prts'},
+			{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15},],
 		}, {
 			code = 'zephyra_costume_10', reqs = [], text = tr("ZEPHYRA_COSTUME_9_OPTION_2"), type = 'next_dialogue', dialogue_argument = 2
 		}, {
-			code = 'zephyra_costume_10', reqs = [], text = tr("ZEPHYRA_COSTUME_9_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3
+			code = 'zephyra_costume_10', reqs = [], text = tr("ZEPHYRA_COSTUME_9_OPTION_3"), type = 'next_dialogue', dialogue_argument = 3,
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -15}],
 		}, ]
 	},
 	

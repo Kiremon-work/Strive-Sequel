@@ -926,6 +926,7 @@ var sprites = {
 	bolthar = load("res://assets/images/sprites/gnome.png"),
 	keeper = load("res://assets/images/sprites/keeper.png"),
 	alise = load("res://assets/images/sprites/alise.png"),
+	sebastian = load("res://assets/images/sprites/sebastian.png"),
 	
 	emperor = load("res://assets/images/sprites/emperor.png"),
 	chancellor = load("res://assets/images/sprites/advisor.png"),

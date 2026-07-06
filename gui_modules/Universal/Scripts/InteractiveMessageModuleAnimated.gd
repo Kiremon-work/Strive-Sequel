@@ -1188,7 +1188,10 @@ func handle_characters_sprites(scene):
 			show_long_text()
 
 		if scene.has("character"):
-			if scene.character.ends_with('_shade'):
+			if scene.character == null:
+				scene_char = null
+				char_shade = false
+			elif scene.character.ends_with('_shade'):
 				scene_char = scene.character.trim_suffix('_shade')
 				char_shade = true
 			else:
@@ -1232,7 +1235,10 @@ func handle_characters_sprites(scene):
 				$CharacterImage.hide()
 #			$CharacterImage.show()
 		if scene.has("character2"):
-			if scene.character2.ends_with('_shade'):
+			if scene.character2 == null:
+				scene_char = null
+				char_shade = false
+			elif scene.character2.ends_with('_shade'):
 				scene_char = scene.character2.trim_suffix('_shade')
 				char_shade = true
 			else:

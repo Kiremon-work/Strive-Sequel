@@ -427,4 +427,11 @@ var unique_dict = { #shows available talk characters. Scenes go in order from hi
 			{code = 'kuro_dialogue_start', reqs = []}
 		]
 	},
+
+	hara = {
+		code = 'hara',
+		scenes = [
+			{code = 'act4_sebastian_hara_mansion_1', reqs = [{type = "active_quest_stage", value = "sebastian_railroad_quest", stage = "find_technician"}]}
+		]
+	},
 }

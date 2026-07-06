@@ -150,7 +150,7 @@ var data = {
 		reqs = [],
 		text = "MAE_MARKET_FRUIT_BUY",
 		options = [
-			{code = "mae_market_fruit_after", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue"}
+			{code = "mae_market_fruit_after", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 10}]}
 		]
 	},
 	mae_market_fruit_steal = {
@@ -159,7 +159,7 @@ var data = {
 		reqs = [],
 		text = "MAE_MARKET_FRUIT_STEAL",
 		options = [
-			{code = "mae_market_fruit_after", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue"}
+			{code = "mae_market_fruit_after", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 10}]}
 		]
 	},
 	mae_market_fruit_after = {
@@ -177,7 +177,7 @@ var data = {
 		reqs = [],
 		text = "MAE_MARKET_FRUIT_MOVE_ON",
 		options = [
-			{code = "mae_market_shelia_intro", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue"}
+			{code = "mae_market_shelia_intro", text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = -10}]}
 		]
 	},
 	mae_market_shelia_intro = {
@@ -509,9 +509,9 @@ var data = {
 		character = "$mae",
 		text = "MAE_SEARCH_COMPLETE_HOME",
 		options = [
-			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_1", reqs = [], dialogue_argument = 1, type = "next_dialogue"},
-			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue"},
-			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue"}
+			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_1", reqs = [], dialogue_argument = 1, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 15}]},
+			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 10}]},
+			{code = "mae_search_complete_response_1", text = "MAE_SEARCH_COMPLETE_HOME_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = -20}]}
 		]
 	},
 	mae_search_complete_response_1 = {

@@ -366,6 +366,7 @@ ma manterrà comunque tutti i tuoi personaggi, oggetti e inventario. Usa questa 
 	LMMWORK = "Lavoro",
 	BTNLEVELING = "Livellamento",
 	BTNDATE = "Incontro",
+	DATECONFIRM = """Confirm dating [name]?""", # MISSING TRANSLATION
 	BTNCHAT = "Chiacchierata",
 	BTNRELATIONS = "Relazioni",
 	BTNCUSTOMIZATION = "Personalizzazione",
@@ -2655,6 +2656,7 @@ Danno +15%, Salute +20.""",
 	FAMEDESC_PRICE_BONUS = "Valore del Personaggio",
 	FAMEDESC_UPKEEP = "Manutenzione settimanale subordinata",
 	FAMEDESC_LOYALTY_BONUS = "Lealtà per il tirocinante",
+	FAMEDESC_MANHUNT_BONUS = """Manhunt bonus""", # MISSING TRANSLATION
 	FAMEDESC_RECRUIT_BONUS = "Efficienza nel reclutamento",
 	PRICEDESC_TRAITS_POS = "Tratti positivi",
 	PRICEDESC_TRAITS_NEG = "Tratti negativi",
@@ -3536,6 +3538,22 @@ Autorità: +""",
 	DATING_PHYSF_BONUS_2 = """
 
 Anche se questa è stata un'esperienza spiacevole per [name], di sicuro gli insegnerà ad avere paura della tua rabbia.""",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""", # MISSING TRANSLATION
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""", # MISSING TRANSLATION
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""", # MISSING TRANSLATION
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""", # MISSING TRANSLATION
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""", # MISSING TRANSLATION
 	DATING_SEX_OFFER_1 = """
 
 {color=green|Sembra che a [name] non dispiaccia continuare questo incontro...}""",

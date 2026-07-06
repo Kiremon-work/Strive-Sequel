@@ -754,7 +754,6 @@ func recruit_tick(task): #maybe incomplete
 	var val = 1
 	if taskdata.has('function'):
 		val = call(taskdata.function)
-	val += val * parent.get_ref().get_fame_bonus('recruit_bonus')
 	task.progress += val
 	work_tick_values(taskdata.workstat)
 	while task.progress >= task.threshold:

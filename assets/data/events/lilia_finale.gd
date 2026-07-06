@@ -1364,7 +1364,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = -20}
+				]
 			},
 			{
 				code = "quest_fight",
@@ -1393,7 +1396,10 @@ var data = {
 
 				],
 				dialogue_argument = 4,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 10}
+				]
 			}
 		],
 		character2 = "$lilia"
@@ -1652,7 +1658,11 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 20},
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "respect", value = 15}
+				]
 			}
 		]
 	},
@@ -2257,7 +2267,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = -20}
+				]
 			},
 			{
 				code = "lilith_proposal_2",
@@ -2266,7 +2279,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 15}
+				]
 			}
 		]
 	},
@@ -2373,7 +2389,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "respect", value = 10}
+				]
 			},
 			{
 				code = "lilith_proposal_4",

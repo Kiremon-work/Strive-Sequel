@@ -130,6 +130,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -10}
 				]
 			},
 			{
@@ -139,6 +142,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = 15}
 				]
 			}
 		]
@@ -690,7 +696,10 @@ var data = {
 				],
 				select_person = true,
 				challenge = "persuasion",
-				not_hide = true
+				not_hide = true,
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -15}
+				]
 			},
 			{
 				code = "kuro_whiskey_reply_feelwaste",
@@ -1314,6 +1323,7 @@ var data = {
 
 				],
 				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 20},
 					{
 						code = "decision",
 						value = "KuroSkippedSex"

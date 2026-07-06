@@ -410,7 +410,8 @@ var data = {
 		options = [ {
 			code = 'zephyra_disappearance_bowl_3_1', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', 
 		}, {
-			code = 'zephyra_disappearance_bowl_3_2', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_2", reqs = [{type = "has_money", value = 1000}], dialogue_argument = 2, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_bowl_3_2', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_2", reqs = [{type = "has_money", value = 1000}], dialogue_argument = 2, type = 'next_dialogue',
+				bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 20}]
 		}, ]
 	},
 	
@@ -461,10 +462,11 @@ var data = {
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_2", reqs = []},
 		],
 		options = [ {
-			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_1", reqs = [{type = 'decision', value = 'GotFakeZephyraBowl', check = true}], dialogue_argument = 1, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_1", reqs = [{type = 'decision', value = 'GotFakeZephyraBowl', check = true}], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "respect", value = -10}],
 		}, {
 			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_2",
-			bonus_effects = [{code = 'remove_item', name = 'sacred_bowl', number = 1}], reqs = [], dialogue_argument = 2, type = 'next_dialogue', 
+			bonus_effects = [{code = 'remove_item', name = 'sacred_bowl', number = 1}, {code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 25}, {code = "affect_unique_character", name = "zephyra", type = "stat", stat = "respect", value = 15}], reqs = [], dialogue_argument = 2, type = 'next_dialogue',
 		}, {
 			code = 'zephyra_disappearance_ketch_3_f_1', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
 		}, ]
@@ -569,8 +571,10 @@ var data = {
 		],
 		options = [ {
 			code = 'zephyra_disappearance_sex_1', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 2,
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10}],
 		}, {
-			code = 'zephyra_disappearance_ketch_9_2', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_2", reqs = [], dialogue_argument = 1, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_ketch_9_2', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_2", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -10}],
 		}, ]
 	},
 	
@@ -926,8 +930,10 @@ var data = {
 		],
 		options = [ {
 			code = 'zephyra_brush_10', text = "ZEPHYRA_BRUSH_9_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10}],
 		}, {
 			code = 'zephyra_brush_18', text = "ZEPHYRA_BRUSH_9_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -15}],
 		}, ]
 	},
 	
@@ -988,10 +994,13 @@ var data = {
 		],
 		options = [ {
 			code = 'zephyra_brush_16', text = "ZEPHYRA_BRUSH_15_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15}],
 		}, {
 			code = 'zephyra_brush_16', text = "ZEPHYRA_BRUSH_15_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15}],
 		}, {
 			code = 'zephyra_brush_16_3', text = "ZEPHYRA_BRUSH_15_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -20}],
 		} ]
 	},
 	

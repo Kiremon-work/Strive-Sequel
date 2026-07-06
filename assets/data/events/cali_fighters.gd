@@ -145,8 +145,10 @@ var data = {
 		text = [ {text = "CALI_GOBLINS_3", reqs = []} ],
 		options = [ {
 			code = 'cali_goblins_4', text = "CALI_GOBLINS_3_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 20}],
 		}, {
 			code = 'cali_goblins_4', text = "CALI_GOBLINS_3_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}],
 		}, ],
 	}, 
 	

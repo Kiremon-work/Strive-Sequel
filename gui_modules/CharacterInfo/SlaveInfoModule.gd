@@ -6,6 +6,7 @@ var person
 var universal_skills = ['oral','anal','petting']
 
 onready var traitlist = $TraitContainer/HBoxContainer
+onready var traitlist2 = $TraitContainer2/HBoxContainer
 onready var upgrades = $UpgradesPanel
 onready var sextraits = $SexTraitsPanel
 onready var trainings_selector = $tr_selector
@@ -171,6 +172,7 @@ var personality_icons = {
 
 func update_traitlist():
 	globals.build_traitlist_for_char(person, traitlist)
+	globals.build_training_traitlist(person, traitlist2)
 
 
 func update_trainings_selector():
