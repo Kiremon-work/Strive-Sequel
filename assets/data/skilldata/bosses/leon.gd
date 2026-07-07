@@ -11,7 +11,7 @@ var skills = {
 		tags = ['aoe', 'debuff','instant','noreduce', 'noevade','passive'],
 		reqs = [],
 		targetreqs = [],
-		effects = [Effectdata.rebuild_template({effect = 'sanguine_instinct_listener', duration = 1})], 
+		effects = ['sanguine_instinct_apply_1'], 
 		cost = {},
 		charges = 0,
 		combatcooldown = 0,
@@ -55,31 +55,6 @@ var skills = {
 		sounddata = {initiate = null, strike = 'spell2', hit = null},
 		value = [['0']],
 		damagestat = 'no_stat'
-	},
-	scent_of_blood = {
-		code = 'scent_of_blood',
-		descript = '',
-		icon =  "res://assets/images/iconsskills/icon_blood_explosion.png",
-		type = 'auto', 
-		ability_type = 'spell',
-		tags = ['aoe', 'debuff','instant','noreduce', 'noevade','passive'],
-		reqs = [],
-		targetreqs = [],
-		effects = [Effectdata.rebuild_template({effect = 'bloodthrist'})], 
-		cost = {},
-		charges = 0,
-		combatcooldown = 0,
-		cooldown = 0,
-		catalysts = {},
-		target = 'self',
-		target_number = 'nontarget_group',
-		target_range = 'any',
-		damage_type = 'weapon',
-		sfx = [], 
-		sounddata = {initiate = null, strike = null, hit = null, hittype = null},
-		value = [['0']],
-		damagestat = ['no_stat'],
-		critchance = 0,
 	},
 	#actual move
 	lion_swipe = {
@@ -375,34 +350,44 @@ var effects = {
 			},
 		],
 	},
-	sanguine_instinct_listener = {
-		type = 'temp_s',
-		target = 'target',
+	sanguine_instinct_apply_1 = {
+		type = 'trigger',
+		trigger = [variables.TR_POSTDAMAGE],
+		req_skill = true,
+		conditions = [
+			{type = 'target', value = [{code = 'has_status', status = 'sanguine_instinct_listener', check = false}]},
+		],
 		duration = 1,
-		tick_event = [variables.TR_TURN_S,],
-		rem_event = [variables.TR_COMBAT_F],
-		conditions = [],
-		buffs = [],
-		statchanges = {},
+		args = {target = {obj = 'target', func = 'eq'},},
+		sub_effects = ['sanguine_instinct_listener']
+	},
+	sanguine_instinct_listener = {
+		type = 'temp_global',
+		tags = ['duration_none', 'sanguine_instinct_listener'],
+		target = 'target',
+		req_skill = true,
+		name = '',
+		timers = [
+			{events = variables.TR_COMBAT_F, objects = [], timer = 1},
+			{events = variables.TR_DEATH, objects = 'caster', timer = 1},
+		],
+		sub_effects = ['sanguine_instinct_listen',],
+	},
+	sanguine_instinct_listen = {
+		type = 'trigger',
+		trigger = [variables.TR_TURN_F],
+		req_skill = false,
+		conditions = [
+			{type = 'owner', value = [{code = 'has_status', status = 'bleed', check = true}]},
+		],
+		args = {skill = {obj = 'owner', func = 'eq'}, smeller = {obj = 'parent', func = 'arg', arg = 'caster'}},
 		sub_effects = [
 			{
-				type = 'trigger',
-				trigger = [variables.TR_TURN_F],
-				req_skill = false,
-				conditions = [
-					{type = 'owner', value = [{code = 'has_status', status = 'bleed', check = true}]},
-				],
-				args = {skill = {obj = 'owner', func = 'eq'},},
-				sub_effects = [
-					{
-						type = 'oneshot',
-						target = 'owner',
-						atomic = [{type = 'use_combat_skill', skill = 'scent_of_blood'}],
-					},
-				]
+				type = 'oneshot',
+				target = 'smeller',
+				atomic = [{type = 'effect', value = 'bloodthrist'}],
 			},
-		],
-		tags = ['sanguine_instinct_listener'],
+		]
 	},
 	sanguine_instinct_self = {
 		type = 'trigger',
