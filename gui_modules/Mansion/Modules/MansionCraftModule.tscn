@@ -1831,6 +1831,27 @@ text = "Confirm"
 align = 1
 valign = 1
 
+[node name="Button2" type="TextureButton" parent="NumberSelect2/VBoxContainer"]
+visible = false
+margin_left = 149.0
+margin_top = 445.0
+margin_right = 369.0
+margin_bottom = 503.0
+size_flags_horizontal = 4
+theme = ExtResource( 9 )
+texture_normal = ExtResource( 23 )
+texture_pressed = ExtResource( 69 )
+texture_hover = ExtResource( 73 )
+
+[node name="Label" type="Label" parent="NumberSelect2/VBoxContainer/Button2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Confirm"
+align = 1
+valign = 1
+
 [node name="Enchant" parent="." instance=ExtResource( 18 )]
 visible = false
 

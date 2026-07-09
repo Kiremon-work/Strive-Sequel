@@ -43,6 +43,7 @@ func _ready():
 	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b3.connect('pressed', self, 'cap_low_change', [1])
 	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b4.connect('pressed', self, 'cap_low_change', [10])
 	$NumberSelect2/VBoxContainer/Button.connect('pressed', self, 'confirm_craft')
+	$NumberSelect2/VBoxContainer/Button2.connect('pressed', self, 'confirm_craft_edit')
 	for i in $categories.get_children():
 		i.connect("pressed", self, 'select_category', [i.name])
 	for i in $filter.get_children():
@@ -241,11 +242,14 @@ func rebuild_scheldue():
 		if pdata.has('repeat'):
 			newnode.get_node("Label").text = tr(item_data.name) + ": " +  str(pdata.repeat) 
 		else:
-			newnode.get_node("Label").text = tr(item_data.name) + ": " + '∞'
+			newnode.get_node("Label").text = "%s: %d / %d" % [tr(item_data.name), pdata.cap_up, ResourceScripts.game_res.materials[recipe_data.resultitem]]
 		newnode.connect("pressed", self, 'select_entry', [i])
 		newnode.set_meta("selected_craft", i)
 		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
-		newnode.get_node("progress").text = str(floor(pdata.progress)) + "/" + str(pdata.progress_limit)
+		newnode.get_node("ProgressBar").visible = true
+		newnode.get_node("progress").visible = false
+		newnode.get_node("ProgressBar").value = pdata.progress
+		newnode.get_node("ProgressBar").max_value = pdata.progress_limit
 		newnode.arraydata = i
 		newnode.parentnodearray = ResourceScripts.game_res.crafting_lists[craft_category + '_material']
 		newnode.target_node = self
@@ -261,7 +265,7 @@ func rebuild_scheldue():
 		if pdata.has('repeat'):
 			newnode.get_node("Label").text = tr(item_data.name) + ": " +  str(pdata.repeat) 
 		else:
-			newnode.get_node("Label").text = tr(item_data.name) + ": " + '∞'
+			newnode.get_node("Label").text = "%s: %d / %d" % [tr(item_data.name), pdata.cap_up, ResourceScripts.game_res.get_item_amount(recipe_data.resultitem)]
 		newnode.connect("pressed", self, 'select_entry', [i])
 		newnode.set_meta("selected_craft", i)
 		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
@@ -296,6 +300,22 @@ func confirm_craft():
 	select_category(craft_category)
 
 
+func confirm_craft_edit():
+#	$SelectCharacters.show()
+	$NumberSelect2.hide()
+	$MaterialSetupPanel.hide()
+#	$CraftSchedule.show()
+	if cancelentry == null: 
+		return
+	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
+	if num_select_expanded:
+		pdata.cap_up = cap_up
+		pdata.cap_low = cap_low
+	else:
+		pdata.repeat = repeats
+	select_category(craft_category)
+
+
 func confirm_unique():
 #	$SelectCharacters.show()
 	$NumberSelect.hide()
@@ -310,10 +330,12 @@ func delete_from_queue(entry):
 
 
 func select_entry(entry):
+	cancelentry = entry
 	for button in $CraftSchedule/ScrollContainer/VBoxContainer.get_children():
 		if button.name == "Button":
 			continue
 		button.pressed = button.get_meta("selected_craft") == entry
+	open_number_edit()
 
 
 func cancel_item_craft():
@@ -660,20 +682,45 @@ func open_number_select():
 	repeats = 1
 	num_select_expanded = false
 	build_num_select()
+	$NumberSelect2/VBoxContainer/Button2.visible = false
+	$NumberSelect2/VBoxContainer/Button.visible = true
+	$NumberSelect2.show()
+
+
+func open_number_edit():
+	if cancelentry == null: 
+		return
+	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
+	if pdata.has('repeat'):
+		num_select_expanded = false
+		repeats = pdata.repeat
+	else:
+		num_select_expanded = true
+		repeats = 1
+		cap_up = pdata.cap_up
+		cap_low = pdata.cap_low
+	build_num_select()
+	$NumberSelect2/VBoxContainer/Button2.visible = true
+	$NumberSelect2/VBoxContainer/Button.visible = false
 	$NumberSelect2.show()
 
 
 func build_num_select():
 	var item_data = Items.recipes[selected_item.code]
+	var newitem = item_data.resultitem
 	var amount
 	if item_data.resultitemtype == 'material':
-		amount = ResourceScripts.game_res.materials[item_data.resultitem]
-		$NumberSelect2/VBoxContainer/icon.texture = Items.materiallist[item_data.resultitem].icon
-		$NumberSelect2/VBoxContainer/name.text = tr(Items.materiallist[item_data.resultitem].name)
+		var matdata = Items.materiallist[newitem]
+		$NumberSelect2/Label2.text = "Craft %s" % tr(matdata.name)
+		amount = ResourceScripts.game_res.materials[newitem]
+		$NumberSelect2/VBoxContainer/icon.texture = matdata.icon
+		$NumberSelect2/VBoxContainer/name.text = tr(matdata.name)
 	else:
-		amount = ResourceScripts.game_res.get_item_amount(item_data.resultitem)
-		$NumberSelect2/VBoxContainer/icon.texture = Items.itemlist[item_data.resultitem].icon
-		$NumberSelect2/VBoxContainer/name.text = tr(Items.itemlist[item_data.resultitem].name)
+		amount = ResourceScripts.game_res.get_item_amount(newitem)
+		var itemdata = Items.itemlist[newitem]
+		$NumberSelect2/Label2.text = "Craft %s" % tr(itemdata.name)
+		$NumberSelect2/VBoxContainer/icon.texture = itemdata.icon
+		$NumberSelect2/VBoxContainer/name.text = tr(itemdata.name)
 		if item_data.crafttype == 'modular':
 			$NumberSelect2/VBoxContainer/icon.material = load("res://assets/ItemShader.tres").duplicate()
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt2/Amount.text = str(repeats)
