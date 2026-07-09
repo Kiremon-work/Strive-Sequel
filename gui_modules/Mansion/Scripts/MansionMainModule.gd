@@ -40,9 +40,6 @@ var selected_upgrade
 var chars_for_upgrades = []
 
 # Craft
-var is_craft_selected = false
-var selected_craft_task
-var persons_for_craft = []
 var craft_state = "default"
 
 # Sex
@@ -268,53 +265,27 @@ func match_state():
 				$MansionJobModule2.close_job_pannel()
 		"travels":
 			$map.open()
-#			$TravelsModule.show()
-#			$MansionTravelsModule.show()
-#			$MansionSlaveListModule.set_size(Vector2(1100, 580))
-#			SlaveListModule.get_node("Background").set_size(Vector2(1100, 580))
-#			$MansionSlaveListModule/ScrollContainer.set_size(Vector2(1004, 360))
-#			travels_manager(travels_defaults)
-#			menu_buttons.get_node("TravelsButton").pressed = true
-#			if mansion_state != mansion_prev_state:
-#				ResourceScripts.core_animations.UnfadeAnimation($TravelsModule, 0.3)
-##				ResourceScripts.core_animations.UnfadeAnimation($SlaveListModule, 0.3)
-#			else:
-#				$TravelsModule.update_lists()
 		"upgrades":
 			UpgradesModule_.show()
 			if mansion_state != mansion_prev_state:
 				ResourceScripts.core_animations.UnfadeAnimation(UpgradesModule_, 0.3)
-#			$MansionUpgradesModule.show()
-#			$MansionUpgradesModule.open()
-#			$MansionUpgradesModule.open_queue()
-#			$MansionSlaveListModule.set_size(Vector2(1100, 580))
-#			SlaveListModule.get_node("Background").set_size(Vector2(1100, 580))
-#			$MansionSlaveListModule/ScrollContainer.set_size(Vector2(1004, 360))
-#			menu_buttons.get_node("UpgradesButton").pressed = true
-#			SlaveListModule.rebuild()
-#			if mansion_state != mansion_prev_state:
-#				ResourceScripts.core_animations.UnfadeAnimation($MansionUpgradesModule, 0.3)
-#				ResourceScripts.core_animations.UnfadeAnimation($MansionSlaveListModule, 0.3)
 		"occupation":
 			$MansionSlaveListModule.rebuild()
-#			$MansionJobModule.show()
-#			$MansionSlaveListModule.set_size(Vector2(1100, 580))
-#			SlaveListModule.get_node("Background").set_size(Vector2(1100, 580))
-#			$MansionSlaveListModule/ScrollContainer.set_size(Vector2(1004, 360))
-			# $MansionSlaveListModule/ScrollContainer.set_size($MansionSlaveListModule/ScrollContainer/VBoxContainer.get_size())
-#			$MansionJobModule.cancel_job_choice()
 			if mansion_state != mansion_prev_state:
 				$MansionJobModule2.show()
 				$MansionJobModule2.rebuild()
 				ResourceScripts.core_animations.UnfadeAnimation($MansionJobModule2, 0.3)
 				gui_controller.clock.hide()
 				ResourceScripts.core_animations.FadeAnimation(gui_controller.clock, 0.3)
-#				ResourceScripts.core_animations.UnfadeAnimation($MansionJobModule, 0.3)
-#				ResourceScripts.core_animations.UnfadeAnimation($MansionSlaveListModule, 0.3)
 		"char_info":
 			open_char_info()
 		"craft":
-			craft_handler()
+			CraftModule.open()
+			CraftModule.get_node("MaterialSetupPanel").hide()
+			CraftModule.update()
+			# CraftModule.get_node("filter").hide()
+			ResourceScripts.core_animations.UnfadeAnimation(CraftModule, 0.3)
+			ResourceScripts.core_animations.UnfadeAnimation($MansionSlaveListModule, 0.3)
 			menu_buttons.get_node("CraftButton").pressed = true
 		"sex":
 			SlaveListModule.show()
@@ -327,7 +298,7 @@ func match_state():
 			SexSelect.show()
 			sex_handler()
 			menu_buttons.get_node("SexButton").pressed = true
-
+	
 	rebuild_task_info()
 
 
@@ -357,26 +328,26 @@ func try_rebuild_slave_list():
 	SlaveListModule.rebuild()
 
 func rebuild_task_info():
-	var char_on_quest = false
-	for ch in ResourceScripts.game_party.characters.values():
-		if ch.is_on_quest():
-			char_on_quest = true
-			break
-	if ResourceScripts.game_party.active_tasks.empty() && !char_on_quest:
-		TaskModule.visible = false
-		if TaskModule.is_visible():
-			ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
-		return
-	for i in ResourceScripts.game_party.active_tasks:
-		if !i.workers.empty() || char_on_quest:
-			if !TaskModule.is_visible():
-				ResourceScripts.core_animations.UnfadeAnimation(TaskModule, 0.3)
-			TaskModule.visible = true
-			break
-		else:
-			TaskModule.visible = false
-			if TaskModule.is_visible():
-				ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
+#	var char_on_quest = false
+#	for ch in ResourceScripts.game_party.characters.values():
+#		if ch.is_on_quest():
+#			char_on_quest = true
+#			break
+#	if ResourceScripts.game_party.active_tasks.empty() && !char_on_quest:
+#		TaskModule.visible = false
+#		if TaskModule.is_visible():
+#			ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
+#		return
+#	for i in ResourceScripts.game_party.active_tasks:
+#		if !i.workers.empty() || char_on_quest:
+#			if !TaskModule.is_visible():
+#				ResourceScripts.core_animations.UnfadeAnimation(TaskModule, 0.3)
+#			TaskModule.visible = true
+#			break
+#		else:
+#			TaskModule.visible = false
+#			if TaskModule.is_visible():
+#				ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
 	TaskModule.show_task_info()
 
 ### State Managers ###
@@ -387,47 +358,6 @@ func sex_handler():
 		sex_participants.clear()
 		mansion_prev_state = mansion_state
 
-
-func craft_handler():
-	match craft_state:
-		"default":
-			selected_craft_task = null
-			# is_craft_selected = false
-			CraftModule.open()
-			CraftModule.get_node("MaterialSetupPanel").hide()
-			CraftModule.update()
-			# CraftModule.get_node("filter").hide()
-			ResourceScripts.core_animations.UnfadeAnimation(CraftModule, 0.3)
-			ResourceScripts.core_animations.UnfadeAnimation($MansionSlaveListModule, 0.3)
-		"confirm":
-			$MansionSlaveListModule.set_size(Vector2(1100, 580))
-			SlaveListModule.get_node("Background").set_size(Vector2(1100, 580))
-			$MansionSlaveListModule/ScrollContainer.set_size(Vector2(871, 300))
-			ResourceScripts.core_animations.FadeAnimation(CraftModule, 0.3)
-			CraftModule.hide()
-			SlaveListModule.rebuild()
-
-
-#func travels_manager(params):
-#	TravelsModule.open_character_dislocation()
-#	match params.code:
-#		'default':
-#			is_travel_selected = false
-#			selected_destination = null
-#			Locations.show()
-#			selected_travel_characters.clear()
-#			TravelsModule.get_node("Resources").hide()
-#			TravelsModule.get_node("SelectedLocation/Label").text = "Select Location"
-#			TravelsModule.get_node("LocationListButton").pressed = Locations.is_visible()
-#			TravelsModule.update_character_dislocation()
-#			# SlaveListModule.rebuild()
-#		'destination_selected':
-#			is_travel_selected = true
-#			selected_travel_characters.clear()
-#			selected_destination = params.destination
-#			TravelsModule.update_character_dislocation()
-#			SlaveListModule.rebuild()
-##			TravelsModule.update_buttons()
 
 func upgrades_manager():
 	SlaveListModule.rebuild()
@@ -481,14 +411,6 @@ func slave_list_manager():
 			pass
 			#$MansionSlaveListModule.rebuild()
 #			$MansionJobModule.open_jobs_window()
-		'craft':
-			if active_person == null:
-				set_active_person(SlaveListModule.visible_persons[0])
-			if (active_person.get_location() == ResourceScripts.game_world.mansion_location) && !active_person in persons_for_craft:
-				persons_for_craft.append(active_person)
-			else:
-				persons_for_craft.erase(active_person)
-			SlaveListModule.rebuild()
 		'sex':
 			if !sex_participants.has(active_person) && active_person != null:
 				sex_participants.append(active_person)
@@ -682,6 +604,7 @@ func test_mode():
 		character.fill_boosters()
 		character.set_stat('height', 'petite')
 		character.is_players_character = true
+		character.unlock_class("berserker")
 		characters_pool.move_to_state(character.id)
 		character = ResourceScripts.scriptdict.class_slave.new("test_main_real")
 		character.create('Elf', 'female', 'random')
@@ -689,6 +612,12 @@ func test_mode():
 		character.set_stat('height', 'short')
 		character.is_players_character = true
 		characters_pool.move_to_state(character.id)
+		character.unlock_class("berserker")
+		character.unlock_class("druid")
+		character.unlock_class("valkyrie")
+		character.unlock_class("empyrian")
+		character.unlock_class("battlesmith")
+		character.unlock_class("dragonknight")
 		character = ResourceScripts.scriptdict.class_slave.new("test_main_real")
 		character.create('Goblin', 'female', 'random')
 		character.fill_boosters()

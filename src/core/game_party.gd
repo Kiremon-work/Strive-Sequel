@@ -4,7 +4,6 @@ extends Reference
 
 var characters = {}
 var babies = {}
-var active_tasks = []
 
 var farming_slots = {}
 
@@ -472,15 +471,6 @@ func fix_serialization():
 	for dir in relativesdata.values():
 		if typeof(dir.father) != TYPE_STRING: dir.father = null
 		if typeof(dir.mother) != TYPE_STRING: dir.mother = null
-	for task in active_tasks:
-		if task.has('threshhold'):
-			task.threshold = task.threshhold
-			task.erase('threshhold')
-		if task.messages.has('noresources'):
-			task.messages.erase('noresources')
-	for task in active_tasks.duplicate():
-		if task.product == 'rest':
-			active_tasks.erase(task)
 	for val in travel_groups_ref.values():
 		val.priority = int(val.priority)
 
@@ -497,7 +487,6 @@ func fix_serialization_postload():
 
 
 func fix_import():
-	active_tasks.clear()
 	for p in characters:
 		characters[p].fix_import()
 
@@ -664,67 +653,12 @@ func heal_full_party():
 		i.heal(i.hp)
 
 
-func get_output_for_task(tsk, loc_id, predict = false):
-	var res = 0
-	for task in active_tasks:
-		if task.code == tsk and task.task_location == loc_id:
-			for worker_id in task.workers:
-				var tmp = characters_pool.get_char_by_id(worker_id)
-				res += tmp.get_progress_task(task.code, task.product, !predict)
-	return res
-
-
 func get_characters_for_task(tsk):
 	var res = 0
 	for i in characters.values():
 		if i.get_work() == tsk:
 			res += 1
 	return res
-
-func clean_tasks(loc_id):
-	var tarr = []
-	for i in active_tasks:
-		if i.task_location == loc_id:
-			clean_task(i)
-			tarr.push_back(i)
-	for i in tarr:
-		active_tasks.erase(i)
-
-
-func clean_task(task):
-	for id in task.workers.duplicate():
-		var tchar = characters_pool.get_char_by_id(id)
-		if tchar.check_task(task): #character is not removed from task before
-			tchar.remove_from_task() #character should normally be set to ni work and removed from workers list
-			if tchar.check_task(task): #character is STILL not removed from task
-				print("error - %s not removing from task" % id)
-				task.workers.erase(id)
-			if task.workers.has(id): #character is STILL not removed from task
-				print("error - %s removal from task wasn' correct" % id)
-				task.workers.erase(id)
-#		else: #data for character is inconsistent
-#			task.workers.erase(id)
-
-
-func find_task_for_quest(q_id):
-	for task in active_tasks:
-		if !task.has('args'): 
-			continue
-		for dir in task.args:
-			if dir.code != 'finish_worktask':
-				continue
-			#ids of slave's quests are floats for now
-			if typeof(dir.value) == typeof(q_id) and dir.value == q_id:
-				return task
-	return null
-
-
-func remove_quest_task(q_id):
-	var task = find_task_for_quest(q_id)
-	if task != null:
-		clean_task(task)
-		active_tasks.erase(task)
-		globals.emit_signal("task_removed")
 
 
 func calculate_food_consumption():

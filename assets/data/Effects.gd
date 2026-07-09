@@ -1256,7 +1256,7 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration * 2 / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = variables.pregduration / 3},
-			{code = 'trait', trait = 'breeder', check = false}
+			{code = 'has_status', status = 'breeder', check = false}
 		],
 		buffs = [{
 			icon = "res://assets/images/iconsskills/preg_icon1.png",
@@ -1269,7 +1269,7 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = 0},
-			{code = 'trait', trait = 'breeder', check = false}
+			{code = 'has_status', status = 'breeder', check = false}
 		],
 		statchanges = {speed = -20, physics_bonus = -40},
 		buffs = [{
@@ -1284,7 +1284,7 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = 0},
-			{code = 'trait', trait = 'breeder', check = true}
+			{code = 'has_status', status = 'breeder', check = true}
 		],
 		buffs = [{
 			icon = "res://assets/images/iconsskills/preg_icon1.png",

@@ -1,7 +1,7 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://assets/Fonts_v2/FontThemes/MainBig.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/Themes_v2/UNIVERSAL/PT_26.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/Textures_v2/CLASS_INFO/Panels/divider_2.png" type="Texture" id=2]
 [ext_resource path="res://assets/Themes_v2/UNIVERSAL/VScrollBar.tres" type="Theme" id=3]
 [ext_resource path="res://assets/Themes_v2/UNIVERSAL/PT_30.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/Textures_v2/MANSION/Craft/Icons/icon_trashcan_pressed.png" type="Texture" id=5]
@@ -77,6 +77,15 @@
 [ext_resource path="res://assets/Fonts_v2/PT_Sans/PT_24.tres" type="DynamicFont" id=75]
 [ext_resource path="res://assets/Textures_v2/MANSION/LeftMenu/Icons/icon_craft_small.png" type="Texture" id=76]
 [ext_resource path="res://gui_modules/Mansion/Modules/MansionImproveModule.tscn" type="PackedScene" id=77]
+[ext_resource path="res://assets/Themes_v2/UNIVERSAL/Ledger_30.tres" type="DynamicFont" id=78]
+[ext_resource path="res://src/scenes/CloseButton.tscn" type="PackedScene" id=79]
+[ext_resource path="res://assets/Textures_v2/Universal/Buttons/button_exp_hover.png" type="Texture" id=80]
+[ext_resource path="res://assets/Textures_v2/Universal/Buttons/button_exp_pressed.png" type="Texture" id=81]
+[ext_resource path="res://assets/Textures_v2/Universal/Buttons/button_exp.png" type="Texture" id=82]
+[ext_resource path="res://assets/Textures_v2/JOB_MODULE/occupation/tick_hover.png" type="Texture" id=83]
+[ext_resource path="res://assets/Textures_v2/JOB_MODULE/occupation/tick.png" type="Texture" id=84]
+[ext_resource path="res://assets/Textures_v2/JOB_MODULE/occupation/tick_chosen.png" type="Texture" id=85]
+[ext_resource path="res://assets/Textures_v2/MANSION/panel_square.png" type="Texture" id=86]
 
 [sub_resource type="StyleBoxTexture" id=1]
 region_rect = Rect2( 0, 0, 12, 48 )
@@ -99,6 +108,9 @@ font_data = ExtResource( 70 )
 
 [sub_resource type="StyleBoxTexture" id=6]
 region_rect = Rect2( 0, 0, 554, 754 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.0705882, 0.0588235, 0.145098, 1 )
 
 [node name="MansionCraftModule" type="TextureRect"]
 anchor_right = 1.0
@@ -125,27 +137,11 @@ margin_right = -648.0
 margin_bottom = -82.0
 texture = ExtResource( 32 )
 
-[node name="CharFrame" type="TextureRect" parent="frame"]
-margin_left = 1318.55
-margin_top = 35.0
-margin_right = 1883.55
-margin_bottom = 523.409
-texture = ExtResource( 64 )
-
-[node name="Label" type="Label" parent="frame/CharFrame"]
-anchor_right = 1.0
-margin_top = 3.0
-margin_bottom = 54.0
-custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
-custom_fonts/font = ExtResource( 48 )
-text = "CRAFTCHARACTERS"
-align = 1
-
 [node name="QueueFrame" type="TextureRect" parent="frame"]
 margin_left = 1319.22
-margin_top = 523.067
+margin_top = 42.0
 margin_right = 1884.22
-margin_bottom = 998.067
+margin_bottom = 517.0
 texture = ExtResource( 62 )
 
 [node name="Label2" type="Label" parent="frame/QueueFrame"]
@@ -154,7 +150,23 @@ margin_top = 2.0
 margin_bottom = 53.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 48 )
-text = "CRAFTORDER"
+text = "CRAFTORDERMATERIALS"
+align = 1
+
+[node name="QueueFrame2" type="TextureRect" parent="frame"]
+margin_left = 1319.22
+margin_top = 523.067
+margin_right = 1884.22
+margin_bottom = 998.067
+texture = ExtResource( 62 )
+
+[node name="Label2" type="Label" parent="frame/QueueFrame2"]
+anchor_right = 1.0
+margin_top = 2.0
+margin_bottom = 53.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 48 )
+text = "CRAFTORDERITEMS"
 align = 1
 
 [node name="categories" type="HBoxContainer" parent="."]
@@ -372,69 +384,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharList" type="ScrollContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1335.0
-margin_top = 109.0
-margin_right = -53.0
-margin_bottom = -584.0
-theme = ExtResource( 3 )
-scroll_horizontal_enabled = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CharList"]
-
-[node name="Button" type="TextureButton" parent="CharList/VBoxContainer"]
-visible = false
-margin_right = 503.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 260, 46 )
-mouse_default_cursor_shape = 2
-toggle_mode = true
-texture_normal = ExtResource( 67 )
-texture_pressed = ExtResource( 49 )
-texture_hover = ExtResource( 40 )
-
-[node name="Icon" type="TextureRect" parent="CharList/VBoxContainer/Button"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 45.0
-margin_bottom = 45.0
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="name" type="Label" parent="CharList/VBoxContainer/Button"]
-margin_left = 55.0
-margin_top = 5.0
-margin_right = 306.0
-margin_bottom = 45.0
-custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Name"
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="job" type="Label" parent="CharList/VBoxContainer/Button"]
-margin_left = 312.359
-margin_top = 8.0
-margin_right = 494.359
-margin_bottom = 43.0
-custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Rest"
-align = 1
-clip_text = true
-
 [node name="CraftSchedule" type="Control" parent="."]
 margin_left = 1336.0
-margin_top = 592.0
+margin_top = 107.0
 margin_right = 1877.0
-margin_bottom = 979.0
+margin_bottom = 494.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CraftSchedule"]
 anchor_right = 1.0
@@ -527,6 +481,103 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CraftSchedule2" type="Control" parent="."]
+margin_left = 1336.0
+margin_top = 592.0
+margin_right = 1877.0
+margin_bottom = 979.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CraftSchedule2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CraftSchedule2/ScrollContainer"]
+margin_right = 416.0
+rect_min_size = Vector2( 416, 0 )
+custom_constants/separation = 4
+
+[node name="Button" type="TextureButton" parent="CraftSchedule2/ScrollContainer/VBoxContainer"]
+visible = false
+margin_right = 503.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 440, 0 )
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 67 )
+texture_pressed = ExtResource( 49 )
+texture_hover = ExtResource( 40 )
+script = ExtResource( 56 )
+
+[node name="icon" type="TextureRect" parent="CraftSchedule2/ScrollContainer/VBoxContainer/Button"]
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 45.0
+margin_bottom = 44.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CraftSchedule2/ScrollContainer/VBoxContainer/Button"]
+margin_left = 59.0
+margin_top = 8.0
+margin_right = 327.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "Item Name"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="progress" type="Label" parent="CraftSchedule2/ScrollContainer/VBoxContainer/Button"]
+margin_left = 334.0
+margin_top = 8.0
+margin_right = 458.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 55 )
+text = "100/500"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="CraftSchedule2/ScrollContainer/VBoxContainer/Button"]
+visible = false
+margin_top = 52.0
+margin_right = 440.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteButton" type="TextureButton" parent="CraftSchedule2/ScrollContainer/VBoxContainer/Button"]
+margin_left = 458.0
+margin_top = 6.0
+margin_right = 498.0
+margin_bottom = 46.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
+
+[node name="VScrollBar" type="VScrollBar" parent="CraftSchedule2"]
+visible = false
+margin_left = 1055.0
+margin_top = 338.0
+margin_right = 1067.0
+margin_bottom = 916.0
+custom_styles/grabber = SubResource( 1 )
+custom_styles/scroll = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NumberSelect" type="Panel" parent="."]
 margin_left = 772.0
 margin_top = 254.0
@@ -555,7 +606,27 @@ text = "CONFIRM"
 align = 1
 valign = 1
 
+[node name="NumberConfirm2" type="TextureButton" parent="NumberSelect"]
+visible = false
+margin_left = 254.519
+margin_top = 124.465
+margin_right = 473.519
+margin_bottom = 172.465
+theme = ExtResource( 9 )
+texture_normal = ExtResource( 65 )
+texture_pressed = ExtResource( 65 )
+texture_hover = ExtResource( 65 )
+
+[node name="Label" type="Label" parent="NumberSelect/NumberConfirm2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+text = "CONFIRM"
+align = 1
+valign = 1
+
 [node name="BackButton2" type="TextureButton" parent="NumberSelect"]
+visible = false
 margin_left = 19.2158
 margin_top = 123.676
 margin_right = 239.216
@@ -574,6 +645,7 @@ align = 1
 valign = 1
 
 [node name="HSlider" type="HSlider" parent="NumberSelect"]
+visible = false
 margin_left = 15.3412
 margin_top = 70.2274
 margin_right = 475.341
@@ -590,6 +662,7 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NumberSelect"]
+visible = false
 margin_left = 100.498
 margin_top = 11.5051
 margin_right = 490.498
@@ -606,6 +679,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="NumberSelect"]
+visible = false
 margin_left = 8.72845
 margin_top = 7.34161
 margin_right = 52.7285
@@ -613,6 +687,7 @@ margin_bottom = 51.3416
 texture = ExtResource( 76 )
 
 [node name="workunits" type="Label" parent="NumberSelect"]
+visible = false
 margin_left = 57.0
 margin_top = 17.0
 margin_right = 89.0
@@ -1250,6 +1325,509 @@ margin_right = 537.0
 margin_bottom = 86.0
 theme = ExtResource( 8 )
 text = "SELECTMATERIAL"
+align = 1
+valign = 1
+
+[node name="NumberSelect2" type="Panel" parent="."]
+visible = false
+margin_left = 772.0
+margin_top = 254.0
+margin_right = 1337.0
+margin_bottom = 737.0
+custom_styles/panel = SubResource( 9 )
+
+[node name="frame" type="TextureRect" parent="NumberSelect2"]
+margin_right = 335.0
+margin_bottom = 235.0
+texture = ExtResource( 64 )
+
+[node name="CloseButton" parent="NumberSelect2" instance=ExtResource( 79 )]
+margin_left = 533.0
+margin_top = 2.0
+margin_right = 563.0
+margin_bottom = 32.0
+
+[node name="Label2" type="Label" parent="NumberSelect2"]
+anchor_right = 1.0
+margin_top = 2.0
+margin_bottom = 53.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 78 )
+text = "Craft Elixir of Expanded Mind"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NumberSelect2"]
+margin_left = 24.0
+margin_top = 64.0
+margin_right = 543.0
+margin_bottom = 479.0
+size_flags_horizontal = 4
+custom_constants/separation = 2
+
+[node name="icon" type="TextureRect" parent="NumberSelect2/VBoxContainer"]
+margin_left = 219.0
+margin_right = 299.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 4
+expand = true
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer"]
+margin_top = 82.0
+margin_right = 519.0
+margin_bottom = 112.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "name"
+align = 1
+
+[node name="separator" type="TextureRect" parent="NumberSelect2/VBoxContainer"]
+margin_left = 84.0
+margin_top = 114.0
+margin_right = 434.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 350, 5 )
+size_flags_horizontal = 4
+texture = ExtResource( 2 )
+expand = true
+
+[node name="label1" type="Label" parent="NumberSelect2/VBoxContainer"]
+margin_top = 121.0
+margin_right = 519.0
+margin_bottom = 151.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "Quantity"
+align = 1
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="NumberSelect2/VBoxContainer"]
+margin_top = 153.0
+margin_right = 519.0
+margin_bottom = 208.0
+custom_constants/separation = -3
+
+[node name="pt1" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer1"]
+margin_right = 175.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b1" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt1"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-10"
+align = 1
+
+[node name="b2" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt1"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-1"
+align = 1
+
+[node name="pt2" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer1"]
+margin_left = 172.0
+margin_right = 347.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Amount" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 78 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="pt3" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer1"]
+margin_left = 344.0
+margin_right = 519.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b3" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt3"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+1"
+align = 1
+
+[node name="b4" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt3"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+10"
+align = 1
+
+[node name="AdvOption" type="NinePatchRect" parent="NumberSelect2/VBoxContainer"]
+margin_top = 210.0
+margin_right = 519.0
+margin_bottom = 265.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NumberSelect2/VBoxContainer/AdvOption"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+
+[node name="TextureButton" type="TextureButton" parent="NumberSelect2/VBoxContainer/AdvOption/HBoxContainer"]
+margin_top = 7.0
+margin_right = 40.0
+margin_bottom = 47.0
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource( 84 )
+texture_pressed = ExtResource( 85 )
+texture_hover = ExtResource( 83 )
+
+[node name="Label" type="Label" parent="NumberSelect2/VBoxContainer/AdvOption/HBoxContainer"]
+margin_left = 44.0
+margin_top = 6.0
+margin_right = 320.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 78 )
+text = "Advanced settings"
+align = 1
+valign = 1
+
+[node name="label2" type="Label" parent="NumberSelect2/VBoxContainer"]
+margin_top = 267.0
+margin_right = 519.0
+margin_bottom = 297.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "Stop at"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NumberSelect2/VBoxContainer"]
+margin_top = 299.0
+margin_right = 519.0
+margin_bottom = 354.0
+custom_constants/separation = -3
+
+[node name="pt1" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer2"]
+margin_right = 175.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b1" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt1"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt1/b1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-10"
+align = 1
+
+[node name="b2" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt1"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt1/b2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-1"
+align = 1
+
+[node name="pt2" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer2"]
+margin_left = 172.0
+margin_right = 347.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Amount" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 78 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="pt3" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer2"]
+margin_left = 344.0
+margin_right = 519.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b3" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt3"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt3/b3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+1"
+align = 1
+
+[node name="b4" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt3"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer2/pt3/b4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+10"
+align = 1
+
+[node name="label3" type="Label" parent="NumberSelect2/VBoxContainer"]
+margin_top = 356.0
+margin_right = 519.0
+margin_bottom = 386.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "Restart at"
+align = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="NumberSelect2/VBoxContainer"]
+margin_top = 388.0
+margin_right = 519.0
+margin_bottom = 443.0
+custom_constants/separation = -3
+
+[node name="pt1" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer3"]
+margin_right = 175.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b1" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt1"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt1/b1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-10"
+align = 1
+
+[node name="b2" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt1"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt1/b2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "-1"
+align = 1
+
+[node name="pt2" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer3"]
+margin_left = 172.0
+margin_right = 347.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Amount" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 78 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="pt3" type="NinePatchRect" parent="NumberSelect2/VBoxContainer/HBoxContainer3"]
+margin_left = 344.0
+margin_right = 519.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+texture = ExtResource( 86 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="b3" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt3"]
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 75.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+1"
+align = 1
+
+[node name="b4" type="TextureButton" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt3"]
+margin_left = 98.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 43.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 81 )
+texture_hover = ExtResource( 80 )
+
+[node name="name" type="Label" parent="NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 55 )
+text = "+10"
+align = 1
+
+[node name="Button" type="TextureButton" parent="NumberSelect2/VBoxContainer"]
+margin_left = 149.0
+margin_top = 445.0
+margin_right = 369.0
+margin_bottom = 503.0
+size_flags_horizontal = 4
+theme = ExtResource( 9 )
+texture_normal = ExtResource( 23 )
+texture_pressed = ExtResource( 69 )
+texture_hover = ExtResource( 73 )
+
+[node name="Label" type="Label" parent="NumberSelect2/VBoxContainer/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Confirm"
 align = 1
 valign = 1
 

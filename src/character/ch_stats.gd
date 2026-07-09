@@ -1470,7 +1470,7 @@ func baby_transform(mother):
 func tick():
 	update_stat('lust', parent.get_ref().get_stat('lusttick'), 'add')
 	if pregnancy.pregnancy_duration > 0 && pregnancy.pregnancy_baby != null:
-		var is_breeder = parent.get_ref().check_trait('breeder')
+		var is_breeder = parent.get_ref().has_status('breeder')
 		pregnancy.pregnancy_duration -= 1
 		if pregnancy.pregnancy_duration * 3 <= variables.pregduration * 2 and !parent.get_ref().has_status('pregnant'):
 			if !pregnancy.pregnancy_reported:

@@ -750,7 +750,11 @@ func setup_baby(mother, father):
 	for i in variables.inheritedstats:
 		if furryfix and i == 'skin_coverage':
 			continue
-		if randf() >= 0.5 || mother.has_profession("breeder"):
+		if father.has_status("breeder") and !mother.has_status("breeder"):
+			set_stat(i, father.get_stat(i))
+		elif !father.has_status("breeder") and mother.has_status("breeder"):
+			set_stat(i, mother.get_stat(i))
+		elif randf() >= 0.5:
 			set_stat(i, mother.get_stat(i))
 		else:
 			set_stat(i, father.get_stat(i))
@@ -770,10 +774,10 @@ func setup_baby(mother, father):
 				add_stat(factor, 1)
 	
 	for tr in mother.get_traits_by_tag('positive') + father.get_traits_by_tag('positive'):
-		if randf() <= 0.8 or mother.has_profession("breeder") or father.has_profession("breeder"):
+		if randf() <= 0.8 or mother.has_status("breeder") or father.has_status("breeder"):
 			add_trait(tr)
 	for tr in mother.get_traits_by_tag('negative') + father.get_traits_by_tag('negative'):
-		if mother.has_profession("breeder") or father.has_profession("breeder"):
+		if mother.has_status("breeder") or father.has_status("breeder"):
 			if randf() <= 0.1:
 				add_trait(tr)
 		elif randf() <= 0.5:
@@ -915,22 +919,8 @@ func check_task(task):
 func get_task_diff():
 	return xp_module.get_task_diff()
 
-
-func find_current_task():
-	var res = xp_module.find_task(get_location())
-	if res == null: 
-		return res
-	if res.workers.has(id): 
-		return res
-	else:
-		print ("warn - %s not included into current task" % id)
-		return null
-
-func assign_to_task(taskcode, taskproduct):
-	xp_module.assign_to_task(taskcode, taskproduct)
-
-func assign_to_special_task(worktask):
-	xp_module.assign_to_special_task(worktask)
+func assign_to_task(taskcode):
+	xp_module.assign_to_task(taskcode)
 
 func remove_from_task(travel = false):
 	xp_module.remove_from_task(travel)
@@ -940,6 +930,27 @@ func return_to_task():
 
 func get_unaval_string():
 	return xp_module.get_unaval_string()
+
+func recruit_tick(task):
+	return xp_module.recruit_tick(task)
+
+func special_tick(task):
+	return xp_module.special_tick(task)
+
+func get_progress_resource(tempresource, count_crit = false):
+	return xp_module.get_progress_resource(tempresource, count_crit)
+
+func get_job_value(temptask, count_crit = false):
+	return xp_module.get_job_value(temptask, count_crit)
+
+func get_farming_rules():
+	return xp_module.get_farming_rules()
+
+func add_metric_for_outcome(res_id, amount):
+	xp_module.add_metric_for_outcome(res_id, amount)
+
+func work_tick_values(workstat):
+	xp_module.work_tick_values(workstat)
 
 func travel_per_tick():
 	return travel.travel_per_tick()
@@ -977,6 +988,28 @@ func add_to_captured():
 func recruit_and_return():
 	travel.return_recruit()
 	ResourceScripts.game_party.add_slave(self)
+
+
+func get_job_order(materials = true):
+	return xp_module.get_job_order(materials)
+
+func get_job_priority(job, materials = true):
+	return xp_module.get_job_priority(job, materials)
+
+func get_jobs_enabled(materials = true):
+	return xp_module.get_jobs_enabled(materials)
+
+
+func set_job_orders(value, materials = true): 
+	xp_module.set_job_orders(value, materials)
+
+
+func set_job_order(job, value, materials = true):
+	xp_module.set_job_order(job, value, materials)
+
+
+func set_job_enabled(job, value, materials = true):
+	xp_module.set_job_enabled(job, value, materials)
 
 
 func set_work(task):
@@ -2078,13 +2111,10 @@ func pretick():
 	process_event(variables.TR_TICK)
 
 
-func tick():
+func tick(): #work ticks are not here - as they are called in tasks order, not in character
 	if is_on_quest():
 		xp_module.quest_tick()
 	
-	var skip_work = false
-	if get_work() == '':
-		skip_work = true
 	self.hp += get_stat('hp_reg')
 	self.mp += get_stat('mp_reg')
 	#loyalty and obedience changes are in stats
@@ -2100,7 +2130,8 @@ func tick():
 		travel.tick()
 		return
 	
-	xp_module.work_tick()
+	if get_work() == '':
+		rest_tick()
 	
 	minor_training_tick()
 

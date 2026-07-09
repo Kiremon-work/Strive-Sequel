@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://assets/Fonts_v2/PT_Sans/PTSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Themes_v2/EmptyTexture.tres" type="StyleBox" id=2]
@@ -59,6 +59,14 @@
 [ext_resource path="res://assets/Textures_v2/JOB_MODULE/farm/button_hero_disabled_1.png" type="Texture" id=57]
 [ext_resource path="res://assets/Textures_v2/JOB_MODULE/icon_question_small.png" type="Texture" id=58]
 [ext_resource path="res://assets/Fonts_v2/FontThemes/NOTO_SANS_Regular_16px.tres" type="DynamicFont" id=59]
+[ext_resource path="res://assets/Textures_v2/CHAR_CREATION/Buttons/buttonsmall_pressed.png" type="Texture" id=60]
+[ext_resource path="res://assets/Textures_v2/CHAR_CREATION/Buttons/buttonsmall_hover.png" type="Texture" id=61]
+[ext_resource path="res://dragarraytemplate.gd" type="Script" id=62]
+[ext_resource path="res://assets/Textures_v2/CHAR_CREATION/Buttons/buttonsmall.png" type="Texture" id=63]
+[ext_resource path="res://assets/Textures_v2/Universal/Panels/panel_simple.png" type="Texture" id=64]
+[ext_resource path="res://gui_modules/Mansion/Scripts/dragprioritytemplate.gd" type="Script" id=65]
+[ext_resource path="res://assets/Textures_v2/CHAR_INFO/character/icon_question_small.png" type="Texture" id=66]
+[ext_resource path="res://assets/Textures_v2/Universal/Buttons/arrow_navigator.png" type="Texture" id=67]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -127,6 +135,7 @@ __meta__ = {
 }
 
 [node name="Frame_farm" type="TextureRect" parent="."]
+visible = false
 margin_left = 30.0
 margin_top = 30.0
 margin_right = 1890.0
@@ -799,23 +808,23 @@ margin_right = 757.0
 margin_bottom = 428.0
 
 [node name="males" type="CheckBox" parent="BrothelRules/sexes_container"]
-margin_right = 112.0
+margin_right = 221.0
 margin_bottom = 60.0
 theme = ExtResource( 42 )
 custom_fonts/font = ExtResource( 41 )
 text = "BROTHELMALES"
 
 [node name="females" type="CheckBox" parent="BrothelRules/sexes_container"]
-margin_left = 116.0
-margin_right = 252.0
+margin_left = 225.0
+margin_right = 471.0
 margin_bottom = 60.0
 theme = ExtResource( 42 )
 custom_fonts/font = ExtResource( 41 )
 text = "BROTHELFEMALES"
 
 [node name="futa" type="CheckBox" parent="BrothelRules/sexes_container"]
-margin_left = 256.0
-margin_right = 353.0
+margin_left = 475.0
+margin_right = 680.0
 margin_bottom = 60.0
 theme = ExtResource( 42 )
 custom_fonts/font = ExtResource( 41 )
@@ -914,6 +923,739 @@ margin_right = 1268.71
 margin_bottom = 162.218
 custom_fonts/normal_font = ExtResource( 53 )
 text = "add description"
+
+[node name="CraftRules" type="Panel" parent="."]
+margin_left = 78.0
+margin_top = 274.0
+margin_right = 860.0
+margin_bottom = 714.0
+
+[node name="crafttooltip" type="TextureRect" parent="CraftRules"]
+margin_left = 0.330963
+margin_top = 6.06903
+margin_right = 48.331
+margin_bottom = 51.069
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CraftRules"]
+margin_left = 87.1022
+margin_top = 15.8572
+margin_right = 239.102
+margin_bottom = 39.8572
+custom_fonts/font = ExtResource( 44 )
+text = "Crafting Rules"
+
+[node name="Label2" type="Label" parent="CraftRules"]
+margin_left = 434.0
+margin_top = 15.8572
+margin_right = 586.0
+margin_bottom = 50.8572
+custom_fonts/font = ExtResource( 44 )
+text = "Predicted task:"
+
+[node name="icon" type="TextureRect" parent="CraftRules"]
+margin_left = 690.0
+margin_top = 10.0
+margin_right = 754.0
+margin_bottom = 74.0
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+
+[node name="Container" type="VBoxContainer" parent="CraftRules"]
+margin_left = 28.0
+margin_top = 80.0
+margin_right = 749.0
+margin_bottom = 406.0
+
+[node name="Label" type="Label" parent="CraftRules/Container"]
+margin_right = 721.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 44 )
+text = "Material Rules"
+
+[node name="materials" type="GridContainer" parent="CraftRules/Container"]
+margin_top = 39.0
+margin_right = 721.0
+margin_bottom = 171.0
+columns = 8
+
+[node name="Label" type="Label" parent="CraftRules/Container/materials"]
+margin_top = 14.0
+margin_right = 200.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 44 )
+text = "Jobs Priority"
+
+[node name="pos_e_1" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_e_1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 272.0
+margin_right = 304.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_2" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 308.0
+margin_right = 372.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_e_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator2" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 376.0
+margin_right = 408.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_3" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 412.0
+margin_right = 476.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_e_3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator3" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 480.0
+margin_right = 512.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_4" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 516.0
+margin_right = 580.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_e_4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="Label2" type="Label" parent="CraftRules/Container/materials"]
+margin_top = 82.0
+margin_right = 200.0
+margin_bottom = 117.0
+custom_fonts/font = ExtResource( 44 )
+text = "Jobs Disabled"
+
+[node name="pos_d_1" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 204.0
+margin_top = 68.0
+margin_right = 268.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_d_1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator4" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 272.0
+margin_top = 68.0
+margin_right = 304.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_2" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 308.0
+margin_top = 68.0
+margin_right = 372.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_d_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator5" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 376.0
+margin_top = 68.0
+margin_right = 408.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_3" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 412.0
+margin_top = 68.0
+margin_right = 476.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_d_3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator6" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 480.0
+margin_top = 68.0
+margin_right = 512.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_4" type="TextureRect" parent="CraftRules/Container/materials"]
+margin_left = 516.0
+margin_top = 68.0
+margin_right = 580.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/materials/pos_d_4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="Label2" type="Label" parent="CraftRules/Container"]
+margin_top = 175.0
+margin_right = 721.0
+margin_bottom = 210.0
+custom_fonts/font = ExtResource( 44 )
+text = "Items Rules"
+
+[node name="items" type="GridContainer" parent="CraftRules/Container"]
+margin_top = 214.0
+margin_right = 721.0
+margin_bottom = 346.0
+columns = 10
+
+[node name="Label" type="Label" parent="CraftRules/Container/items"]
+margin_top = 14.0
+margin_right = 200.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 44 )
+text = "Jobs Priority"
+
+[node name="pos_e_1" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_e_1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 272.0
+margin_right = 304.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_2" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 308.0
+margin_right = 372.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_e_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator2" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 376.0
+margin_right = 408.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_3" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 412.0
+margin_right = 476.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_e_3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator3" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 480.0
+margin_right = 512.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_4" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 516.0
+margin_right = 580.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_e_4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator7" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 584.0
+margin_right = 616.0
+margin_bottom = 64.0
+texture = ExtResource( 67 )
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_e_5" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 620.0
+margin_right = 684.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_e_5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="Label2" type="Label" parent="CraftRules/Container/items"]
+margin_top = 82.0
+margin_right = 200.0
+margin_bottom = 117.0
+custom_fonts/font = ExtResource( 44 )
+text = "Jobs Disabled"
+
+[node name="pos_d_1" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 204.0
+margin_top = 68.0
+margin_right = 268.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_d_1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator4" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 272.0
+margin_top = 68.0
+margin_right = 304.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_2" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 308.0
+margin_top = 68.0
+margin_right = 372.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_d_2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator5" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 376.0
+margin_top = 68.0
+margin_right = 408.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_3" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 412.0
+margin_top = 68.0
+margin_right = 476.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_d_3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator6" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 480.0
+margin_top = 68.0
+margin_right = 512.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_4" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 516.0
+margin_top = 68.0
+margin_right = 580.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_d_4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="separator8" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 584.0
+margin_top = 68.0
+margin_right = 616.0
+margin_bottom = 132.0
+stretch_mode = 4
+flip_h = true
+
+[node name="pos_d_5" type="TextureRect" parent="CraftRules/Container/items"]
+margin_left = 620.0
+margin_top = 68.0
+margin_right = 684.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 64 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 65 )
+
+[node name="icon" type="TextureRect" parent="CraftRules/Container/items/pos_d_5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+texture = ExtResource( 66 )
+expand = true
+
+[node name="CraftRules2" type="Panel" parent="."]
+visible = false
+margin_left = 78.0
+margin_top = 274.0
+margin_right = 860.0
+margin_bottom = 714.0
+
+[node name="crafttooltip2" type="TextureRect" parent="CraftRules2"]
+margin_left = 0.330963
+margin_top = 6.06903
+margin_right = 48.331
+margin_bottom = 51.069
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="CraftRules2"]
+margin_left = 87.1022
+margin_top = 15.8572
+margin_right = 239.102
+margin_bottom = 39.8572
+custom_fonts/font = ExtResource( 44 )
+text = "Craft Rules"
+
+[node name="Label2" type="Label" parent="CraftRules2"]
+margin_left = 434.0
+margin_top = 15.8572
+margin_right = 586.0
+margin_bottom = 50.8572
+custom_fonts/font = ExtResource( 44 )
+text = "Predicted task:"
+
+[node name="icon" type="TextureRect" parent="CraftRules2"]
+margin_left = 690.0
+margin_top = 10.0
+margin_right = 754.0
+margin_bottom = 74.0
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+
+[node name="filters" type="HBoxContainer" parent="CraftRules2"]
+margin_left = 18.0
+margin_top = 81.0
+margin_right = 762.0
+margin_bottom = 425.0
+custom_constants/separation = 30
+
+[node name="checks1" type="VBoxContainer" parent="CraftRules2/filters"]
+margin_right = 108.0
+margin_bottom = 344.0
+
+[node name="Label" type="Label" parent="CraftRules2/filters/checks1"]
+margin_right = 108.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 44 )
+text = "Materials"
+
+[node name="Button" type="CheckBox" parent="CraftRules2/filters/checks1"]
+visible = false
+margin_top = 39.0
+margin_right = 121.0
+margin_bottom = 87.0
+theme = ExtResource( 42 )
+text = "button"
+
+[node name="checks2" type="VBoxContainer" parent="CraftRules2/filters"]
+margin_left = 138.0
+margin_right = 204.0
+margin_bottom = 344.0
+
+[node name="Label" type="Label" parent="CraftRules2/filters/checks2"]
+margin_right = 66.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 44 )
+text = "Items"
+
+[node name="Button" type="CheckBox" parent="CraftRules2/filters/checks2"]
+visible = false
+margin_top = 39.0
+margin_right = 121.0
+margin_bottom = 87.0
+theme = ExtResource( 42 )
+text = "button"
+
+[node name="order1" type="VBoxContainer" parent="CraftRules2/filters"]
+margin_left = 234.0
+margin_right = 411.0
+margin_bottom = 344.0
+
+[node name="Label" type="Label" parent="CraftRules2/filters/order1"]
+margin_right = 177.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 44 )
+text = "Materials order"
+
+[node name="Button" type="TextureButton" parent="CraftRules2/filters/order1"]
+visible = false
+margin_left = 8.0
+margin_top = 39.0
+margin_right = 168.0
+margin_bottom = 79.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 63 )
+texture_pressed = ExtResource( 60 )
+texture_hover = ExtResource( 61 )
+script = ExtResource( 62 )
+
+[node name="Label" type="Label" parent="CraftRules2/filters/order1/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "Name"
+align = 1
+valign = 1
+
+[node name="order2" type="VBoxContainer" parent="CraftRules2/filters"]
+margin_left = 441.0
+margin_right = 576.0
+margin_bottom = 344.0
+
+[node name="Label" type="Label" parent="CraftRules2/filters/order2"]
+margin_right = 135.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 44 )
+text = "Items order"
+
+[node name="Button" type="TextureButton" parent="CraftRules2/filters/order2"]
+visible = false
+margin_top = 39.0
+margin_right = 160.0
+margin_bottom = 79.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 63 )
+texture_pressed = ExtResource( 60 )
+texture_hover = ExtResource( 61 )
+script = ExtResource( 62 )
+
+[node name="Label" type="Label" parent="CraftRules2/filters/order2/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "Name"
+align = 1
+valign = 1
 
 [node name="mod_select" type="HBoxContainer" parent="."]
 margin_left = 427.446
