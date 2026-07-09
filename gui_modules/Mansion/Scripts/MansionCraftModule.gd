@@ -43,6 +43,7 @@ func _ready():
 	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b3.connect('pressed', self, 'cap_low_change', [1])
 	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b4.connect('pressed', self, 'cap_low_change', [10])
 	$NumberSelect2/VBoxContainer/Button.connect('pressed', self, 'confirm_craft')
+	$NumberSelect2/VBoxContainer/Button2.connect('pressed', self, 'confirm_craft_edit')
 	for i in $categories.get_children():
 		i.connect("pressed", self, 'select_category', [i.name])
 	for i in $filter.get_children():
@@ -299,6 +300,22 @@ func confirm_craft():
 	select_category(craft_category)
 
 
+func confirm_craft_edit():
+#	$SelectCharacters.show()
+	$NumberSelect2.hide()
+	$MaterialSetupPanel.hide()
+#	$CraftSchedule.show()
+	if cancelentry == null: 
+		return
+	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
+	if num_select_expanded:
+		pdata.cap_up = cap_up
+		pdata.cap_low = cap_low
+	else:
+		pdata.repeat = repeats
+	select_category(craft_category)
+
+
 func confirm_unique():
 #	$SelectCharacters.show()
 	$NumberSelect.hide()
@@ -313,10 +330,12 @@ func delete_from_queue(entry):
 
 
 func select_entry(entry):
+	cancelentry = entry
 	for button in $CraftSchedule/ScrollContainer/VBoxContainer.get_children():
 		if button.name == "Button":
 			continue
 		button.pressed = button.get_meta("selected_craft") == entry
+	open_number_edit()
 
 
 func cancel_item_craft():
@@ -663,6 +682,26 @@ func open_number_select():
 	repeats = 1
 	num_select_expanded = false
 	build_num_select()
+	$NumberSelect2/VBoxContainer/Button2.visible = false
+	$NumberSelect2/VBoxContainer/Button.visible = true
+	$NumberSelect2.show()
+
+
+func open_number_edit():
+	if cancelentry == null: 
+		return
+	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
+	if pdata.has('repeat'):
+		num_select_expanded = false
+		repeats = pdata.repeat
+	else:
+		num_select_expanded = true
+		repeats = 1
+		cap_up = pdata.cap_up
+		cap_low = pdata.cap_low
+	build_num_select()
+	$NumberSelect2/VBoxContainer/Button2.visible = true
+	$NumberSelect2/VBoxContainer/Button.visible = false
 	$NumberSelect2.show()
 
 
