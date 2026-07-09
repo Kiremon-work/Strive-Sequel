@@ -14,7 +14,7 @@ var tasklist = {
 		production_item = 'gold',
 		progress_function = 'whoring_gold',
 		production_reqs = [],
-		production_icon = load("res://assets/images/gui/service.png"),
+		production_icon = "res://assets/images/gui/service.png",
 		production_descript = tr("JOBPROSTITUTEGOLDDESCRIPT"),
 		#production = {prostitutegold = {code = 'prostitutegold', descript = tr("JOBPROSTITUTEGOLDDESCRIPT"), icon = load("res://assets/images/iconsitems/gold.png"), item = 'gold', progress_per_item = 1, reqs = [], progress_function = 'whoring_gold'}},
 		icon = null,
@@ -24,7 +24,7 @@ var tasklist = {
 	special = { #don't remove - we need fallback for special tasks
 		code = 'special',
 		base_workers = 1,
-		production_icon = load("res://assets/Textures_v2/DUNGEON/Icons/exclaim.png"),
+		production_icon = "res://assets/Textures_v2/DUNGEON/Icons/exclaim.png",
 		production_descript = tr("JOBPROSTITUTEGOLDDESCRIPT"),
 		icon = "res://assets/Textures_v2/DUNGEON/Icons/exclaim.png",
 		progress_per_item = 10,
@@ -33,7 +33,7 @@ var tasklist = {
 	fighters_task = {
 		code = 'fighters_task',
 		base_workers = 1,
-		production_icon = load("res://assets/images/gui/service.png"),
+		production_icon = "res://assets/images/gui/service.png",
 		production_descript = tr("JOBPROSTITUTEGOLDDESCRIPT"),
 		icon = "res://assets/images/gui/service.png",
 		progress_per_item = 10,
@@ -47,7 +47,7 @@ var tasklist = {
 		base_workers = 1,
 		progress_per_item = 10,
 		production_reqs = [],
-		production_icon = load("res://assets/images/gui/gui icons/icon_recruit.png"),
+		production_icon = "res://assets/images/gui/gui icons/icon_recruit.png",
 		production_descript = tr("JOBPROSTITUTEGOLDDESCRIPT"),
 		#production = {prostitutegold = {code = 'prostitutegold', descript = tr("JOBPROSTITUTEGOLDDESCRIPT"), icon = load("res://assets/images/iconsitems/gold.png"), item = 'gold', progress_per_item = 1, reqs = [], progress_function = 'whoring_gold'}},
 		icon = null,
@@ -64,7 +64,7 @@ var tasklist = {
 		base_workers = 1,
 		progress_per_item = 25,
 		production_reqs = [],
-		production_icon = load("res://assets/images/gui/gui icons/icon_recruit.png"),
+		production_icon = "res://assets/images/gui/gui icons/icon_recruit.png",
 		production_descript = tr("JOBPROSTITUTEGOLDDESCRIPT"),
 		#production = {prostitutegold = {code = 'prostitutegold', descript = tr("JOBPROSTITUTEGOLDDESCRIPT"), icon = load("res://assets/images/iconsitems/gold.png"), item = 'gold', progress_per_item = 1, reqs = [], progress_function = 'whoring_gold'}},
 		icon = null,
@@ -87,12 +87,12 @@ var tasklist = {
 		production_item = 'building',
 		progress_function = 'building_progress',
 		production_reqs = [],
-		production_icon = load("res://assets/Textures_v2/MANSION/icon_upgrade_64.png"),
+		production_icon = "res://assets/Textures_v2/MANSION/icon_upgrade_64.png",
 		production_descript = tr("JOBBUILDINGCRAFTDESCRIPT"),
 		progress_per_item = 1.0,
 		#production = {building = {code = 'building', item = 'building',descript = tr("JOBBUILDINGCRAFTDESCRIPT"), icon = load("res://assets/Textures_v2/MANSION/icon_upgrade_64.png"), progress_per_item = 1, reqs = [], progress_function = 'building_progress'}},
 		icon = null,
-		tags = ['alchemy', 'hide_progress_ratio'],
+		tags = ['building', 'hide_progress_ratio', 'crafting'],
 		mod = 'mod_build'
 	},
 	cooking = {
@@ -106,11 +106,11 @@ var tasklist = {
 		production_item = 'cooking',
 		progress_function = 'cooking_progress',
 		production_reqs = [],
-		production_icon = load("res://assets/Textures_v2/MANSION/icon_cooking_64.png"),
+		production_icon = "res://assets/Textures_v2/MANSION/icon_cooking_64.png",
 		production_descript = tr("JOBCOOKINGCRAFTDESCRIPT"),
 		#production = {cooking = {code = 'cooking',item = 'cooking',descript = tr("JOBCOOKINGCRAFTDESCRIPT"), icon = load("res://assets/Textures_v2/MANSION/icon_cooking_64.png"), progress_per_item = 1, reqs = [], progress_function = 'cooking_progress'}},
 		icon = null,
-		tags = ['cooking', 'hide_progress_ratio'],
+		tags = ['cooking', 'hide_progress_ratio', 'crafting'],
 		mod = 'mod_cook'
 	},
 	tailor = {
@@ -127,12 +127,12 @@ var tasklist = {
 		production_item = 'tailor',
 		progress_function = 'tailor_progress',
 		production_reqs = [],
-		production_icon = load("res://assets/Textures_v2/MANSION/icon_tailoring_64.png"),
+		production_icon = "res://assets/Textures_v2/MANSION/icon_tailoring_64.png",
 		production_descript = tr("JOBTAILORCRAFTDESCRIPT"),
 		progress_per_item = 1,
 		#production = {tailor = {code = 'tailor',item = 'tailor',descript = tr("JOBTAILORCRAFTDESCRIPT"), icon = load("res://assets/Textures_v2/MANSION/icon_tailoring_64.png"), progress_per_item = 1, reqs = [], progress_function = 'tailor_progress'}},
 		icon = null,
-		tags = ['tailor','hide_progress_ratio'],
+		tags = ['tailor','hide_progress_ratio', 'crafting'],
 		mod = 'mod_tailor'
 	},
 	smith = {
@@ -149,12 +149,12 @@ var tasklist = {
 		production_item = 'smith',
 		progress_function = 'forge_progress',
 		production_reqs = [],
-		production_icon = load("res://assets/Textures_v2/MANSION/icon_blacksmith_64.png"),
+		production_icon = "res://assets/Textures_v2/MANSION/icon_blacksmith_64.png",
 		production_descript = tr("JOBSMITHCRAFTDESCRIPT"),
 		progress_per_item = 1,
 		#production = {smith = {code = 'smith',item = 'smith',descript = tr("JOBSMITHCRAFTDESCRIPT"), icon = load("res://assets/Textures_v2/MANSION/icon_blacksmith_64.png"), progress_per_item = 1, reqs = [], progress_function = 'forge_progress'}},
 		icon = null,
-		tags = ['smith', 'hide_progress_ratio'],
+		tags = ['smith', 'hide_progress_ratio', 'crafting'],
 		mod = 'mod_smith'
 	},
 	alchemy = {
@@ -170,12 +170,12 @@ var tasklist = {
 		production_item = 'alchemy',
 		progress_function = 'alchemy_progress',
 		production_reqs = [],
-		production_icon = load("res://assets/Textures_v2/MANSION/icon_alchemy_64.png"),
+		production_icon = "res://assets/Textures_v2/MANSION/icon_alchemy_64.png",
 		production_descript = tr("JOBALCHEMYCRAFTDESCRIPT"),
 		progress_per_item = 1,
 		#production = {alchemy = {code = 'alchemy',item = 'alchemy',descript = tr("JOBALCHEMYCRAFTDESCRIPT"), icon = load("res://assets/Textures_v2/MANSION/icon_alchemy_64.png"), progress_per_item = 1, reqs = [], progress_function = 'alchemy_progress'}},
 		icon = null,
-		tags = ['alchemy', 'hide_progress_ratio'],
+		tags = ['alchemy', 'hide_progress_ratio', 'crafting'],
 		mod = 'mod_alchemy'
 	},
 	fishing = {
@@ -457,7 +457,7 @@ var tasklist = {
 		production = {},
 		icon = null,
 		tags = ['hide_progress_ratio'],
-		production_icon = load("res://assets/images/gui/gui icons/icon_rest_brothel.png"),
+		production_icon = "res://assets/images/gui/gui icons/icon_rest_brothel.png",
 	},
 }
 
@@ -637,3 +637,10 @@ var farm_tasks = {
 	},
 	
 }
+
+
+func find_task_for_res(res):
+	for i in tasklist:
+		if tasklist[i].has("production_item") and tasklist[i].production_item == res:
+			return i
+	return null

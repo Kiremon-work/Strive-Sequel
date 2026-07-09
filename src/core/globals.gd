@@ -1367,47 +1367,6 @@ func calculate_travel_time(location1, location2): #2remade to new mechanic
 	time = max(1, time - variables.stable_boost_per_level * ResourceScripts.game_res.upgrades.stables)
 	return {time = time}
 
-func check_recipe_resources(temprecipe):
-	var recipe = Items.recipes[temprecipe.code]
-	if recipe.crafttype == 'basic':
-		var check = true
-		for i in recipe.materials:
-			if ResourceScripts.game_res.materials[i] < recipe.materials[i]:
-				check = false
-		for i in recipe.items:
-			if ResourceScripts.game_res.if_has_free_items(i, 'gte', recipe.items[i]) == false:
-				check = false
-		if check == false:
-			return false
-	else:
-		var item = Items.itemlist[recipe.resultitem]
-		var check = true
-		var sum_cost = {}
-		for i in temprecipe.partdict:
-			if sum_cost.has(temprecipe.partdict[i]):
-				 sum_cost[temprecipe.partdict[i]] += item.parts[i]
-			else:
-				sum_cost[temprecipe.partdict[i]] = item.parts[i]
-		for i in sum_cost:
-			if ResourceScripts.game_res.materials[i] < sum_cost[i]:
-				check = false
-		if check == false:
-			return false
-	return true
-
-func spend_resources(temprecipe):
-	var recipe = Items.recipes[temprecipe.code]
-	if recipe.crafttype == 'basic':
-		for i in recipe.materials:
-			ResourceScripts.game_res.materials[i] -= recipe.materials[i]
-		for i in recipe.items:
-			ResourceScripts.game_res.remove_item(i, recipe.items[i])
-	else:
-		var item = Items.itemlist[recipe.resultitem]
-		for i in temprecipe.partdict:
-			ResourceScripts.game_res.materials[temprecipe.partdict[i]] -= item.parts[i]
-	temprecipe.resources_taken = true
-
 
 func text_log_add(label, text):
 	var date = ResourceScripts.game_globals.date
@@ -1895,7 +1854,7 @@ func remove_location(locationid):
 		print('WARNING - incorrect location removal')
 		return
 	var area = ResourceScripts.world_gen.get_area_from_location_code(locationid)
-	ResourceScripts.game_party.clean_tasks(location.id)
+	ResourceScripts.game_res.remove_tasks_for_location(location.id)
 	return_characters_from_location(locationid)
 	if location.has('captured_characters'):
 		for id in location.captured_characters:
@@ -2649,68 +2608,11 @@ func common_effects(effects, from_event = false):
 			'plan_loc_event':
 				ResourceScripts.game_progress.plan_loc_event(i.loc, i.event)
 			'add_special_task_for_location':
-				var template = {
-					code = 'special',
-					product = 'special',
-					progress = 0,
-#					threshold = i.amount,
-					workers = [],
-					workers_count = 0,
-					task_location = i.location,
-					messages = [],
-					args = [],
-#					desc = i.desc,
-#					name = i.name,
-#					icon = i.icon,
-#					max_workers = i.max_workers
-#					function = "",
-					}
-				var template2 = tasks.tasklist.special
-				var template3 = {}
-				if i.has('template'):
-					template3 = tasks.tasklist[i.template]
-				#threshold
-				template.threshold = template2.progress_per_item
-				if template3.has('progress_per_item'):
-					template.threshold = template3.progress_per_item
-				if i.has('amount'):
-					template.threshold = i.amount
-				#args
-				if i.has('args'):
-					template.args = i.args.duplicate(true)
-				elif template3.has('args'):
-					template.args = template3.args.duplicate(true)
-				elif template2.has('args'):
-					template.args = template2.args.duplicate(true)
-				#desc name icon
-				for st in ['descript', 'name', 'icon']:
-					template[st] = ""
-					if template2.has(st):
-						template[st] = template2[st]
-					if template3.has(st):
-						template[st] = template3[st]
-					if i.has(st):
-						template[st] = i[st]
-				#max_workers
-				template.max_workers = template2.base_workers
-				if template3.has('base_workers'):
-					template.max_workers = template3.base_workers
-				if i.has('max_workers'):
-					template.max_workers = i.max_workers
-				#function workstat
-				for st in ['function', 'workstat']:
-					if template2.has(st):
-						template[st] = template2[st]
-					if template3.has(st):
-						template[st] = template3[st]
-					if i.has(st):
-						template[st] = i[st]
-				ResourceScripts.game_party.active_tasks.push_back(template)
+				ResourceScripts.game_res.add_special_job(i)
 			'remove_special_task_for_location':
-				for task in ResourceScripts.game_party.active_tasks.duplicate():
-					if task.code != 'special':
-						continue
-					if task.task_location != i.location:
+				for task_id in ResourceScripts.game_res.active_tasks.special.duplicate():
+					var task = ResourceScripts.game_res.tasks_progresses[task_id]
+					if task.location != i.location:
 						continue
 					if i.has('event'):
 						var found_event = false
@@ -2720,8 +2622,7 @@ func common_effects(effects, from_event = false):
 								break
 						if !found_event:
 							continue
-					ResourceScripts.game_party.clean_task(task)
-					ResourceScripts.game_party.active_tasks.erase(task)
+					ResourceScripts.game_res.clean_task(task_id)
 				emit_signal("task_removed")
 			'add_hireling_to_location':
 				roll_hirelings(i.location)
@@ -2903,7 +2804,7 @@ func valuecheck(dict):
 		"has_items":
 			return ResourceScripts.game_res.if_has_items(dict.name, dict.operant, dict.value)
 		"has_free_items":
-			return ResourceScripts.game_res.if_has_free_items(dict.name, dict.operant, dict.value)
+			return ResourceScripts.game_res.if_has_items(dict.name, dict.operant, dict.value, true)
 		'disabled':
 			return false
 		'has_spouse':

@@ -1,40 +1,53 @@
 extends Control
 
-var craft_category = "cooking"
+var craft_category = 'cooking'
+var current_craft_list = 'cooking_materials'
 var item_filter = 'all'
 var selected_item
 var recipes = []
 var default_part_texture = preload("res://assets/Textures_v2/MANSION/Craft/Buttons/button_craftchoose.png")
+
+var itemtemplate
+var itemparts = {}
+var chosenpartbutton
 #warning-ignore-all:return_value_discarded
+var repeats = 1
+var cap_low = 1
+var cap_up = 999
+var num_select_expanded = false
 
-# func _init():
-# 	yield(Items, "tree_entered")
+var cancelentry
+var partdict
 
+var enditem
 
 func _ready():
 	# input_handler.AddPanelOpenCloseAnimation($NumberSelect)
-	$NumberSelect/NumberConfirm.connect("pressed", self, "confirm_craft")
-	$NumberSelect/HSlider.connect("value_changed", self, "number_change")
-#	$SelectCharacters.connect("pressed", self, "select_characters")
+	$NumberSelect/NumberConfirm.connect("pressed", self, "open_number_select")
+	$NumberSelect/NumberConfirm2.connect("pressed", self, "confirm_unique")
 	$CraftSelect/BackButton.connect("pressed", get_parent(), "mansion_state_set", ["default"])
-	$NumberSelect/BackButton2.connect("pressed", self, "cancel_choise")
-	globals.connecttexttooltip($NumberSelect/TextureRect, tr("TOOLTIPPROGRESSREQUIRED"))
 	# input_handler.AddPanelOpenCloseAnimation($MaterialSelect)
-
-#	for i in $MaterialSetupPanel/ModularSetup/HBoxContainer.get_children(): #[get_node(part_container)+"Part1, $MaterialSetupPanel/ModularSetup/Part2, $MaterialSetupPanel/ModularSetup/Part3]:
-#		i.get_node('ResourceSelect').connect("pressed", self, 'choosematerial', [i])
-
+	
+	$NumberSelect2/CloseButton.connect('pressed', self, 'close_number_select')
+	$NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b1.connect('pressed', self, 'number_change', [-10])
+	$NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b2.connect('pressed', self, 'number_change', [-1])
+	$NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b3.connect('pressed', self, 'number_change', [1])
+	$NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b4.connect('pressed', self, 'number_change', [10])
+	$NumberSelect2/VBoxContainer/AdvOption/HBoxContainer/TextureButton.connect('pressed', self, 'toggle_num_select_mode')
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt1/b1.connect('pressed', self, 'cap_up_change', [-10])
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt1/b2.connect('pressed', self, 'cap_up_change', [-1])
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt3/b3.connect('pressed', self, 'cap_up_change', [1])
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt3/b4.connect('pressed', self, 'cap_up_change', [10])
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt1/b1.connect('pressed', self, 'cap_low_change', [-10])
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt1/b2.connect('pressed', self, 'cap_low_change', [-1])
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b3.connect('pressed', self, 'cap_low_change', [1])
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt3/b4.connect('pressed', self, 'cap_low_change', [10])
+	$NumberSelect2/VBoxContainer/Button.connect('pressed', self, 'confirm_craft')
 	for i in $categories.get_children():
 		i.connect("pressed", self, 'select_category', [i.name])
 	for i in $filter.get_children():
 		i.connect('pressed',self, 'set_filter', [i.name])
 		globals.connecttexttooltip(i, tr(filtercategories[i.name]))
-
-func cancel_choise():
-	$NumberSelect.hide()
-	$MaterialSetupPanel.hide()
-	$CraftSchedule.show()
-	#$SelectCharacters.show()
 
 
 func set_filter(type):
@@ -43,12 +56,14 @@ func set_filter(type):
 		i.pressed = i.name == type
 	rebuild_recipe_list()
 
+
 var craftcategories = {
 	cooking = {reqs = []},
 	tailor = {reqs = [{type = "has_upgrade", name = 'tailor', value = 1}]},
 	alchemy = {reqs = [{type = "has_upgrade", name = 'alchemy', value = 1}]},
 	smith = {reqs = [{type = "has_upgrade", name = 'forge', value = 1}]},
 }
+
 var filtercategories = {
 	all = "CRAFTFILTERALL",
 	materials = "CRAFTFILTERMATERIALS",
@@ -56,6 +71,7 @@ var filtercategories = {
 	costume = "CRAFTFILTERCOSTUME",
 	usables = "CRAFTFILTERUSABLES",
 }
+
 
 func update():
 	for i in $categories.get_children():
@@ -65,6 +81,7 @@ func update():
 	$CraftSchedule.show()
 	# $CraftSelect.hide()
 
+
 func open():
 	show()
 	gui_controller.clock.hide()
@@ -73,12 +90,13 @@ func open():
 	if craft_category != null:
 		select_category(craft_category)
 	input_handler.ActivateTutorial('TUTORIALLIST2')
-	build_char_list()
+
 
 func clear():
 	craft_category = null
 	input_handler.ClearContainer($CraftSchedule/VBoxContainer)
 	input_handler.ClearContainer($CraftSelect/VBoxContainer)
+
 
 func select_category(category):
 	if category == 'enchant':
@@ -90,11 +108,10 @@ func select_category(category):
 	$MaterialSelect.hide()
 	$MaterialSetupPanel.hide()
 	$NumberSelect.hide()
-	get_parent().selected_craft_task = category
 	craft_category = category
 	for i in $categories.get_children():
 		i.pressed = i.name == category
-
+	
 	for i in $filter.get_children():
 		i.pressed = false
 	item_filter = 'all'
@@ -108,12 +125,12 @@ func select_category(category):
 func rebuild_recipe_list():
 	var array = []
 	input_handler.ClearContainer($CraftSelect/ScrollContainer/VBoxContainer)
-
+	
 	for i in $filter.get_children():
 		i.hide()
-
+	
 	$filter/all.show()
-
+	
 	for i in Items.recipes.values():
 		if i.worktype != craft_category || globals.checkreqs(i.unlockreqs) == false:
 			continue
@@ -188,11 +205,13 @@ func rebuild_recipe_list():
 		progressnode.get_node("Label").text = str(i.workunits)
 		globals.connecttexttooltip(progressnode, tr('TOOLTIPPROGRESSREQUIRED'))
 
+
 func update_buttons(item):
 	for button in $CraftSelect/ScrollContainer/VBoxContainer.get_children():
 		if button == $CraftSelect/ScrollContainer/VBoxContainer.get_child($CraftSelect/ScrollContainer/VBoxContainer.get_children().size()-1):
 			continue
 		button.pressed = item == button.get_meta("item")
+
 
 func sort_craft_list(first, second):
 	var enditem
@@ -209,39 +228,50 @@ func sort_craft_list(first, second):
 
 	return enditem.name < enditem2.name
 
+
 func rebuild_scheldue():
 	input_handler.ClearContainer($CraftSchedule/ScrollContainer/VBoxContainer)
-	for i in ResourceScripts.game_res.craftinglists[craft_category]:
+	input_handler.ClearContainer($CraftSchedule2/ScrollContainer/VBoxContainer)
+	for i in ResourceScripts.game_res.crafting_lists[craft_category + '_material']:
+		var pdata = ResourceScripts.game_res.tasks_progresses[i]
 		var newnode = input_handler.DuplicateContainerTemplate($CraftSchedule/ScrollContainer/VBoxContainer)
-		var recipe = Items.recipes[i.code]
-		var item = Items.get(recipe.resultitemtype + 'list')[recipe.resultitem]
-		newnode.get_node("icon").texture = item.icon
-		if item.type == 'gear' && item.crafttype == 'modular':
-			newnode.get_node("icon").material = load("res://assets/ItemShader.tres").duplicate()
-		newnode.get_node("Label").text = tr(item.name) + ": " + globals.fastif(i.repeats != -1,str(i.repeats),'∞')
-		newnode.connect("pressed",self,'confirm_cancel_craft', [i])
+		var recipe_data = Items.recipes[pdata.id]
+		var item_data = Items.materiallist[recipe_data.resultitem]
+		newnode.get_node("icon").texture = item_data.icon
+		if pdata.has('repeat'):
+			newnode.get_node("Label").text = tr(item_data.name) + ": " +  str(pdata.repeat) 
+		else:
+			newnode.get_node("Label").text = tr(item_data.name) + ": " + '∞'
+		newnode.connect("pressed", self, 'select_entry', [i])
 		newnode.set_meta("selected_craft", i)
 		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
-		newnode.get_node("progress").text = str(floor(i.workunits)) + "/" + str(i.workunits_needed)
+		newnode.get_node("progress").text = str(floor(pdata.progress)) + "/" + str(pdata.progress_limit)
 		newnode.arraydata = i
-		newnode.parentnodearray = ResourceScripts.game_res.craftinglists[craft_category]
+		newnode.parentnodearray = ResourceScripts.game_res.crafting_lists[craft_category + '_material']
+		newnode.target_node = self
+		newnode.target_function = 'rebuild_scheldue'
+	for i in ResourceScripts.game_res.crafting_lists[craft_category + '_item']:
+		var pdata = ResourceScripts.game_res.tasks_progresses[i]
+		var newnode = input_handler.DuplicateContainerTemplate($CraftSchedule2/ScrollContainer/VBoxContainer)
+		var recipe_data = Items.recipes[pdata.id]
+		var item_data = Items.itemlist[recipe_data.resultitem]
+		newnode.get_node("icon").texture = item_data.icon
+		if recipe_data.crafttype == 'modular':
+			newnode.get_node("icon").material = load("res://assets/ItemShader.tres").duplicate()
+		if pdata.has('repeat'):
+			newnode.get_node("Label").text = tr(item_data.name) + ": " +  str(pdata.repeat) 
+		else:
+			newnode.get_node("Label").text = tr(item_data.name) + ": " + '∞'
+		newnode.connect("pressed", self, 'select_entry', [i])
+		newnode.set_meta("selected_craft", i)
+		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
+		newnode.get_node("progress").text = str(floor(pdata.progress)) + "/" + str(pdata.progress_limit)
+		newnode.arraydata = i
+		newnode.parentnodearray = ResourceScripts.game_res.crafting_lists[craft_category + '_item']
 		newnode.target_node = self
 		newnode.target_function = 'rebuild_scheldue'
 
 
-var repeats = 1
-
-func number_change(value):
-	var text = ''
-	$NumberSelect/HSlider.value = value
-	repeats = value
-	var visiblerepeats = str(repeats)
-	if repeats >= 100:
-		repeats = -1
-		visiblerepeats = '∞'
-	text = tr('CRAFTREPEATTIMES') % visiblerepeats
-	$NumberSelect/RichTextLabel.bbcode_text = text
-#
 #func craft_select(item):
 #	selected_item = item
 #	number_change(1)
@@ -250,48 +280,47 @@ func number_change(value):
 
 func confirm_craft():
 #	$SelectCharacters.show()
-	$NumberSelect.hide()
+	$NumberSelect2.hide()
 	$MaterialSetupPanel.hide()
 #	$CraftSchedule.show()
-	var list = selected_item.worktype
-	var data = {}
-	data.code = selected_item.code
-	data.repeats = repeats
-	data.workunits = 0
-	data.workunits_needed = selected_item.workunits
-	data.materials = selected_item.items.duplicate()
-	data.resources_taken = false
-	ResourceScripts.game_res.craftinglists[list].append(data)
+	var amount = {}
+	if num_select_expanded:
+		amount.max = cap_up
+		amount.min = cap_low
+	else:
+		amount.fixed = repeats
+	var parts = {}
 	if selected_item.crafttype == 'modular':
-		data.partdict = partdict.duplicate()
-
+		parts = partdict.duplicate()
+	ResourceScripts.game_res.add_recipe_task(selected_item.code, parts, amount)
 	select_category(craft_category)
 
-var cancelentry
-var partdict
+
+func confirm_unique():
+#	$SelectCharacters.show()
+	$NumberSelect.hide()
+	$MaterialSetupPanel.hide()
+	ResourceScripts.game_res.add_recipe_task(selected_item.code) #for unique recipes are not modular
+	select_category(craft_category)
+
 
 func delete_from_queue(entry):
 	cancelentry = entry
-	input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'cancel_item_craft', tr('CANCELTASKQUESTION')	])
+	input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'cancel_item_craft', tr('CANCELTASKQUESTION')])
 
-func confirm_cancel_craft(entry):
-	get_parent().is_craft_selected = true
-	# $SelectCharacters.disabled = false
+
+func select_entry(entry):
 	for button in $CraftSchedule/ScrollContainer/VBoxContainer.get_children():
 		if button.name == "Button":
 			continue
 		button.pressed = button.get_meta("selected_craft") == entry
 
 
-
 func cancel_item_craft():
 	var entry = cancelentry
-	ResourceScripts.game_res.craftinglists[craft_category].erase(entry)
+	ResourceScripts.game_res.clean_task(entry)
 	select_category(craft_category)
 
-var itemtemplate
-var itemparts = {}
-var chosenpartbutton
 
 func selectcraftitem(item):
 	globals.disconnect_text_tooltip($MaterialSetupPanel/EndItemFrame)
@@ -310,22 +339,19 @@ func selectcraftitem(item):
 	else:
 		$MaterialSetupPanel/EndItemFrame/Label.visible = false
 	$NumberSelect.show()
-	number_change(repeats)
 	$MaterialSetupPanel.show()
 	get_node("MaterialSetupPanel/ModularSetup/").visible = item.crafttype != 'basic'
 	get_node("MaterialSetupPanel/BasicSetup/").visible = !get_node("MaterialSetupPanel/ModularSetup/").visible
 	# for i in ['Part1','Part2','Part3', 'Part1Descript', 'Part2Descript', 'Part3Descript', 'Label']:
 	# 	get_node("MaterialSetupPanel/ModularSetup/" + i).visible = !item.crafttype == 'basic'
+	$NumberSelect/NumberConfirm.visible = true
+	$NumberSelect/NumberConfirm2.visible = false
 	if item.has('unique'):
 		if item.unique:
-			$NumberSelect/HSlider.value = 1
-			$NumberSelect/HSlider.hide()
-			for i in ResourceScripts.game_res.craftinglists[craft_category]:
-				if i.code == item.code:
-					$NumberSelect.hide()
-	else:
-		$NumberSelect/HSlider.show()
-	$NumberSelect/workunits.text = str(selected_item.workunits)
+			$NumberSelect/NumberConfirm.visible = false
+			$NumberSelect/NumberConfirm2.visible = true
+			if ResourceScripts.game_res.if_has_crafting_recipe(item.code):
+				$NumberSelect/NumberConfirm2.visible = false
 	if item.crafttype == 'basic':
 		var baseitem
 		if Items.materiallist.has(item.resultitem):
@@ -367,7 +393,6 @@ func selectcraftitem(item):
 			newbutton.get_node("Name").text = tr(Items.itemlist[i].name)
 			newbutton.disabled = item.items[i] > amount
 #			globals.connectitemtooltip_v2(newbutton, Items.itemlist[i])
-	
 	else:
 		$NumberSelect/NumberConfirm.disabled = true
 		$MaterialSetupPanel/Label.text = ''
@@ -444,23 +469,12 @@ func make_material_list(container):
 #			$MaterialSelect/ScrollContainer/VBoxContainer.add_child(newbutton)
 			newbutton.get_node('icon').texture = i.icon
 			newbutton.get_node("amount").text = str(tempmaterial)
-#			var part_name = "{color=k_yellow|" + tr(i.name) + '}'
-#			var name_encoded = globals.TextEncoder(part_name)
-#			var parttext = str(name_encoded) + "\n"
-#			for k in i.parts[part]:
-#				if Items.itemlist[itemtemplate].itemtype == 'armor':
-#					parttext += statdata.statdata[k].name + ": " +  str(float(i.parts[part][k])/2) + ", "
-#				else:
-#					parttext += statdata.statdata[k].name + ": " +  str(i.parts[part][k]) + ", "
-#			parttext = parttext.substr(0, parttext.length()-2)
-#			newbutton.get_node("Label").bbcode_text = parttext
-
+			
 			var temptext = '[center]' + tr(i.name) + "[/center]\n" + tr('CRAFTINPOSSESSION') + ": " + str(ResourceScripts.game_res.materials[i.code]) +  "\n" + tr('CRAFTPARTEFFECTS') + ":" + get_mat_bonuses(i, part)
-
+			
 			newbutton.get_node("name").text = tr(i.name)
 			newbutton.set_meta('material', i.code)
 			globals.connecttexttooltip(newbutton,temptext)
-			
 			
 			newbutton.connect("pressed",self,'selectmaterial',[i, part, cost])
 	yield(get_tree(),"idle_frame")
@@ -507,31 +521,18 @@ func choosematerial(button):
 	chosenpartbutton = button
 	var part = button.get_meta('part')
 	var cost = button.get_meta('cost')
-
+	
 	var text = tr(Items.Parts[part].name) + ' - ' + tr('REQUIREDMATERIAL') + ': ' + str(cost)
 	$MaterialSelect/PartLabel.text = text
-
+	
 	for i in Items.materiallist.values():
 		var tempmaterial = ResourceScripts.game_res.materials[i.code]
 		if !i.has("parts") || tempmaterial < 1:
 			continue
 		if i.parts.has(part):
 			var newbutton = input_handler.DuplicateContainerTemplate($MaterialSelect/ScrollContainer/VBoxContainer, 'Button')
-#			var newbutton = $MaterialSelect/ScrollContainer/VBoxContainer/Button.duplicate()
-#			newbutton.show()
-#			$MaterialSelect/ScrollContainer/VBoxContainer.add_child(newbutton)
 			newbutton.get_node('icon').texture = i.icon
 			newbutton.get_node("number").text = str(tempmaterial)
-#			var part_name = "{color=k_yellow|" + tr(i.name) + '}'
-#			var name_encoded = globals.TextEncoder(part_name)
-#			var parttext = str(name_encoded) + "\n"
-#			for k in i.parts[part]:
-#				if Items.itemlist[itemtemplate].itemtype == 'armor':
-#					parttext += statdata.statdata[k].name + ": " +  str(float(i.parts[part][k])/2) + ", "
-#				else:
-#					parttext += statdata.statdata[k].name + ": " +  str(i.parts[part][k]) + ", "
-#			parttext = parttext.substr(0, parttext.length()-2)
-#			newbutton.get_node("Label").bbcode_text = parttext
 			newbutton.get_node("Label").text = tr(i.name)
 			globals.connecttexttooltip(newbutton, '[center]' + tr(i.name) + "[/center]\n" + tr(i.descript))
 			newbutton.connect("pressed",self,'selectmaterial',[i, part, cost])
@@ -540,13 +541,6 @@ func choosematerial(button):
 func selectmaterial(material, part, cost):
 	$filter.show()
 	itemparts[part] = {material = material.code, price = cost}
-#	chosenpartbutton.get_node("TextureRect").texture = material.icon
-	#chosenpartbutton.get_node("ResourceSelect/icon").texture = material.icon
-	# chosenpartbutton.get_node('TextureRect').hide()
-	#chosenpartbutton.get_node("PartDescript").text = tr(Items.Parts[part].name)
-	#chosenpartbutton.get_node("ResourceSelect/name").text = material.name
-	#chosenpartbutton.get_node("ResourceSelect/amount").text = str(ResourceScripts.game_res.materials[material.code])
-	#chosenpartbutton.get_node("ResourceSelect/amount").show()
 	var text = tr(Items.Parts[part].name)
 	$MaterialSelect.hide()
 	$CraftSelect.show()
@@ -571,8 +565,6 @@ func selectmaterial(material, part, cost):
 	text += globals.build_desc_for_bonusstats(material.parts[part])
 			
 #	get_node("MaterialSetupPanel/ModularSetup/" + chosenpartbutton.name + 'Descript').bbcode_text = text
-
-var enditem
 
 func checkcreatingitem(item):
 	if !Items.itemlist.has(item):
@@ -657,72 +649,87 @@ func CreateItem():
 	input_handler.SystemMessage(tr("ITEMCREATED") +": " + enditem.name)
 	globals.AddItemToInventory(enditem)
 	selectcraftitem(Items.itemlist[itemtemplate])
-	#$NumberSelect.hide()
-
-func select_characters():
-	get_parent().craft_state = "confirm"
-	get_parent().match_state()
-
-# func rebuild_craft_module(state):
-# 	match state:
-# 		"confirm":
-# 			hide()
-
-func update_char_button(newbutton, person):
-	var twork = person.get_work()
-	match twork:
-		'':
-			if !person.is_worker():
-				newbutton.get_node("job").text = tr('NOSERVITUDE') #change translation
-				newbutton.pressed = false
-				newbutton.disabled = true
-			else:
-				newbutton.get_node("job").text = tr('TASKREST')
-				newbutton.pressed = false
-				newbutton.disabled = false
-		'learning', 'Assignment', 'disabled':
-			newbutton.get_node("job").text = tr('CHAR_UNAVALIABLE')
-			newbutton.pressed = false
-			newbutton.disabled = true
-		'travel':
-			newbutton.get_node("job").text = tr("CHAR_TRAVEL")
-			newbutton.pressed = false
-			newbutton.disabled = true
-		_:
-			if Items.materiallist.has(twork):
-				newbutton.get_node("job").text = tr(Items.materiallist[twork].name)
-			else:
-				newbutton.get_node("job").text = tr(tasks.tasklist[twork].name)
-			newbutton.disabled = false
-			newbutton.pressed = (twork == craft_category)
+	$NumberSelect.hide()
 
 
-func build_char_list():
-	input_handler.ClearContainer($CharList/VBoxContainer, ['Button'])
-	for ch in ResourceScripts.game_party.character_order:
-		var person = characters_pool.get_char_by_id(ch)
-		if !person.check_location(ResourceScripts.game_world.mansion_location, true): continue
-		var newbutton = input_handler.DuplicateContainerTemplate($CharList/VBoxContainer, 'Button')
-		newbutton.get_node("name").text = person.get_stat("name")
-		newbutton.get_node("Icon").texture = person.get_icon_small()
-		newbutton.set_meta('character', ch)
-		newbutton.connect('pressed', self, 'toggle_char', [ch])
-		update_char_button(newbutton, person)
+func close_number_select():
+	$NumberSelect2.hide()
 
 
-func update_char_list():
-	for newbutton in $CharList/VBoxContainer.get_children():
-		if !newbutton.has_meta('character'):
-			continue
-		var ch = newbutton.get_meta('character')
-		var person = characters_pool.get_char_by_id(ch)
-		update_char_button(newbutton, person)
+func open_number_select():
+	repeats = 1
+	num_select_expanded = false
+	build_num_select()
+	$NumberSelect2.show()
 
 
-func toggle_char(ch):
-	var person = characters_pool.get_char_by_id(ch)
-	if person.get_work() == craft_category:
-		person.remove_from_task()
+func build_num_select():
+	var item_data = Items.recipes[selected_item.code]
+	var amount
+	if item_data.resultitemtype == 'material':
+		amount = ResourceScripts.game_res.materials[item_data.resultitem]
+		$NumberSelect2/VBoxContainer/icon.texture = Items.materiallist[item_data.resultitem].icon
+		$NumberSelect2/VBoxContainer/name.text = tr(Items.materiallist[item_data.resultitem].name)
 	else:
-		person.assign_to_task(craft_category, craft_category)
-	update_char_list()
+		amount = ResourceScripts.game_res.get_item_amount(item_data.resultitem)
+		$NumberSelect2/VBoxContainer/icon.texture = Items.itemlist[item_data.resultitem].icon
+		$NumberSelect2/VBoxContainer/name.text = tr(Items.itemlist[item_data.resultitem].name)
+		if item_data.crafttype == 'modular':
+			$NumberSelect2/VBoxContainer/icon.material = load("res://assets/ItemShader.tres").duplicate()
+	$NumberSelect2/VBoxContainer/HBoxContainer1/pt2/Amount.text = str(repeats)
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt2/Amount.text = "%d / %d" % [cap_up, amount]
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt2/Amount.text = "%d / %d" % [cap_low, amount]
+	if num_select_expanded:
+		$NumberSelect2/VBoxContainer/AdvOption/HBoxContainer/TextureButton.pressed = true
+		$NumberSelect2/VBoxContainer/label1.visible = false
+		$NumberSelect2/VBoxContainer/HBoxContainer1.visible = false
+		$NumberSelect2/VBoxContainer/label2.visible = true
+		$NumberSelect2/VBoxContainer/HBoxContainer2.visible = true
+		$NumberSelect2/VBoxContainer/label3.visible = true
+		$NumberSelect2/VBoxContainer/HBoxContainer3.visible = true
+	else:
+		$NumberSelect2/VBoxContainer/AdvOption/HBoxContainer/TextureButton.pressed = false
+		$NumberSelect2/VBoxContainer/label1.visible = true
+		$NumberSelect2/VBoxContainer/HBoxContainer1.visible = true
+		$NumberSelect2/VBoxContainer/label2.visible = false
+		$NumberSelect2/VBoxContainer/HBoxContainer2.visible = false
+		$NumberSelect2/VBoxContainer/label3.visible = false
+		$NumberSelect2/VBoxContainer/HBoxContainer3.visible = false
+
+
+func toggle_num_select_mode():
+	num_select_expanded = !num_select_expanded
+	var item_data = Items.recipes[selected_item.code]
+	var amount
+	if item_data.resultitemtype == 'material':
+		amount = ResourceScripts.game_res.materials[item_data.resultitem]
+	else:
+		amount = ResourceScripts.game_res.get_item_amount(item_data.resultitem)
+	cap_up = amount + repeats
+	cap_low = 1
+	build_num_select()
+
+
+func number_change(value):
+	repeats += value
+	if repeats < 1:
+		repeats = 1
+	build_num_select()
+
+
+func cap_up_change(value):
+	cap_up += value
+	if cap_up < 1:
+		cap_up = 1
+	if cap_up < cap_low:
+		cap_up = cap_low
+	build_num_select()
+
+
+func cap_low_change(value):
+	cap_low += value
+	if cap_low < 1:
+		cap_low = 1
+	if cap_up < cap_low:
+		cap_low = cap_up
+	build_num_select()

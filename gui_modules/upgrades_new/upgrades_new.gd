@@ -104,17 +104,17 @@ func build_description(upgrade_id):
 	desc_panel.get_node("VBoxContainer/resources").visible = true
 	work_cost.get_parent().visible = true
 
-	if ResourceScripts.game_res.upgrades_queue.has(upgrade_id):
+	if ResourceScripts.game_res.crafting_lists.building.has(upgrade_id):
 		desc_panel.get_node("VBoxContainer/MarginContainer/ScrollContainer").visible = false
 		desc_panel.get_node("VBoxContainer/resources").visible = false
 		work_cost.get_parent().visible = false
 		can_upgrade = false
 		text += "\n" + tr('UPGRADEPURCHASEDQUEUED') % [ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
-	elif ResourceScripts.game_res.upgrade_progresses.has(upgrade_id):
-		desc_panel.get_node("VBoxContainer/MarginContainer/ScrollContainer").visible = false
-		desc_panel.get_node("VBoxContainer/resources").visible = false
-		work_cost.get_parent().visible = false
-		text += "\n" + tr('UPGRADEPURCHASEDNOTQUEUED') % [ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
+#	elif ResourceScripts.game_res.upgrade_progresses.has(upgrade_id):
+#		desc_panel.get_node("VBoxContainer/MarginContainer/ScrollContainer").visible = false
+#		desc_panel.get_node("VBoxContainer/resources").visible = false
+#		work_cost.get_parent().visible = false
+#		text += "\n" + tr('UPGRADEPURCHASEDNOTQUEUED') % [ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
 	elif upgrade_next_state == null:
 		desc_panel.get_node("VBoxContainer/MarginContainer/ScrollContainer").visible = false
 		desc_panel.get_node("VBoxContainer/resources").visible = false
@@ -168,11 +168,11 @@ func build_description(upgrade_id):
 
 
 func build_queue_list():
-	var upgrades = ResourceScripts.game_res.upgrades_queue
+	var upgrades = ResourceScripts.game_res.crafting_lists.building
 	input_handler.ClearContainer(queuelist)
 	var remains = 0
-	var output = ResourceScripts.game_party.get_output_for_task("building", ResourceScripts.game_world.mansion_location, true)
-
+#	var output = ResourceScripts.game_party.get_output_for_task("building", ResourceScripts.game_world.mansion_location, true)
+	
 	for upgrade in upgrades:
 		var upgrade_data = upgradedata.upgradelist[upgrade]
 		var text = upgrade_data.name
@@ -181,7 +181,7 @@ func build_queue_list():
 		newbutton.target_node = self
 		newbutton.target_function = 'build_queue_list'
 		newbutton.arraydata = upgrade
-		newbutton.parentnodearray = ResourceScripts.game_res.upgrades_queue
+		newbutton.parentnodearray = ResourceScripts.game_res.crafting_lists.building
 		newbutton.get_node("name").text = text
 		if upgrade_data.has('icon'):
 			newbutton.get_node("Icon").texture = images.upgrade_icons[upgrade_data.icon]
@@ -204,10 +204,7 @@ func build_queue_list():
 
 		globals.connecttexttooltip(newbutton, tr('UPGRADEQUEUETOOLTIP'))
 		newbutton.connect("pressed", self, "remove_from_upgrades_queue", [upgrade])
-		if output > 0:
-			newbutton.get_node("time").text = tr('UPGRADETIMETURNS') % int(ceil(remains / (1.0 * output)))
-		else:
-			newbutton.get_node("time").visible = false
+		newbutton.get_node("time").visible = false
 
 
 func update_progresses(upgrade, newbutton, currentupgradelevel):
@@ -226,7 +223,7 @@ func update_progresses(upgrade, newbutton, currentupgradelevel):
 var removing_upgrade
 
 func remove_upgrade_confirm():
-	ResourceScripts.game_res.upgrades_queue.erase(removing_upgrade)
+	ResourceScripts.game_res.crafting_lists.building.erase(removing_upgrade)
 	build_queue_list()
 	build_description(selected_upgrade)
 
