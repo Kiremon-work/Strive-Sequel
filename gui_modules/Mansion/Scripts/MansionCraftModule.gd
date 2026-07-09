@@ -245,7 +245,10 @@ func rebuild_scheldue():
 		newnode.connect("pressed", self, 'select_entry', [i])
 		newnode.set_meta("selected_craft", i)
 		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
-		newnode.get_node("progress").text = str(floor(pdata.progress)) + "/" + str(pdata.progress_limit)
+		newnode.get_node("ProgressBar").visible = true
+		newnode.get_node("progress").visible = false
+		newnode.get_node("ProgressBar").value = pdata.progress
+		newnode.get_node("ProgressBar").max_value = pdata.progress_limit
 		newnode.arraydata = i
 		newnode.parentnodearray = ResourceScripts.game_res.crafting_lists[craft_category + '_material']
 		newnode.target_node = self
