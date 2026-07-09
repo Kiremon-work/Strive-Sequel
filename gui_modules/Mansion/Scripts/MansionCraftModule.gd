@@ -665,15 +665,20 @@ func open_number_select():
 
 func build_num_select():
 	var item_data = Items.recipes[selected_item.code]
+	var newitem = item_data.resultitem
 	var amount
 	if item_data.resultitemtype == 'material':
-		amount = ResourceScripts.game_res.materials[item_data.resultitem]
-		$NumberSelect2/VBoxContainer/icon.texture = Items.materiallist[item_data.resultitem].icon
-		$NumberSelect2/VBoxContainer/name.text = tr(Items.materiallist[item_data.resultitem].name)
+		var matdata = Items.materiallist[newitem]
+		$NumberSelect2/Label2.text = "Craft %s" % tr(matdata.name)
+		amount = ResourceScripts.game_res.materials[newitem]
+		$NumberSelect2/VBoxContainer/icon.texture = matdata.icon
+		$NumberSelect2/VBoxContainer/name.text = tr(matdata.name)
 	else:
-		amount = ResourceScripts.game_res.get_item_amount(item_data.resultitem)
-		$NumberSelect2/VBoxContainer/icon.texture = Items.itemlist[item_data.resultitem].icon
-		$NumberSelect2/VBoxContainer/name.text = tr(Items.itemlist[item_data.resultitem].name)
+		amount = ResourceScripts.game_res.get_item_amount(newitem)
+		var itemdata = Items.itemlist[newitem]
+		$NumberSelect2/Label2.text = "Craft %s" % tr(itemdata.name)
+		$NumberSelect2/VBoxContainer/icon.texture = itemdata.icon
+		$NumberSelect2/VBoxContainer/name.text = tr(itemdata.name)
 		if item_data.crafttype == 'modular':
 			$NumberSelect2/VBoxContainer/icon.material = load("res://assets/ItemShader.tres").duplicate()
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt2/Amount.text = str(repeats)
