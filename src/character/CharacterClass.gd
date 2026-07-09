@@ -715,7 +715,11 @@ func setup_baby(mother, father):
 	for i in variables.inheritedstats:
 		if furryfix and i == 'skin_coverage':
 			continue
-		if randf() >= 0.5 || mother.has_profession("breeder"):
+		if father.has_status("breeder") and !mother.has_status("breeder"):
+			set_stat(i, father.get_stat(i))
+		elif !father.has_status("breeder") and mother.has_status("breeder"):
+			set_stat(i, mother.get_stat(i))
+		elif randf() >= 0.5:
 			set_stat(i, mother.get_stat(i))
 		else:
 			set_stat(i, father.get_stat(i))
@@ -735,10 +739,10 @@ func setup_baby(mother, father):
 				add_stat(factor, 1)
 	
 	for tr in mother.get_traits_by_tag('positive') + father.get_traits_by_tag('positive'):
-		if randf() <= 0.8 or mother.has_profession("breeder") or father.has_profession("breeder"):
+		if randf() <= 0.8 or mother.has_status("breeder") or father.has_status("breeder"):
 			add_trait(tr)
 	for tr in mother.get_traits_by_tag('negative') + father.get_traits_by_tag('negative'):
-		if mother.has_profession("breeder") or father.has_profession("breeder"):
+		if mother.has_status("breeder") or father.has_status("breeder"):
 			if randf() <= 0.1:
 				add_trait(tr)
 		elif randf() <= 0.5:
