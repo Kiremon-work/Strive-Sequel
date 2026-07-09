@@ -241,7 +241,7 @@ func rebuild_scheldue():
 		if pdata.has('repeat'):
 			newnode.get_node("Label").text = tr(item_data.name) + ": " +  str(pdata.repeat) 
 		else:
-			newnode.get_node("Label").text = tr(item_data.name) + ": " + '∞'
+			newnode.get_node("Label").text = "%s: %d / %d" % [tr(item_data.name), pdata.cap_up, ResourceScripts.game_res.materials[recipe_data.resultitem]]
 		newnode.connect("pressed", self, 'select_entry', [i])
 		newnode.set_meta("selected_craft", i)
 		newnode.get_node("DeleteButton").connect("pressed",self,'delete_from_queue', [i])
