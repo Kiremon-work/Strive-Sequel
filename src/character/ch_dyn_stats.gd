@@ -13,6 +13,7 @@ var body_upgrades = {}
 var professions = {}
 var masteries = {} #{magic = [], combat = [], universal = [], passive = [], enable = true},
 var bonuses_stored = {}
+var info_bonus_mastery = {}
 
 #rebuildable
 var traits_real = {}
@@ -196,6 +197,10 @@ func process_race_data(id, process_skills = true):
 	if data.has('traits'):
 		for tr in data.traits:
 			process_trait_add(tr, 0)
+	if data.has("social_skills") and process_skills:
+		for id in data.social_skills:
+			if !skills_real.has(id):
+				skills_real.push_back(id)
 	if data.has("combat_skills") and process_skills:
 		for id in data.combat_skills:
 			if !c_skills_real.has(id):
@@ -976,7 +981,7 @@ func get_racial_features(race):
 
 func process_chardata(chardata):
 	for i in chardata:
-		if !(i in ['code', 'slave_class', 'tags','sex_traits', 'sex_skills', 'sex_training', 'personality', 'training_disposition', 'blocked_training_traits','traits', 'food_like', 'food_hate', 'classes', 'skills', 'mastery', 'achievement', 'achi_bonus', 'achi_wedding']):
+		if !(i in ['code', 'slave_class', 'tags','sex_traits', 'sex_skills', 'sex_training', 'personality', 'training_disposition', 'blocked_training_traits', 'affection', 'respect', 'traits', 'food_like', 'food_hate', 'classes', 'skills', 'mastery', 'achievement', 'achi_bonus', 'achi_wedding']):
 			var st_data = statdata.statdata[i]
 			if !st_data.direct:
 				set_default_value(i, chardata[i])
@@ -1099,6 +1104,7 @@ func get_used_mastery_points(category):
 func _add_mastery_as_bonuses(category, lv, mul = 2.5):
 	if lv <= 0:
 		return
+	info_bonus_mastery['monster_mastery_' + category] = {category = category, lvl = lv, mul = mul}
 	add_trait('monster_mastery_' + category)
 	var mas_data = Skilldata.masteries[category]
 	for i in range(lv):
@@ -1232,3 +1238,39 @@ func get_buff_number(status):
 			if buff.get_duration() != null:
 				result += buff.get_duration().count
 	return result
+
+func has_info_bonus_mastery(mastery):
+	return info_bonus_mastery.has(mastery)
+
+func get_info_bonus_mastery(mastery):
+	return info_bonus_mastery[mastery]
+
+func try_get_bonus_mastery_desc(mastery):
+	var desc = ""
+	if !has_info_bonus_mastery(mastery):
+		return desc
+	var entry = get_info_bonus_mastery(mastery)
+	var mas_data = Skilldata.masteries[entry.category]
+	desc = "%s. %s" % [tr("MASTERYLEVEL") % entry.lvl, tr("MASTERYGRANTS")]
+#	for stat in mas_data.passive:
+#		var data = statdata.statdata[stat]
+#		var val = mas_data.passive[stat] * entry.mul
+#		desc += " %s" % (globals.get_bonus_name_string(data.default_bonus, data, val)
+#			+ globals.make_bonus_value_string(data.default_bonus, data, val))
+#	desc += ". %s" % tr("MASTERYGRANTS")
+	var text_list = []
+	for i in range(entry.lvl):
+		if i < mas_data.maxlevel:
+			var lvdata = mas_data['level%d' % (i + 1)]
+			for id in lvdata.traits:
+				var trait = Traitdata.traits[id]
+				text_list.append(tr(trait.name))
+			for id in lvdata.combat_skills:
+				var skill = Skilldata.get_template_combat(id, parent.get_ref())
+				text_list.append(tr(skill.name))
+	for j in range(text_list.size()):
+		if j > 0:
+			desc += ","
+		desc += " %s" % text_list[j]
+	desc += "."
+	return desc

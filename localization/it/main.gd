@@ -15,6 +15,7 @@ var TranslationDict = {
 	MENUGALLERY = "Galleria",
 	MENUQUIT = "Esci",
 	MENUCHANGELOG = "Registro delle modifiche",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	GALLERYNAME = "Galleria",
 	GALLERYSTORY = "Storia",
 	GALLERYERO = "Ero", #
@@ -36,6 +37,12 @@ var TranslationDict = {
 	MODCLOSE = "Chiudi",
 	MODSORT = "Ordina",
 	MODOPENEDITOR = "Apri editor (versione alpha)",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	MENUCREDITSNAME = "Crediti",
 	MENUCREDITSDESC = """Progettazione, scrittura, programmazione del gioco: Maverik /
 
@@ -359,6 +366,7 @@ ma manterrà comunque tutti i tuoi personaggi, oggetti e inventario. Usa questa 
 	LMMWORK = "Lavoro",
 	BTNLEVELING = "Livellamento",
 	BTNDATE = "Incontro",
+	DATECONFIRM = """Confirm dating [name]?""", # MISSING TRANSLATION
 	BTNCHAT = "Chiacchierata",
 	BTNRELATIONS = "Relazioni",
 	BTNCUSTOMIZATION = "Personalizzazione",
@@ -518,6 +526,9 @@ ma manterrà comunque tutti i tuoi personaggi, oggetti e inventario. Usa questa 
 	QBACCEPT = "Accettare",
 	MONEYTOOLTIP = "Soldi Posseduti",
 	MONEYTOOLTIP2 = "Tasse Settimanali",
+	UPGRADETAXTOOLTIP = """Upgrade Taxes""", # MISSING TRANSLATION
+	CHARACTERUPKEEPTOOLTIP = """Character Upkeep""", # MISSING TRANSLATION
+	TOTALUPKEEPTOOLTIP = """Total Upkeep""", # MISSING TRANSLATION
 	PAUSEMENUSAVE = "Salva",
 	PAUSEMENULOAD = "Carica",
 	PAUSEMENUOPT = "Opzioni",
@@ -1313,6 +1324,9 @@ Tasto di scelta rapida: 3""",
 	QUESTCOMPLETEMESSAGE = "Missione completata",
 	QUESTDAYSLEFT = "Giorni rimasti",
 	QUESTLOCATION = "Posizione della missione",
+	NEEDTOSEESKILL = """You have not yet seen this skill in action.""", # MISSING TRANSLATION
+	CHARSMALLTAB_ABIL = """Abilities""", # MISSING TRANSLATION
+	CHARSMALLTAB_GEN = """Stats""", # MISSING TRANSLATION
 	SKILLATTACK = "Attacco",
 	SKILLATTACKDESCRIPT = "Attacca il bersaglio con l'arma equipaggiata.",
 	SKILLRANGED_ATTACK = "Attacco (a distanza)",
@@ -1670,9 +1684,12 @@ Non richiede il turno per essere attivato. """,
 	SKILLNECRO_AURADESCRIPT = "Evocazione Passiva: Scheletri. Il numero di scheletri è definito dal Fattore Magico.",
 	SKILLRAMONT_RIPOSTE_STANCE_SKILL = 'Posizione di Parata e Risposta',
 	SKILLCOMMAND_EMBARGO = 'Comando: Embargo',
+	SKILLCOMMAND_EMBARGODESCRIPT = """Target another ally in the melee zone. Command them to attack a random enemy, dealing 70% ATK damage and inflicting Provoke.""", # MISSING TRANSLATION
 	SKILLRAMONT_EMBRAGO = 'Embargo in Vigore',
 	SKILLRAMONT_EVICTION_NOTICE = 'Avviso di Sfratto',
+	SKILLRAMONT_EVICTION_NOTICEDESCRIPT = """Deal 85% ATK damage and inflict {color=aqua|Eviction Notice}.""", # MISSING TRANSLATION
 	SKILLRAMONT_PIERCING_OBSIDIAN = 'Ossidiana Perforante',
+	SKILLRAMONT_PIERCING_OBSIDIANDESCRIPT = """Deal 135% ATK damage to a row and inflict Bleed. Deal +20% damage against enemies affected by '{color=aqua|Eviction Notice}'.""", # MISSING TRANSLATION
 	SKILLPROTECT_ME = """Protect Me!""", # MISSING TRANSLATION
 	SKILLENRAGING_BELITTLEMENT = """Enraging Belittlement""", # MISSING TRANSLATION
 	SKILLENRAGING_BELITTLEMENT_CALI = """Enraging Belittlement""", # MISSING TRANSLATION
@@ -2437,6 +2454,21 @@ Non potrai completare il turno se il numero totale dei tuoi personaggi è superi
 	STATTRAINEE_AMOUNTDESCRIPT = "Numero massimo di tirocinanti",
 	TRAITTRAINER = "Allenatore",
 	TRAITTRAINERDESCRIPT = "Può supervisionare gli schiavi",
+	CHARACTER_STANDING_ANTIPATHY = """Antipathy""", # MISSING TRANSLATION
+	CHARACTER_STANDING_FRIEND = """Friend""", # MISSING TRANSLATION
+	CHARACTER_STANDING_LOVE_PEST = """Love Pest""", # MISSING TRANSLATION
+	CHARACTER_STANDING_MINION = """Minion""", # MISSING TRANSLATION
+	CHARACTER_STANDING_HOUSEMATE = """Housemate""", # MISSING TRANSLATION
+	CHARACTER_STANDING_INFATUATED = """Infatuated""", # MISSING TRANSLATION
+	CHARACTER_STANDING_SWORN_SERVANT = """Sworn Servant""", # MISSING TRANSLATION
+	CHARACTER_STANDING_COMPANION = """Companion""", # MISSING TRANSLATION
+	CHARACTER_STANDING_BELOVED = """Beloved""", # MISSING TRANSLATION
+	TRAITSTANDING_LOVE_PEST = """Love Pest""", # MISSING TRANSLATION
+	TRAITSTANDING_LOVE_PESTDESCRIPT = """Experience gained from the sex minigame is increased by 25%.""", # MISSING TRANSLATION
+	TRAITSTANDING_HOUSEMATE = """Housemate""", # MISSING TRANSLATION
+	TRAITSTANDING_HOUSEMATEDESCRIPT = """Health and Mana regeneration are increased by 10%.""", # MISSING TRANSLATION
+	TRAITSTANDING_SWORN_SERVANT = """Sworn Servant""", # MISSING TRANSLATION
+	TRAITSTANDING_SWORN_SERVANTDESCRIPT = """Productivity is increased by 10%.""", # MISSING TRANSLATION
 	STATSPIRIT = "Spirito",
 	TRAITTRAINING_WORKFORCE = "Addestramento: Forza lavoro",
 	TRAITTRAINING_WORKFORCEDESCRIPT = """Impostato per la schiavitù del lavoro. 
@@ -2455,6 +2487,10 @@ Danno +15%, Salute +20.""",
 	STATOBEDIENCEDESCRIPT = "L'obbedienza è la volontà di un personaggio di obbedire ai tuoi ordini. L'obbedienza si ottiene utilizzando le abilità sociali. Quando il personaggio è esaurito può scappare e si perderà nel caso in cui ciò accada. ",
 	STATLOYALTY = "Lealtà",
 	STATLOYALTYDESCRIPT = "I punti fedeltà ti permettono di sbloccare nuove abilità per i tuoi servitori. La lealtà si ottiene passivamente in base al fattore addomesticamento del personaggio, ma può anche essere migliorata in base alle date e all'uso delle abilità sociali.",
+	STATAFFECTION = """Affection""", # MISSING TRANSLATION
+	STATAFFECTIONDESCRIPT = """Affection represents how positively or negatively this character feels about you.""", # MISSING TRANSLATION
+	STATRESPECT = """Respect""", # MISSING TRANSLATION
+	STATRESPECTDESCRIPT = """Respect represents how highly or poorly this character regards you.""", # MISSING TRANSLATION
 	STATRESISTANCE = "Resistenza",
 	STATRESISTANCEDESCRIPT = "Resistenza DESCRIPT PLACEHOLDER.",
 	STATSUBMISSION = "Sottomissione",
@@ -2620,6 +2656,7 @@ Danno +15%, Salute +20.""",
 	FAMEDESC_PRICE_BONUS = "Valore del Personaggio",
 	FAMEDESC_UPKEEP = "Manutenzione settimanale subordinata",
 	FAMEDESC_LOYALTY_BONUS = "Lealtà per il tirocinante",
+	FAMEDESC_MANHUNT_BONUS = """Manhunt bonus""", # MISSING TRANSLATION
 	FAMEDESC_RECRUIT_BONUS = "Efficienza nel reclutamento",
 	PRICEDESC_TRAITS_POS = "Tratti positivi",
 	PRICEDESC_TRAITS_NEG = "Tratti negativi",
@@ -3018,6 +3055,10 @@ Lealtà: +10 (metà per gli spettatori), Lussuria: +15, Max Obbedienza.""",
 Esegue il carattere selezionato. Migliora notevolmente l'obbedienza di tutte le persone coinvolte. 
 Effetti di base: 
 Lealtà: +25, massima obbedienza.""",
+	SKILLCLASS_COPY = """Universal Aptitude""", # MISSING TRANSLATION
+	SKILLCLASS_COPYDESCRIPT = """Select a character to get it's specific racial class.""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT = """Select a class for [name] to learn from [targetname].""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT_FAILED = """No class for [name] to learn from [targetname].""", # MISSING TRANSLATION
 	SKILLENTHRALL = "Affascinare",
 	SKILLENTHRALLDESCRIPT = "Seleziona un personaggio per trasformarlo in uno Schiavo dell'incantatore. Ogni Schiavo aumenta il desiderio massimo, la rigenerazione del desiderio e fornisce punti sblocco.",
 	DIALOGUEENTHRALLREPORT = "[targetname] è stata conquistata da [name]. [targetname] si sente completamente innamorata di [him].",
@@ -3497,6 +3538,22 @@ Autorità: +""",
 	DATING_PHYSF_BONUS_2 = """
 
 Anche se questa è stata un'esperienza spiacevole per [name], di sicuro gli insegnerà ad avere paura della tua rabbia.""",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""", # MISSING TRANSLATION
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""", # MISSING TRANSLATION
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""", # MISSING TRANSLATION
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""", # MISSING TRANSLATION
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""", # MISSING TRANSLATION
 	DATING_SEX_OFFER_1 = """
 
 {color=green|Sembra che a [name] non dispiaccia continuare questo incontro...}""",
@@ -4086,17 +4143,29 @@ Aumento dei Danni e della Frequenza dei Colpi""",
 Aumento dell'Evasione, dell Frequenza dei Colpi e MDEF""",
 	TRAITEFFECTRARETOUGH = """Raro: Duro
 Aumento della Salute, DEF e MDEF""",
+	TRAITMONSTER_MASTERY_WARFARE = """Warfare Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_WARFAREDESCRIPT = "Maestria della Guerra",
+	TRAITMONSTER_MASTERY_PROTECTION = """Protection Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_PROTECTIONDESCRIPT = "Maestria della Protezione",
+	TRAITMONSTER_MASTERY_STEALTH = """Stealth Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_STEALTHDESCRIPT = "Maestria della Furtività",
+	TRAITMONSTER_MASTERY_MARKSMANSHIP = """Marksmanship Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_MARKSMANSHIPDESCRIPT = "Maestria nel Tiro con l'Arco",
+	TRAITMONSTER_MASTERY_LEADERSHIP = """Leadershp Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_LEADERSHIPDESCRIPT = "Maestria della Leadership",
+	TRAITMONSTER_MASTERY_FIRE = """Fire Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_FIREDESCRIPT = "Maestria del Fuoco",
+	TRAITMONSTER_MASTERY_WATER = """Water Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_WATERDESCRIPT = "Maestria dell'Acqua",
+	TRAITMONSTER_MASTERY_AIR = """Air Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_AIRDESCRIPT = "Maestria dell'Aria",
+	TRAITMONSTER_MASTERY_EARTH = """Earth Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_EARTHDESCRIPT = "Maestria della Terra",
+	TRAITMONSTER_MASTERY_LIGHT = """Light Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_LIGHTDESCRIPT = "Maestria della Luce",
+	TRAITMONSTER_MASTERY_DARK = """Dark Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_DARKDESCRIPT = "Maestria Oscura",
+	TRAITMONSTER_MASTERY_MIND = """Mind Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_MINDDESCRIPT = "Maestria della Mente",
 	TRAITEFFECTHARDWORK = "Duro lavoro: +50%% di produttività",
 	TRAITEFFECTPHYSBUF = "Elisir della Forza dell'Orco: +80 Fisica",

@@ -34,7 +34,7 @@ var skills = {
 		icon = load("res://assets/images/iconsskills/heavyshot.png"),
 		type = 'combat', 
 		ability_type = 'skill',
-		tags = ['damage', 'default', 'basic', 'stealth_casting', 'need_to_see'],
+		tags = ['damage', 'default', 'basic', 'stealth_casting'],
 		reqs = [],
 		targetreqs = [],
 		effects = ['expose_cover'], 
@@ -131,7 +131,9 @@ var skills = {
 		target_number = 'nontarget_group',
 		target_range = 'any',
 		damage_type = 'air',
-		sfx = [{code = 'inspire', target = 'target', period = 'predamage'}], 
+		sfx = [
+			{code = 'inspire', target = 'target', period = 'predamage'},
+			{code = 'cast_air', target = 'caster', period = 'windup', is_cast = true}], 
 		sounddata = {initiate = null, strike = null, hit = null},
 		value = [['0']],
 		damagestat = 'no_stat',
@@ -245,6 +247,7 @@ var effects = {
 		req_skill = true,
 		conditions = [
 			{type = 'skill', value = ['tags', 'has', 'damage'] },
+			{type = 'skill', value = ['mode', 'eq', variables.SKILL_BASE]},
 			{type = 'target', value = [{code = 'stat', stat = 'combatgroup', value = 'enemy', operant = 'eq'}] },
 			{type = 'target', value = [{code = 'trait', trait = 'aire_overwatch_assignment', check = false}] },
 			{type = 'caster', value = [{code = 'stat', stat = 'hp', operant = 'gt', value = 0}]},

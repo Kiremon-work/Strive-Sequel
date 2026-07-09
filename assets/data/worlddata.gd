@@ -717,6 +717,51 @@ var random_dungeon_events = {
 var fixed_location_options = { #override serialized data
 	aliron = [
 		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'report_kharzug'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_report_kharzug_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'speak_to_church'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_church_visit', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'return_ginny_refusal'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_return_ginny_refusal_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'offer_alternative_site'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_offer_alternative_site_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'parishioners_persuaded'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_ginny_parishioners_persuaded', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'new_church_site'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_new_church_opening_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'find_warehouse_owner'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_find_warehouse_owner_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'buy_warehouse'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_revisit_warehouse_owner', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'report_warehouse_solution'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_report_warehouse_solution_1', args = []}]
+		},
+		{
 			text = tr("LIRA_QUEST2_CITY_OPTION"),
 			reqs = [{type = 'active_quest_stage', value = 'lira_quest_2', stage = 'fair', state = true}],
 			args = [{code = 'start_event', data = 'lira_quest2_fair_arrival', args = []}]
@@ -1154,6 +1199,73 @@ var fixed_location_options = { #override serialized data
 	],
 	dwarf_capital = [
 		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_HARA"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'find_technician'},
+				{type = 'decision', value = 'TempRecruitHara', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_hara_capital_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KARGUN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'find_technician'},
+				{type = 'decision', value = 'TempRecruitHara', check = false},
+				{type = 'decision', value = 'Act4SebastianKargunRefused', check = false}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_kargun_intro_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KARGUN_RETURN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'find_technician'},
+				{type = 'decision', value = 'Act4SebastianKargunRefused', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_kargun_return', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'investigate_trouble'},
+				{type = 'decision', value = 'Act4SebastianTechnicianHara', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_trouble_hara_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'investigate_trouble'},
+				{type = 'decision', value = 'Act4SebastianTechnicianKargun', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_trouble_kargun_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'investigate_kharzug'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_arrive_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'clear_lower_tomb'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_tomb_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'return_to_technician'},
+				{type = 'decision', value = 'Act4SebastianTechnicianHara', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_return_hara', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN"),
+			reqs = [
+				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'return_to_technician'},
+				{type = 'decision', value = 'Act4SebastianTechnicianKargun', check = true}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_return_kargun', args = []}]
+		},
+		{
 			text = tr("DWARF_PALACE"),
 			reqs = [{type = 'any_quest_stage', value = 'visit_dwarfs_quest', stages = ['audience', 'jean']}],
 			args = [{code = 'start_event', data = 'dwarf_palace_first', args = []}]
@@ -1335,6 +1447,33 @@ var fixed_location_options = { #override serialized data
 	],
 	
 	empire_capital = [
+		{
+			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
+			reqs = [
+				{type = 'decision', value = 'JoinCoalition', check = false},
+				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
+				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
+				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
+				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_proposal_dwarf_king_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
+			reqs = [
+				{type = 'decision', value = 'JoinCoalition', check = true},
+				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
+				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
+				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
+				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
+			],
+			args = [{code = 'start_event', data = 'act4_sebastian_proposal_bolthar_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_REPORT_TECHNICIAN"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'report_technician'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_report_technician_1', args = []}]
+		},
 #		{
 #			text = tr("LIRA_QUEST3_EMPIRE_NOTICE_OPTION"),
 #			reqs = [{type = 'active_quest_stage', value = 'lira_quest_3', stage = 'empire', state = true}],

@@ -15,6 +15,7 @@ var TranslationDict = {
 	MENUGALLERY = "Galeria",
 	MENUQUIT = "Salir",
 	MENUCHANGELOG = "Registro de cambios",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	GALLERYNAME = "Galeria",
 	GALLERYSTORY = "Historia",
 	GALLERYERO = "Ero",
@@ -36,6 +37,12 @@ var TranslationDict = {
 	MODCLOSE = "Cerrar",
 	MODSORT = "Ordenar",
 	MODOPENEDITOR = "Editor abierto (versión alfa)",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	MENUCREDITSNAME = "Credito",
 	MENUCREDITSDESC = """Diseño, escritura y programación del juego: Maverik /
 
@@ -511,6 +518,9 @@ pero conservarás todos tus personajes, objetos e inventario. Usa este modo para
 	QBACCEPT = "Aceptar",
 	MONEYTOOLTIP = "Dinero en posesión",
 	MONEYTOOLTIP2 = "Impuestos semanales",
+	UPGRADETAXTOOLTIP = """Upgrade Taxes""", # MISSING TRANSLATION
+	CHARACTERUPKEEPTOOLTIP = """Character Upkeep""", # MISSING TRANSLATION
+	TOTALUPKEEPTOOLTIP = """Total Upkeep""", # MISSING TRANSLATION
 	PAUSEMENUSAVE = "Guardar",
 	PAUSEMENULOAD = "Cargar",
 	PAUSEMENUOPT = "Opciones",
@@ -1297,6 +1307,9 @@ Tecla de acceso rápido: 3""",
 	QUESTCOMPLETEMESSAGE = "Misión completada",
 	QUESTDAYSLEFT = "días restantes",
 	QUESTLOCATION = "Ubicación de la misión",
+	NEEDTOSEESKILL = """You have not yet seen this skill in action.""", # MISSING TRANSLATION
+	CHARSMALLTAB_ABIL = """Abilities""", # MISSING TRANSLATION
+	CHARSMALLTAB_GEN = """Stats""", # MISSING TRANSLATION
 	SKILLATTACK = "Ataque",
 	SKILLATTACKDESCRIPT = "Ataca al objetivo con el arma equipada.",
 	SKILLRANGED_ATTACK = "Ataque (a distancia)",
@@ -2452,6 +2465,21 @@ Servicio es un modificador global para esta asignación.""",
 	STATTRAINEE_AMOUNTDESCRIPT = """Maximal number of trainee""", # MISSING TRANSLATION
 	TRAITTRAINER = "Entrenador",
 	TRAITTRAINERDESCRIPT = "Puede supervisar a los esclavos",
+	CHARACTER_STANDING_ANTIPATHY = """Antipathy""", # MISSING TRANSLATION
+	CHARACTER_STANDING_FRIEND = """Friend""", # MISSING TRANSLATION
+	CHARACTER_STANDING_LOVE_PEST = """Love Pest""", # MISSING TRANSLATION
+	CHARACTER_STANDING_MINION = """Minion""", # MISSING TRANSLATION
+	CHARACTER_STANDING_HOUSEMATE = """Housemate""", # MISSING TRANSLATION
+	CHARACTER_STANDING_INFATUATED = """Infatuated""", # MISSING TRANSLATION
+	CHARACTER_STANDING_SWORN_SERVANT = """Sworn Servant""", # MISSING TRANSLATION
+	CHARACTER_STANDING_COMPANION = """Companion""", # MISSING TRANSLATION
+	CHARACTER_STANDING_BELOVED = """Beloved""", # MISSING TRANSLATION
+	TRAITSTANDING_LOVE_PEST = """Love Pest""", # MISSING TRANSLATION
+	TRAITSTANDING_LOVE_PESTDESCRIPT = """Experience gained from the sex minigame is increased by 25%.""", # MISSING TRANSLATION
+	TRAITSTANDING_HOUSEMATE = """Housemate""", # MISSING TRANSLATION
+	TRAITSTANDING_HOUSEMATEDESCRIPT = """Health and Mana regeneration are increased by 10%.""", # MISSING TRANSLATION
+	TRAITSTANDING_SWORN_SERVANT = """Sworn Servant""", # MISSING TRANSLATION
+	TRAITSTANDING_SWORN_SERVANTDESCRIPT = """Productivity is increased by 10%.""", # MISSING TRANSLATION
 	STATSPIRIT = "Espíritu",
 	TRAITTRAINING_WORKFORCE = "Formación: Fuerza laboral",
 	TRAITTRAINING_WORKFORCEDESCRIPT = """Preparado para la esclavitud laboral.
@@ -2470,6 +2498,10 @@ Daño +15%, Salud +20.""",
 	STATOBEDIENCEDESCRIPT = "La obediencia es la disposición de un personaje a obedecer tus órdenes. Se obtiene mediante el uso de habilidades sociales. Cuando se agota, el personaje puede escapar y se perderá en caso de que esto ocurra.",
 	STATLOYALTY = "Lealtad",
 	STATLOYALTYDESCRIPT = "Los puntos de lealtad te permiten desbloquear nuevas habilidades para tus sirvientes. La lealtad se obtiene pasivamente según el Factor de Domesticación del personaje, pero también se puede mejorar con las citas y el uso de habilidades sociales.",
+	STATAFFECTION = """Affection""", # MISSING TRANSLATION
+	STATAFFECTIONDESCRIPT = """Affection represents how positively or negatively this character feels about you.""", # MISSING TRANSLATION
+	STATRESPECT = """Respect""", # MISSING TRANSLATION
+	STATRESPECTDESCRIPT = """Respect represents how highly or poorly this character regards you.""", # MISSING TRANSLATION
 	STATRESISTANCE = "Fortaleza",
 	STATRESISTANCEDESCRIPT = "Resistencia DESCRIPCIÓN MARCADOR DE POSICIÓN.",
 	STATSUBMISSION = "Sumisión",
@@ -2634,7 +2666,7 @@ Daño +15%, Salud +20.""",
 	FAMEDESC_PRICE_BONUS = "Valor del personaje",
 	FAMEDESC_UPKEEP = 'Mantenimiento semanal subordinado',
 	FAMEDESC_LOYALTY_BONUS = 'Fidelización del aprendiz',
-	FAMEDESC_RECRUIT_BONUS = 'Eficiencia en el reclutamiento',
+	FAMEDESC_MANHUNT_BONUS = 'Manhunt bonus', # MISSING TRANSLATION
 	PRICEDESC_TRAITS_POS = "Rasgos positivos",
 	PRICEDESC_TRAITS_NEG = "Rasgos negativos",
 	PRICEDESC_CUMULATIVE = "Bonificación acumulada %s de",
@@ -3036,6 +3068,10 @@ Lealtad: +10 (la mitad para los espectadores), Lujuria: +15, Obediencia máxima.
 Ejecuta al personaje seleccionado. Mejora considerablemente la obediencia de todos los involucrados.
 Efectos básicos:
 Lealtad: +25, Obediencia máxima.""",	
+	SKILLCLASS_COPY = """Universal Aptitude""", # MISSING TRANSLATION
+	SKILLCLASS_COPYDESCRIPT = """Select a character to get it's specific racial class.""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT = """Select a class for [name] to learn from [targetname].""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT_FAILED = """No class for [name] to learn from [targetname].""", # MISSING TRANSLATION
 	
 	SKILLENTHRALL = "Cautivar",
 	SKILLENTHRALLDESCRIPT = """Selecciona un personaje para convertirlo en esclavo de un lanzador. Cada esclavo aumenta la Lujuria máxima y su regeneración, y proporciona puntos de desbloqueo.""",
@@ -3583,6 +3619,7 @@ Mayor daño y tasa de impacto""",
 Mayor evasión, tasa de impacto y MAG DEF""",
 	TRAITEFFECTRARETOUGH = """Raro: Duro
 Mayor salud, DEF y MAG DEF""",
+	TRAITMONSTER_MASTERY_WARFARE = """Warfare Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_WARFAREDESCRIPT = """Warfare Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_PROTECTIONDESCRIPT = """Protection Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_STEALTHDESCRIPT = """Stealth Mastery""", # MISSING TRANSLATION
@@ -5895,6 +5932,9 @@ La mujer desaparece tan rápido como apareció ante ti, dejándote frente a la m
 	ENEMYAIRE = "Aire",
 	ENEMYKURDAN = "Kurdan",
 	ENEMYLEON = "Leon",
+	ENEMYFAT_BANDIT = """Fat Bandit""", # MISSING TRANSLATION
+	ENEMYREDHEAD_BOSS_BANDIT = """Bandit Leader""", # MISSING TRANSLATION
+	ENEMYSMALL_BANDIT = """Small Bandit""", # MISSING TRANSLATION
 	ENEMYLILITH_BOSS_1 = """Ashmedai""", # MISSING TRANSLATION
 	ENEMYLILITH_BOSS_2 = """Ashmedai""", # MISSING TRANSLATION
 	ENEMYWHITE_STAG = "Ciervo blanco",
@@ -20202,6 +20242,22 @@ Autoridad: +""",
 	DATING_PHYSF_BONUS_2 = """
 
 Si bien esta fue una experiencia desagradable para [name], ciertamente le enseñará a tener miedo de [him] enojo.""",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""", # MISSING TRANSLATION
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""", # MISSING TRANSLATION
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""", # MISSING TRANSLATION
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""", # MISSING TRANSLATION
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""", # MISSING TRANSLATION
 	DATING_SEX_OFFER_1 = """
 
 {color=green|Parece que a [name] no le importa continuar con este encuentro...}""",

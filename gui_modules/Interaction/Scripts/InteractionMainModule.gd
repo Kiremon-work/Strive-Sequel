@@ -1715,7 +1715,7 @@ func showbody(i):
 		$Panel/BodyDisplay/ragdoll.test_mode = false
 		$Panel/BodyDisplay/ragdoll.rebuild(i.person)
 		$Panel/BodyDisplay/ragdoll.rebuild_cloth(false)
-#		$Panel/BodyDisplay/ragdoll.rebuild_underwear()
+		$Panel/BodyDisplay/ragdoll.rebuild_underwear()
 	else:
 		$Panel/bodyimage.texture = i.person.get_body_image()
 		$Panel/bodyimage.visible = true
@@ -2794,6 +2794,8 @@ func endencounter():
 #						i.consentgain = input_handler.math(j.operant, i.consentgain, j.value)
 					else: call(j.effect, i)
 
+		if i.person.has_status('standing_love_pest'):
+			bonus *= 1.25
 		expgain = round(expgain * bonus)
 
 		i.person.add_stat('base_exp', expgain)

@@ -16,6 +16,7 @@ var customization_button
 var inventory_button
 var occupation_button
 
+var pending_date_person
 
 func _ready():
 	
@@ -79,6 +80,14 @@ func chat():
 
 func date():
 	var person = selected_person
+	pending_date_person = person
+	input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'date_confirmed', person.translate(tr("DATECONFIRM"))])
+
+func date_confirmed():
+	var person = pending_date_person
+	pending_date_person = null
+	if person == null:
+		return
 	person.add_stat('metrics_dates', 1)
 	if !ResourceScripts.game_globals.unlimited_date_sex:
 		ResourceScripts.game_globals.weekly_dates_left -= 1
@@ -416,6 +425,13 @@ var unique_dict = { #shows available talk characters. Scenes go in order from hi
 				{type = "event_seen", check = false, value = "kuro_after_tome"}
 			]},
 			{code = 'kuro_dialogue_start', reqs = []}
+		]
+	},
+
+	hara = {
+		code = 'hara',
+		scenes = [
+			{code = 'act4_sebastian_hara_mansion_1', reqs = [{type = "active_quest_stage", value = "sebastian_railroad_quest", stage = "find_technician"}]}
 		]
 	},
 }

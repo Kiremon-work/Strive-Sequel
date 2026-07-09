@@ -19,13 +19,6 @@ var data = {
 				]
 			}
 		],
-		common_effects = [
-			{
-				code = "dialogue_counter",
-				name = "daisy_sympathy",
-				op = 0
-			},
-		],
 		music = "daisy_theme",
 		options = [
 			{
@@ -35,14 +28,7 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue",
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "+"
-					}
-				]
+				type = "next_dialogue"
 			},
 			{
 				code = "close",
@@ -51,14 +37,7 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue",
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "-"
-					}
-				]
+				type = "next_dialogue"
 			}
 		]
 	},
@@ -81,13 +60,6 @@ var data = {
 				]
 			}
 		],
-		common_effects = [
-			{
-				code = "dialogue_counter",
-				name = "daisy_sympathy",
-				op = 0
-			}
-		],
 		options = [
 			{
 				code = "daisy_recruitment_2",
@@ -96,14 +68,7 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue",
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "+"
-					}
-				]
+				type = "next_dialogue"
 			},
 			{
 				code = "daisy_recruitment_2",
@@ -121,7 +86,10 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -15},
+				]
 			}
 		]
 	},
@@ -331,7 +299,8 @@ var data = {
 						code = "progress_quest",
 						value = "daisy_clothes",
 						stage = "stage1"
-					}
+					},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 15},
 				]
 			},
 			{
@@ -341,7 +310,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -20},
+				]
 			}
 		]
 	},
@@ -464,7 +436,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_CLOTHES_AMELIA_REPLY_1",
@@ -509,7 +481,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_CLOTHES_AMELIA_REPLY_2_1",
@@ -549,7 +521,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_CLOTHES_AMELIA_REPLY_2_2",
@@ -589,7 +561,7 @@ var data = {
 			"dialogue_scene"
 		],
 		image = null,
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_CLOTHES_AMELIA_REPLY_3_150",
@@ -649,7 +621,7 @@ var data = {
 			"dialogue_scene"
 		],
 		image = null,
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_CLOTHES_AMELIA_REPLY_3_250",
@@ -799,14 +771,7 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue",
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "+"
-					}
-				]
+				type = "next_dialogue"
 			},
 			{
 				code = "daisy_dress_acquired_normal_3",
@@ -815,7 +780,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = -10},
+				]
 			},
 			{
 				code = "daisy_dress_acquired_normal_2",
@@ -922,14 +890,7 @@ var data = {
 
 						],
 						dialogue_argument = 3,
-						change_dialogue_type = 2,
-						bonus_effects = [
-							{
-								code = "dialogue_counter",
-								name = "daisy_sympathy",
-								op = "-"
-							}
-						]
+						change_dialogue_type = 2
 					}
 				]
 			},
@@ -1202,7 +1163,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 10},
+				]
 			},
 			{
 				code = "daisy_dress_acquired_lewd_3",
@@ -1211,7 +1175,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -10},
+				]
 			}
 		]
 	},
@@ -1294,14 +1261,7 @@ var data = {
 				],
 				dialogue_argument = 3,
 				type = "next_dialogue",
-				change_dialogue_type = 2,
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "-"
-					}
-				]
+				change_dialogue_type = 2
 			}
 		]
 	},
@@ -1482,7 +1442,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_TRAINING_REPLY_1",
@@ -1537,7 +1497,8 @@ var data = {
 						code = "money_change",
 						operant = "-",
 						value = 200
-					}
+					},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = 15},
 				]
 			},
 			{
@@ -1575,7 +1536,8 @@ var data = {
 						code = "money_change",
 						operant = "-",
 						value = 300
-					}
+					},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -10},
 				]
 			},
 			{
@@ -1627,7 +1589,9 @@ var data = {
 						code = "money_change",
 						operant = "-",
 						value = 400
-					}
+					},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -30},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = -25},
 				]
 			},
 			{
@@ -1671,7 +1635,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_TRAINING_REPLY_2_1",
@@ -2224,14 +2188,7 @@ var data = {
 				],
 				dialogue_argument = 3,
 				change_dialogue_type = 1,
-				type = "next_dialogue",
-				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "-"
-					}
-				]
+				type = "next_dialogue"
 			}
 		]
 	},
@@ -2547,7 +2504,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -10},
+				]
 			},
 			{
 				code = "training_complete_fucktoy_3_2_1",
@@ -2556,7 +2516,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -20},
+				]
 			},
 			{
 				code = "training_complete_fucktoy_3_3_1",
@@ -2567,11 +2530,7 @@ var data = {
 				dialogue_argument = 3,
 				type = "next_dialogue",
 				bonus_effects = [
-					{
-						code = "dialogue_counter",
-						name = "daisy_sympathy",
-						op = "-"
-					}
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -30},
 				]
 			},
 			{
@@ -2581,7 +2540,10 @@ var data = {
 
 				],
 				dialogue_argument = 4,
-				change_dialogue_type = 1
+				change_dialogue_type = 1,
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 15},
+				]
 			}
 		]
 	},
@@ -3269,7 +3231,9 @@ var data = {
 								hour = 2
 							}
 						]
-					}
+					},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 25},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = 20},
 				],
 				code = "close",
 				text = "DIALOGUECLOSE",
@@ -3285,11 +3249,11 @@ var data = {
 			{
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "gte",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "gte", value = 50}
+						]
 					}
 				],
 				music = "daisy_theme",
@@ -3331,11 +3295,11 @@ var data = {
 			{
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "lt",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "lt", value = 50}
+						]
 					}
 				],
 				music = "daisy_theme",
@@ -3360,7 +3324,10 @@ var data = {
 
 						],
 						dialogue_argument = 1,
-						type = "next_dialogue"
+						type = "next_dialogue",
+						bonus_effects = [
+							{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 20},
+						]
 					},
 					{
 						code = "daisy_admirer_first_event_5",
@@ -3370,7 +3337,10 @@ var data = {
 						],
 						dialogue_argument = 2,
 						type = "next_dialogue",
-						change_dialogue_type = 2
+						change_dialogue_type = 2,
+						bonus_effects = [
+							{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -25},
+						]
 					}
 				]
 			}
@@ -3402,7 +3372,11 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 10},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = 10},
+				]
 			},
 			{
 				code = "daisy_admirer_first_event_3",
@@ -3411,7 +3385,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 20},
+				]
 			},
 			{
 				code = "daisy_admirer_first_event_3",
@@ -3420,7 +3397,10 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -20},
+				]
 			}
 		]
 	},
@@ -3633,7 +3613,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_LOST_AMELIA_REPLY_0",
@@ -3671,7 +3651,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "amelia",
+		character = "$amelia",
 		text = [
 			{
 				text = "DAISY_LOST_AMELIA_REPLY_1_1",
@@ -3841,7 +3821,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 15},
+				]
 			},
 			{
 				code = "daisy_lost_13",
@@ -3850,7 +3833,11 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 20},
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "respect", value = 20},
+				]
 			},
 			{
 				code = "daisy_lost_14",
@@ -3859,7 +3846,10 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -40},
+				]
 			}
 		]
 	},
@@ -3951,7 +3941,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 25},
+				]
 			},
 			{
 				code = "daisy_lost_11",
@@ -3960,7 +3953,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = 5},
+				]
 			},
 			{
 				code = "daisy_lost_12",
@@ -3969,7 +3965,10 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "daisy", type = "stat", stat = "affection", value = -30},
+				]
 			}
 		]
 	},
@@ -3988,11 +3987,11 @@ var data = {
 				text = "DAISY_LOST_APPROACH_REPLY_FIGHT_4_1and2_good",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "gte",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "gte", value = 50}
+						]
 					}
 				]
 			},
@@ -4000,11 +3999,11 @@ var data = {
 				text = "DAISY_LOST_APPROACH_REPLY_FIGHT_4_1and2_bad",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "lt",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "lt", value = 50}
+						]
 					}
 				]
 			}
@@ -4142,11 +4141,11 @@ var data = {
 				text = "DAISY_LOST_APPROACH_REPLY_3_2_good",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "gte",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "gte", value = 50}
+						]
 					}
 				]
 			},
@@ -4154,11 +4153,11 @@ var data = {
 				text = "DAISY_LOST_APPROACH_REPLY_3_2_bad",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "lt",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "lt", value = 50}
+						]
 					}
 				]
 			}
@@ -4169,11 +4168,11 @@ var data = {
 				text = "DIALOGUECONTINUE",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "gte",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "gte", value = 50}
+						]
 					}
 				],
 				dialogue_argument = 1,
@@ -4187,11 +4186,11 @@ var data = {
 				text = "DIALOGUECLOSE",
 				reqs = [
 					{
-						type = "local_counter",
-						name = "daisy_sympathy",
-						operant = "lt",
-						value = 1,
-						check = true
+						type = "unique_character_checks",
+						name = "daisy",
+						value = [
+							{code = "stat", stat = "affection", operant = "lt", value = 50}
+						]
 					}
 				],
 				dialogue_argument = 1,

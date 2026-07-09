@@ -619,14 +619,14 @@ var data = {
 		text = [{text = "ZEPHYRA_WED_6", reqs = [], }], 
 		options = [ {code = 'zephyra_wed_7', text = "DIALOGUECONTINUE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',}, ],
 	},
-	zephyra_wed_7 = { 
+	zephyra_wed_7 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
 		scene_type = "ero_scene",
 		custom_background = "zephyra_wed_7",
 		save_scene_to_gallery = true,
-		reqs = [], 
-		text = [{text = "ZEPHYRA_WED_7", reqs = [], }], 
-		options = [ {code = 'close', text = "DIALOGUECLOSE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',}, ],
+		reqs = [],
+		text = [{text = "ZEPHYRA_WED_7", reqs = [], }],
+		options = [ {code = 'close', text = "DIALOGUECLOSE", reqs = [], dialogue_argument = 1, type = 'next_dialogue', bonus_effects = [{code = 'complete_quest', value = 'marriage_quest_main'}, {code = 'complete_wedding'} ]}, ],
 	},
 	
 	mae_wedding_1 = { 

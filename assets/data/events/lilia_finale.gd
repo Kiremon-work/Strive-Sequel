@@ -243,7 +243,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FINALE_2",
@@ -292,7 +292,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FINALE_2_1AND2",
@@ -342,7 +342,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FINALE_2_3",
@@ -394,7 +394,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FLIRTING_1",
@@ -441,7 +441,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FLIRTING_2",
@@ -517,7 +517,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_FLIRTING_3",
@@ -628,7 +628,7 @@ var data = {
 				type = "next_dialogue"
 			}
 		],
-		character = "lilia"
+		character = "$lilia"
 	},
 	lilith_finish_dungeon_2 = {
 		tags = [
@@ -720,7 +720,7 @@ var data = {
 				type = "next_dialogue"
 			}
 		],
-		character = "lilia"
+		character = "$lilia"
 	},
 	lilith_finish_dungeon_fight = {
 		image = null,
@@ -807,7 +807,7 @@ var data = {
 				change_dialogue_type = 2
 			}
 		],
-		character = "lilia"
+		character = "$lilia"
 	},
 	lilith_finish_dungeon_after_scene = {
 		image = null,
@@ -819,7 +819,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILIA_FINISH_DUNGEON_AFTER_SCENE",
@@ -867,7 +867,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILIA_FINISH_DUNGEON_AFTER_SCENE_1_1",
@@ -954,7 +954,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_1",
@@ -992,7 +992,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_1_CHOICE_1",
@@ -1050,7 +1050,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_2",
@@ -1088,7 +1088,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_2_1",
@@ -1139,7 +1139,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_2_CLOSE",
@@ -1177,7 +1177,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3",
@@ -1206,7 +1206,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CONTINUE",
@@ -1302,7 +1302,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CONTINUE_4",
@@ -1344,7 +1344,7 @@ var data = {
 				type = "next_dialogue"
 			}
 		],
-		character2 = "lilia"
+		character2 = "$lilia"
 	},
 	lilith_good_route_village_7 = {
 		tags = [
@@ -1364,7 +1364,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = -20}
+				]
 			},
 			{
 				code = "quest_fight",
@@ -1393,10 +1396,13 @@ var data = {
 
 				],
 				dialogue_argument = 4,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 10}
+				]
 			}
 		],
-		character2 = "lilia"
+		character2 = "$lilia"
 	},
 	lilith_good_route_village_8 = {
 		image = null,
@@ -1407,7 +1413,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CHOICE_1",
@@ -1482,7 +1488,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CHOICE_1_1",
@@ -1588,7 +1594,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CHOICE_2",
@@ -1652,7 +1658,11 @@ var data = {
 
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 20},
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "respect", value = 15}
+				]
 			}
 		]
 	},
@@ -1729,7 +1739,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_GOOD_ROUTE_3_CHOICE_4",
@@ -1816,7 +1826,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_SET_FAIRIES_FREE",
@@ -1907,7 +1917,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilia",
+		character = "$lilia",
 		text = [
 			{
 				text = "LILIA_SET_FAIRIES_FREE_CONTINUE",
@@ -1947,7 +1957,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_1",
@@ -2003,7 +2013,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_1_2",
@@ -2048,7 +2058,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_1_3_1",
@@ -2084,7 +2094,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_1_3_2",
@@ -2121,7 +2131,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_2",
@@ -2150,7 +2160,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BAD_ROUTE_2_CONTINUE",
@@ -2257,7 +2267,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = -20}
+				]
 			},
 			{
 				code = "lilith_proposal_2",
@@ -2266,7 +2279,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "affection", value = 15}
+				]
 			}
 		]
 	},
@@ -2279,7 +2295,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_ACCEPT_PROPOSAL_1",
@@ -2356,7 +2372,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_REFUSE_PROPOSAL_2",
@@ -2373,7 +2389,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "lilia", type = "stat", stat = "respect", value = 10}
+				]
 			},
 			{
 				code = "lilith_proposal_4",
@@ -2403,7 +2422,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_REFUSE_OPTION_1",
@@ -2454,7 +2473,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_REFUSE_OPTION_2",
@@ -2689,7 +2708,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_PATRON_MEETING",
@@ -2825,7 +2844,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_DEAL_1_1",
@@ -2863,7 +2882,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_DEMON_VOICE",
@@ -2923,7 +2942,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_BEAT_DEMON",
@@ -2953,7 +2972,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_DEMON_SUBMISSION",
@@ -2984,7 +3003,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "lilith",
+		character = "$lilith",
 		text = [
 			{
 				text = "LILITH_AFTER_DEMON_DEFEAT",

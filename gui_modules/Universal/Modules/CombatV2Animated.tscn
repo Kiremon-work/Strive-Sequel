@@ -857,9 +857,6 @@ margin_top = 297.0
 margin_right = 1182.0
 margin_bottom = 548.0
 texture = ExtResource( 21 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Panel" parent="ItemPanel"]
 self_modulate = Color( 0, 0, 0, 0.705882 )
@@ -1232,53 +1229,55 @@ expand = true
 stretch_mode = 5
 flip_v = true
 
-[node name="Panel4" type="TextureRect" parent="."]
-margin_left = 597.0
+[node name="Panel4" type="NinePatchRect" parent="."]
+margin_left = 574.0
 margin_top = 45.0
-margin_right = 1319.0
-margin_bottom = 125.0
+margin_right = 1346.0
+margin_bottom = 115.0
+rect_clip_content = true
 texture = ExtResource( 58 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Panel4"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="container" type="Control" parent="Panel4"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
-custom_constants/separation = 10
-
-[node name="Button" type="TextureButton" parent="Panel4/VBoxContainer"]
-visible = false
-margin_right = 60.0
+margin_right = 762.0
 margin_bottom = 60.0
+rect_clip_content = true
+
+[node name="Button" type="TextureButton" parent="Panel4/container"]
+visible = false
+margin_right = 50.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 64 )
 texture_hover = ExtResource( 65 )
 texture_disabled = ExtResource( 66 )
+expand = true
 
-[node name="icon" type="TextureRect" parent="Panel4/VBoxContainer/Button"]
+[node name="icon" type="TextureRect" parent="Panel4/container/Button"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 67 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="hpbar" type="TextureProgress" parent="Panel4/VBoxContainer/Button"]
-margin_left = 5.29205
-margin_top = 48.6518
-margin_right = 53.292
-margin_bottom = 53.6518
+[node name="hpbar" type="TextureProgress" parent="Panel4/container/Button"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -10.0
+margin_right = -4.0
+margin_bottom = -5.0
 value = 50.0
 texture_progress = ExtResource( 63 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+nine_patch_stretch = true
 
 [node name="SkillBook" parent="." instance=ExtResource( 33 )]
 visible = false

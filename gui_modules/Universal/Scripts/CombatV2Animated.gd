@@ -28,6 +28,10 @@ var allowaction = false
 var highlightargets = false
 var allowedtargets = {}
 var turnorder = []
+var next_turnorder = []
+var current_turn_info = {}
+var last_order_id = -1
+const turn_order_step = 54
 var fightover = false
 
 var playergroup = {} #pos:hid
@@ -91,9 +95,10 @@ signal combat_finished
 signal combat_cleaned_up
 signal turn_started
 
-var queue_size_max
+#var queue_size_max
 
 onready var screen_block = $screen_block
+onready var turnorder_cont = $Panel4/container
 
 func _ready():
 	if gui_controller.mansion != null:
@@ -137,7 +142,7 @@ func _ready():
 	input_handler.register_btn_source('combat_enemy', self, 'tut_get_enemy')
 	input_handler.register_btn_source('combat_ally', self, 'tut_get_master')
 	
-	queue_size_max = $Panel4/VBoxContainer.rect_size.x
+#	queue_size_max = $Panel4/VBoxContainer.rect_size.x
 
 func tut_get_CloseButton():
 	return $Rewards/CloseButton
@@ -226,6 +231,7 @@ func reset_combat_data():
 func start_combat(newplayergroup, newenemygroup, background, music = 'battle1', t_combat_data = {}):
 	ClearSkillPanel()
 	ClearItemPanel()
+	input_handler.ClearContainer(turnorder_cont)
 	screen_block.hide()
 	if images.backgrounds.has(background):
 		$Background.texture = images.get_background(background)
@@ -258,6 +264,7 @@ func start_combat(newplayergroup, newenemygroup, background, music = 'battle1', 
 	enemygroup.clear()
 	playergroup.clear()
 	turnorder.clear()
+	next_turnorder.clear()
 	if music == 'combattheme':
 		var temparray = ['battle1','battle2','battle3','battle4']
 		music = temparray[randi()%temparray.size()]
@@ -462,6 +469,7 @@ func make_fighter_panel(fighter, spot):
 
 
 func checkdeaths():
+#	var update_queue_needed = false
 	for i in range(battlefield.size()):
 		if battlefield[i] == null: 
 			continue
@@ -473,11 +481,12 @@ func checkdeaths():
 			tchar.hp = 0
 			input_handler.emit_signal('fighter_changed')
 			combatlogadd(tr("LOG_COMBAT_DEFEATED") % tchar.get_short_name())
-			for j in range(turnorder.size()):
-				if turnorder[j].pos == i:
-					turnorder.remove(j)
-					update_queue_asynch()
-					break
+			for order_cont in [next_turnorder, turnorder]:
+				for j in range(order_cont.size()):
+					if order_cont[j].pos == i:
+						order_cont.remove(j)
+#						update_queue_needed = true
+						break#will it work with arrays in speed stat?
 			#turnorder.erase(battlefield[i])
 			if summons.has(i):
 #				tchar.displaynode.queue_free()
@@ -492,6 +501,8 @@ func checkdeaths():
 				summons.erase(i)
 		elif tchar.has_status('mark_for_escape'):
 			enemy_escape(tchar)
+#	if update_queue_needed:
+#		update_queue_asynch()#probaly should be updated only on select_actor
 
 func enemy_escape(escaper):
 	escaper.defeated = true
@@ -499,11 +510,15 @@ func enemy_escape(escaper):
 	input_handler.emit_signal('fighter_changed')
 	combatlogadd(tr("LOG_COMBAT_ENEMY_ESCAPED") % escaper.get_short_name())
 	var i = escaper.position
-	for j in range(turnorder.size()):
-		if turnorder[j].pos == i:
-			turnorder.remove(j)
-			update_queue_asynch()
-			break
+#	var update_queue_needed = false
+	for order_cont in [next_turnorder, turnorder]:
+		for j in range(order_cont.size()):
+			if order_cont[j].pos == i:
+				order_cont.remove(j)
+#				update_queue_needed = true
+				break#will it work with arrays in speed stat?
+#	if update_queue_needed:
+#		update_queue_asynch()#probaly should be updated only on select_actor
 #	escaper.displaynode.queue_free()
 	escaper.displaynode.is_active = false
 #	escaper.displaynode = null
@@ -565,10 +580,14 @@ func select_actor():
 	checkdeaths()
 	if checkwinlose() == true:
 		return
+	var is_new_turn = false
 	if turnorder.empty():
 		#to test, maybe this is wrong decision
-		calculateorder()
 		newturn()
+		calculateorder()
+		is_new_turn = true
+	else:
+		update_order()
 	
 	if !ActionQueue.is_empty():
 		if !ActionQueue.is_active:
@@ -576,8 +595,9 @@ func select_actor():
 		yield(ActionQueue, 'queue_empty')
 	
 	currentactor = turnorder[0].pos
+	current_turn_info = turnorder[0]
 	turnorder.remove(0)
-	update_queue_asynch()
+	update_queue_asynch(is_new_turn)
 	#currentactor.update_timers()
 	current_turn()
 
@@ -614,25 +634,66 @@ func newturn():
 
 
 func calculateorder():
-	turnorder.clear()
-	if autoskill != null:
-		turnorder.append({pos = 0, speed = 100})
-	for pos in playergroup:
-		var tchar = get_char_by_pos(pos)
-		if tchar.defeated == true:
-			continue
-		for v in tchar.get_stat('speed'):
-			turnorder.append({speed = v + randf() * 5, pos = pos})
-	for pos in enemygroup:
-		var tchar = get_char_by_pos(pos)
-		if tchar.defeated == true:
-			continue
-		for v in tchar.get_stat('speed'):
-			turnorder.append({speed = v + randf() * 5, pos = pos})
-	
-	turnorder.sort_custom(self, 'speedsort')
-#	update_queue_asynch()
+	turnorder = next_turnorder
+	next_turnorder = []
+	var order_conts
+	if turnorder.empty():
+		order_conts = [turnorder, next_turnorder]
+	else:
+		order_conts = [next_turnorder]
+	for order_cont in order_conts:
+		if autoskill != null:
+			order_cont.append({pos = 0, speed = 100, id = make_order_id()})
+		for pos in playergroup.keys() + enemygroup.keys():
+			var tchar = get_char_by_pos(pos)
+			if tchar.defeated == true:
+				continue
+			for i in range(tchar.get_stat('speed').size()):
+				order_cont.append({dice = randf() * 5, pos = pos, id = make_order_id()})
+	update_order()
 
+func update_order():
+	for order_cont in [turnorder, next_turnorder]:
+		var list_by_pos = {}
+		for i in range(order_cont.size()):
+			var entry = order_cont[i]
+			if entry.pos == 0: continue
+			
+			if !list_by_pos.has(entry.pos):
+				list_by_pos[entry.pos] = []
+			list_by_pos[entry.pos].append(i)
+		
+		var to_remove = []
+		for pos in list_by_pos:
+			var tchar = get_char_by_pos(pos)
+			if tchar.defeated == true: continue
+			
+			var cur_list = list_by_pos[pos]
+#			print("ask speed %s" % tchar.get_short_name())
+			var speed_list = tchar.get_stat('speed')
+#			print("speed_list %s" % speed_list)
+#			print("cur_list %s speed_list %s" % [cur_list.size(), speed_list.size()])
+			for i in range(speed_list.size()):
+				if cur_list.size() < i+1:
+#					print("add new entry!")
+					var dice = randf() * 5
+					order_cont.append({speed = speed_list[i] + dice, dice = dice, pos = pos})
+				else:
+#					print("update entry")
+					var entry = order_cont[cur_list[i]]
+					entry.speed = speed_list[i] + entry.dice
+			if cur_list.size() > speed_list.size():
+				for i in range(speed_list.size(), cur_list.size()):
+#					print("will remove %s" % cur_list[i])
+					to_remove.append(cur_list[i])
+		if !to_remove.empty():
+			for i in range(order_cont.size()-1, -1, -1):
+				if i in to_remove:
+#					print("removing %s" % i)
+					order_cont.remove(i)
+		
+		order_cont.sort_custom(self, 'speedsort')
+#	update_queue_asynch()
 
 func speedsort(first, second):
 	return first.speed > second.speed
@@ -1145,8 +1206,11 @@ func use_skill(skill_code, caster, target, mode = variables.SKILL_BASE):
 	tmp_handler.setup_caster(caster)
 	tmp_handler.setup_target(target)
 	ActionQueue.invoke()
-	if template.has("tags") and template.tags.has("need_to_see"):
-		ResourceScripts.game_progress.try_append_seen_skill(skill_code)
+	if (caster.combatgroup == 'enemy'
+			and template.has("tags")
+			and !template.tags.has("recognizable")
+			and !template.tags.has("descript_hidden")):
+		input_handler.update_progress_data("seen_skills", skill_code)
 
 
 func get_char_by_pos(pos):
@@ -1701,40 +1765,130 @@ func combatlogadd(text):
 func combatlogadd_q(text):
 	$Combatlog/RichTextLabel.append_bbcode(text)
 
-
-func update_queue_asynch():
-	var data = {node = self, time = turns, type = 'order', slot = 'order', params = {queue = turnorder.duplicate(), current = currentactor}}
-	CombatAnimations.add_new_data(data)
-
-
-func update_queue(queue, current): #don't call in asynchroned state
-	input_handler.ClearContainer($Panel4/VBoxContainer)
-	
-	for ch in [{pos = current}] + queue:
-		if ch.pos < 0 : continue
-		if battlefield[ch.pos] == null:
+func update_queue_asynch(new_turn = false):
+	var new_queue = [current_turn_info] + turnorder + [{next_turn = true, id = -1}] + next_turnorder
+	var old_queue = turnorder_cont.get_children()
+	for queue_icon in old_queue:
+		if (!queue_icon.visible
+				or queue_icon.get_meta("marked_to_remove", false)
+				or !is_instance_valid(queue_icon)):
 			continue
-		var person = get_char_by_pos(ch.pos)
-		var tmp = input_handler.DuplicateContainerTemplate($Panel4/VBoxContainer, 'Button')
-		if ch.pos > 6:
-			tmp.disabled = true
-		var icon = person.get_icon()
-		if icon != null:
-			tmp.get_node('icon').texture = icon
-		if person.combatgroup == 'enemy':
-			tmp.self_modulate = Color(1.0,0.5,0.5,1.0)
-		else:
-			tmp.self_modulate = Color(0.5,1.0,0.5,1.0)
-		tmp.get_node('hpbar').max_value = person.get_stat('hpmax')
-		tmp.get_node('hpbar').value = person.hp
-		tmp.connect("mouse_entered", self, 'FighterMouseOver', [person.id, true])
-		tmp.connect("mouse_exited", self, 'FighterMouseOverFinish', [person.id])
+		var moved = false
+		var id = queue_icon.get_meta("id")
+		for i in range(new_queue.size()):
+			var is_next_turn_icon = new_queue[i].has("next_turn")
+			if (!is_next_turn_icon
+					and (new_queue[i].pos < 0
+					or battlefield[new_queue[i].pos] == null)):
+				continue
+			if new_queue[i].id == id and !(is_next_turn_icon and new_turn):
+				CombatAnimations.add_new_data({
+					node = queue_icon, time = turns,
+					type = 'order_move', slot = 'order',
+					params = {new_x = turn_order_step * i}})
+				if !new_queue[i].has("next_turn"):
+					var person = get_char_by_pos(new_queue[i].pos)
+					var hp_bar = queue_icon.get_node('hpbar')
+					if hp_bar.value != person.hp:
+						CombatAnimations.add_new_data({
+							node = hp_bar, time = turns,
+							type = 'bar_val_change', slot = 'order',
+							params = {value = person.hp}})
+				moved = true
+		if !moved:
+			queue_icon.set_meta("marked_to_remove", true)
+			CombatAnimations.add_new_data({
+				node = queue_icon, time = turns,
+				type = 'order_remove', slot = 'order',
+				params = {parent = self}})
+	for i in range(new_queue.size()):
+		var is_next_turn_icon = new_queue[i].has("next_turn")
+		if (!is_next_turn_icon
+				and (new_queue[i].pos < 0
+				or battlefield[new_queue[i].pos] == null)):
+			continue
+		var has_icon = false
+		for queue_icon in old_queue:
+			if (!queue_icon.visible
+					or queue_icon.get_meta("marked_to_remove", false)
+					or !is_instance_valid(queue_icon)):
+				continue
+			if new_queue[i].id == queue_icon.get_meta("id") and !(is_next_turn_icon and new_turn):
+				has_icon = true
+				break
+		if !has_icon:
+			var new_icon = make_new_queue_icon(new_queue[i], i)
+			CombatAnimations.add_new_data({
+				node = new_icon, time = turns,
+				type = 'order_add', slot = 'order',
+				params = {}})
 	
-	yield(get_tree(), 'idle_frame')
-	var queue_cont = $Panel4/VBoxContainer
-	queue_cont.rect_scale.x = 1.0
-	if queue_cont.rect_size.x > queue_size_max:
-		queue_cont.rect_scale.x -= (queue_cont.rect_size.x - queue_size_max) / queue_cont.rect_size.x
+#	var data = {node = self, time = turns, type = 'order', slot = 'order', params = {queue = turnorder.duplicate(), next_queue = next_turnorder.duplicate(), current = currentactor}}
+#	CombatAnimations.add_new_data(data)
+
+func make_new_queue_icon(order_entry, order_num):
+	var tmp = input_handler.DuplicateContainerTemplate(turnorder_cont, 'Button')
+	tmp.rect_position.x = turn_order_step * order_num
+	tmp.set_meta("id", order_entry.id)
+	if order_entry.has("next_turn"):
+		tmp.get_node('icon').texture = load("res://assets/Textures_v2/craft/exchant.png")
+		tmp.get_node('hpbar').hide()
+		return tmp
+	var person = get_char_by_pos(order_entry.pos)
+	if order_entry.pos > 6:
+		tmp.disabled = true
+	var icon = person.get_icon()
+	if icon != null:
+		tmp.get_node('icon').texture = icon
+	if person.combatgroup == 'enemy':
+		tmp.self_modulate = Color(1.0,0.5,0.5,1.0)
+	else:
+		tmp.self_modulate = Color(0.5,1.0,0.5,1.0)
+	tmp.get_node('hpbar').max_value = person.get_stat('hpmax')
+	tmp.get_node('hpbar').value = person.hp
+	tmp.connect("mouse_entered", self, 'FighterMouseOver', [person.id, true])
+	tmp.connect("mouse_exited", self, 'FighterMouseOverFinish', [person.id])
+	tmp.rect_position.x = turn_order_step * order_num
+	return tmp
+
+func remove_queue_icon(node):
+	#probably should do it by id instead of object, but this will do for now
+	node.queue_free()
+
+#func update_queue(queue, next_queue, current): #don't call in asynchroned state
+#	var container = $Panel4/container/VBoxContainer
+#	input_handler.ClearContainer(container)
+#
+#	for ch in [{pos = current}] + queue + [{next_turn = true}] + next_queue:
+#		if ch.has("next_turn"):
+#			var tmp = input_handler.DuplicateContainerTemplate(container, 'Button')
+#			tmp.get_node('icon').texture = load("res://assets/Textures_v2/craft/exchant.png")
+#			tmp.get_node('hpbar').hide()
+#			continue
+#		if ch.pos < 0 : continue
+#		if battlefield[ch.pos] == null:
+#			continue
+#		var person = get_char_by_pos(ch.pos)
+#		var tmp = input_handler.DuplicateContainerTemplate(container, 'Button')
+#		if ch.pos > 6:
+#			tmp.disabled = true
+#		var icon = person.get_icon()
+#		if icon != null:
+#			tmp.get_node('icon').texture = icon
+#		if person.combatgroup == 'enemy':
+#			tmp.self_modulate = Color(1.0,0.5,0.5,1.0)
+#		else:
+#			tmp.self_modulate = Color(0.5,1.0,0.5,1.0)
+#		tmp.get_node('hpbar').max_value = person.get_stat('hpmax')
+#		tmp.get_node('hpbar').value = person.hp
+#		tmp.connect("mouse_entered", self, 'FighterMouseOver', [person.id, true])
+#		tmp.connect("mouse_exited", self, 'FighterMouseOverFinish', [person.id])
+	
+#	yield(get_tree(), 'idle_frame')
+#	var queue_cont = $Panel4/VBoxContainer
+#	queue_cont.rect_scale.x = 1.0
+#	if queue_cont.rect_size.x > queue_size_max:
+#		queue_cont.rect_scale.x -= (queue_cont.rect_size.x - queue_size_max) / queue_cont.rect_size.x
 
 
 var active_position
@@ -2060,3 +2214,10 @@ func hide_popup_skill():
 
 func get_current_actor():#for external use
 	return get_char_by_pos(currentactor)
+
+func make_order_id():
+	last_order_id += 1
+	if last_order_id > 10000:
+		last_order_id = 0
+	return last_order_id
+

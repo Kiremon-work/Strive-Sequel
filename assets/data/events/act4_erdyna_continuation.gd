@@ -3,7 +3,7 @@ extends Reference
 var data = {
 	emp_erdyna_followup_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene"],
 		reqs = [],
@@ -25,7 +25,7 @@ var data = {
 	},
 	emp_erdyna_followup_later = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_ERDYNA_FOLLOWUP_LATER",
@@ -41,7 +41,7 @@ var data = {
 	},
 	emp_erdyna_hideout_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene"],
 		reqs = [],
@@ -57,7 +57,7 @@ var data = {
 	},
 	emp_erdyna_hideout_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene",'master_translate'],
 		reqs = [],
 		text = "ACT4_ERDYNA_HIDEOUT_2",
@@ -72,7 +72,7 @@ var data = {
 	},
 	emp_erdyna_hideout_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate"],
 		reqs = [],
 		text = [
@@ -121,7 +121,7 @@ var data = {
 	},
 	emp_erdyna_paul_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_ERDYNA_PAUL_1",
@@ -136,7 +136,7 @@ var data = {
 	},
 	emp_erdyna_paul_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_ERDYNA_PAUL_2",
@@ -151,7 +151,7 @@ var data = {
 	},
 	emp_erdyna_paul_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "blackscreen_transition_common"],
 		reqs = [],
 		text = "ACT4_ERDYNA_PAUL_3",
@@ -172,7 +172,7 @@ var data = {
 		image = null,
 		music = "dungeon",
 		character = "senerus",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_SENERUS_HOME_1",
@@ -188,7 +188,7 @@ var data = {
 	emp_senerus_home_2 = {
 		image = null,
 		character = "senerus",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_SENERUS_HOME_2",
@@ -205,7 +205,7 @@ var data = {
 	emp_senerus_home_3 = {
 		image = null,
 		character = "senerus",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_SENERUS_HOME_3",
@@ -221,7 +221,7 @@ var data = {
 	emp_senerus_home_4 = {
 		image = null,
 		character = "senerus",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_SENERUS_HOME_4",
@@ -378,7 +378,7 @@ var data = {
 				code = "emp_senerus_gods",
 				text = "ACT4_SENERUS_HUB_OPTION_GODS",
 				reqs = [],
-				dialogue_argument = 3
+				dialogue_argument = 0
 			},
 			{
 				code = "emp_senerus_champions",
@@ -438,10 +438,11 @@ var data = {
 				reqs = [],
 				previous_dialogue_option = 5
 			},
-			{
-				text = "ACT4_SENERUS_GODS_6",
-				reqs = []
-			}
+#			Depricated as useless
+#			{ 
+#				text = "ACT4_SENERUS_GODS_6",
+#				reqs = []
+#			}
 		],
 		options = [
 			{
@@ -551,7 +552,7 @@ var data = {
 	emp_senerus_artifact_lead = {
 		image = null,
 		character = "senerus",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_SENERUS_ARTIFACT_LEAD",
@@ -571,7 +572,7 @@ var data = {
 	},
 	emp_catacomb_entry_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "dungeon",
 		tags = ["dialogue_scene"],
 		reqs = [],
@@ -587,7 +588,7 @@ var data = {
 	},
 	emp_catacomb_entry_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate"],
 		reqs = [],
 		text = "ACT4_CATACOMB_ENTRY_2",
@@ -602,7 +603,7 @@ var data = {
 	},
 	emp_catacomb_entry_2b = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate"],
 		reqs = [],
 		text = "ACT4_CATACOMB_ENTRY_2B",
@@ -632,7 +633,7 @@ var data = {
 	},
 	emp_catacomb_entry_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = [
@@ -693,7 +694,7 @@ var data = {
 	},
 	emp_catacomb_intimidated_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_CATACOMB_INTIMIDATED_1",
@@ -708,7 +709,7 @@ var data = {
 	},
 	emp_catacomb_after_fight = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "dungeon",
 		tags = ["dialogue_scene"],
 		reqs = [],
@@ -755,8 +756,8 @@ var data = {
 	},
 	emp_catacomb_doors_heleviel_intro = {
 		image = null,
-		character = "heleviel",
-		character2 = "erdyna",
+		character = "$heleviel",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_CATACOMB_DOORS_HELEVIEL_0",
@@ -766,8 +767,8 @@ var data = {
 	},
 	emp_catacomb_doors_heleviel = {
 		image = null,
-		character = "heleviel",
-		character2 = "erdyna",
+		character = "$heleviel",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = [
@@ -823,7 +824,7 @@ var data = {
 	},
 	emp_catacomb_doors_myr = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = "ACT4_CATACOMB_DOORS_MYR",
@@ -901,7 +902,7 @@ var data = {
 	},
 	emp_myr_catacomb_followup = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = [
@@ -932,7 +933,7 @@ var data = {
 	},
 	emp_myr_catacomb_reply = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene"],
 		reqs = [],
 		text = [
@@ -963,7 +964,7 @@ var data = {
 	},
 	act4_erdyna_lineage_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -979,7 +980,7 @@ var data = {
 	},
 	act4_erdyna_lineage_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_ERDYNA_LINEAGE_2",
@@ -999,7 +1000,7 @@ var data = {
 	},
 	act4_erdyna_visit_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1037,7 +1038,7 @@ var data = {
 	},
 	act4_erdyna_visit_entry_reply = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		character2 = "vaeloria",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1083,7 +1084,7 @@ var data = {
 	},
 	act4_erdyna_ward_reply = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		character2 = "vaeloria",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1125,7 +1126,7 @@ var data = {
 	},
 	act4_erdyna_negotiate_intro = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		character2 = "vaeloria",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1141,7 +1142,7 @@ var data = {
 	},
 	act4_erdyna_negotiate_hub = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		character2 = "vaeloria",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1237,7 +1238,7 @@ var data = {
 	act4_erdyna_fight_entry = {
 		image = null,
 		character = "vaeloria",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		music = "threat",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1289,7 +1290,7 @@ var data = {
 	},
 	act4_erdyna_fight_win_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_ERDYNA_FIGHT_WIN_3",
@@ -1504,7 +1505,7 @@ var data = {
 	act4_3_erdyna_released_1 = {
 		image = null,
 		character = "vaeloria",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_RELEASED_1",
@@ -1520,7 +1521,7 @@ var data = {
 	act4_3_erdyna_released_2 = {
 		image = null,
 		character = "vaeloria",
-		character2 = "erdyna",
+		character2 = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_RELEASED_2",
@@ -1535,7 +1536,7 @@ var data = {
 	},
 	act4_3_erdyna_released_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "blackscreen_transition_common", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1551,7 +1552,7 @@ var data = {
 	},
 	act4_erdyna_after_leave_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -1567,7 +1568,7 @@ var data = {
 	},
 	act4_erdyna_after_leave_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_ERDYNA_AFTER_LEAVE_2",
@@ -1634,7 +1635,7 @@ var data = {
 	},
 	act4_erdyna_after_leave_reveal_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_ERDYNA_AFTER_LEAVE_REVEAL_ANY_2",
@@ -1649,7 +1650,7 @@ var data = {
 	},
 	act4_erdyna_after_leave_hub = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = [
@@ -1713,7 +1714,7 @@ var data = {
 	},
 	act4_erdyna_campfire_nonflirt = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate"],
 		reqs = [],
 		text = "ERDYNA_CAMPFIRE_EPILOGUE_NONFLIRT",
@@ -1731,7 +1732,7 @@ var data = {
 			{
 				reqs = [{type = "master_check", value = [{code = "stat", stat = "sexuals_factor", operant = "gte", value = 5}]}],
 				image = null,
-				character = "erdyna",
+				character = "$erdyna",
 				tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 				text = "ACT4_ERDYNA_AFTER_LEAVE_HUB_4_SUCCESS",
 				options = [
@@ -1746,7 +1747,7 @@ var data = {
 			{
 				reqs = [{type = "master_check", value = [{code = "stat", stat = "sexuals_factor", operant = "lt", value = 5}]}],
 				image = null,
-				character = "erdyna",
+				character = "$erdyna",
 				tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 				text = "ACT4_ERDYNA_AFTER_LEAVE_HUB_4_FAIL",
 				options = [
@@ -1991,7 +1992,7 @@ var data = {
 	},
 	erdyna_capital_return_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2007,7 +2008,7 @@ var data = {
 	},
 	erdyna_capital_return_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_CAPITAL_RETURN_2",
@@ -2022,7 +2023,7 @@ var data = {
 	},
 	erdyna_capital_return_3 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_CAPITAL_RETURN_3",
@@ -2050,7 +2051,7 @@ var data = {
 	},
 	erdyna_capital_return_help = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_CAPITAL_RETURN_HELP",
@@ -2069,7 +2070,7 @@ var data = {
 	},
 	erdyna_capital_return_physics = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = [
@@ -2140,7 +2141,7 @@ var data = {
 	},
 	erdyna_capital_return_leave = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_CAPITAL_RETURN_LEAVE",
@@ -2160,7 +2161,7 @@ var data = {
 	},
 	erdyna_old_hideout_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2176,7 +2177,7 @@ var data = {
 	},
 	erdyna_old_hideout_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_OLD_HIDEOUT_2",
@@ -2203,7 +2204,7 @@ var data = {
 	},
 	erdyna_old_hideout_move = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_ERDYNA_OLD_HIDEOUT_MOVE",
@@ -2223,7 +2224,7 @@ var data = {
 	},
 	red_rooks_old_fort_complete_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "threat",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2239,7 +2240,7 @@ var data = {
 	},
 	red_rooks_old_fort_complete_1b = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "threat",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2255,7 +2256,7 @@ var data = {
 	},
 	red_rooks_old_fort_complete_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_COMPLETE_2",
@@ -2270,7 +2271,7 @@ var data = {
 	},
 	red_rooks_old_fort_complete_2b = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_COMPLETE_2B",
@@ -2291,7 +2292,7 @@ var data = {
 	},
 	red_rooks_betrayal_entry = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "threat",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2308,11 +2309,12 @@ var data = {
 	},
 	red_rooks_betrayal_win_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "tragic",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_BETRAYAL_WIN",
+		common_effects = [{code = "money_change", operant = "+", value = 1000}],
 		options = [
 			{
 				code = "close",
@@ -2320,7 +2322,6 @@ var data = {
 				reqs = [],
 				type = "next_dialogue",
 				bonus_effects = [
-					{code = "money_change", operant = "+", value = 1000},
 					{code = "make_story_character", value = "Erdyna", recruit_from_location = true},
 					{code = "affect_unique_character", name = "erdyna", type = "slavetype", value = "slave"},
 					{code = "unique_character_changes", value = "erdyna", args = [
@@ -2336,7 +2337,7 @@ var data = {
 	},
 	red_rooks_leader_refuse = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_REFUSE",
@@ -2352,7 +2353,7 @@ var data = {
 	},
 	red_rooks_leader_win_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2363,16 +2364,23 @@ var data = {
 				text = "DIALOGUECONTINUE",
 				reqs = [],
 				type = "next_dialogue",
-				bonus_effects = [{code = "screen_black_transition", value = 1}]
+				bonus_effects = [
+					{code = "make_story_character", value = "Erdyna", recruit_from_location = true},
+					{code = "screen_black_transition", value = 1}
+				]
 			}
 		]
 	},
 	red_rooks_leader_win_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "blackscreen_transition_common", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_LEADER_WIN_2",
+		common_effects = [{code = "unique_character_changes", value = "erdyna", args = [
+			{code = "add_trait", trait = "training_obedience"},
+			{code = "add_trait", trait = "training_s_combat"}
+		]}],
 		options = [
 			{
 				code = "close",
@@ -2381,12 +2389,9 @@ var data = {
 				type = "next_dialogue",
 				bonus_effects = [
 					{code = "decision", value = "ErdynaBandRescued"},
-					{code = "make_story_character", value = "Erdyna", recruit_from_location = true},
 					{code = "unique_character_changes", value = "erdyna", args = [
 						{code = "take_virginity", type = "vaginal", partner = "master"},
-						{code = "remove_combat_skill", skill = "fly_evasion"},
-						{code = "add_trait", trait = "training_obedience"},
-						{code = "add_trait", trait = "training_s_combat"}
+						{code = "remove_combat_skill", skill = "fly_evasion"}
 					]},
 					{code = "progress_quest", value = "erdyna_quest", stage = "catacombs_opened"},
 					{code = "set_completed_active_location"},
@@ -2401,11 +2406,8 @@ var data = {
 				type = "next_dialogue",
 				bonus_effects = [
 					{code = "decision", value = "ErdynaBandRescued"},
-					{code = "make_story_character", value = "Erdyna", recruit_from_location = true},
 					{code = "unique_character_changes", value = "erdyna", args = [
-						{code = "remove_combat_skill", skill = "fly_evasion"},
-						{code = "add_trait", trait = "training_obedience"},
-						{code = "add_trait", trait = "training_s_combat"}
+						{code = "remove_combat_skill", skill = "fly_evasion"}
 					]},
 					{code = "progress_quest", value = "erdyna_quest", stage = "catacombs_opened"},
 					{code = "set_completed_active_location"},
@@ -2446,7 +2448,7 @@ var data = {
 	},
 	act4_3_sealed_doors_erdyna_1 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "dungeon",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
@@ -2462,7 +2464,7 @@ var data = {
 	},
 	act4_3_sealed_doors_erdyna_2 = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],
 		text = "ACT4_3_SEALED_DOORS_ERDYNA_2",
@@ -2556,7 +2558,7 @@ var data = {
 	},
 	act4_3_artifact_found_erdyna = {
 		image = null,
-		character = "erdyna",
+		character = "$erdyna",
 		music = "erdyna_theme",
 		tags = ["dialogue_scene", "master_translate", "act4_erdyna"],
 		reqs = [],

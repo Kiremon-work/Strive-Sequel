@@ -160,7 +160,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = 'kuro',
+		character = '$kuro',
 		start_dialogue_option = 9,
 		text = [
 			{
@@ -220,7 +220,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = 'kuro',
+		character = '$kuro',
 		text = [
 			{
 				text = "KURO_HIDEOUT_REPLY_SURE",
@@ -291,7 +291,7 @@ var data = {
 				tags = [
 					"dialogue_scene"
 				],
-				character = 'kuro',
+				character = '$kuro',
 				common_effects = [
 					{
 						code = "remove_decision",
@@ -408,7 +408,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = 'kuro',
+		character = '$kuro',
 		common_effects = [
 			{
 				code = "add_special_task_for_location",
@@ -467,7 +467,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = 'kuro',
+		character = '$kuro',
 		common_effects = [
 			{
 				code = "add_special_task_for_location",
@@ -566,7 +566,7 @@ var data = {
 			"dialogue_scene",
 			"master_translate"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_HIDEOUT_MEDIUM",
@@ -595,7 +595,7 @@ var data = {
 			"dialogue_scene",
 			"master_translate"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_HIDEOUT_MEDIUM2",
@@ -623,7 +623,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_HIDEOUT_MEDIUM3",
@@ -651,7 +651,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_HIDEOUT_MEDIUM4",
@@ -720,6 +720,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -10}
 				]
 			},
 			{
@@ -729,6 +732,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = 10}
 				]
 			},
 		]
@@ -757,6 +763,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -20}
 				]
 			},
 			{
@@ -1005,7 +1014,7 @@ var data = {
 				value = true
 			}
 		],
-		character = "kuro",
+		character = "$kuro",
 		dialogue_type = 1,
 		text = [
 			{
@@ -1061,7 +1070,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_BACK_START2",
@@ -1089,7 +1098,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_BACK_START3",
@@ -1117,7 +1126,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_BACK_START4",
@@ -1214,7 +1223,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_BACK_REPLY_ALL",
@@ -1280,7 +1289,7 @@ var data = {
 				value = true
 			}
 		],
-		character = "kuro",
+		character = "$kuro",
 		dialogue_type = 1,
 		text = [
 			{
@@ -1318,7 +1327,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_MANSION_EXPLAIN",
@@ -1355,7 +1364,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_MANSION_NOTKILL",
@@ -1392,7 +1401,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO_MANSION_REPLY_HUMANE",

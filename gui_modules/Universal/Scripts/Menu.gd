@@ -18,6 +18,7 @@ func _ready():
 	gui_controller.add_close_button($Options)
 	gui_controller.add_close_button($Credits)
 	gui_controller.add_close_button($NewOrTutorial)
+	$ModListSafetyPopup/CloseButton.connect("pressed", $ModListSafetyPopup, "hide")
 	var buttonlist = ['continueb','newgame', 'loadwindow','options', 'credits', 'mods']
 	$version.text = "ver. " + globals.gameversion
 	input_handler.CurrentScene = self
@@ -56,7 +57,18 @@ func _ready():
 	$NewOrTutorial/ButtonR.connect("pressed", self, 'close_new_or_tutorial', [2])
 	newgame_node.get_node("NGPButton").connect("pressed", self, 'switch_ng_bonuses')
 	$Credits/Background/RichTextLabel.bbcode_text = tr("MENUCREDITSDESC")
+	call_deferred("show_mod_list_safety_message")
 	cycle_backgrounds()
+
+func show_mod_list_safety_message():
+	if modding_core.mod_list_safety_message == "":
+		return
+	var backup_path = ProjectSettings.globalize_path(modding_core.mod_list_backup_path)
+	var text = tr(modding_core.mod_list_safety_message) % [modding_core.mod_list_backup_version, globals.gameversion, backup_path]
+	modding_core.mod_list_safety_message = ""
+	$ModListSafetyPopup/VBoxContainer/RichTextLabel.bbcode_text = globals.TextEncoder(text)
+	$ModListSafetyPopup.show()
+	$ModListSafetyPopup.raise()
 
 func cycle_backgrounds():
 	var arr = [images.get_background("forest1_menu"),

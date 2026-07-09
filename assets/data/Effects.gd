@@ -1,7 +1,7 @@
 extends Node
 
 
-var effect_nolog = ['commander', 'atkpass', 'atkpass_remove', 'hide', 'default', 'warlock', 'manasiphon', 'thorns', 'vampirism', 'ench_commander', 'spell_mastery', 'flight_upkeep', 'max_stats'] #2add more
+var effect_nolog = ['commander', 'atkpass', 'atkpass_remove', 'hide', 'default', 'warlock', 'manasiphon', 'thorns', 'vampirism', 'ench_commander', 'spell_mastery', 'flight_upkeep', 'max_stats','sanguine_instinct_listener'] #2add more
 #to fix EFFECT TAGS TO TEMPLATE,
 #'positive'/'negative' - the widest classification (to most global cleaning like bard2 skill effect)
 #'buff'/'debuff' - additional markings for common effect removal effects (like purge) (and maybe add two more for a state effects)
@@ -168,6 +168,56 @@ var effect_table = {
 			tags = ['show_in_traits', 'mansion_only']
 		}
 		],
+		sub_effects = [],
+	},
+	e_standing_love_pest = {
+		type = 'simple',
+		descript = '',
+		conditions = [
+			{code = 'stat', stat = 'affection', operant = 'gte', value = 50},
+			{code = 'stat', stat = 'respect', operant = 'lte', value = -50},
+		],
+		statchanges = {},
+		tags = ['standing_love_pest', 'hide_from_stat_breakdown'],
+		buffs = [],
+		sub_effects = [],
+	},
+	e_standing_housemate = {
+		type = 'simple',
+		descript = '',
+		conditions = [
+			{code = 'stat', stat = 'affection', operant = 'gt', value = -50},
+			{code = 'stat', stat = 'affection', operant = 'lt', value = 50},
+			{code = 'stat', stat = 'respect', operant = 'gt', value = -50},
+			{code = 'stat', stat = 'respect', operant = 'lt', value = 50},
+		],
+		statchanges = {hp_reg_add_part = 0.1, mp_reg_add_part = 0.1},
+		tags = ['standing_housemate', 'hide_from_stat_breakdown'],
+		buffs = [],
+		sub_effects = [],
+	},
+	e_standing_sworn_servant = {
+		type = 'simple',
+		descript = '',
+		conditions = [
+			{code = 'stat', stat = 'affection', operant = 'lte', value = -50},
+			{code = 'stat', stat = 'respect', operant = 'gte', value = 50},
+		],
+		statchanges = {productivity = 0.1},
+		tags = ['standing_sworn_servant', 'hide_from_stat_breakdown'],
+		buffs = [],
+		sub_effects = [],
+	},
+	e_standing_beloved = {
+		type = 'simple',
+		descript = '',
+		conditions = [
+			{code = 'stat', stat = 'affection', operant = 'gte', value = 50},
+			{code = 'stat', stat = 'respect', operant = 'gte', value = 50},
+		],
+		statchanges = {},
+		tags = ['standing_beloved', 'hide_from_stat_breakdown'],
+		buffs = [],
 		sub_effects = [],
 	},
 	

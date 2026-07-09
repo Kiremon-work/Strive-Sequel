@@ -7,7 +7,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_LETTER_1_1",
@@ -32,7 +32,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = 15}
+				]
 			},
 			{
 				code = "ana_letter_2",
@@ -50,7 +53,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -20}
+				]
 			},
 			{
 				code = "ana_letter_1",
@@ -80,7 +86,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_LETTER_END",
@@ -109,7 +115,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_LETTER_2_1",
@@ -521,7 +527,9 @@ var data = {
 					{
 						code = "decision",
 						value = "ana_soldier_saved"
-					}
+					},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = 25},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = 20}
 				]
 			},
 			{
@@ -534,7 +542,9 @@ var data = {
 					{
 						code = "decision",
 						value = "ana_soldier_left"
-					}
+					},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -10},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = -10}
 				]
 			},
 			{
@@ -547,7 +557,9 @@ var data = {
 					{
 						code = "decision",
 						value = "ana_soldier_killed"
-					}
+					},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -30},
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = -25}
 				]
 			}
 		],
@@ -727,7 +739,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_RETURN_1",
@@ -774,7 +786,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_RETURN_2_1",
@@ -857,7 +869,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_RETURN_3_1",
@@ -867,6 +879,9 @@ var data = {
 						check = true,
 						value = "ana_liora_good"
 					}
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = 15}
 				]
 			},
 			{
@@ -877,6 +892,9 @@ var data = {
 						check = true,
 						value = "ana_liora_bad"
 					}
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -15}
 				]
 			}
 		],
@@ -888,7 +906,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = 10}
+				]
 			},
 			{
 				code = "anastasia_return_5",
@@ -897,7 +918,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -15}
+				]
 			}
 		]
 	},
@@ -910,7 +934,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_RETURN_4",
@@ -965,7 +989,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_RETURN_5",
@@ -1003,7 +1027,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_PT2_1_1",
@@ -1065,7 +1089,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANASTASIA_PT2_2",
@@ -1118,7 +1142,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = -10}
+				]
 			},
 			{
 				code = "ana_duncan_2",
@@ -1127,7 +1154,10 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				previous_dialogue_option = 1
+				previous_dialogue_option = 1,
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = 15}
+				]
 			}
 		]
 	},
@@ -1230,7 +1260,10 @@ var data = {
 					}
 				],
 				dialogue_argument = 2,
-				remove_after_first_use = true
+				remove_after_first_use = true,
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = -15}
+				]
 			},
 			{
 				code = "ana_duncan_3",
@@ -1247,7 +1280,10 @@ var data = {
 					}
 				],
 				dialogue_argument = 3,
-				remove_after_first_use = true
+				remove_after_first_use = true,
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "respect", value = 15}
+				]
 			},
 			{
 				code = "ana_duncan_4",
@@ -1355,7 +1391,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_TRAVEL_INITIATE",
@@ -1462,7 +1498,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_3",
@@ -1491,7 +1527,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_4",
@@ -1521,7 +1557,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_5",
@@ -1538,7 +1574,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = 20}
+				]
 			},
 			{
 				code = "ana_fort_7",
@@ -1547,7 +1586,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "anastasia", type = "stat", stat = "affection", value = -15}
+				]
 			}
 		]
 	},
@@ -1560,7 +1602,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_6",
@@ -1596,7 +1638,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_7",
@@ -1627,7 +1669,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_8",
@@ -1725,7 +1767,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_11",
@@ -1763,7 +1805,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FORT_12",
@@ -1808,7 +1850,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		character2 = "duncan",
 		text = [
 			{
@@ -1840,7 +1882,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		character2 = "duncan",
 		text = [
 			{
@@ -1891,7 +1933,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "anastasia",
+		character = "$anastasia",
 		text = [
 			{
 				text = "ANA_FINAL_3",

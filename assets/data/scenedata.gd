@@ -3006,6 +3006,31 @@ var quests = {
 			act4_continue = {code = 'act4_continue', name = 'ACT_4_CAPITAL_NAME', descript = 'ACT_4_CONTINUE'}
 		}
 	},
+	sebastian_railroad_quest = {
+		code = 'sebastian_railroad_quest',
+		summary = 'ACT4_SEBASTIAN_RAILROAD_SUMMARY',
+		stages = {
+			find_technician = {code = 'find_technician', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN'},
+			report_technician = {code = 'report_technician', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_REPORT_TECHNICIAN'},
+			wait_preparation = {code = 'wait_preparation', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_WAIT_PREPARATION'},
+			investigate_trouble = {code = 'investigate_trouble', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_INVESTIGATE_TROUBLE'},
+			investigate_kharzug = {code = 'investigate_kharzug', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_INVESTIGATE_KHARZUG'},
+			clear_lower_tomb = {code = 'clear_lower_tomb', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_CLEAR_LOWER_TOMB'},
+			return_to_technician = {code = 'return_to_technician', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_RETURN_TO_TECHNICIAN'},
+			report_kharzug = {code = 'report_kharzug', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_REPORT_KHARZUG'},
+			speak_to_church = {code = 'speak_to_church', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_SPEAK_TO_CHURCH'},
+			return_ginny_refusal = {code = 'return_ginny_refusal', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_RETURN_GINNY_REFUSAL'},
+			offer_alternative_site = {code = 'offer_alternative_site', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_OFFER_ALTERNATIVE_SITE'},
+			persuade_parishioners = {code = 'persuade_parishioners', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_PERSUADE_PARISHIONERS'},
+			parishioners_persuaded = {code = 'parishioners_persuaded', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_PARISHIONERS_PERSUADED'},
+			new_church_site = {code = 'new_church_site', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_NEW_CHURCH_SITE'},
+			find_warehouse_owner = {code = 'find_warehouse_owner', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_FIND_WAREHOUSE_OWNER'},
+			buy_warehouse = {code = 'buy_warehouse', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_BUY_WAREHOUSE'},
+			report_warehouse_solution = {code = 'report_warehouse_solution', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_REPORT_WAREHOUSE_SOLUTION'},
+			sebastian_route_complete = {code = 'sebastian_route_complete', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION'},
+			church_protected_complete = {code = 'church_protected_complete', name = 'ACT4_SEBASTIAN_RAILROAD_NAME', descript = 'ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION'},
+		}
+	},
 	erdyna_quest = {
 		code = 'erdyna_quest',
 		summary = 'ACT4_ERDYNA_QUEST_SUMMARY',

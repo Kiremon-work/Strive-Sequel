@@ -735,10 +735,10 @@ func test_mode():
 				{code = 'make_story_character', value = 'Heleviel'},
 				{code = 'make_story_character', value = 'Jean'},
 				{code = 'make_story_character', value = 'Zephyra'},
-				{code = 'make_story_character', value = 'Lira'},
+				{code = 'make_story_character', value = 'Mae'},
 				{code = 'make_story_character', value = 'Kuro'},
-				{code = 'make_story_character', value = 'Rouge'},
-				{code = 'make_story_character', value = 'Amelia'},
+				{code = 'make_story_character', value = 'Lilia'},
+				{code = 'make_story_character', value = 'Anastasia'},
 				{code = 'affect_unique_character', name = 'mae', type = 'add_trait', trait = 'spirit_owl'},
 				{code = 'affect_unique_character', name = 'lilia', type = 'turn_into_unique', value = 'Lilith'},
 			]
@@ -755,7 +755,7 @@ func test_mode():
 		globals.AddItemToInventory(globals.CreateGearItem("mask", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("foxmask", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("service_suit", {}))
-		globals.AddItemToInventory(globals.CreateGearItem("hector_armor", {}))
+		globals.AddItemToInventory(globals.CreateGearItem("lacy_underwear", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("jacket", {}))
 		var titem = globals.CreateGearItem("cali_heirloom_test", {})
 		titem.set_quality_level('legendary')

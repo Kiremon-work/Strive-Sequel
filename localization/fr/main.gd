@@ -24,6 +24,7 @@ var TranslationDict = {
 	MENUGALLERY = "Galerie",
 	MENUQUIT = "Quitter",
 	MENUCHANGELOG = "Journal des modifications",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	#Gallery
 	GALLERYNAME = "Galerie",
 	GALLERYSTORY = "Histoire",
@@ -47,6 +48,12 @@ var TranslationDict = {
 	MODCLOSE = "Fermer",
 	MODSORT = "Tri",
 	MODOPENEDITOR = "Open Editor (Alpha Version)",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	#MENUCREDITS
 	MENUCREDITSNAME = "Crédits",
 	MENUCREDITSDESC = """Game design, écriture, programmation : Maverik /
@@ -530,6 +537,9 @@ var TranslationDict = {
 	
 	MONEYTOOLTIP = "Argent en possession",
 	MONEYTOOLTIP2 = "Impôts hebdomadaires",
+	UPGRADETAXTOOLTIP = """Upgrade Taxes""", # MISSING TRANSLATION
+	CHARACTERUPKEEPTOOLTIP = """Character Upkeep""", # MISSING TRANSLATION
+	TOTALUPKEEPTOOLTIP = """Total Upkeep""", # MISSING TRANSLATION
 	
 	PAUSEMENUSAVE = "Sauvegarder",
 	PAUSEMENULOAD = "Charger",
@@ -2550,6 +2560,10 @@ Damage +15%, Health +20.""", # MISSING TRANSLATION
 	STATOBEDIENCEDESCRIPT = "L'obéissance est la volonté d'un personnage d'obéir à vos ordres. L'obéissance s'acquiert en utilisant les compétences sociales. Lorsqu'elle est épuisée, le personnage peut s'échapper et sera perdu dans ce cas. ",
 	STATLOYALTY = "Loyauté",
 	STATLOYALTYDESCRIPT = "Les points de loyauté vous permettent de débloquer de nouvelles capacités pour vos serviteurs. La loyauté est acquise passivement en fonction du facteur d'apprivoisement du personnage, mais peut également être améliorée par des rendez-vous et l'utilisation de compétences sociales.",
+	STATAFFECTION = """Affection""", # MISSING TRANSLATION
+	STATAFFECTIONDESCRIPT = """Affection represents how positively or negatively this character feels about you.""", # MISSING TRANSLATION
+	STATRESPECT = """Respect""", # MISSING TRANSLATION
+	STATRESPECTDESCRIPT = """Respect represents how highly or poorly this character regards you.""", # MISSING TRANSLATION
 	STATRESISTANCE = """Resistance""", # MISSING TRANSLATION
 	STATRESISTANCEDESCRIPT = """Resistance DESCRIPT PLACEHOLDER.""", # MISSING TRANSLATION
 	STATSUBMISSION = "Soumission",#Obsolete
@@ -2721,7 +2735,7 @@ Damage +15%, Health +20.""", # MISSING TRANSLATION
 	FAMEDESC_PRICE_BONUS = """Character's Value""", # MISSING TRANSLATION
 	FAMEDESC_UPKEEP = """Subordinate weekly upkeep""", # MISSING TRANSLATION
 	FAMEDESC_LOYALTY_BONUS = """Loyalty for trainee""", # MISSING TRANSLATION
-	FAMEDESC_RECRUIT_BONUS = """Recruitment efficiency""", # MISSING TRANSLATION
+	FAMEDESC_MANHUNT_BONUS = """Manhunt bonus""", # MISSING TRANSLATION
 	PRICEDESC_TRAITS_POS = """Positive traits""", # MISSING TRANSLATION
 	PRICEDESC_TRAITS_NEG = """Negative traits""", # MISSING TRANSLATION
 	PRICEDESC_CUMULATIVE = """Cumulative bonus %s of""", # MISSING TRANSLATION
@@ -3059,6 +3073,10 @@ Damage +15%, Health +20.""", # MISSING TRANSLATION
 	SKILLPUBLICSEXHUMILIATIONDESCRIPT = "Catégorie : {color=pink|Lewd}\nMise en place d'une humiliation sexuelle publique pour la cible sélectionnée, améliorant le comportement de la cible et des spectateurs et procurant un peu de Lust à tous les observateurs. \nEffets de base : \nLoyauté : +10 (la moitié pour les spectateurs), Volupté : +15, Obéissance maximale",
 	SKILLPUBLICEXECUTION = "Exécution publique",
 	SKILLPUBLICEXECUTIONDESCRIPT = "Catégorie : {color=red|Mean}\nExécute le personnage sélectionné. Améliore grandement l'obéissance de toutes les personnes impliquées. \nEffets de base : \nLoyauté : +25, Améliore l'obéissance",
+	SKILLCLASS_COPY = """Universal Aptitude""", # MISSING TRANSLATION
+	SKILLCLASS_COPYDESCRIPT = """Select a character to get it's specific racial class.""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT = """Select a class for [name] to learn from [targetname].""", # MISSING TRANSLATION
+	DIALOGUECLASS_COPYREPORT_FAILED = """No class for [name] to learn from [targetname].""", # MISSING TRANSLATION
 	SKILLENTHRALL = """Enthrall""", # MISSING TRANSLATION
 	SKILLENTHRALLDESCRIPT = """Select a character to make them into a Thrall of a caster. Each Thrall increases maximum Lust, Lust regeneration and provides unlock ponts.""", # MISSING TRANSLATION
 	DIALOGUEENTHRALLREPORT = """[targetname] has been successfully enthralled by [name]. [targetname] feels completely enarmoured with [him].""", # MISSING TRANSLATION
@@ -3542,6 +3560,7 @@ Only one attunement can be taken""", # MISSING TRANSLATION
 	TRAITEFFECTRAREDEADLY = "Rare : Mortel Augmentation des dégâts et de la vitesse",
 	TRAITEFFECTRAREPRECISE = "Rare : Précision : Evasion, Hitrate et MDEF accrus",
 	TRAITEFFECTRARETOUGH = "Rare : Rugosité : Augmentation des points de vie, de la DEF et de la MDEF",
+	TRAITMONSTER_MASTERY_WARFARE = """Warfare Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_WARFAREDESCRIPT = """Warfare Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_PROTECTIONDESCRIPT = """Protection Mastery""", # MISSING TRANSLATION
 	TRAITMONSTER_MASTERY_STEALTHDESCRIPT = """Stealth Mastery""", # MISSING TRANSLATION
@@ -5912,6 +5931,9 @@ The woman disappears as quickly as she appeared before you, leaving you in front
 	ENEMYKURDAN = "Kurdan",
 	
 	ENEMYLEON = "Léon",
+	ENEMYFAT_BANDIT = """Fat Bandit""", # MISSING TRANSLATION
+	ENEMYREDHEAD_BOSS_BANDIT = """Bandit Leader""", # MISSING TRANSLATION
+	ENEMYSMALL_BANDIT = """Small Bandit""", # MISSING TRANSLATION
 	ENEMYLILITH_BOSS_1 = """Ashmedai""", # MISSING TRANSLATION
 	ENEMYLILITH_BOSS_2 = """Ashmedai""", # MISSING TRANSLATION
 	ENEMYWHITE_STAG = "Cerf blanc",
@@ -20647,6 +20669,22 @@ Authority: +""", # MISSING TRANSLATION
 ##	RENDEZ-VOUS_AUTHORITÉ_BONUS_2 = "\nSatisfaits du temps p
 #	RENCONTRE_AUTHORITÉ_1 = "\nAutorité : +",
 	DATING_PHYSF_BONUS_2 = "\nBien que cette expérience ait été désagréable pour [name], elle lui apprendra certainement à avoir peur de votre colère",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""", # MISSING TRANSLATION
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""", # MISSING TRANSLATION
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""", # MISSING TRANSLATION
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""", # MISSING TRANSLATION
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""", # MISSING TRANSLATION
 	DATING_SEX_OFFER_1 = "\n{color=green|Il semble que [name] ne veuille pas continuer cette rencontre...}",
 	DATING_CHAT_DESC_1 = "Avoir une discussion amicale. Améliore légèrement l'humeur.",
 	DATING_CHAT_1 = "Conversation",

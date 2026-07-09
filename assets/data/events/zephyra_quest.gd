@@ -9,7 +9,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		text = [
 			{
 				text = "ZEPHYRA_QUEST_1",
@@ -54,7 +54,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		text = [
 			{
 				text = "ZEPHYRA_QUEST_2",
@@ -84,7 +84,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		character2 = "ginny",
 		custom_background = "church_event",
 		text = [
@@ -115,7 +115,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		character2 = "ginny",
 		custom_background = "church_event",
 		text = [
@@ -156,7 +156,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		character2 = "ginny",
 		custom_background = "church_event",
 		text = [
@@ -196,7 +196,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -226,7 +226,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -244,7 +244,16 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = -10
+					}
+				]
 			},
 			{
 				code = "zephyra_quest_8",
@@ -253,7 +262,16 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = 15
+					}
+				]
 			},
 			{
 				code = "zephyra_quest_8",
@@ -265,7 +283,16 @@ var data = {
 					}
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = 25
+					}
+				]
 			}
 		]
 	},
@@ -289,7 +316,7 @@ var data = {
 						]
 					}
 				],
-				character = "zephyra",
+				character = "$zephyra",
 				custom_background = "church_event",
 				text = [
 					{
@@ -371,7 +398,7 @@ var data = {
 				reqs = [
 
 				],
-				character = "zephyra",
+				character = "$zephyra",
 				custom_background = "church_event",
 				text = [
 					{
@@ -455,7 +482,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		character2 = "$daisy",
 		custom_background = "church_event",
 		text = [
@@ -487,7 +514,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		character2 = "$daisy",
 		custom_background = "church_event",
 		text = [
@@ -538,7 +565,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -569,7 +596,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -608,7 +635,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -646,7 +673,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -676,7 +703,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -706,7 +733,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -737,7 +764,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -777,7 +804,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -833,7 +860,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		custom_background = "church_event",
 		text = [
 			{
@@ -892,7 +919,7 @@ var data = {
 						value = 1
 					}
 				],
-				character = "zephyra",
+				character = "$zephyra",
 				character2 = "ginny",
 				custom_background = "church_event",
 				text = [
@@ -945,7 +972,7 @@ var data = {
 				reqs = [
 
 				],
-				character = "zephyra",
+				character = "$zephyra",
 				character2 = "ginny",
 				custom_background = "church_event",
 				text = [
@@ -1203,7 +1230,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
+		character = "$zephyra",
 		text = [
 			{
 				text = "ZEPHYRA_BATH_6",
@@ -1308,8 +1335,8 @@ var data = {
 				negative = "repeat_next_day"
 			}
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_1",
@@ -1352,8 +1379,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_2",
@@ -1383,8 +1410,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_3",
@@ -1401,7 +1428,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15},
+				]
 			},
 			{
 				code = "zephyra_lilia_4_2",
@@ -1410,7 +1440,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -15},
+				]
 			},
 			{
 				code = "zephyra_lilia_4_3",
@@ -1422,7 +1455,10 @@ var data = {
 					}
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10},
+				]
 			}
 		]
 	},
@@ -1435,8 +1471,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_4_1",
@@ -1476,8 +1512,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_4_2",
@@ -1510,8 +1546,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_4_3",
@@ -1545,8 +1581,8 @@ var data = {
 		reqs = [
 
 		],
-		character = "zephyra",
-		character2 = "lilia",
+		character = "$zephyra",
+		character2 = "$lilia",
 		text = [
 			{
 				text = "ZEPHYRA_LILIA_5",

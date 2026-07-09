@@ -4,10 +4,15 @@ var version = '4.0'
 
 var modconfig_path = "user://mods.ini"
 var modfolder_path = "user://mods"
+const MOD_CONFIG_VERSION_KEY = "game_version"
+const MOD_CONFIG_MODS_KEY = "mods"
 
 var debug = false
 
 var mods_list = [] #name, data_file, config_file
+var mod_list_safety_message = ""
+var mod_list_backup_path = ""
+var mod_list_backup_version = ""
 var modules = {} #children of modding_core
 var gui_nodes = [] #tmp ResourceScripts.node_data instances
 var scripts = [] #initial scriptdict resources
@@ -167,16 +172,16 @@ func process_node_extensions_mods():
 func get_mods_list():
 	var f := File.new()
 	if !f.file_exists(modconfig_path) : 
-		f.open(modconfig_path, File.WRITE)
-		var tres = []
-		f.store_line(to_json(tres))
-		f.close()
 		mods_list.clear()
+		save_mod_config([])
 		return
 	f.open(modconfig_path, File.READ)
 	var tres = f.get_as_text()
 	f.close()
-	mods_list = parse_json(tres)
+	var parsed_config = parse_json(tres)
+	mods_list = get_mods_from_config(parsed_config)
+	if mod_list_safety_message != "":
+		return
 	var new_mods_list = []
 	check_avail()
 	for mod in mods_list:
@@ -190,13 +195,77 @@ func get_mods_list():
 
 func save_mod_list():
 	check_avail()
-	var tlist = mods_list.duplicate()
-	for f in tlist:
-		f.erase('config')
+	save_mod_config(mods_list)
+
+func save_mod_config(mods):
+	var tlist = []
+	for mod in mods:
+		if typeof(mod) != TYPE_DICTIONARY:
+			continue
+		var clean_mod = mod.duplicate(true)
+		clean_mod.erase('config')
+		clean_mod.erase('button')
+		clean_mod.erase('before')
+		tlist.push_back(clean_mod)
+	var config = {}
+	config[MOD_CONFIG_VERSION_KEY] = globals.gameversion
+	config[MOD_CONFIG_MODS_KEY] = tlist
 	var f:= File.new()
 	f.open(modconfig_path, File.WRITE)
-	f.store_line(to_json(tlist))
+	f.store_line(to_json(config))
 	f.close()
+
+func get_mods_from_config(parsed_config):
+	if typeof(parsed_config) == TYPE_ARRAY:
+		delete_old_mod_config()
+		save_mod_config([])
+		return []
+	if typeof(parsed_config) != TYPE_DICTIONARY:
+		save_mod_config([])
+		return []
+	if !parsed_config.has(MOD_CONFIG_VERSION_KEY):
+		delete_old_mod_config()
+		save_mod_config([])
+		return []
+	if str(parsed_config[MOD_CONFIG_VERSION_KEY]) != globals.gameversion:
+		var mods = []
+		if parsed_config.has(MOD_CONFIG_MODS_KEY) and typeof(parsed_config[MOD_CONFIG_MODS_KEY]) == TYPE_ARRAY:
+			mods = parsed_config[MOD_CONFIG_MODS_KEY]
+		if mods.empty():
+			save_mod_config([])
+		elif backup_old_mod_config(str(parsed_config[MOD_CONFIG_VERSION_KEY])):
+			save_mod_config([])
+		return []
+	if parsed_config.has(MOD_CONFIG_MODS_KEY) and typeof(parsed_config[MOD_CONFIG_MODS_KEY]) == TYPE_ARRAY:
+		return parsed_config[MOD_CONFIG_MODS_KEY]
+	save_mod_config([])
+	return []
+
+func delete_old_mod_config():
+	var dir := Directory.new()
+	var result = dir.remove(modconfig_path)
+	if result != OK:
+		print("ERROR: Could not remove old mods.ini. Error code: %s" % result)
+
+func backup_old_mod_config(config_version):
+	if config_version == "":
+		config_version = "unknown"
+	var backup_path = modconfig_path + "." + config_version
+	var dir := Directory.new()
+	var final_path = backup_path
+	var suffix = 1
+	var file := File.new()
+	while file.file_exists(final_path):
+		final_path = "%s.%d" % [backup_path, suffix]
+		suffix += 1
+	var result = dir.rename(modconfig_path, final_path)
+	if result != OK:
+		print("ERROR: Could not back up old mods.ini. Error code: %s" % result)
+		return false
+	mod_list_backup_path = final_path
+	mod_list_backup_version = config_version
+	mod_list_safety_message = "MODLISTGAMEVERSIONRESET"
+	return true
 
 func check_avail():
 	var to_del = []

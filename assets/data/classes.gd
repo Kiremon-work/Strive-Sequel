@@ -692,7 +692,7 @@ var professions = {
 		categories = ['magic'],
 		showupreqs = [],
 		reqs = [
-			{code = 'has_any_profession', value = ['caster', 'priest', 'occultist']},
+			{code = 'has_any_profession', value = ['caster', 'occultist']},
 			{code = 'stat', stat = 'wits', operant = 'gte', value = 75},
 			{code = 'stat', stat = 'magic_factor', operant = 'gte', value = 4}
 		],

@@ -9,7 +9,7 @@ var data = {
 			{type = "class_unlocked", class = "druid", operant = "eq", check = true, negative = "repeat_next_day"},
 			{type = "decision", value = "mae_druid_event_seen", check = false}
 		],
-		character = "mae",
+		character = "$mae",
 		text = "MAE_DRUID_EVENT_START",
 		common_effects = [{code = "decision", value = "mae_druid_event_seen"}],
 		options = [
@@ -21,7 +21,7 @@ var data = {
 		image = null,
 		tags = ["dialogue_scene"],
 		reqs = [],
-		character = "mae",
+		character = "$mae",
 		text = "MAE_DRUID_EVENT_FOLLOWUP",
 		options = [
 			{code = "close", text = "MAE_DRUID_EVENT_FOLLOWUP_OPTION_1", reqs = [], dialogue_argument = 1, type = "next_dialogue", bonus_effects = [{code = "decision", value = "mae_druid_lorien_unlocked"}]},
@@ -187,7 +187,7 @@ var data = {
 		music = 'mae_theme',
 		tags = ["dialogue_scene", "master_translate"],
 		reqs = [],
-		character = "mae",
+		character = "$mae",
 		text = "MAE_DRUID_RETURN",
 		common_effects = [
 			{code = "affect_unique_character", name = "mae", type = "set_availability", value = true},
@@ -196,15 +196,15 @@ var data = {
 		],
 		options = [
 			{code = "mae_sex_behind_1", text = "MAE_DRUID_RETURN_OPTION_1", reqs = [], dialogue_argument = 1, type = "next_dialogue", change_dialogue_type = 2},
-			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue"},
-			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue"}
+			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 15}]},
+			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = -15}]}
 		]
 	},
 	mae_druid_return_2 = {
 		image = null,
 		tags = ["dialogue_scene"],
 		reqs = [],
-		character = "mae",
+		character = "$mae",
 		text = [
 			{text = "MAE_DRUID_RETURN_AFFECTION", reqs = [], previous_dialogue_option = 2},
 			{text = "MAE_DRUID_RETURN_WORK", reqs = [], previous_dialogue_option = 3},

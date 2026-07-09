@@ -6,9 +6,12 @@ var person
 var universal_skills = ['oral','anal','petting']
 
 onready var traitlist = $TraitContainer/HBoxContainer
+onready var traitlist2 = $TraitContainer2/HBoxContainer
 onready var upgrades = $UpgradesPanel
 onready var sextraits = $SexTraitsPanel
 onready var trainings_selector = $tr_selector
+onready var race_label = $Panel/maininfo/Race/label
+onready var race_label_font = race_label.get_font("font")
 var curr_tab
 
 
@@ -74,6 +77,7 @@ func update():
 	if person != null:
 		#$Panel/character_class.visible = !person.has_profession("master")
 		$Panel/maininfo/price.visible = !person.has_profession("master")
+		$Panel/maininfo/standing.visible = !person.is_master()
 		#$Panel/MasterIcon.visible = person.has_profession("master")
 		var text = ""
 		if person.is_master():
@@ -85,7 +89,9 @@ func update():
 		$ConsentLabel.text = text
 		
 		$Panel/maininfo/Race/icon.texture = races.racelist[person.get_stat('race')].icon
-		$Panel/maininfo/Race/label.text = races.racelist[person.get_stat('race')].name
+		race_label.text = races.racelist[person.get_stat('race')].name
+		race_label.set("custom_fonts/font", race_label_font)
+		input_handler.font_size_adjust(race_label)
 		globals.connecttexttooltip($Panel/maininfo/Race, "[center]{color=green|"+ races.racelist[person.get_stat('race')].name +"}[/center]\n\n"+ person.show_race_description())
 		
 		var slavename = "CHARTYPE" + person.get_stat('slave_class').to_upper()
@@ -96,15 +102,18 @@ func update():
 		$Panel/maininfo/type/icon.texture = person.get_class_icon()
 		$Panel/maininfo/type/label.text = tr(slavename)
 		
-		var character_tax = 0
-		if person.is_active and person.get_stat('slave_class') == 'servant':
-			character_tax = person.get_upkeep()
 		$Panel/maininfo/price/label.text = str(person.calculate_price(false, false, true))
+		var character_tax = person.get_weekly_tax()
 		if character_tax > 0:
 			$Panel/maininfo/price/label.text += " (%d)" % character_tax
 		var value_tooltip = tr("TOOLTIPVALUE") + '\n\n' + person.get_price_composition()
 		if character_tax > 0:
-			value_tooltip += "\n%s: {color=yellow|%d}" % [tr("FAMEDESC_UPKEEP"), character_tax]
+			value_tooltip += "\n%s: {color=yellow|%d} (%d + %d)" % [
+				tr("FAMEDESC_UPKEEP"),
+				character_tax,
+				person.get_upkeep(),
+				person.get_value_upkeep()
+			]
 		globals.connecttexttooltip($Panel/maininfo/price, value_tooltip)
 		$Panel/maininfo/fame/label.text = tr(person.get_fame_bonus('name'))
 		globals.connecttexttooltip($Panel/maininfo/fame,
@@ -115,6 +124,8 @@ func update():
 		
 		$Panel/maininfo/personality/label.text = tr("PERSONALITYNAME" + person.get_stat("personality").to_upper())
 		$Panel/maininfo/personality/icon.texture = personality_icons[person.get_stat('personality')]
+		$Panel/maininfo/standing/label.text = person.get_character_standing()
+		globals.connecttexttooltip($Panel/maininfo/standing, build_standing_tooltip())
 		
 		globals.connecttexttooltip($Panel/maininfo/personality, globals.get_character_personality_tooltip(person.get_stat('personality')))
 		$Panel/maininfo/food/foodlikedicon.texture = foodicons[person.food.food_love]
@@ -133,6 +144,22 @@ func update():
 		for i in [$UpgradesPanel, $tr_selector, $Label2]:
 			i.visible = !person.is_on_quest()
 
+
+func build_standing_tooltip():
+	var text = person.translate(tr("TOOLTIPCHARACTERSTANDING"))
+	var standing_code = person.get_character_standing_code()
+	var effect_code = 'e_' + standing_code
+	if person.has_status(standing_code) and Effectdata.effect_table.has(effect_code):
+		var effect = Effectdata.effect_table[effect_code]
+		text += "\n\n[center]{color=yellow|%s}[/center]\n%s" % [
+			tr('TRAIT' + standing_code.to_upper()),
+			person.translate(tr('TRAIT' + standing_code.to_upper() + 'DESCRIPT')),
+		]
+		var bonus_text = person.translate(globals.build_desc_for_bonusstats(effect.statchanges).strip_edges())
+		if bonus_text != "":
+			text += "\n" + bonus_text
+	return text
+
 var personality_icons = {
 	bold = load("res://assets/Textures_v2/MANSION/personality_bold.png"),
 	kind = load("res://assets/Textures_v2/MANSION/personality_kind.png"),
@@ -145,6 +172,7 @@ var personality_icons = {
 
 func update_traitlist():
 	globals.build_traitlist_for_char(person, traitlist)
+	globals.build_training_traitlist(person, traitlist2)
 
 
 func update_trainings_selector():

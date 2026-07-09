@@ -38,7 +38,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue_2 = {
 		reqs = [
@@ -89,7 +89,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue_3 = {
 		reqs = [
@@ -197,7 +197,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue_4 = {
 		reqs = [
@@ -261,7 +261,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue_5 = {
 		tags = [
@@ -282,7 +282,7 @@ var data = {
 				type = "next_dialogue"
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue_6 = {
 		tags = [
@@ -303,7 +303,7 @@ var data = {
 				type = "next_dialogue"
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_init_1 = {
 		reqs = [
@@ -364,7 +364,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_init_1_1 = {
 		reqs = [
@@ -419,7 +419,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_init_2 = {
 		tags = [
@@ -475,7 +475,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_depths_1 = {
 		reqs = [
@@ -485,7 +485,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DEPTHS_1",
@@ -564,6 +564,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 10}
 				]
 			},
 			{
@@ -615,7 +618,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DEPTHS_6",
@@ -707,7 +710,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DEPTHS_9",
@@ -732,7 +735,7 @@ var data = {
 		reqs = [
 
 		],
-		character = "kuro",
+		character = "$kuro",
 		tags = [
 			"dialogue_scene"
 		],
@@ -839,7 +842,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dungeon_1 = {
 		reqs = [
@@ -849,7 +852,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DUNGEON_1",
@@ -877,7 +880,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DUNGEON_2",
@@ -999,7 +1002,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dungeon_7 = {
 		reqs = [
@@ -1009,7 +1012,7 @@ var data = {
 			"dialogue_scene",
 			"master_translate"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DUNGEON_7",
@@ -1037,7 +1040,7 @@ var data = {
 		tags = [
 			"dialogue_scene"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DUNGEON_8",
@@ -1103,7 +1106,7 @@ var data = {
 			"dialogue_scene",
 			"master_translate"
 		],
-		character = "kuro",
+		character = "$kuro",
 		text = [
 			{
 				text = "KURO3_DUNGEON_10",
@@ -1142,6 +1145,10 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = 30},
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 20}
 				]
 			},
 			{
@@ -1151,6 +1158,10 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -40},
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = -30}
 				]
 			}
 		],
@@ -1176,7 +1187,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_good_2 = {
 		reqs = [
@@ -1215,13 +1226,13 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_good_3 = {
 		reqs = [
 
 		],
-		character = "kuro",
+		character = "$kuro",
 		tags = [
 			"dialogue_scene",
 			"master_translate"
@@ -1255,6 +1266,7 @@ var data = {
 				]
 			}
 		],
+		common_effects = [{code = "material_change", operant = "-", material = "vesperine_cage", value = 1}],
 		options = [
 			{
 				code = "close",
@@ -1265,12 +1277,6 @@ var data = {
 				dialogue_argument = 1,
 				type = "next_dialogue",
 				bonus_effects = [
-					{
-						code = "material_change",
-						operant = "-",
-						material = "vesperine_cage",
-						value = 1
-					},
 					{
 						code = "affect_unique_character",
 						name = "kuro",
@@ -1318,7 +1324,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_bad_2 = {
 		reqs = [
@@ -1337,6 +1343,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = 10}
 				]
 			},
 			{
@@ -1346,6 +1355,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "respect", value = -20}
 				]
 			},
 			{
@@ -1358,7 +1370,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_bad_3 = {
 		tags = [
@@ -1368,6 +1380,7 @@ var data = {
 
 		],
 		text = "KURO3_BAD_3",
+		common_effects = [{code = "material_change", operant = "-", material = "vesperine_cage", value = 1}],
 		options = [
 			{
 				code = "close",
@@ -1378,12 +1391,6 @@ var data = {
 				dialogue_argument = 1,
 				type = "next_dialogue",
 				bonus_effects = [
-					{
-						code = "material_change",
-						operant = "-",
-						material = "vesperine_cage",
-						value = 1
-					},
 					{
 						code = "affect_master",
 						type = "add_class",
@@ -1409,7 +1416,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_bad_4 = {
 		tags = [
@@ -1419,6 +1426,7 @@ var data = {
 
 		],
 		text = "KURO3_BAD_4",
+		common_effects = [{code = "material_change", operant = "-", material = "vesperine_cage", value = 1}],
 		options = [
 			{
 				code = "close",
@@ -1429,12 +1437,6 @@ var data = {
 				dialogue_argument = 1,
 				type = "next_dialogue",
 				bonus_effects = [
-					{
-						code = "material_change",
-						operant = "-",
-						material = "vesperine_cage",
-						value = 1
-					},
 					{
 						code = "affect_master",
 						type = "add_class",
@@ -1466,7 +1468,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_bad_5 = {
 		tags = [
@@ -1476,6 +1478,7 @@ var data = {
 
 		],
 		text = "KURO3_BAD_5",
+		common_effects = [{code = "material_change", operant = "-", material = "vesperine_cage", value = 1}],
 		options = [
 			{
 				code = "close",
@@ -1486,12 +1489,6 @@ var data = {
 				dialogue_argument = 1,
 				type = "next_dialogue",
 				bonus_effects = [
-					{
-						code = "material_change",
-						operant = "-",
-						material = "vesperine_cage",
-						value = 1
-					},
 					{
 						code = "affect_master",
 						type = "add_class",
@@ -1545,7 +1542,7 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	},
 	kuro3_dialogue2_2 = {
 		reqs = [
@@ -1581,6 +1578,6 @@ var data = {
 				]
 			}
 		],
-		character = "kuro"
+		character = "$kuro"
 	}
 }

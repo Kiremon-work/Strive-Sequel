@@ -43,7 +43,7 @@ var data = {
 	},
 	
 	zephyra_painting_4 = {
-		image = null, tags = ['dialogue_scene', 'master_translate'], character = "zephyra",
+		image = null, tags = ['dialogue_scene', 'master_translate'], character = "$zephyra",
 		reqs = [],
 		text = [{text = "ZEPHYRA_PAINTING_4", reqs = [], previous_dialogue_option = 1},
 		{text = "ZEPHYRA_PAINTING_5_1", reqs = [], previous_dialogue_option = 4}],
@@ -57,7 +57,7 @@ var data = {
 	},
 	
 	zephyra_painting_5 = {
-		image = null, tags = ['dialogue_scene', 'master_translate'], character = "zephyra",
+		image = null, tags = ['dialogue_scene', 'master_translate'], character = "$zephyra",
 		reqs = [],
 		text = [{text = "ZEPHYRA_PAINTING_5_2", reqs = [], previous_dialogue_option = 2},
 		{text = "ZEPHYRA_PAINTING_5_3", reqs = [], previous_dialogue_option = 3}],
@@ -410,7 +410,8 @@ var data = {
 		options = [ {
 			code = 'zephyra_disappearance_bowl_3_1', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', 
 		}, {
-			code = 'zephyra_disappearance_bowl_3_2', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_2", reqs = [{type = "has_money", value = 1000}], dialogue_argument = 2, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_bowl_3_2', text = "ZEPHYRA_DISAPPEARANCE_BOWL_2_OPTION_2", reqs = [{type = "has_money", value = 1000}], dialogue_argument = 2, type = 'next_dialogue',
+				bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 20}]
 		}, ]
 	},
 	
@@ -461,10 +462,11 @@ var data = {
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_2", reqs = []},
 		],
 		options = [ {
-			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_1", reqs = [{type = 'decision', value = 'GotFakeZephyraBowl', check = true}], dialogue_argument = 1, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_1", reqs = [{type = 'decision', value = 'GotFakeZephyraBowl', check = true}], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "respect", value = -10}],
 		}, {
 			code = 'zephyra_disappearance_ketch_3', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_2",
-			bonus_effects = [{code = 'remove_item', name = 'sacred_bowl', number = 1}], reqs = [], dialogue_argument = 2, type = 'next_dialogue', 
+			bonus_effects = [{code = 'remove_item', name = 'sacred_bowl', number = 1}, {code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 25}, {code = "affect_unique_character", name = "zephyra", type = "stat", stat = "respect", value = 15}], reqs = [], dialogue_argument = 2, type = 'next_dialogue',
 		}, {
 			code = 'zephyra_disappearance_ketch_3_f_1', text = "ZEPHYRA_DISAPPEARANCE_KETCH_2_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
 		}, ]
@@ -506,7 +508,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_4 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		music = "zephyra_theme",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_4", reqs = []},
 		],
@@ -521,7 +523,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_5 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_5_1", reqs = [], previous_dialogue_option = 1},
 		{text = "ZEPHYRA_DISAPPEARANCE_KETCH_5_2AND3", reqs = [], previous_dialogue_option = [2,3]}
 		],
@@ -538,7 +540,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_6a = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_6_1a", reqs = []},
 		],
 		options = [ { 
@@ -550,7 +552,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_6 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_6_1b", reqs = [], previous_dialogue_option = 1},
 		{text = "ZEPHYRA_DISAPPEARANCE_KETCH_6_2", reqs = [], previous_dialogue_option = 2},
 		{text = "ZEPHYRA_DISAPPEARANCE_KETCH_6_3", reqs = [], previous_dialogue_option = 3},
@@ -564,13 +566,15 @@ var data = {
 	
 	zephyra_disappearance_ketch_7_1 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_7_1", reqs = []}
 		],
 		options = [ {
 			code = 'zephyra_disappearance_sex_1', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue', change_dialogue_type = 2,
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10}],
 		}, {
-			code = 'zephyra_disappearance_ketch_9_2', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_2", reqs = [], dialogue_argument = 1, type = 'next_dialogue', 
+			code = 'zephyra_disappearance_ketch_9_2', text = "ZEPHYRA_DISAPPEARANCE_KETCH_8_OPTION_2", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -10}],
 		}, ]
 	},
 	
@@ -655,7 +659,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_9_2 = { # refuse
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_9_2", reqs = []}],
 		options = [ { 
 			code = 'close', text = "DIALOGUECLOSE", reqs = [], dialogue_argument = 1, type = 'next_dialogue', 
@@ -666,7 +670,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_7_2 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_7_2", reqs = []}
 		],
 		options = [ { # flashback
@@ -676,7 +680,7 @@ var data = {
 	
 	zephyra_disappearance_ketch_8 = {
 		image = null, tags = ['dialogue_scene', 'master_translate', 'blackscreen_transition_common'], 
-		reqs = [], character = "zephyra",
+		reqs = [], character = "$zephyra",
 		text = [{text = "ZEPHYRA_DISAPPEARANCE_KETCH_8", reqs = []},
 		],
 		options = [ {
@@ -842,7 +846,7 @@ var data = {
 	
 	zephyra_brush_4 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = "kuro",
+		reqs = [], character = "$kuro",
 		common_effects = [{code = 'decision', value = 'SawKuroWithBrush'}],
 		text = [{text = "ZEPHYRA_BRUSH_4_1", reqs = [], previous_dialogue_option = 1},
 		{text = "ZEPHYRA_BRUSH_4_2_GOOD", reqs = [{type = 'master_check', value = [{code = 'stat', stat = 'physics', operant = 'gte', value = 90}]}], previous_dialogue_option = 2},
@@ -859,7 +863,7 @@ var data = {
 	
 	zephyra_brush_5_1 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = "kuro",
+		reqs = [], character = "$kuro",
 		text = [{text = "ZEPHYRA_BRUSH_5_1", reqs = []},
 		],
 		options = [ {
@@ -869,7 +873,7 @@ var data = {
 	
 	zephyra_brush_5_3 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = "kuro",
+		reqs = [], character = "$kuro",
 		text = [{text = "ZEPHYRA_BRUSH_5_3", reqs = []},
 		],
 		options = [ {
@@ -881,7 +885,7 @@ var data = {
 	
 	zephyra_brush_6 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = "kuro",
+		reqs = [], character = "$kuro",
 		text = [{text = "ZEPHYRA_BRUSH_5_2", reqs = [], previous_dialogue_option = 2},
 		{text = "ZEPHYRA_BRUSH_6_1", reqs = [], previous_dialogue_option = 11},
 		{text = "ZEPHYRA_BRUSH_6_2", reqs = [], previous_dialogue_option = 12},
@@ -897,7 +901,7 @@ var data = {
 	
 	zephyra_brush_7 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = "kuro",
+		reqs = [], character = "$kuro",
 		text = [{text = "ZEPHYRA_BRUSH_7_1", reqs = [], previous_dialogue_option = 1, 
 		bonus_effects = [{code = 'decision', value = 'AskedKurosName'}]},
 		{text = "ZEPHYRA_BRUSH_7_2", reqs = [], previous_dialogue_option = 2},
@@ -911,7 +915,7 @@ var data = {
 	
 	zephyra_brush_8 = {
 		image = null, music = "zephyra_theme", tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_8", reqs = []},
 		],
 		options = [ {
@@ -921,19 +925,21 @@ var data = {
 	
 	zephyra_brush_9 = {
 		image = null, music = "tragic", tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_9", reqs = []},
 		],
 		options = [ {
 			code = 'zephyra_brush_10', text = "ZEPHYRA_BRUSH_9_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10}],
 		}, {
 			code = 'zephyra_brush_18', text = "ZEPHYRA_BRUSH_9_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -15}],
 		}, ]
 	},
 	
 	zephyra_brush_10 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_10", reqs = []},
 		],
 		options = [ {
@@ -943,7 +949,7 @@ var data = {
 	
 	zephyra_brush_11 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_11", reqs = []},
 		],
 		options = [ {
@@ -983,21 +989,24 @@ var data = {
 	
 	zephyra_brush_15 = {
 		image = null, tags = ['dialogue_scene', 'master_translate', 'blackscreen_transition_common'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_15", reqs = []},
 		],
 		options = [ {
 			code = 'zephyra_brush_16', text = "ZEPHYRA_BRUSH_15_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15}],
 		}, {
 			code = 'zephyra_brush_16', text = "ZEPHYRA_BRUSH_15_OPTION_2", reqs = [], dialogue_argument = 2, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15}],
 		}, {
 			code = 'zephyra_brush_16_3', text = "ZEPHYRA_BRUSH_15_OPTION_3", reqs = [], dialogue_argument = 3, type = 'next_dialogue',
+			bonus_effects = [{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -20}],
 		} ]
 	},
 	
 	zephyra_brush_16_3 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_16_3", reqs = []},
 		],
 		common_effects = [],
@@ -1022,7 +1031,7 @@ var data = {
 	
 	zephyra_brush_16 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_16_1AND2", reqs = []},
 		],
 		options = [ {
@@ -1057,7 +1066,7 @@ var data = {
 	
 	zephyra_brush_18 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_18", reqs = []},
 		],
 		common_effects = [],
@@ -1082,7 +1091,7 @@ var data = {
 	
 	zephyra_brush_19 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_19", reqs = []},
 		],
 		options = [ {
@@ -1094,7 +1103,7 @@ var data = {
 	
 	zephyra_brush_20 = {
 		image = null, tags = ['dialogue_scene', 'master_translate'],
-		reqs = [], character = 'zephyra',
+		reqs = [], character = '$zephyra',
 		text = [{text = "ZEPHYRA_BRUSH_20", reqs = []},
 		],
 		options = [ {

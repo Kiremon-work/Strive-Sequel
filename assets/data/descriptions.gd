@@ -794,8 +794,8 @@ func get_fame_tier_bonus(tier):
 		text += '%s: {color=yellow|%d}\n' % [tr('FAMEDESC_UPKEEP'), dict.upkeep]
 	if dict.has('loyalty_bonus'):
 		text += '%s: {color=green|+%d%%}\n' % [tr('FAMEDESC_LOYALTY_BONUS'), int(dict.loyalty_bonus * 100)]
-	if dict.has('recruit_bonus'):
-		text += '%s: {color=green|+%d%%}\n' % [tr('FAMEDESC_RECRUIT_BONUS'), int(dict.recruit_bonus * 100)]
+	if dict.has('manhunt_bonus'):
+		text += '%s: {color=green|+%d}\n' % [tr('FAMEDESC_MANHUNT_BONUS'), dict.manhunt_bonus]
 	return text
 
 func _sex_training_level_label(level):

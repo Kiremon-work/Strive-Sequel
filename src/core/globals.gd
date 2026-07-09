@@ -518,10 +518,19 @@ func get_traitlist_for_char(person):
 	var trlist = person.get_traits_by_arg('visible', true)
 	for tr in trlist:
 		var trdata = Traitdata.traits[tr]
+		var desc = person.translate(trdata.descript)
+		var bonus_desc = person.try_get_bonus_mastery_desc(tr)
+		if !bonus_desc.empty():
+#			desc += "\n" + bonus_desc
+			#it's a crude patch for monster_mastery descriptions, as they are same as names
+			#at the moment. Ideally there should be some systematic solution for traits, wich are
+			#also buffs, and therefore needs name in description
+			desc = bonus_desc
 		var entry = {
+			trait_code = tr,
 			name = tr(trdata.name),
-			text_with_name = "[center]{color=yellow|" + tr(trdata.name) + '}[/center]\n' + person.translate(trdata.descript),
-			text = person.translate(trdata.descript)
+			text_with_name = "[center]{color=yellow|" + tr(trdata.name) + '}[/center]\n' + desc,
+			text = desc
 		}
 		if trdata.has('tags') and trdata.tags.has('simple_icon'):
 			entry.icon = trdata.icon
@@ -576,7 +585,7 @@ func build_traitlist_for_char(person, node):
 func build_training_traitlist(person, node):
 	input_handler.ClearContainer(node, ['Button'])
 	for tr in person.get_traits_by_tag('training') + person.get_traits_by_tag('servant_training'):
-		if tr == 'untrained':
+		if tr in ['untrained', 'training_broke_in']:
 			continue
 		var upgrade_data = Traitdata.traits[tr]
 		var button = input_handler.DuplicateContainerTemplate(node, 'Button')
@@ -671,13 +680,17 @@ func build_desc_for_bonusstats(bonusstats, mul = 1):
 						bonus = suffix
 						break
 			
-			if bonus != 'set':
-				if data.has('container') and data.container == 'resists' and !(value is bool or value is Array) and value >= 100:
-					text += get_resist_effect_name(data.code).capitalize() + ': '
-				else:
-					text += data.name + ': '
+			text += get_bonus_name_string(bonus, data, value)
 			text += make_bonus_value_string(bonus, data, value) + '\n'
 	return text
+
+func get_bonus_name_string(bonus_type, data, value):
+	if bonus_type == 'set':
+		return ""
+	if data.has('container') and data.container == 'resists' and !(value is bool or value is Array) and value >= 100:
+		return get_resist_effect_name(data.code).capitalize() + ': '
+	else:
+		return data.name + ': '
 
 func make_bonus_value_string(bonus_type, data, value):
 	var text = ''
@@ -1996,7 +2009,7 @@ func roll_characters():
 	for ch_id in input_handler.active_location.group.values():
 		var scout = characters_pool.get_char_by_id(ch_id)
 		if scout != null:
-			manhunt_values.push_back(scout.get_stat('manhunt'))
+			manhunt_values.push_back(scout.get_stat('manhunt') + scout.get_fame_bonus('manhunt_bonus'))
 	manhunt_values.sort()
 	var manhunt_bonus = 0.0
 	for i in range(max(manhunt_values.size() - 2, 0), manhunt_values.size()):
@@ -2060,7 +2073,7 @@ func roll_hirelings(loc, recruiter = null):
 		if locdata1.has('diff_roll'):
 			t_diff = locdata1.diff_roll
 	if recruiter != null:
-		t_diff += recruiter.get_stat('manhunt')
+		t_diff += recruiter.get_stat('manhunt') + recruiter.get_fame_bonus('manhunt_bonus')
 	
 	
 	if racedata is Array and !racedata.empty():
@@ -2592,7 +2605,6 @@ func common_effects(effects, from_event = false):
 				ResourceScripts.game_progress.spouse = input_handler.active_character.id
 #				input_handler.active_character.unlock_class('spouse')
 			'complete_wedding':
-				print(1)
 				ResourceScripts.game_progress.marriage_completed = true
 				ResourceScripts.game_party.get_spouse().unlock_class('spouse')
 				ResourceScripts.game_party.get_spouse().set_slave_category('spouse')
@@ -3320,10 +3332,14 @@ func calculate_lux_rooms():
 
 func make_sfx_params(anim_dict, last_iteration = false):
 	var params = {}
-	if anim_dict.has('duration'): params.duration = anim_dict.duration
+	if anim_dict.has('duration'):
+		params.duration = anim_dict.duration
+	elif anim_dict.has("is_cast") and anim_dict.is_cast:
+		params.duration = 0.3
 	if anim_dict.has('no_delays'): params.no_delays = anim_dict.no_delays
 	if anim_dict.has('no_repeat_delays') and anim_dict.no_repeat_delays and !last_iteration:
 		params.no_delays = true
 	if anim_dict.has('alt_slot'): params.alt_slot = anim_dict.alt_slot
 	if anim_dict.has('force_flip'): params.force_flip = anim_dict.force_flip
+	if anim_dict.target == 'caster': params.reverse_flip = true
 	return params
