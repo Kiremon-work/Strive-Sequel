@@ -52,11 +52,20 @@ func try_add_prof_achimnt(prof):
 	if prof_data.has('achievement'):
 		try_add_achimnt(prof_data.achievement)
 
-func try_add_wed_achimnt(unique_name):
+func get_wed_achimnt_name(unique_name):
 	for pregen_char in worlddata.pregen_characters.values():
-		if pregen_char.has("unique") and pregen_char.unique == unique_name:
-			if pregen_char.has("achi_wedding"):
-				try_add_achimnt(pregen_char.achi_wedding)
+		if pregen_char.has("unique") and pregen_char.unique == unique_name and pregen_char.has("achi_wedding"):
+			return pregen_char.achi_wedding
+	return null
+
+func try_add_wed_achimnt(unique_name):
+	var achi_name = get_wed_achimnt_name(unique_name)
+	if achi_name != null:
+		try_add_achimnt(achi_name)
+
+func has_wed_achimnt(unique_name):
+	var achi_name = get_wed_achimnt_name(unique_name)
+	return achi_name != null and has_achimnt(achi_name)
 
 func try_add_upgrade_achimnt(upgrade_id):
 	var level = ResourceScripts.game_res.findupgradelevel(upgrade_id)

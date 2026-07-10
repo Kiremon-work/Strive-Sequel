@@ -1553,7 +1553,7 @@ margin_right = 320.0
 margin_bottom = 48.0
 custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 custom_fonts/font = ExtResource( 78 )
-text = "Advanced settings"
+text = "Make Continuously"
 align = 1
 valign = 1
 

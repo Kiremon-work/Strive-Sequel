@@ -925,6 +925,7 @@ custom_fonts/normal_font = ExtResource( 53 )
 text = "add description"
 
 [node name="CraftRules" type="Panel" parent="."]
+visible = false
 margin_left = 78.0
 margin_top = 274.0
 margin_right = 860.0
@@ -1510,7 +1511,6 @@ texture = ExtResource( 66 )
 expand = true
 
 [node name="CraftRules2" type="Panel" parent="."]
-visible = false
 margin_left = 78.0
 margin_top = 274.0
 margin_right = 860.0
@@ -1526,26 +1526,28 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="CraftRules2"]
-margin_left = 87.1022
-margin_top = 15.8572
-margin_right = 239.102
-margin_bottom = 39.8572
+margin_left = 209.944
+margin_top = 16.0
+margin_right = 582.944
+margin_bottom = 51.0
 custom_fonts/font = ExtResource( 44 )
 text = "Craft Rules"
+align = 1
 
 [node name="Label2" type="Label" parent="CraftRules2"]
-margin_left = 434.0
-margin_top = 15.8572
-margin_right = 586.0
-margin_bottom = 50.8572
+margin_left = 433.546
+margin_top = 378.891
+margin_right = 659.546
+margin_bottom = 413.891
 custom_fonts/font = ExtResource( 44 )
 text = "Predicted task:"
+align = 1
 
 [node name="icon" type="TextureRect" parent="CraftRules2"]
-margin_left = 690.0
-margin_top = 10.0
-margin_right = 754.0
-margin_bottom = 74.0
+margin_left = 685.546
+margin_top = 363.687
+margin_right = 749.546
+margin_bottom = 427.687
 texture = ExtResource( 43 )
 expand = true
 stretch_mode = 6
@@ -1554,18 +1556,21 @@ stretch_mode = 6
 margin_left = 18.0
 margin_top = 81.0
 margin_right = 762.0
-margin_bottom = 425.0
+margin_bottom = 368.0
 custom_constants/separation = 30
+alignment = 1
 
 [node name="checks1" type="VBoxContainer" parent="CraftRules2/filters"]
-margin_right = 108.0
-margin_bottom = 344.0
+margin_left = 84.0
+margin_right = 192.0
+margin_bottom = 287.0
 
 [node name="Label" type="Label" parent="CraftRules2/filters/checks1"]
 margin_right = 108.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 44 )
 text = "Materials"
+align = 1
 
 [node name="Button" type="CheckBox" parent="CraftRules2/filters/checks1"]
 visible = false
@@ -1576,15 +1581,16 @@ theme = ExtResource( 42 )
 text = "button"
 
 [node name="checks2" type="VBoxContainer" parent="CraftRules2/filters"]
-margin_left = 138.0
-margin_right = 204.0
-margin_bottom = 344.0
+margin_left = 222.0
+margin_right = 288.0
+margin_bottom = 287.0
 
 [node name="Label" type="Label" parent="CraftRules2/filters/checks2"]
 margin_right = 66.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 44 )
 text = "Items"
+align = 1
 
 [node name="Button" type="CheckBox" parent="CraftRules2/filters/checks2"]
 visible = false
@@ -1595,9 +1601,9 @@ theme = ExtResource( 42 )
 text = "button"
 
 [node name="order1" type="VBoxContainer" parent="CraftRules2/filters"]
-margin_left = 234.0
-margin_right = 411.0
-margin_bottom = 344.0
+margin_left = 318.0
+margin_right = 495.0
+margin_bottom = 287.0
 
 [node name="Label" type="Label" parent="CraftRules2/filters/order1"]
 margin_right = 177.0
@@ -1627,9 +1633,9 @@ align = 1
 valign = 1
 
 [node name="order2" type="VBoxContainer" parent="CraftRules2/filters"]
-margin_left = 441.0
-margin_right = 576.0
-margin_bottom = 344.0
+margin_left = 525.0
+margin_right = 660.0
+margin_bottom = 287.0
 
 [node name="Label" type="Label" parent="CraftRules2/filters/order2"]
 margin_right = 135.0
@@ -1642,6 +1648,7 @@ visible = false
 margin_top = 39.0
 margin_right = 160.0
 margin_bottom = 79.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource( 63 )
 texture_pressed = ExtResource( 60 )

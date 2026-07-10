@@ -374,7 +374,7 @@ var factiondata = {
 			slave_races = [['rare',3]],
 			tags = [],
 			slavenumber = [3,5],
-			traits = ['training_broke_in','training_obedience'],
+			traits = ['training_broke_in'],
 			}
 		],
 	},

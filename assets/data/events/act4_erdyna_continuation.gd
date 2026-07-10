@@ -2097,7 +2097,6 @@ var data = {
 					{code = "unique_character_changes", value = "erdyna", args = [
 						{code = "take_virginity", type = "vaginal", partner = "master"},
 						{code = "remove_combat_skill", skill = "fly_evasion"},
-						{code = "add_trait", trait = "training_obedience"},
 						{code = "add_trait", trait = "training_s_combat"}
 					]},
 					{code = "progress_quest", value = "erdyna_quest", stage = "catacombs_opened"},
@@ -2117,7 +2116,6 @@ var data = {
 					{code = "make_story_character", value = "Erdyna", recruit_from_location = true},
 					{code = "unique_character_changes", value = "erdyna", args = [
 						{code = "remove_combat_skill", skill = "fly_evasion"},
-						{code = "add_trait", trait = "training_obedience"},
 						{code = "add_trait", trait = "training_s_combat"}
 					]},
 					{code = "progress_quest", value = "erdyna_quest", stage = "catacombs_opened"},
@@ -2378,7 +2376,6 @@ var data = {
 		reqs = [],
 		text = "ACT4_3_RED_ROOKS_LEADER_WIN_2",
 		common_effects = [{code = "unique_character_changes", value = "erdyna", args = [
-			{code = "add_trait", trait = "training_obedience"},
 			{code = "add_trait", trait = "training_s_combat"}
 		]}],
 		options = [

@@ -2,6 +2,180 @@ extends Node
 
 var person
 
+var negotiation_category = ''
+var negotiation_cost = 0
+
+const NEGOTIATION_DATA = {
+	training_s_working = {
+		percent = 0.10,
+		hesitation_charge = 'NEGOTIATION_HESITATION_WORKING_CHARGE',
+		hesitation_force = 'NEGOTIATION_HESITATION_WORKING_FORCE',
+		persuade_force = 'NEGOTIATION_PERSUADE_FORCE_WORKING',
+		log_paid = 'NEGOTIATION_LOG_PAID_WORKING',
+		log_charge = 'NEGOTIATION_LOG_CHARGE_WORKING',
+		log_force = 'NEGOTIATION_LOG_FORCE_WORKING',
+	},
+	training_s_combat = {
+		percent = 0.15,
+		hesitation_charge = 'NEGOTIATION_HESITATION_COMBAT_CHARGE',
+		hesitation_force = 'NEGOTIATION_HESITATION_COMBAT_FORCE',
+		persuade_force = 'NEGOTIATION_PERSUADE_FORCE_COMBAT',
+		log_paid = 'NEGOTIATION_LOG_PAID_COMBAT',
+		log_charge = 'NEGOTIATION_LOG_CHARGE_COMBAT',
+		log_force = 'NEGOTIATION_LOG_FORCE_COMBAT',
+	},
+	training_s_relation = {
+		percent = 0.10,
+		hesitation_charge = 'NEGOTIATION_HESITATION_DATING_CHARGE',
+		hesitation_force = 'NEGOTIATION_HESITATION_DATING_FORCE',
+		persuade_force = 'NEGOTIATION_PERSUADE_FORCE_DATING',
+		log_paid = 'NEGOTIATION_LOG_PAID_DATING',
+		log_charge = 'NEGOTIATION_LOG_CHARGE_DATING',
+		log_force = 'NEGOTIATION_LOG_FORCE_DATING',
+	},
+	training_s_sexservice = {
+		percent = 0.20,
+		hesitation_charge = 'NEGOTIATION_HESITATION_SEX_CHARGE',
+		hesitation_force = 'NEGOTIATION_HESITATION_SEX_FORCE',
+		persuade_force = 'NEGOTIATION_PERSUADE_FORCE_SEX',
+		log_paid = 'NEGOTIATION_LOG_PAID_SEX',
+		log_charge = 'NEGOTIATION_LOG_CHARGE_SEX',
+		log_force = 'NEGOTIATION_LOG_FORCE_SEX',
+	},
+	training_s_sexservice_adv = {
+		percent = 0.25,
+		hesitation_charge = 'NEGOTIATION_HESITATION_SEXSERVICE_CHARGE',
+		hesitation_force = 'NEGOTIATION_HESITATION_SEXSERVICE_FORCE',
+		persuade_force = 'NEGOTIATION_PERSUADE_FORCE_SEXSERVICE',
+		log_paid = 'NEGOTIATION_LOG_PAID_SEXSERVICE',
+		log_charge = 'NEGOTIATION_LOG_CHARGE_SEXSERVICE',
+		log_force = 'NEGOTIATION_LOG_FORCE_SEXSERVICE',
+	},
+}
+
+const NEGOTIATION_FORCE_RESPECT_LOSS = 30
+const NEGOTIATION_FORCE_AFFECTION_LOSS = 15
+const NEGOTIATION_INSTANT_AGREE_THRESHOLD = 60
+const NEGOTIATION_INSTANT_AGREE_CHANCE = 0.20
+const NEGOTIATION_TAME_INSTANT_AGREE_CHANCE = 0.50
+
+func negotiation_select_working():
+	negotiation_open('training_s_working')
+
+func negotiation_select_combat():
+	negotiation_open('training_s_combat')
+
+func negotiation_select_dating():
+	negotiation_open('training_s_relation')
+
+func negotiation_select_sex():
+	negotiation_open('training_s_sexservice')
+
+func negotiation_select_sexservice():
+	negotiation_open('training_s_sexservice_adv')
+
+func negotiation_open(category):
+	var character = input_handler.active_character
+	person = character
+	negotiation_category = category
+
+	var instant_agree_chance = NEGOTIATION_INSTANT_AGREE_CHANCE
+	if character.get_stat('tame_factor') >= 6:
+		instant_agree_chance = NEGOTIATION_TAME_INSTANT_AGREE_CHANCE
+
+	if (character.get_stat('respect') >= NEGOTIATION_INSTANT_AGREE_THRESHOLD or character.get_stat('affection') >= NEGOTIATION_INSTANT_AGREE_THRESHOLD) and randf() < instant_agree_chance:
+		negotiation_finish(tr('NEGOTIATION_LOG_INSTANT'))
+		return
+
+	character.training.cooldown.negotiation = 3
+	negotiation_refresh_panel()
+	var text_data = NEGOTIATION_DATA[category]
+
+	var value = character.calculate_price()
+	var cost = value * text_data.percent * (1.0 - 0.05 * character.get_stat('tame_factor'))
+	negotiation_cost = int(max(0, round(cost)))
+
+	var persuade_pool = ['break', 'force']
+	var master = ResourceScripts.game_party.get_master()
+	if master.get_stat('chg_persuasion') < master.get_stat('chg_persuasion_max'):
+		persuade_pool.append('charge')
+	var persuade_type = input_handler.random_from_array(persuade_pool)
+
+	var options = []
+	options.append({code = 'negotiation_pay', text = tr('NEGOTIATION_PAY') % negotiation_cost, reqs = [{type = 'has_money', value = negotiation_cost}], not_hide = true, active_char_translate = true})
+
+	var hesitation_key = 'NEGOTIATION_HESITATION_BREAK'
+	match persuade_type:
+		'break':
+			options.append({code = 'negotiation_persuade_break', text = tr('NEGOTIATION_PERSUADE_BREAK'), reqs = [], active_char_translate = true})
+		'charge':
+			options.append({code = 'negotiation_persuade_charge', text = tr('NEGOTIATION_PERSUADE_CHARGE'), reqs = [], active_char_translate = true})
+			hesitation_key = text_data.hesitation_charge
+		'force':
+			options.append({code = 'negotiation_persuade_force', text = tr(text_data.persuade_force), reqs = [], active_char_translate = true})
+			hesitation_key = text_data.hesitation_force
+
+	options.append({code = 'close', text = tr('NEGOTIATION_CANCEL'), reqs = []})
+
+	var dialogue_data = {
+		text = tr(hesitation_key) % character.get_short_name(),
+		image = 'noevent',
+		tags = ['custom_effect', 'active_character_translate'],
+		options = options,
+	}
+	input_handler.active_character = character
+	input_handler.interactive_message_custom(dialogue_data)
+
+
+func negotiation_pay():
+	ResourceScripts.game_res.money -= negotiation_cost
+	person.training.cooldown.negotiation = 0
+	negotiation_finish(tr(NEGOTIATION_DATA[negotiation_category].log_paid) % negotiation_cost)
+
+func negotiation_persuade_break():
+	person.affect_char({type = 'set_availability', value = false, duration = 2})
+	negotiation_finish(tr('NEGOTIATION_LOG_BREAK'))
+
+func negotiation_persuade_charge():
+	var master = ResourceScripts.game_party.get_master()
+	master.add_stat('chg_persuasion', 1)
+	negotiation_finish(tr(NEGOTIATION_DATA[negotiation_category].log_charge))
+
+func negotiation_persuade_force():
+	person.add_stat('respect', -NEGOTIATION_FORCE_RESPECT_LOSS)
+	person.add_stat('affection', -NEGOTIATION_FORCE_AFFECTION_LOSS)
+	var breakdown_note = ''
+	if randf() < 0.1:
+		person.affect_char({type = 'set_availability', value = false, duration = 1})
+		breakdown_note = " " + tr('NEGOTIATION_LOG_FORCE_BREAKDOWN')
+	var log_text = tr(NEGOTIATION_DATA[negotiation_category].log_force) % [NEGOTIATION_FORCE_RESPECT_LOSS, NEGOTIATION_FORCE_AFFECTION_LOSS]
+	negotiation_finish(log_text + breakdown_note)
+
+func negotiation_finish(log_text):
+	person.add_trait(negotiation_category)
+	person.log_me(person.translate(log_text))
+	negotiation_refresh_panel()
+
+	var category_label = Traitdata.traits[negotiation_category].name
+	var closing_text = log_text + "\n\n" + tr('NEGOTIATION_UNLOCKED_TEXT') % [person.get_short_name(), category_label]
+	var dialogue_data = {
+		text = closing_text,
+		image = 'noevent',
+		tags = ['active_character_translate'],
+		options = [{code = 'close', text = tr('DIALOGUECLOSE'), reqs = []}],
+	}
+	input_handler.active_character = person
+	input_handler.interactive_message_custom(dialogue_data)
+
+
+func negotiation_refresh_panel():
+	if gui_controller.slavepanel == null:
+		return
+	var upgrades_list = gui_controller.slavepanel.get_node_or_null("SlaveInfoModule/UpgradesPanel/UpgradesList")
+	if upgrades_list != null:
+		upgrades_list.match_state()
+
+
 func hairdye(character):
 	person = character
 	input_handler.active_character = person
@@ -113,10 +287,6 @@ func writ_of_exemption_use(): #possibly rework
 	if acceptance_chance >= randf()*acceptance_req:
 		input_handler.interactive_message_follow("writ_of_exemption_success",'char_translate',{ch = character})
 		character.set_slave_category('servant')
-		if character.check_trait("training_obedience"):
-			character.add_trait('training_s_working')
-		if character.check_trait("training_obedience"):
-			character.add_trait('training_s_combat')
 		if character.has_status('relation'):
 			character.add_trait('training_s_relation')
 #		character.add_stat('loyalty', 25)

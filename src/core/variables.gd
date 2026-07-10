@@ -294,6 +294,7 @@ var survival_cap_main = 4.0 # added base 1 to max + 300%
 var survival_cap_secondary = 2.5 # added base 1 to max + 150%
 
 var slave_class_list = ['slave', 'slave_trained', 'servant', 'heir', 'master']
+var servant_unlock_traits = ['training_s_working', 'training_s_combat', 'training_s_relation', 'training_s_sexservice', 'training_s_sexservice_adv']
 #sex chances
 
 var teen_age_weight = 1
@@ -564,27 +565,15 @@ var disposition_results = {
 	kink = {fail = 0, resist = 10, success = 45, crit_success = 45},
 }
 
-var training_stat_list = ['spirit', 'spirit_1', 'loyalty', 'resistance']
+var training_stat_list = ['loyalty', 'training_points']
 var training_results_base = {
-	fail = {loyalty = [4, 5], spirit = [-10, -5]}, 
-	resist = {loyalty = 0, spirit = 0}, 
-	success = {loyalty = [8, 10], spirit = [-10, -5]}, 
-	crit_success = {loyalty = [8, 10], spirit = [-5, -3]}
+	fail = {loyalty = [12, 15], training_points = [4, 6]},
+	resist = {loyalty = [8, 10], training_points = 0},
+	success = {loyalty = [12, 15], training_points = [6, 9]},
+	crit_success = {loyalty = [12, 16], training_points = [8, 12]}
 	}
-var spirit_limits = [10, 50, 75]
 var training_costs = [15, 25, 35]
 var training_costs_gold = [500, 1000, 2000]
-var spirit_changes = [
-	{max = 0, min = 0, desc = ''},
-	{max = -0.5, min = -10, desc = 'SPIRITLOSSSMALL'},
-	{max = -10.1, min = -100, desc = 'SPIRITLOSSGREAT'},
-]
-var training_resistance = {
-	0 : {penalty = 0, text = "TRAININGTOOLTIPRESISTLOW", color = "green"},
-	25 : {penalty = 0.3, text = "TRAININGTOOLTIPRESISTMOD", color = "yellow"},
-	50 : {penalty = 0.75, text = "TRAININGTOOLTIPRESISTHIGH", color = "brown"},
-	75 : {penalty = 1, text = "TRAININGTOOLTIPRESISTULT", color = "red"}#training blocked
-}
 
 var breakdown_info = {
 	brk_lose_friend = {chance = 0.1, text = "BREAKDOWN_LFRIEND"}, 

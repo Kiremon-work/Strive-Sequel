@@ -503,7 +503,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			if parent.get_ref().get_stat('slave_class') in ['slave', 'slave_trained']:
 				parent.get_ref().add_trait('training_broke_in')
-				parent.get_ref().add_trait('training_obedience')
 				parent.get_ref().add_trait('training_relation')
 				parent.get_ref().add_trait('training_callmaster')
 				parent.get_ref().add_trait('training_sexservice')
@@ -523,7 +522,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')
@@ -542,7 +540,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')
@@ -561,7 +558,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')

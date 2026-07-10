@@ -444,6 +444,7 @@ func advance_day():
 		i.process_event(variables.TR_DAY)
 		i.quest_day_tick()
 		i.fame_degrade_tick()
+		i.training_day_tick()
 	relationship_decay()
 	for i in range(character_order.size() - 1):
 		if characters[character_order[i]].is_master() == true:

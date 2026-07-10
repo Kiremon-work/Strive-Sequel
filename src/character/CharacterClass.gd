@@ -239,10 +239,7 @@ func set_stat(stat, value):
 		xp_module.base_exp = value
 		return
 	if stat in variables.training_stat_list:
-		if stat == 'resistance':
-			training.set_resistance(value)
-		else:
-			training.set(stat, value)
+		training.set(stat, value)
 		dyn_stats.reset_rebuild()
 		return
 	if stat == 'thrall_master':
@@ -1260,6 +1257,9 @@ func set_slave_category(new_class):
 	add_trait(new_class)
 	dyn_stats.generate_data(variables.DYN_STATS_PREAREA)
 	statlist.statlist.slave_class = new_class
+	if new_class == 'heir':
+		for tr in variables.servant_unlock_traits:
+			add_trait(tr)
 	if has_status('trained'):
 		finish_training(true)
 	else:
@@ -1329,6 +1329,9 @@ func get_quest_time_remains():
 
 func quest_day_tick():
 	xp_module.quest_day_tick()
+
+func training_day_tick():
+	training.day_tick()
 
 func get_prof_number():
 	return dyn_stats.get_prof_number()
@@ -1542,15 +1545,6 @@ func get_servant_training_cost():
 
 func process_training_metrics(value):
 	training.process_training_metrics(value)
-
-func has_resistance_block():
-	return training.has_resistance_block()
-
-func get_loyalty_penalty_data():
-	return training.get_loyalty_penalty_data()
-
-func get_loyalty_growth():
-	return training.get_loyalty_growth()
 
 func can_add_thrall():
 	return enthrall.can_add_thrall()
@@ -2117,8 +2111,6 @@ func tick(): #work ticks are not here - as they are called in tasks order, not i
 	
 	self.hp += get_stat('hp_reg')
 	self.mp += get_stat('mp_reg')
-	#loyalty and obedience changes are in stats
-	training.tick()
 	if ResourceScripts.game_globals.hour == 2:
 		food.get_food()
 	#yet again workaround for effects, that should already be in action, but they don't
@@ -2247,7 +2239,12 @@ func calculate_price(shopflag = false, no_fame = false, desc_ready = false):
 		if desc_ready:
 			price_compo_text += '%s: {color=green|+%s%%}\n' % [
 				tr('STATFAME'), get_fame_bonus('price_bonus') * 100]
-	
+
+	if get_stat('slave_class') in ['slave', 'slave_trained'] and !check_trait('training_broke_in'):
+		value *= (1.0 / 3.0)
+		if desc_ready:
+			price_compo_text += '%s: {color=red|-66%%}\n' % tr('PRICEDESC_NOT_BROKEN_IN')
+
 	if desc_ready and round(value) < 50:
 		price_compo_text += "%s %s." % [tr('PRICEDESC_LESS'), 50]
 	return max(50,round(value))
@@ -2913,7 +2910,10 @@ var minor_training_timer = 0#in turns
 var cur_minor_training
 
 func get_minor_training_max():
-	return variables.minor_trainings_base + floor(get_stat('growth_factor') * variables.minor_trainings_per_growth)
+	var value = variables.minor_trainings_base + floor(get_stat('growth_factor') * variables.minor_trainings_per_growth)
+	if training.is_slave():
+		value = min(value, 2)
+	return value
 
 func get_minor_training_count():
 	return get_traits_by_tag('minor_training').size()

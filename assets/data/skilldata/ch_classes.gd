@@ -1961,7 +1961,7 @@ var effects = {
 		target = 'target',
 		tick_event = [variables.TR_TURN_F],
 		rem_event = [variables.TR_COMBAT_F, variables.TR_DEATH],
-		statchanges = {resist_ranged = 0.5},
+		statchanges = {resist_ranged = 50},
 		buffs = [{
 			icon = "res://assets/images/iconsskills/windwall.png",
 			description = "TRAITEFFECTWINDWALL",

@@ -266,7 +266,7 @@ var quests = {
 		description = "SQ_ELF_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -321,7 +321,7 @@ var quests = {
 		description = "SQ_RATKIN_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -356,7 +356,7 @@ var quests = {
 		description = "SQ_BEASTKIN_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -409,7 +409,7 @@ var quests = {
 		description = "SQ_MONSTER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -464,7 +464,7 @@ var quests = {
 		description = "SQ_FAIRY_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -507,7 +507,7 @@ var quests = {
 		description = "SQ_GARDENER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			[
@@ -555,7 +555,7 @@ var quests = {
 		description = "SQ_MAID_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			[
@@ -622,7 +622,7 @@ var quests = {
 		description = "SQ_MINER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			[
@@ -663,7 +663,7 @@ var quests = {
 		description = "SQ_CRAFTSMAN_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -704,7 +704,7 @@ var quests = {
 		description = "SQ_ALCHEMIST_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -748,7 +748,7 @@ var quests = {
 		description = "SQ_HUNTER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -785,7 +785,7 @@ var quests = {
 		description = "SQ_SHORTSTACK_DESC",
 		gen_req = [{type = 'global_settings', param = 'malechance', operant = 'lt', value = 100}],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -824,7 +824,7 @@ var quests = {
 		description = "SQ_FIGHTER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -866,7 +866,7 @@ var quests = {
 		description = "SQ_RANGER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -905,7 +905,7 @@ var quests = {
 		description = "SQ_HEALER_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 3,
 		slave_req = [
 			[
@@ -941,7 +941,7 @@ var quests = {
 		description = "SQ_THIEF_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 3,
 		slave_req = [
 			{
@@ -984,7 +984,7 @@ var quests = {
 		description = "SQ_SEX_GENERIC_DESC",
 		gen_req = [],
 		time_limit = [20, 25],
-		rewardpool = [4500],
+		rewardpool = [3500],
 		req_max = 3,
 		slave_req = [
 			{
@@ -1014,7 +1014,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -1058,7 +1058,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -1103,7 +1103,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -1160,7 +1160,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -1203,7 +1203,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 5,
 		slave_req = [
 			{
@@ -1253,7 +1253,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 4,
 		slave_req = [
 			{
@@ -1304,7 +1304,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 4,
 		slave_req = [
 			[
@@ -1359,7 +1359,7 @@ var quests = {
 		tags = ['t2'],
 		difficulty = 'medium',
 		time_limit = [20, 25],
-		rewardpool = [9000],
+		rewardpool = [7500],
 		req_max = 4,
 		slave_req = [
 			{

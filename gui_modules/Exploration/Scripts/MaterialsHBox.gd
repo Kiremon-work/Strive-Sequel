@@ -20,7 +20,7 @@ func update():
 		if selected_location.has('tags') and selected_location.tags.has(r_task):
 			var newbutton = input_handler.DuplicateContainerTemplate(self)
 			var jobdata = tasks.tasklist[r_task]
-			newbutton.get_node("TextureRect").texture = jobdata.production_icon
+			newbutton.get_node("TextureRect").texture = load(jobdata.production_icon)
 			var max_workers_count = jobdata.base_workers
 			var current_workers_count = 0
 			var task = ResourceScripts.game_res.check_location_job('recruiting', selected_location.id, r_task)

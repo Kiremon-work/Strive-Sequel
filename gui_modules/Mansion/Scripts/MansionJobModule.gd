@@ -8,6 +8,12 @@ var mode_farm = false
 
 func _ready():
 	$CloseButton.connect("pressed", self, 'close_job_pannel')
+	$CraftRules2/Label2.text = tr("PREDICTEDTASKLABEL")
+	$CraftRules2/filters/checks1/Label.text = tr("INVENTORYMATERIAL")
+	$CraftRules2/filters/checks2/Label.text = tr("ITEMS_LABEL")
+	$CraftRules2/filters/order1/Label.text = tr("MATERIALSORDERLABEL")
+	$CraftRules2/filters/order2/Label.text = tr("ITEMSORDERLABEL")
+	globals.connecttexttooltip($CraftRules2/crafttooltip2, tr("CRAFTRULES2TOOLTIP"))
 	globals.connecttexttooltip($BrothelRules/rulestooltip, tr("BROTHELTOOLTIP"))
 	gui_controller.add_close_button(self, "bigger_offset")#.connect("pressed", self, 'close_job_pannel')
 	$mod_select/occupation.connect('pressed', self, 'build_occupation')
@@ -392,9 +398,9 @@ func update_resources():
 		if selected_job != null and selected_job == 'crafting':
 			craftbutton.pressed = true
 		ResourceScripts.game_res._add_craft_job()
-		craftbutton.get_node("TextureRect").texture = load("res://assets/images/gui/gui icons/workicon.png") #fix icon
+		craftbutton.get_node("TextureRect").texture = load("res://assets/images/gui/inventory/icon_craft64x64.png")
 		craftbutton.connect("pressed", self, "select_resource", ["crafting", craftbutton])
-		globals.connecttexttooltip(craftbutton, tr('TASKCRAFTING'))
+		globals.connecttexttooltip(craftbutton, tr('TASKCRAFT'))
 		#------------
 		for i in tasks.tasklist.values():
 			if i.code in ["rest", "brothel", "recruit_easy", "recruit_hard"] or i.tags.has('special'):
@@ -574,8 +580,8 @@ func focus_on_person_task(ch):
 	if work_code == 'crafting':
 		if craftbutton != null:
 			select_resource("crafting", craftbutton)
-			open_my_craft()
-#			open_mavs_craft()
+			#open_my_craft()
+			open_mavs_craft()
 			return
 	var spec_button = _find_task_button_for_char(work_code)
 	select_resource(work_code, spec_button)
@@ -615,8 +621,8 @@ func select_job(button, newperson):
 		return
 	if selected_job == "crafting":
 		person.assign_to_task('crafting')
-		open_my_craft()
-#		open_mavs_craft()
+		#open_my_craft()
+		open_mavs_craft()
 		update_status(button, person)
 		update_resources()
 		show_faces()
@@ -971,6 +977,7 @@ var temporder2 = []
 
 func open_mavs_craft():
 	if person != null:
+		$CraftRules2/Label.text = tr("CRAFTRULES2TITLE") % person.get_short_name()
 		gather_orders()
 		rebuild_orders()
 	else:
@@ -1001,22 +1008,22 @@ func rebuild_orders():
 		var taskdata = tasks.tasklist[job]
 		if enabled_list_1.has(job):
 			newnode.pressed = true
-			newnode.text = "%s (%d)" % [tr(taskdata.name), person.get_job_priority(job, true)]
+			newnode.text = tr(taskdata.name)
 			newnode.connect('pressed', self, 'toggle_category_2', [job, false, true])
 		else:
 			newnode.pressed = false
-			newnode.text = "%s" % [tr(taskdata.name)]
+			newnode.text = tr(taskdata.name)
 			newnode.connect('pressed', self, 'toggle_category_2', [job, true, true])
 	for job in list2:
 		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/checks2, 'Button')
 		var taskdata = tasks.tasklist[job]
 		if enabled_list_2.has(job):
 			newnode.pressed = true
-			newnode.text = "%s (%d)" % [tr(taskdata.name), person.get_job_priority(job, false)]
+			newnode.text = tr(taskdata.name)
 			newnode.connect('pressed', self, 'toggle_category_2', [job, false, false])
 		else:
 			newnode.pressed = false
-			newnode.text = "%s" % [tr(taskdata.name)]
+			newnode.text = tr(taskdata.name)
 			newnode.connect('pressed', self, 'toggle_category_2', [job, true, false])
 	for job in temporder1:
 		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/order1, 'Button')
@@ -1025,7 +1032,7 @@ func rebuild_orders():
 		if enabled_list_1.has(job):
 			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
 		else:
-			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['gray'])
 		newnode.arraydata = job
 		newnode.parentnodearray = temporder1
 		newnode.target_node = self
@@ -1037,7 +1044,7 @@ func rebuild_orders():
 		if enabled_list_2.has(job):
 			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
 		else:
-			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['gray'])
 		newnode.arraydata = job
 		newnode.parentnodearray = temporder2
 		newnode.target_node = self

@@ -167,7 +167,7 @@ func _add_farming_task(res):
 
 func _add_craft_job():
 	if !tasks_progresses.has('crafting'):
-		tasks_progresses.crafting = {id = 'crafting', status = 'permanent', workers = [], workers_handled = {}, messages = [], location = 'aliron', name = 'TASKCRAFTNAME', descript = 'TASKCRAFTDESCRIPT', icon = "res://assets/images/gui/gui icons/workicon.png", type = 'permanent'} #fix icon
+		tasks_progresses.crafting = {id = 'crafting', status = 'permanent', workers = [], workers_handled = {}, messages = [], location = 'aliron', name = 'TASKCRAFTNAME', descript = 'TASKCRAFTDESCRIPT', icon = "res://assets/images/gui/inventory/icon_craft64x64.png", type = 'permanent'}
 
 
 func _add_farm_job():
@@ -240,11 +240,18 @@ func add_gathering_job_temp(task_template_id, location):
 			template[st] = jobdata[st]
 		tasks_progresses[id] = template
 		active_tasks.gathering.push_back(id)
+	else:
+		template = tasks_progresses[id]
 	if location == 'aliron':
 		_fix_max_workers(id)
 	else:
 		var locdata = ResourceScripts.world_gen.get_location_from_code(location)
-		template.max_workers = locdata.gather_limit_resources[jobdata.production_item]
+		if locdata.type in ["dungeon", "encounter"]:
+			pass #limited by gather_limit_resources amount, not worker count
+		elif locdata.has("category") and locdata.category == 'capital':
+			_fix_max_workers(id)
+		elif locdata.has('gather_resources') and locdata.gather_resources.has(jobdata.production_item):
+			template.max_workers = locdata.gather_resources[jobdata.production_item]
 	return id
 
 

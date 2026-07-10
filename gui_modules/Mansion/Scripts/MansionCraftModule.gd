@@ -724,8 +724,8 @@ func build_num_select():
 		if item_data.crafttype == 'modular':
 			$NumberSelect2/VBoxContainer/icon.material = load("res://assets/ItemShader.tres").duplicate()
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt2/Amount.text = str(repeats)
-	$NumberSelect2/VBoxContainer/HBoxContainer2/pt2/Amount.text = "%d / %d" % [cap_up, amount]
-	$NumberSelect2/VBoxContainer/HBoxContainer3/pt2/Amount.text = "%d / %d" % [cap_low, amount]
+	$NumberSelect2/VBoxContainer/HBoxContainer2/pt2/Amount.text = "%d (%d)" % [cap_up, amount]
+	$NumberSelect2/VBoxContainer/HBoxContainer3/pt2/Amount.text = "%d (%d)" % [cap_low, amount]
 	if num_select_expanded:
 		$NumberSelect2/VBoxContainer/AdvOption/HBoxContainer/TextureButton.pressed = true
 		$NumberSelect2/VBoxContainer/label1.visible = false

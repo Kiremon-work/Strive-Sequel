@@ -562,7 +562,7 @@ func build_info(loc = null):
 		if location.has('tags') and location.tags.has(r_task):
 			var newbutton = input_handler.DuplicateContainerTemplate(info_res_node)
 			var jobdata = tasks.tasklist[r_task]
-			newbutton.get_node("Icon").texture = jobdata.production_icon
+			newbutton.get_node("Icon").texture = load(jobdata.production_icon)
 			var max_workers_count = jobdata.base_workers
 			var current_workers_count = 0
 			for task_id in ResourceScripts.game_res.active_tasks.recruiting:

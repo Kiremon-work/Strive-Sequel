@@ -8,11 +8,11 @@ var trainees = []
 var dispositions = {}
 var dispositions_known = {}
 
-var spirit = 100
-var spirit_1 = 100
 var loyalty = 0
-var resistance = 100
+var training_points = 0
 var training_metrics = {}
+var days_since_training = 0
+var resist_fail_counter = 0
 
 var stored_reqs = {}
 
@@ -21,6 +21,7 @@ var cooldown = {
 #	main = 0,
 	positive = 0,
 	mindread = 0,
+	negotiation = 0,
 }
 
 
@@ -31,44 +32,49 @@ func cooldown_tick():
 		cooldown.positive -= 1
 	if cooldown.mindread > 0:
 		cooldown.mindread -= 1
+	if cooldown.negotiation > 0:
+		cooldown.negotiation -= 1
 
-func tick():
-	if (is_slave() and is_in_training()) or is_servant():
-		set_resistance(resistance - parent.get_ref().get_stat('resistance_red'))
-	if is_servant():
-		add_stat('loyalty', get_loyalty_growth())
+func can_negotiate():
+	return cooldown.negotiation <= 0
 
-func set_resistance(value):
-	resistance = clamp(value, 0, 100)#mind, that clamp() returns float
+func day_tick():
+	if is_slave() and is_in_training():
+		days_since_training += 1
+		if days_since_training > get_loyalty_decay_grace():
+			loyalty = clamp(loyalty - get_loyalty_decay_amount(), 0, 100)
 
-func rand_resistance():
-	set_resistance(round(rand_range(90, 100)))
+func get_loyalty_decay_grace():
+	return 5 - parent.get_ref().get_stat('authority_factor') / 2.0
 
-func get_loyalty_growth():
-	return 1 - resistance * 0.01
+func get_loyalty_decay_amount():
+	return 10 + 2 * parent.get_ref().get_stat('authority_factor')
 
-func get_loyalty_penalty_data():
-	var lvl_list = variables.training_resistance.keys()
-	lvl_list.sort()
-	for i in range(lvl_list.size()-1, -1, -1):
-		if resistance >= lvl_list[i]:
-			return variables.training_resistance[lvl_list[i]].duplicate()#duplicate just for reinsurance
+func get_training_points_cap():
+	return 50 + 10 * parent.get_ref().get_stat('tame_factor')
 
-func get_loyalty_penalty():#returns portion: 0.3 means 30% penalty
-	return get_loyalty_penalty_data().penalty
+func is_broke_in():
+	return parent.get_ref().check_trait('training_broke_in')
+
+func get_loyalty_cap():
+	if is_broke_in():
+		return 100
+	return 50
 
 func add_stat(statname, value):
 	if is_slave() and !enable:#not realy sure if it's necessary at all
 		return
-	if statname == 'resistance':
-		set_resistance(resistance + value)
-	elif statname == 'loyalty':
+	if statname == 'loyalty':
 		if !parent.get_ref().has_status('no_loyalty_growth'):
 			loyalty += value
+			if is_slave():
+				loyalty = clamp(loyalty, 0, get_loyalty_cap())
+				if is_in_training() and loyalty >= 100:
+					finish_training()
+	elif statname == 'training_points':
+		training_points = clamp(training_points + value, 0, get_training_points_cap())
 	else:
 		set(statname, get(statname) + value)
-	if spirit < 0:
-		spirit = 0
 
 
 func setup_dispositions(race_id):
@@ -143,12 +149,8 @@ func is_in_training():
 
 func can_be_trained():
 #	return enable and trainer != null and cooldown.main < 1
-	return is_in_training() and !has_resistance_block()
+	return is_in_training()
 
-func has_resistance_block():
-	if !is_slave(): return false
-	return get_loyalty_penalty() == 1
-	
 func get_disposition_name(value):
 	return tr('DISPOSITION' + value.to_upper())
 
@@ -176,9 +178,10 @@ func clear_training():
 
 
 func reset_training():
-	spirit = 100
 	loyalty = 0
-	rand_resistance()
+	training_points = 0
+	days_since_training = 0
+	resist_fail_counter = 0
 	enable = true
 	training_metrics.clear()
 	
@@ -242,38 +245,96 @@ func get_servant_training_cost():
 
 func add_training(id):
 	var cost = get_training_cost()
-	if is_servant():
-		cost = get_servant_training_cost()
-		rand_resistance()
-	loyalty -= cost
+	if !is_servant():
+		training_points -= cost
 	parent.get_ref().add_trait(id)
 
 
 func add_training_post(id):
 	var data = Traitdata.traits[id]
-	spirit -= data.cost
+	training_points -= data.cost
 	parent.get_ref().add_trait(id)
 
 
 func finish_training(internal = false):
 	if internal:
 		enable = false
-		spirit_1 = spirit
 		parent.get_ref().remove_trait('untrained')
 		if trainer != null:
 			var tchar = characters_pool.get_char_by_id(trainer)
 			tchar.get_trainees().erase(parent.get_ref().id)
 			trainer = null
 	else:
-		if !parent.get_ref().has_status('callmaster'):
-			return
 		enable = false
-		spirit_1 = spirit
 		if trainer != null:
 			var tchar = characters_pool.get_char_by_id(trainer)
 			tchar.get_trainees().erase(parent.get_ref().id)
 			trainer = null
 		parent.get_ref().set_slave_category('slave_trained')
+
+
+func format_chance_diff(before, after):
+	var parts = []
+	for key in ['fail', 'resist', 'success', 'crit_success']:
+		if after[key] != before[key]:
+			parts.push_back("%s %+.0f" % [tr('CHANCELOG_' + key.to_upper()), after[key] - before[key]])
+	return PoolStringArray(parts).join(", ")
+
+
+func format_chance_entry(changes):
+	var parts = []
+	for key in changes:
+		if key.ends_with('_add'):
+			parts.push_back("%s %+.0f" % [tr('CHANCELOG_' + key.trim_suffix('_add').to_upper()), changes[key]])
+		else:
+			parts.push_back("%s x%.2f" % [tr('CHANCELOG_' + key.trim_suffix('_mul').to_upper()), changes[key]])
+	return PoolStringArray(parts).join(", ")
+
+
+func gather_chance_entries(data, cat_data, ch_trainer, disposition):
+	var entries = []
+	for src in [{list = data.bonus_changes, label = tr(data.name)}, {list = cat_data.bonus_changes, label = tr(cat_data.name)}]:
+		for eff in src.list:
+			if !eff.has('chance'):
+				continue
+			var label = ""
+			var applies = false
+			match eff.type:
+				'always':
+					applies = true
+					label = src.label
+				'trainer_class':
+					if ch_trainer.has_profession(eff.check):
+						applies = true
+						label = tr('CHANCELOG_SRC_TRAINERCLASS') % tr(classesdata.professions[eff.check].name)
+				'disposition':
+					if disposition in eff.check:
+						applies = true
+						label = tr('CHANCELOG_SRC_DISPOSITION') % tr('DISPOSITION' + disposition.to_upper())
+			if !applies:
+				continue
+			var resolved = {}
+			for key in eff.chance:
+				var tmp = eff.chance[key]
+				if tmp is Array:
+					if key.ends_with('_add'):
+						tmp = globals.rng.randi_range(tmp[0], tmp[1])
+					else:
+						tmp = globals.rng.randf_range(tmp[0], tmp[1])
+				resolved[key] = tmp
+			entries.push_back({label = label, changes = resolved})
+	return entries
+
+
+func apply_chance_entries(entries, suffix, chance_data):
+	for entry in entries:
+		for key in entry.changes:
+			if key.ends_with(suffix):
+				var ch = key.trim_suffix(suffix)
+				if suffix == '_add':
+					chance_data[ch] += entry.changes[key]
+				else:
+					chance_data[ch] *= entry.changes[key]
 
 
 func apply_training(code):
@@ -290,6 +351,7 @@ func apply_training(code):
 	var cat = data.type
 	var cat_data = Skilldata.training_categories[cat]
 	var disposition = dispositions[cat]
+	var was_disposition_known = dispositions_known[cat]
 	
 #	if !training_metrics.has(code):
 #		training_metrics[code] = 0
@@ -297,54 +359,55 @@ func apply_training(code):
 	if !training_metrics.has(cat):
 		training_metrics[cat] = 0
 	training_metrics[cat] += 1
-	#gather chance effects
-	var effects = []
-	for eff in data.bonus_changes + cat_data.bonus_changes:
-		if !eff.has('chance'):
-			continue
-		match eff.type:
-			'always':
-				effects.push_back(eff.chance)
-			'trainer_class':
-				if ch_trainer.has_profession(eff.check):
-					effects.push_back(eff.chance)
-			'disposition':
-				if disposition in eff.check:
-					effects.push_back(eff.chance)
-	
+	#gather chance effects, each resolved once (random ranges rolled here) and labeled with its source
+	var chance_entries = gather_chance_entries(data, cat_data, ch_trainer, disposition)
+
 	var chance_data = variables.disposition_results[disposition].duplicate(true)
+	var chance_log = []
+#	chance_log.append(tr('CHANCELOG_BASE') % [tr('DISPOSITION' + disposition.to_upper()), chance_data.fail, chance_data.resist, chance_data.success, chance_data.crit_success])
+	var chance_stage = chance_data.duplicate(true)
 	#modify chances
-	chance_data.fail -= 5 * parent.get_ref().get_stat('tame_factor')
-	chance_data.crit_success += 5 * parent.get_ref().get_stat('tame_factor')
-	for eff_dict in effects:
-		for eff in eff_dict:
-			if eff.ends_with('_add'):
-				var tmp = eff_dict[eff]
-				if tmp is Array:
-					tmp = globals.rng.randi_range(tmp[0], tmp[1])
-				var ch = eff.trim_suffix('_add')
-				chance_data[ch] += tmp
-	for eff_dict in effects:
-		for eff in eff_dict:
-			if eff.ends_with('_mul'):
-				var tmp = eff_dict[eff]
-				if tmp is Array:
-					tmp = globals.rng.randf_range(tmp[0], tmp[1])
-				var ch = eff.trim_suffix('_mul')
-				chance_data[ch] *= tmp
+	chance_data.fail -= 3 * parent.get_ref().get_stat('tame_factor')
+	chance_data.crit_success += 3 * parent.get_ref().get_stat('tame_factor')
+	var tame_diff = format_chance_diff(chance_stage, chance_data)
+	if tame_diff != "":
+		chance_log.append(tr('CHANCELOG_TAMEFACTOR') % [parent.get_ref().get_stat('tame_factor'), tame_diff])
+	apply_chance_entries(chance_entries, '_add', chance_data)
+	apply_chance_entries(chance_entries, '_mul', chance_data)
+	for entry in chance_entries:
+		var entry_text = format_chance_entry(entry.changes)
+		if entry_text != "":
+			chance_log.append("%s: %s" % [entry.label, entry_text])
 	for res in chance_data:
 		if chance_data[res] < 0:
 			chance_data[res] = 0
+	var chance_total = float(chance_data.fail + chance_data.resist + chance_data.success + chance_data.crit_success)
+	var chance_percent = {fail = 0, resist = 0, success = 0, crit_success = 0}
+	if chance_total > 0:
+		for key in chance_percent:
+			chance_percent[key] = float(chance_data[key]) / chance_total * 100.0
+	chance_log.append(tr('CHANCELOG_FINAL') % [chance_percent.fail, chance_percent.resist, chance_percent.success, chance_percent.crit_success])
 	#roll result
 	var result = input_handler.weightedrandom_dict(chance_data)
 	if ResourceScripts.game_globals.easytrain:
 		result = 'crit_success'
+	if !is_broke_in() and code != 'mindread' and result in ['success', 'crit_success']:
+		parent.get_ref().add_trait('training_broke_in')
+		effect_text += "{color=yellow|" + (tr('TRAININGBROKENINANNOUNCE') % parent.get_ref().get_short_name()) + "}\n"
+	if result in ['fail', 'resist']:
+		resist_fail_counter += 1
+		if resist_fail_counter >= parent.get_ref().get_stat('tame_factor') + 2:
+			resist_fail_counter = 0
+			var neg_trait = parent.get_ref().get_random_trait_tag('negative')
+			parent.get_ref().add_trait(neg_trait)
+			if neg_trait != null:
+				effect_text += "{color=red|" + (tr('TRAININGNEGATIVETRAITGAINED') % [parent.get_ref().get_short_name(), tr(Traitdata.traits[neg_trait].name)]) + "}\n"
 	var result_data = variables.training_results_base[result].duplicate(true)
 	for st in result_data:
 		if result_data[st] is Array:
 			result_data[st] = globals.rng.randi_range(result_data[st][0], result_data[st][1])
 	#gather result effects
-	effects.clear()
+	var effects = []
 	for eff in data.bonus_changes + cat_data.bonus_changes:
 		if !eff.has('effect'):
 			continue
@@ -374,7 +437,7 @@ func apply_training(code):
 					effects.push_back(eff.effect)
 	#modify result
 	if ResourceScripts.game_res.upgrades.has('resting') and ResourceScripts.game_res.upgrades.resting > 0:
-		result_data.spirit += 1
+		result_data.training_points += 1
 	for eff_dict in effects:
 		for eff in eff_dict:
 			if eff.ends_with('_mul'):
@@ -398,16 +461,15 @@ func apply_training(code):
 		#For now fame works separately, but maybe it should influence trainer_loyalty_bonus
 		var trainers_bonus = ch_trainer.get_stat('trainer_loyalty_bonus') + ch_trainer.get_fame_bonus('loyalty_bonus')
 		result_data.loyalty += result_data.loyalty * trainers_bonus
-		if cat != 'positive':
-			result_data.loyalty -= result_data.loyalty * get_loyalty_penalty()
 		if result_data.loyalty < 0:
-			result_data.loyalty = 0 
-	if result_data.spirit != 0:
-		result_data.spirit += parent.get_ref().get_stat('training_spirit')
-		if result_data.spirit > 0:
-			result_data.spirit = 0 
+			result_data.loyalty = 0
+	if result_data.training_points != 0:
+		result_data.training_points += parent.get_ref().get_stat('training_points_bonus')
+		if result_data.training_points < 0:
+			result_data.training_points = 0
+		if !is_broke_in():
+			result_data.training_points = floor(result_data.training_points * 0.5)
 	#other effects
-	var resistance_increased = false
 	if code == 'dayoff':
 #		parent.get_ref().apply_effect_code('e_s_dayoff')
 		parent.get_ref().affect_char({type = 'set_availability', value = false, duration = 1})
@@ -445,12 +507,10 @@ func apply_training(code):
 				effect_text += "%s - %s \n" % [tr(ddata.name), get_disposition_name(dispositions[dis])]
 	else:
 #		cooldown.main = 3
+		cooldown.positive = 1
 		if cat == 'positive':
-			cooldown.positive = 1
 			ResourceScripts.game_party.add_relationship_value(parent.get_ref().id, trainer, globals.rng.randi_range(1, 2))
 		else:
-			rand_resistance()
-			resistance_increased = true
 			if parent.get_ref().has_status('likes_training'):
 				ResourceScripts.game_party.add_relationship_value(parent.get_ref().id, trainer, 3)
 			else:
@@ -463,21 +523,17 @@ func apply_training(code):
 	#apply
 	if parent.get_ref().has_status('no_loyalty_training'):
 		result_data.loyalty = 0
-	loyalty += result_data.loyalty
-	spirit += result_data.spirit
+	days_since_training = 0
+	add_stat('training_points', result_data.training_points)
+	add_stat('loyalty', result_data.loyalty)
+	var training_finished_now = !enable
 	if randf() >= 0.6 && cat != 'positive' && code != 'mindread':
 		effect_text += "\n({color=aqua|" + parent.get_ref().get_short_name() + "}: " + parent.get_ref().translate(input_handler.get_random_chat_line(parent.get_ref(), 'train_'+result)) + ")\n"
 	if result_data.loyalty != 0:
 		effect_text += statdata.statdata.loyalty.name + " + " + str(result_data.loyalty) + "\n"
-#	if result_data.spirit != 0:
-#		effect_text += statdata.statdata.spirit.name + " - " + str(- result_data.spirit)  + "\n"
-	for rec in variables.spirit_changes:
-		if result_data.spirit >= rec.min and result_data.spirit <= rec.max:
-			effect_text += "{color=yellow|" + parent.get_ref().translate(tr(rec.desc)) + "}\n"
-			break
-	if resistance_increased:
-		effect_text += "{color=yellow|%s}\n" % (tr('TRAININGRESISTANCEINCREASE') % resistance)
-	
+	if result_data.training_points != 0:
+		effect_text += statdata.statdata.training_points.name + " + " + str(result_data.training_points) + "\n"
+
 	if data.has('disposition_affects'):
 		for tag in data.disposition_affects:
 			if tag is Array:
@@ -491,18 +547,7 @@ func apply_training(code):
 					effect_text += disposition_change_report(tag, 2)
 				else:
 					effect_text += disposition_change_report(tag, 1)
-	
-	if spirit < 0:
-		spirit = 0
-#	if spirit < variables.spirit_limits[0]:
-#		if !parent.get_ref().check_trait('training_broken'):
-#			effect_text += tr('TRAININGSTATUS1') + "\n"
-#			parent.get_ref().remove_trait('training_damaged')
-#			parent.get_ref().add_trait('training_broken')
-#	elif spirit < variables.spirit_limits[1]:
-#		if !parent.get_ref().check_trait('training_damaged'):
-#			effect_text += tr('TRAININGSTATUS2') + "\n"
-#			parent.get_ref().add_trait('training_damaged')
+
 	#display
 	var dialogue_data = {text = '', tags = ['skill_report_event'], options = []}
 	var text = tr(data.scene_text)
@@ -510,7 +555,7 @@ func apply_training(code):
 	for tag in variables.dynamic_text_vars:
 		text = text.replace('[%s1]' % tag, ch_trainer.translate('[%s]' % tag))
 		text = text.replace('[%s2]' % tag, parent.get_ref().translate('[%s]' % tag))
-	
+
 	if data.result_text.has(result):
 		text += "\n"
 		text += tr(data.result_text[result])
@@ -519,13 +564,29 @@ func apply_training(code):
 		dialogue_data.image = data.scene_image
 	else:
 		dialogue_data.image = 'noevent'
-	dialogue_data.text = text + "\n" + effect_text
-	
+	var chance_text = ""
+	if was_disposition_known:
+		chance_text = "{color=gray_text_dialogue|" + PoolStringArray(chance_log).join("\n") + "}\n"
+#	elif gui_controller.mansion.in_test_mode:
+#		chance_text = "{color=gray_text_dialogue|" + tr('CHANCELOG_DEBUG_NOTE') + "\n" + PoolStringArray(chance_log).join("\n") + "}\n"
+	var result_colors = {fail = 'red', resist = 'yellow', success = 'green', crit_success = 'green'}
+	var result_header = "[center]{color=%s|%s}[/center]\n" % [result_colors[result], tr('TRAININGRESULT_' + result.to_upper())]
+	dialogue_data.text = chance_text + result_header + text + "\n" + effect_text
+
 	input_handler.active_character = parent.get_ref()
-	
+
 	dialogue_data.options.append({code = 'close', text = tr("DIALOGUECLOSE"), reqs = []})
-	
+
 	input_handler.interactive_message_custom(dialogue_data)
+
+	if training_finished_now:
+		var announce_data = {
+			text = tr('TRAININGCOMPLETEDANNOUNCE') % parent.get_ref().get_short_name(),
+			image = 'praise',
+			tags = [],
+			options = [{code = 'close', text = tr("DIALOGUECONTINUE"), reqs = []}]
+		}
+		input_handler.interactive_message(announce_data, 'direct', {})
 
 
 func get_dispositions_text():
@@ -650,3 +711,8 @@ func fix_old_save():
 			cooldown.positive = 0
 	if cooldown.has('main'):
 		cooldown.erase('main')
+	if !cooldown.has('negotiation'):
+		cooldown.negotiation = 0
+	if parent.get_ref().get_stat('slave_class') == 'heir':
+		for tr in variables.servant_unlock_traits:
+			parent.get_ref().add_trait(tr)

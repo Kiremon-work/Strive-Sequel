@@ -13,15 +13,18 @@ func _ready():
 	$no_trainer/TextureButton.connect("pressed", self, 'build_trainer_list')
 	$training/trainer_frame.connect("pressed", self, 'build_trainer_list')
 	$finished/reset_button.connect("pressed", self, 'reset_training')
-	$training/complete_button.connect("pressed", self, 'finish_training')
+	$training/complete_button.visible = false
 	globals.connecttexttooltip($training/Tooltip, tr("INFOTRAINING"))
 	globals.connecttexttooltip($trainer_list/tooltip, tr("INFOSLAVETRAINER"))
 	$training/spirit.max_value = 100
-	globals.connecttexttooltip($training/TextureRect, tr("LOYALTYTOOLTIP")) 
-	globals.connecttexttooltip($training/TextureRect2, tr("SPIRITTOOLTIP")) 
-	globals.connecttexttooltip($training/spirit, tr("SPIRITTOOLTIP")) 
+	globals.connecttexttooltip($training/TextureRect, tr("TRAININGPOINTSTOOLTIP"))
+	globals.connecttexttooltip($training/TextureRect2, tr("LOYALTYTOOLTIP"))
+	globals.connecttexttooltip($training/spirit, tr("LOYALTYTOOLTIP"))
 	globals.connecttexttooltip($training/trainer_frame, tr("CLICKTOCHANGE"))
-	
+	globals.connecttexttooltip($training/cd, tr("LOYALTYDECAYTOOLTIP"))
+	$training_servant/TalkButton.connect("pressed", self, 'open_servant_unlock_dialogue')
+	$training_servant/TalkButton.text = tr('SERVANTUNLOCK_TALK_BUTTON')
+
 	globals.connecttexttooltip($finished/reset_button, tr("RESETTRAINREQ"))
 	input_handler.register_btn_source("trainer_btn", self, "tut_get_no_trainer_btn")
 	input_handler.register_btn_source("trainer_select_btn", self, "tut_get_trainer_select")
@@ -166,9 +169,10 @@ func remove_trainer():
 func build_posttrain():
 	$finished.visible = true
 	$finished/reset_button.disabled = (ResourceScripts.game_res.if_has_items('oblivion_potion', 'lt', 1))
-	var spirit = person.get_stat('spirit')
-	var spirit_1 = person.get_stat('spirit_1')
-	$finished/status.text = tr('STATSPIRIT') + ": " + str(spirit) + "/" + str(spirit_1)
+	var training_points = person.get_stat('training_points')
+	var training_points_cap = person.training.get_training_points_cap()
+	$finished/status.text = tr('TRAININGLABELLOYALTY') % [training_points, training_points_cap]
+	globals.connecttexttooltip($finished/tp_icon, tr("TRAININGPOINTSTOOLTIP"))
 	var text = tr('TRAININGFINISHHEADER')
 	var list = person.get_traits_by_tag('training')
 	input_handler.ClearContainer($finished/VBoxContainer/HBoxContainer2, ['Button'])
@@ -184,6 +188,7 @@ func build_posttrain():
 			panel.get_node('icon').texture = trdata.icon
 		globals.connecttexttooltip(panel, "[center]" +tr(trdata.name) + "[/center]\n" +  person.translate(tr(trdata.descript)))
 	
+	$finished/VBoxContainer/select_text.text = tr('TRAININGBONUSES')
 	input_handler.ClearContainer($finished/VBoxContainer/HBoxContainer3, ['Button'])
 	for tr in tr_rewards:
 		var trdata = Traitdata.traits[tr]
@@ -200,7 +205,7 @@ func build_posttrain():
 			panel.texture_disabled = load("res://assets/Textures_v2/CHAR_INFO/loyalty/Assigned trainer/button traits/button_traits_hover.png")
 		else:
 			panel.pressed = false
-			if spirit < trdata.cost:
+			if training_points < trdata.cost:
 				panel.disabled = true
 				panel.get_node('Label').set("custom_colors/font_color", Color(variables.hexcolordict.k_red))
 			else:
@@ -228,96 +233,98 @@ func build_training():
 	build_training_header()
 	build_training_list()
 	build_training_traits()
-	update_confirm_finish()
+
+
+const SERVANT_UNLOCK_LIST = [
+	{code = 'training_s_working', label = 'SERVANTUNLOCK_WORKING', node = 'working', select_code = 'negotiation_select_working'},
+	{code = 'training_s_combat', label = 'SERVANTUNLOCK_COMBAT', node = 'combat', select_code = 'negotiation_select_combat'},
+	{code = 'training_s_relation', label = 'SERVANTUNLOCK_DATING', node = 'dating', select_code = 'negotiation_select_dating', hard_req = {code = 'stat', stat = 'affection', operant = 'gte', value = 25}, hard_req_text = 'SERVANTUNLOCK_REQ_AFFECTION'},
+	{code = 'training_s_sexservice', label = 'SERVANTUNLOCK_SEX', node = 'sex', select_code = 'negotiation_select_sex'},
+	{code = 'training_s_sexservice_adv', label = 'SERVANTUNLOCK_SEXSERVICE', node = 'sexservice', select_code = 'negotiation_select_sexservice', hard_req = {code = 'stat', stat = 'consent', operant = 'gte', value = 2}, hard_req_text = 'SERVANTUNLOCK_REQ_CONSENT'},
+]
 
 
 func build_training_servant():
 	gather_data()
-	var cost = person.get_servant_training_cost()
 	$training_servant.visible = true
-	$training_servant/cost.text = tr('TRAININGCOST') % cost
-	
-	var resistance_value = person.get_stat('resistance')
-	var resistance_reduction = person.get_stat('resistance_red')
-	var resistance_text
-	if resistance_value > 0:
-		resistance_text = tr('TRAININGLABELRESISTANCEDROP') % [
-			resistance_value, resistance_reduction]
+	$training_servant/cost.visible = false
+	$training_servant/resistance.visible = false
+	$training_servant/loyalty.visible = false
+	$training_servant/HBoxContainer2.visible = false
+
+	var all_unlocked = true
+	for entry in SERVANT_UNLOCK_LIST:
+		var row = $training_servant/UnlockList.get_node(entry.node)
+		row.get_node('name').text = tr(entry.label)
+		var status_label = row.get_node('status')
+		if person.check_trait(entry.code):
+			status_label.text = tr('SERVANTUNLOCK_UNLOCKED')
+			status_label.set("custom_colors/font_color", Color(variables.hexcolordict.green))
+		else:
+			all_unlocked = false
+			status_label.text = tr('SERVANTUNLOCK_LOCKED')
+			status_label.set("custom_colors/font_color", Color(variables.hexcolordict.red))
+
+	if all_unlocked:
+		$training_servant/TalkButton.visible = false
 	else:
-		resistance_text = tr('TRAININGLABELRESISTANCE') % resistance_value
-	$training_servant/resistance/label.text = resistance_text
-	globals.connecttexttooltip($training_servant/resistance, tr("TRAINSERVTOOLTIPRESISTANCE") % [person.get_short_name(), resistance_reduction])
-	
-	var loyalty_label = $training_servant/loyalty/label
-	var loyalty_value = person.get_stat('loyalty')
-	var loyalty_growth = person.get_loyalty_growth()
-	loyalty_label.text = tr('TRAININGLABELLOYALTYGROW') % [
-		floor(loyalty_value), loyalty_growth]
-	var loyalty_color = variables.hexcolordict.yellow
-	if loyalty_value >= cost:
-		loyalty_color = variables.hexcolordict.green
-	loyalty_label.set("custom_colors/font_color", Color(loyalty_color))
-	globals.connecttexttooltip($training_servant/loyalty, tr("TRAINSERVTOOLTIPLOYALTY") % [
-		person.get_short_name(), loyalty_growth])
-	
-	input_handler.ClearContainer($training_servant/HBoxContainer2, ['Button'])
-	for tr in tr_traits_s:
-		var panel = input_handler.DuplicateContainerTemplate($training_servant/HBoxContainer2, 'Button')
-		var trdata = Traitdata.traits[tr]
-		if trdata.icon is String:
-			panel.get_node('icon').texture = load(trdata.icon)
+		$training_servant/TalkButton.visible = true
+		if person.training.can_negotiate():
+			$training_servant/TalkButton.disabled = false
+			$training_servant/TalkButton.text = tr('SERVANTUNLOCK_TALK_BUTTON')
 		else:
-			panel.get_node('icon').texture = trdata.icon
-		globals.connecttexttooltip(panel, "[center]" + tr(trdata.name) + "[/center]\n"+ person.translate(tr(trdata.descript)))
-		if person.check_trait(tr):
-			panel.pressed = true
-		else:
-			panel.pressed = false
-			if person.get_stat('loyalty') >= cost and person.checkreqs(trdata.reqs) and person.training.check_stored_reqs(tr) and !person.has_status('no_trainings'):
-				panel.connect('toggled', self, 'press_trait_servant', [tr])
-			else:
-				panel.disabled = true
-				panel.material = load("res://assets/sfx/bw_shader.tres")
-				panel.get_node('icon').material = load("res://assets/sfx/bw_shader.tres")
-				panel.get_node('icon').modulate = Color(0.3, 0.3, 0.3, 1.0)
+			$training_servant/TalkButton.disabled = true
+			$training_servant/TalkButton.text = tr('SERVANTUNLOCK_TALK_BUTTON_COOLDOWN') % person.training.cooldown.negotiation
+
+
+func open_servant_unlock_dialogue():
+	var options = []
+	for entry in SERVANT_UNLOCK_LIST:
+		if person.check_trait(entry.code):
+			continue
+		var option_text = tr(entry.label)
+		var reqs = []
+		if entry.has('hard_req'):
+			reqs.append({type = 'active_character_checks', value = [entry.hard_req]})
+			if !person.checkreqs(entry.hard_req):
+				option_text += " (%s)" % tr(entry.hard_req_text)
+		options.append({code = entry.select_code, text = option_text, reqs = reqs, not_hide = true})
+	options.append({code = 'close', text = tr('SERVANTUNLOCK_LEAVE'), reqs = []})
+	var dialogue_data = {
+		text = tr('SERVANTUNLOCK_DIALOGUE_TEXT') % person.get_short_name(),
+		image = 'noevent',
+		tags = ['custom_effect'],
+		options = options,
+	}
+	input_handler.active_character = person
+	input_handler.interactive_message_custom(dialogue_data)
 
 
 func build_training_header():
 	var trainer = person.get_trainer()
 	$training/trainer_frame/icon.texture = trainer.get_icon()
 	$training/name.text = tr("TRAINING_TRAINER_NAME") % trainer.get_full_name()
-#	$training/spirit.text = tr('TRAININGLABELSPIRIT') % person.get_stat('spirit')
-	$training/spirit.value = person.get_stat('spirit')
+	$training/spirit.value = person.get_stat('loyalty')
+	$training/resistance.visible = false
+
+	var tp_label = $training/loyalty
+	var tp_value = person.get_stat('training_points')
+	var tp_cap = person.training.get_training_points_cap()
+	tp_label.text = tr('TRAININGLABELLOYALTY') % [floor(tp_value), tp_cap]
+	var tp_color = variables.hexcolordict.yellow
+	if tp_value >= person.get_training_cost():
+		tp_color = variables.hexcolordict.green
+	tp_label.set("custom_colors/font_color", Color(tp_color))
 	
-	var resistance_value = person.get_stat('resistance')
-	var resistance_reduction = person.get_stat('resistance_red')
-	var resistance_text
-	if resistance_value > 0:
-		resistance_text = tr('TRAININGLABELRESISTANCEDROP') % [
-			resistance_value, resistance_reduction]
+	var decay_grace = person.training.get_loyalty_decay_grace()
+	var decay_amount = person.training.get_loyalty_decay_amount()
+	var days_left = int(floor(decay_grace)) + 1 - person.training.days_since_training
+	if days_left > 0:
+		$training/cd.text = tr('TRAININGDECAYSIN') % [days_left, decay_amount]
+		$training/cd.set("custom_colors/font_color", Color(variables.hexcolordict.yellow))
 	else:
-		resistance_text = tr('TRAININGLABELRESISTANCE') % resistance_value
-	$training/resistance/label.text = resistance_text
-	var penalty_data = person.get_loyalty_penalty_data()
-	globals.connecttexttooltip($training/resistance, "%s\n{color=%s|%s}" % [
-		(tr("TRAININGTOOLTIPRESISTANCE") % [
-			person.get_short_name(), resistance_reduction]
-		),
-		penalty_data.color, tr(penalty_data.text)
-	])
-	
-	var loyalty_label = $training/loyalty
-	var loyalty_value = person.get_stat('loyalty')
-	loyalty_label.text = tr('TRAININGLABELLOYALTY') % floor(loyalty_value)
-	var loyalty_color = variables.hexcolordict.yellow
-	if loyalty_value >= person.get_training_cost():
-		loyalty_color = variables.hexcolordict.green
-	loyalty_label.set("custom_colors/font_color", Color(loyalty_color))
-	
-	if person.has_resistance_block():
-		$training/cd.text = tr ('TRAINRESISTANT')
-	else:
-		$training/cd.text = tr ('TRAINREADY')
+		$training/cd.text = tr('TRAININGDECAYING') % decay_amount
+		$training/cd.set("custom_colors/font_color", Color(variables.hexcolordict.red))
 
  
 func build_training_list():
@@ -345,15 +352,10 @@ func build_training_list():
 				globals.connecttexttooltip(panel, text)
 				panel.get_node('name').set("custom_colors/font_color", Color(variables.hexcolordict.red))
 			#avail check
-			elif ((tr == 'mindread' and person.training.cooldown.mindread > 0)
-					or (category == 'positive' and person.training.cooldown.positive > 0)):
+			elif !gui_controller.mansion.in_test_mode and ((tr == 'mindread' and person.training.cooldown.mindread > 0)
+					or person.training.cooldown.positive > 0):
 				panel.disabled = true
 				text = "{color=red|"+tr('ACTIONALREADYDONETODAY') +"}\n\n"+ text
-				globals.connecttexttooltip(panel, text)
-				panel.get_node('name').set("custom_colors/font_color", Color(variables.hexcolordict.gray))
-			elif category != 'positive' and person.has_resistance_block():
-				panel.disabled = true
-				text = "{color=red|"+tr('TRAINRESISTANT') +"}\n\n"+ text
 				globals.connecttexttooltip(panel, text)
 				panel.get_node('name').set("custom_colors/font_color", Color(variables.hexcolordict.gray))
 			#cost check
@@ -398,7 +400,7 @@ func build_training_traits():
 			panel.get_node('Label').visible = false
 		else:
 			panel.pressed = false
-			if person.get_stat('loyalty') >= person.get_training_cost() and person.checkreqs(trdata.reqs) and person.training.check_stored_reqs(tr) and !person.has_status('no_trainings'): 
+			if person.get_stat('training_points') >= person.get_training_cost() and person.checkreqs(trdata.reqs) and person.training.check_stored_reqs(tr) and !person.has_status('no_trainings'):
 				panel.connect('toggled', self, 'press_trait', [tr])
 			else:
 				panel.disabled = true
@@ -417,7 +419,8 @@ func activate_training(tr_code):
 			'mana':
 				trainer.mp -= trdata.cost[stat]
 	person.apply_training(tr_code)
-	build_training()
+	root.update()
+	match_state()
 
 
 var selected_id = ""
@@ -425,7 +428,7 @@ func press_trait(value, tr_code):
 	if !person.check_trait(tr_code):
 		selected_id = tr_code
 		var data = Traitdata.traits[tr_code]
-		var text = tr("UPGRADELIST_UNLOCK") % [str(person.get_training_cost()), tr("STATLOYALTY")]
+		var text = tr("UPGRADELIST_UNLOCK") % [str(person.get_training_cost()), tr("STATTRAINING_POINTS")]
 		input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'learn_upgrade_confirmed', text])
 #		person.add_training(tr_code)
 	build_training_traits()
@@ -435,7 +438,7 @@ func press_trait_post(value, tr_code):
 	if !person.check_trait(tr_code):
 		selected_id = tr_code
 		var data = Traitdata.traits[tr_code]
-		var text = tr("UPGRADELIST_UNLOCK") % [str(data.cost), tr("STATSPIRIT")]
+		var text = tr("UPGRADELIST_UNLOCK") % [str(data.cost), tr("STATTRAINING_POINTS")]
 		input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'learn_upgrade_post_confirmed', text])
 #		person.add_training(tr_code)
 	build_posttrain()
@@ -443,22 +446,13 @@ func press_trait_post(value, tr_code):
 
 func press_trait_servant(value, tr_code):
 	if !person.check_trait(tr_code):
-		selected_id = tr_code
-		var data = Traitdata.traits[tr_code]
-		var text = tr("UPGRADELIST_UNLOCK") % [str(person.get_servant_training_cost()), tr("STATLOYALTY")]
-		input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'learn_upgrade_confirmed', text])
-#		person.add_training(tr_code)
+		var args = {}
+		args["current_trait"] = tr_code
+		args["person"] = person
+		person.add_training(tr_code)
+		root.update()
+		input_handler.play_animation("trait_aquired", args)
 	build_training_servant()
-
-
-func finish_training():
-	input_handler.get_spec_node(input_handler.NODE_YESNOPANEL, [self, 'finish_training_confirm', tr("FINISHTRAINING")])
-
-
-func finish_training_confirm():
-	person.finish_training()
-	root.update()
-	match_state()
 
 
 func learn_upgrade_confirmed():
@@ -485,10 +479,4 @@ func learn_upgrade_post_confirmed():
 	selected_id = ""
 	root.update()
 	input_handler.play_animation("trait_aquired", args)
-
-
-func update_confirm_finish():
-	$training/complete_button.disabled = false
-	if !person.has_status('callmaster'):
-		$training/complete_button.disabled = true
 
