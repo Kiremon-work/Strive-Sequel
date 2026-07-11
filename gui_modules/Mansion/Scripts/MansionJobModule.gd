@@ -184,7 +184,7 @@ func update_characters():
 		newbutton.get_node("Speed").text = ""
 		if job_data != null and job_data.id == 'gathering':
 			var val
-			if job_data.type == 'gather_limited':
+			if job_data.type in ['gather_limited', 'gather_simple']:
 				val = ch.get_progress_resource(job_data.job, false) / job_data.progress_limit
 			else:
 				val = ch.get_job_value(tasks.find_task_for_res(job_data.job), false) / job_data.progress_limit
@@ -451,7 +451,7 @@ func update_resources():
 		else:
 			if !ResourceScripts.game_progress.can_gather_item(resource):
 				continue
-			var newjob = ResourceScripts.game_res.add_gathering_job_temp(tasks.find_task_for_res(resource), person_location)
+			var newjob = ResourceScripts.game_res.add_gathering_res_temp(resource, person_location)
 			var jobdata = ResourceScripts.game_res.tasks_progresses[newjob]
 			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
 			var current_workers_count = jobdata.workers.size()

@@ -242,16 +242,40 @@ func add_gathering_job_temp(task_template_id, location):
 		active_tasks.gathering.push_back(id)
 	else:
 		template = tasks_progresses[id]
-	if location == 'aliron':
+	var locdata = ResourceScripts.world_gen.get_location_from_code(location)
+	if locdata.has("category") and locdata.category == 'capital':
 		_fix_max_workers(id)
+	return id
+
+
+func add_gathering_res_temp(res, location):
+	var id = check_location_job('gathering' , location, res)
+	var template
+	if id == null:
+		id = _get_new_task_id()
+		var resdata = Items.materiallist[res]
+		template = {
+			id = 'gathering',
+			progress = 0,
+			progress_limit = resdata.progress_per_item,
+			workers = [],
+			location = location,
+			messages = [],
+			icon = resdata.icon.resource_path,
+			status = 'temporal',
+			type = 'gather_simple',
+			job = res,
+			worktool = resdata.tool_type,
+			mod = resdata.workmod
+		}
+		for st in ['descript', 'name', 'workstat']:
+			template[st] = resdata[st]
+		tasks_progresses[id] = template
+		active_tasks.gathering.push_back(id)
 	else:
-		var locdata = ResourceScripts.world_gen.get_location_from_code(location)
-		if locdata.type in ["dungeon", "encounter"]:
-			pass #limited by gather_limit_resources amount, not worker count
-		elif locdata.has("category") and locdata.category == 'capital':
-			_fix_max_workers(id)
-		elif locdata.has('gather_resources') and locdata.gather_resources.has(jobdata.production_item):
-			template.max_workers = locdata.gather_resources[jobdata.production_item]
+		template = tasks_progresses[id]
+	var locdata = ResourceScripts.world_gen.get_location_from_code(location)
+	template.max_workers = locdata.gather_resources[res]
 	return id
 
 
@@ -260,11 +284,10 @@ func add_gathering_limited_job_temp(res, location):
 	if id == null:
 		id = _get_new_task_id()
 		var resdata = Items.materiallist[res]
-		var jobdata = tasks.tasklist[tasks.find_task_for_res(res)]
 		var template = {
 			id = 'gathering',
 			progress = 0,
-			progress_limit = jobdata.progress_per_item,
+			progress_limit = resdata.progress_per_item,
 			workers = [],
 			location = location,
 			messages = [],
@@ -272,12 +295,11 @@ func add_gathering_limited_job_temp(res, location):
 			status = 'temporal',
 			type = 'gather_limited',
 			job = res,
-			workstat = resdata.workstat,
 			worktool = resdata.tool_type,
 			mod = resdata.workmod
 		}
-		for st in ['descript', 'name']:
-			template[st] = jobdata[st]
+		for st in ['descript', 'name', 'workstat']:
+			template[st] = resdata[st]
 		tasks_progresses[id] = template
 		active_tasks.gathering.push_back(id)
 	return id
@@ -477,7 +499,7 @@ func process_gathering():
 				character.rest_tick()
 			else:
 				var val = 0
-				if tprogress.type == 'gather_limited':
+				if tprogress.type in ['gather_limited', 'gather_simple']:
 					val = character.get_progress_resource(tprogress.job, true)
 				else:
 					val = character.get_job_value(tasks.find_task_for_res(tprogress.job), true)
