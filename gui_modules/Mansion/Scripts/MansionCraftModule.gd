@@ -309,6 +309,7 @@ func confirm_craft_edit():
 		return
 	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
 	if num_select_expanded:
+		pdata.erase('repeat')
 		pdata.cap_up = cap_up
 		pdata.cap_low = cap_low
 	else:
@@ -691,6 +692,7 @@ func open_number_edit():
 	if cancelentry == null: 
 		return
 	var pdata = ResourceScripts.game_res.tasks_progresses[cancelentry]
+	selected_item = Items.recipes[pdata.id]
 	if pdata.has('repeat'):
 		num_select_expanded = false
 		repeats = pdata.repeat
@@ -723,6 +725,8 @@ func build_num_select():
 		$NumberSelect2/VBoxContainer/name.text = tr(itemdata.name)
 		if item_data.crafttype == 'modular':
 			$NumberSelect2/VBoxContainer/icon.material = load("res://assets/ItemShader.tres").duplicate()
+		else:
+			$NumberSelect2/VBoxContainer/icon.material = null
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt2/Amount.text = str(repeats)
 	$NumberSelect2/VBoxContainer/HBoxContainer2/pt2/Amount.text = "%d (%d)" % [cap_up, amount]
 	$NumberSelect2/VBoxContainer/HBoxContainer3/pt2/Amount.text = "%d (%d)" % [cap_low, amount]

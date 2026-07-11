@@ -93,7 +93,7 @@ func show_resources_info():
 		newtask.get_node("Task/TaskIcon").texture = load(progress_data.icon)
 		newtask.get_node("ProgressBar").visible = true
 		newtask.get_node("progress").visible = false
-		newtask.get_node("ProgressBar").max_value = progress_data.threshold
+		newtask.get_node("ProgressBar").max_value = progress_data.progress_limit
 		newtask.get_node("ProgressBar").value = progress_data.progress
 		newtask.get_node("Task").text = tr(progress_data.name)
 		globals.connecttexttooltip(newtask, text)
@@ -113,7 +113,7 @@ func show_resources_info():
 		newtask.get_node("Task/TaskIcon").texture = load(progress_data.icon)
 		newtask.get_node("ProgressBar").visible = true
 		newtask.get_node("progress").visible = false
-		newtask.get_node("ProgressBar").max_value = progress_data.threshold
+		newtask.get_node("ProgressBar").max_value = progress_data.progress_limit
 		newtask.get_node("ProgressBar").value = progress_data.progress
 		newtask.get_node("Task").text = tr(progress_data.name)
 		globals.connecttexttooltip(newtask, text)
@@ -131,7 +131,7 @@ func show_resources_info():
 		for worker in progress_data.workers:
 			var ch = ResourceScripts.game_party.characters[worker]
 			var val = 0
-			if progress_data.type == 'gather_limited':
+			if progress_data.type in ['gather_limited', 'gather_simple']:
 				val = ch.get_progress_resource(progress_data.job)
 			else:
 				val = ch.get_job_value(tasks.find_task_for_res(progress_data.job))

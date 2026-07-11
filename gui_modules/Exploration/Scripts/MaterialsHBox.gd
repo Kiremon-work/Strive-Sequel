@@ -23,8 +23,9 @@ func update():
 			newbutton.get_node("TextureRect").texture = load(jobdata.production_icon)
 			var max_workers_count = jobdata.base_workers
 			var current_workers_count = 0
-			var task = ResourceScripts.game_res.check_location_job('recruiting', selected_location.id, r_task)
-			if task != null:
+			var task_id = ResourceScripts.game_res.check_location_job('recruiting', selected_location.id, r_task)
+			if task_id != null:
+				var task = ResourceScripts.game_res.tasks_progresses[task_id]
 				current_workers_count = task.workers.size()
 			newbutton.get_node("Label").text = str(max_workers_count - current_workers_count) + "/" + str(max_workers_count)
 			globals.connecttexttooltip(newbutton, jobdata.descript)
@@ -59,8 +60,8 @@ func update():
 					var gather_mod = Items.get_loot().get_gather_mod_from_loc(selected_location, i)
 					newbutton.set_meta("gather_mod", round(gather_mod * 100))
 				else:
-					ResourceScripts.game_res.add_gathering_job_temp(tasks.find_task_for_res(i), selected_location.id)
-					var task = ResourceScripts.game_res.check_location_job('gathering', selected_location.id, i)
+					var task_id = ResourceScripts.game_res.add_gathering_res_temp(i, selected_location.id)
+					var task = ResourceScripts.game_res.tasks_progresses[task_id]
 					var current_workers_count = task.workers.size()
 					var max_workers_count = task.max_workers
 					newbutton.set_meta("max_workers", max_workers_count)
