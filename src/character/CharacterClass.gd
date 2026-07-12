@@ -1037,7 +1037,7 @@ func get_farm_res(res):
 	return xp_module.check_farm_res(res)
 
 func find_worktask():
-	return xp_module.find_worktask(get_location())
+	return xp_module.find_worktask()
 
 
 func get_quest_time_init():
