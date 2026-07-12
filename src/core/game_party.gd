@@ -233,11 +233,7 @@ func _in_same_location(char1, char2):
 		return false
 	if person1.get_location() == ResourceScripts.game_world.mansion_location:
 		if person1.xp_module.work == person2.xp_module.work:
-			if person1.xp_module.work in ['', 'produce', 'brothel']:
-				return true
-			return person1.xp_module.workproduct == person2.xp_module.workproduct
-		else:
-			return false
+			return true
 	else:
 		return true
 

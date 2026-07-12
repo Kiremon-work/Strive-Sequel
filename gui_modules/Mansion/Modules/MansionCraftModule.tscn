@@ -1336,6 +1336,14 @@ margin_right = 1337.0
 margin_bottom = 737.0
 custom_styles/panel = SubResource( 9 )
 
+[node name="Screen" type="Button" parent="NumberSelect2"]
+self_modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+margin_left = -784.0
+margin_top = -276.0
+margin_right = 1162.0
+margin_bottom = 854.0
+
 [node name="frame" type="TextureRect" parent="NumberSelect2"]
 margin_right = 335.0
 margin_bottom = 235.0
@@ -1549,7 +1557,7 @@ texture_hover = ExtResource( 83 )
 [node name="Label" type="Label" parent="NumberSelect2/VBoxContainer/AdvOption/HBoxContainer"]
 margin_left = 44.0
 margin_top = 6.0
-margin_right = 320.0
+margin_right = 339.0
 margin_bottom = 48.0
 custom_colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 custom_fonts/font = ExtResource( 78 )
