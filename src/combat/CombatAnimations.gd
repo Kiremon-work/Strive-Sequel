@@ -446,7 +446,8 @@ func order_move(node, args):
 	node.raise()
 	tween.interpolate_property(node, 'rect_position:x', node.rect_position.x, args.new_x, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
 	tween.start()
-	return duration + delay
+#	return duration + delay
+	return 0
 
 func order_remove(node, args):
 	var delay = 0
@@ -456,7 +457,8 @@ func order_remove(node, args):
 	tween.interpolate_property(node, 'modulate:a', 1.0, 0.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
 	tween.interpolate_callback(args.parent, duration + delay, 'remove_queue_icon', node)
 	tween.start()
-	return duration + delay
+#	return duration + delay
+	return 0
 
 func order_add(node, args):
 	var delay = 0
@@ -465,7 +467,8 @@ func order_add(node, args):
 	tween.interpolate_property(node, 'rect_position:y', node.rect_size.y, 0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
 	tween.interpolate_property(node, 'modulate:a', 0.0, 1.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
 	tween.start()
-	return duration + delay
+#	return duration + delay
+	return 0
 
 func bar_val_change(node, args):
 	var delay = 0
