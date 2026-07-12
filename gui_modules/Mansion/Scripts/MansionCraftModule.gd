@@ -29,6 +29,7 @@ func _ready():
 	# input_handler.AddPanelOpenCloseAnimation($MaterialSelect)
 	
 	$NumberSelect2/CloseButton.connect('pressed', self, 'close_number_select')
+	$NumberSelect2/Screen.connect('pressed', self, 'close_number_select')
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b1.connect('pressed', self, 'number_change', [-10])
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt1/b2.connect('pressed', self, 'number_change', [-1])
 	$NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b3.connect('pressed', self, 'number_change', [1])
@@ -84,6 +85,7 @@ func update():
 
 
 func open():
+	close_number_select()
 	show()
 	gui_controller.clock.hide()
 	for i in craftcategories:
