@@ -652,7 +652,7 @@ var fame_tiers = {
 		price_bonus = 0.4,
 		upkeep = 60,
 		loyalty_bonus = 0.2,
-		recruit_bonus = 0.1
+		manhunt_bonus = 1
 	},
 	4 : {
 		name = "FAME4_NAME",
@@ -660,7 +660,7 @@ var fame_tiers = {
 		price_bonus = 0.6,
 		upkeep = 80,
 		loyalty_bonus = 0.3,
-		recruit_bonus = 0.25
+		manhunt_bonus = 2
 	},
 	5 : {
 		name = "FAME5_NAME",
@@ -668,7 +668,7 @@ var fame_tiers = {
 		price_bonus = 0.75,
 		upkeep = 125,
 		loyalty_bonus = 0.4,
-		recruit_bonus = 0.5
+		manhunt_bonus = 3
 	},
 	6 : {
 		name = "FAME6_NAME",
@@ -676,7 +676,7 @@ var fame_tiers = {
 		price_bonus = 0.75,
 		upkeep = 175,
 		loyalty_bonus = 0.5,
-		recruit_bonus = 0.75
+		manhunt_bonus = 5
 	}
 }
 const fame_degrade_time = 7

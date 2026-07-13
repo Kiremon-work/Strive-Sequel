@@ -196,8 +196,8 @@ var data = {
 		],
 		options = [
 			{code = "mae_sex_behind_1", text = "MAE_DRUID_RETURN_OPTION_1", reqs = [], dialogue_argument = 1, type = "next_dialogue", change_dialogue_type = 2},
-			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue"},
-			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue"}
+			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_2", reqs = [], dialogue_argument = 2, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = 15}]},
+			{code = "mae_druid_return_2", text = "MAE_DRUID_RETURN_OPTION_3", reqs = [], dialogue_argument = 3, type = "next_dialogue", bonus_effects = [{code = "affect_unique_character", name = "mae", type = "stat", stat = "affection", value = -15}]}
 		]
 	},
 	mae_druid_return_2 = {

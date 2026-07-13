@@ -105,7 +105,7 @@ func show_resources_info():
 		if task.workers.empty():
 			newtask.hide()
 			continue
-		
+
 		var text = tr("TASKINFOWORKERS") + "\n"
 		var cleararray = []
 		for worker in task.workers:
@@ -119,7 +119,7 @@ func show_resources_info():
 				cleararray.append(worker)
 		for i in cleararray:
 			task.workers.erase(i)
-		
+
 		if task_name in ['alchemy','tailor','cooking','smith']:
 			if ResourceScripts.game_res.craftinglists[task_name].size() <= 0:
 				newtask.hide()

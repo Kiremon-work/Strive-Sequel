@@ -720,6 +720,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -10}
 				]
 			},
 			{
@@ -729,6 +732,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = 10}
 				]
 			},
 		]
@@ -757,6 +763,9 @@ var data = {
 				type = "next_dialogue",
 				reqs = [
 
+				],
+				bonus_effects = [
+					{code = "affect_unique_character", name = "kuro", type = "stat", stat = "affection", value = -20}
 				]
 			},
 			{

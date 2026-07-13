@@ -149,7 +149,7 @@ var data = {
 		image = null, tags = ['dialogue_scene', 'master_translate', 'blackscreen_transition_common'], reqs = [], 
 		character = "$cali",
 		text = [ {text = "CALI_SERVANTS_8", reqs = []} ],
-		options = [ 
+		options = [
 			{
 			code = 'cali_servants_9', text = "CALI_SERVANTS_8_OPTION_1", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
 			},
@@ -201,13 +201,13 @@ var data = {
 				type = 'next_dialogue',
 				reqs = [{type = 'has_money', value = 100}],
 				dialogue_argument = 1,
+				bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = 15}],
 			},
 			{
 				code = 'cali_sex_5_1',
 				text = "CALI_SEX_5_OPTION_2",
 				type = 'next_dialogue',
 				reqs = [{type = 'dialogue_seen', value = 'CALI_SEX_5_1', check = false}],
-				bonus_effects = [],
 				dialogue_argument = 2,
 			},
 			{
@@ -215,7 +215,6 @@ var data = {
 				text = "CALI_SEX_5_OPTION_2",
 				type = 'next_dialogue',
 				reqs = [{type = 'dialogue_seen', value = 'CALI_SEX_5_1', check = true}],
-				bonus_effects = [],
 				dialogue_argument = 2,
 			},
 		],
@@ -226,7 +225,8 @@ var data = {
 		text = [ {text = "CALI_SEX_5_1", reqs = []} ],
 		options = [ {
 			code = 'close', text = "DIALOGUECLOSE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
-			bonus_effects = [{code = 'add_timed_event', value = "cali_sex_5", args = [{type = 'add_to_date', date = [3,3], hour = 2}]}]
+			bonus_effects = [{code = 'add_timed_event', value = "cali_sex_5", args = [{type = 'add_to_date', date = [3,3], hour = 2}]},
+				{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -10}]
 		} ],
 	},
 	cali_sex_5_2 = {
@@ -235,7 +235,7 @@ var data = {
 		text = [ {text = "CALI_SEX_5_2", reqs = []} ],
 		options = [ {
 			code = 'close', text = "DIALOGUECLOSE", reqs = [], dialogue_argument = 1, type = 'next_dialogue',
-			bonus_effects = []
+			bonus_effects = [{code = "affect_unique_character", name = "cali", type = "stat", stat = "affection", value = -20}]
 		} ],
 	},
 	

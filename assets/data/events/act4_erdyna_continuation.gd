@@ -378,7 +378,7 @@ var data = {
 				code = "emp_senerus_gods",
 				text = "ACT4_SENERUS_HUB_OPTION_GODS",
 				reqs = [],
-				dialogue_argument = 3
+				dialogue_argument = 0
 			},
 			{
 				code = "emp_senerus_champions",
@@ -438,10 +438,11 @@ var data = {
 				reqs = [],
 				previous_dialogue_option = 5
 			},
-			{
-				text = "ACT4_SENERUS_GODS_6",
-				reqs = []
-			}
+#			Depricated as useless
+#			{ 
+#				text = "ACT4_SENERUS_GODS_6",
+#				reqs = []
+#			}
 		],
 		options = [
 			{

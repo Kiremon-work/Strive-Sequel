@@ -431,13 +431,49 @@ func c_log(node, args):
 	tween.start()
 	return delaytime + delay
 
-func order(node, args):
+#func order(node, args):
+#	var delay = 0
+#	var delaytime = 0.1
+#	var tween = input_handler.GetTweenNode(node)
+#	tween.interpolate_callback(node, delay, 'update_queue', args.queue, args.next_queue, args.current)
+#	tween.start()
+#	return delaytime + delay
+
+func order_move(node, args):
 	var delay = 0
-	var delaytime = 0.1
+	var duration = max(abs(node.rect_position.x - args.new_x) * 0.002, 0.5)
 	var tween = input_handler.GetTweenNode(node)
-	tween.interpolate_callback(node, delay, 'update_queue', args.queue, args.current)
+	node.raise()
+	tween.interpolate_property(node, 'rect_position:x', node.rect_position.x, args.new_x, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
 	tween.start()
-	return delaytime + delay
+	return duration + delay
+
+func order_remove(node, args):
+	var delay = 0
+	var duration = 0.5
+	var tween = input_handler.GetTweenNode(node)
+	tween.interpolate_property(node, 'rect_position:y', 0, node.rect_size.y, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+	tween.interpolate_property(node, 'modulate:a', 1.0, 0.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+	tween.interpolate_callback(args.parent, duration + delay, 'remove_queue_icon', node)
+	tween.start()
+	return duration + delay
+
+func order_add(node, args):
+	var delay = 0
+	var duration = 0.5
+	var tween = input_handler.GetTweenNode(node)
+	tween.interpolate_property(node, 'rect_position:y', node.rect_size.y, 0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+	tween.interpolate_property(node, 'modulate:a', 0.0, 1.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+	tween.start()
+	return duration + delay
+
+func bar_val_change(node, args):
+	var delay = 0
+	var duration = 0.3
+	var tween = input_handler.GetTweenNode(node)
+	tween.interpolate_property(node, 'value', node.value, args.value, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+	tween.start()
+	return duration + delay
 
 func critical(node, args = null):
 	var delay = 0.01

@@ -244,7 +244,16 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = -10
+					}
+				]
 			},
 			{
 				code = "zephyra_quest_8",
@@ -253,7 +262,16 @@ var data = {
 
 				],
 				dialogue_argument = 2,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = 15
+					}
+				]
 			},
 			{
 				code = "zephyra_quest_8",
@@ -265,7 +283,16 @@ var data = {
 					}
 				],
 				dialogue_argument = 3,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{
+						code = "affect_unique_character",
+						name = "zephyra",
+						type = "stat",
+						stat = "affection",
+						value = 25
+					}
+				]
 			}
 		]
 	},
@@ -1401,7 +1428,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 15},
+				]
 			},
 			{
 				code = "zephyra_lilia_4_2",
@@ -1410,7 +1440,10 @@ var data = {
 
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = -15},
+				]
 			},
 			{
 				code = "zephyra_lilia_4_3",
@@ -1422,7 +1455,10 @@ var data = {
 					}
 				],
 				dialogue_argument = 1,
-				type = "next_dialogue"
+				type = "next_dialogue",
+				bonus_effects = [
+					{code = "affect_unique_character", name = "zephyra", type = "stat", stat = "affection", value = 10},
+				]
 			}
 		]
 	},

@@ -15,6 +15,7 @@ var TranslationDict = {
 	MENUGALLERY = "Galeria",
 	MENUQUIT = "Salir",
 	MENUCHANGELOG = "Registro de cambios",
+	MENUMODLISTSAFETY = """Mod List Reset""", # MISSING TRANSLATION
 	GALLERYNAME = "Galeria",
 	GALLERYSTORY = "Historia",
 	GALLERYERO = "Ero",
@@ -36,6 +37,12 @@ var TranslationDict = {
 	MODCLOSE = "Cerrar",
 	MODSORT = "Ordenar",
 	MODOPENEDITOR = "Editor abierto (versión alfa)",
+	MODLISTGAMEVERSIONRESET = """The enabled mod list was made for game version %s, but the current game version is %s.
+
+For safety, the old mods.ini was backed up to:
+%s
+
+A new empty mods.ini has been created. Please re-enable compatible mods from the Mods menu.""", # MISSING TRANSLATION
 	MENUCREDITSNAME = "Credito",
 	MENUCREDITSDESC = """Diseño, escritura y programación del juego: Maverik /
 
@@ -2659,7 +2666,7 @@ Daño +15%, Salud +20.""",
 	FAMEDESC_PRICE_BONUS = "Valor del personaje",
 	FAMEDESC_UPKEEP = 'Mantenimiento semanal subordinado',
 	FAMEDESC_LOYALTY_BONUS = 'Fidelización del aprendiz',
-	FAMEDESC_RECRUIT_BONUS = 'Eficiencia en el reclutamiento',
+	FAMEDESC_MANHUNT_BONUS = 'Manhunt bonus', # MISSING TRANSLATION
 	PRICEDESC_TRAITS_POS = "Rasgos positivos",
 	PRICEDESC_TRAITS_NEG = "Rasgos negativos",
 	PRICEDESC_CUMULATIVE = "Bonificación acumulada %s de",
@@ -20235,6 +20242,22 @@ Autoridad: +""",
 	DATING_PHYSF_BONUS_2 = """
 
 Si bien esta fue una experiencia desagradable para [name], ciertamente le enseñará a tener miedo de [him] enojo.""",
+	DATING_AFFECTIONATE_RESULT_1 = """
+
+{color=green|Affectionate Mood}: The time together leaves [name] feeling closer to you.""", # MISSING TRANSLATION
+	DATING_LOW_FEAR_WARNING = """
+{color=yellow|[name] felt too at ease around you, weakening [his] respect.}""", # MISSING TRANSLATION
+	DATING_FEARFUL_RESULT_1 = """
+
+{color=red|Fearful Mood}: The date leaves [name] shaken, but more conscious of your power.""", # MISSING TRANSLATION
+	DATING_RESULT_AFFECTION_GAIN = """
+Affection: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_GAIN = """
+Respect: +""", # MISSING TRANSLATION
+	DATING_RESULT_RESPECT_LOSS = """
+Respect: -""", # MISSING TRANSLATION
+	DATING_RESULT_NO_CHANGE = """
+No relationship change.""", # MISSING TRANSLATION
 	DATING_SEX_OFFER_1 = """
 
 {color=green|Parece que a [name] no le importa continuar con este encuentro...}""",

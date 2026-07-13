@@ -826,7 +826,7 @@ func test_mode():
 		globals.AddItemToInventory(globals.CreateGearItem("mask", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("foxmask", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("service_suit", {}))
-		globals.AddItemToInventory(globals.CreateGearItem("hector_armor", {}))
+		globals.AddItemToInventory(globals.CreateGearItem("lacy_underwear", {}))
 		globals.AddItemToInventory(globals.CreateGearItem("jacket", {}))
 		var titem = globals.CreateGearItem("cali_heirloom_test", {})
 		titem.set_quality_level('legendary')
