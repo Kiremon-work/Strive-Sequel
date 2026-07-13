@@ -32,12 +32,12 @@ func clone():
 	return tmp_
 
 
-func calculate_reduction(value):
-	if value < 100:
-		return value/200.0
-	if value > 250:
+func calculate_reduction(defvalue):
+	if defvalue < 100:
+		return defvalue/200.0
+	if defvalue > 250:
 		return 0.9
-	return -320.0/27.0 + value * (13.0/18.0 - value * (1.0/1125.0 + value / 675000.0))
+	return -320.0/27.0 + defvalue * (13.0/18.0 - defvalue * (1.0/1125.0 + defvalue / 675000.0))
 
 
 func apply_atomic(tmp):
@@ -152,7 +152,7 @@ func calculate_dmg():
 			value -= reduction
 	else:
 		if parent.ability_type == 'skill':
-			reduction = calculate_reduction(parent.target.get_stat('armor') * (1.0 - parent.armor_p))
+			reduction = calculate_reduction(parent.target.get_stat('armor') * (1.0 - 0.01 * parent.armor_p))
 		else:
 			reduction = calculate_reduction(parent.target.get_stat('mdef'))
 		if !template.nodef and !template.nomod and !parent.tags.has('nodef'):
