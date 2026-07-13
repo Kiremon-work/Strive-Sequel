@@ -694,17 +694,17 @@ func get_combined_hairs_data():
 			color_parts.erase('hair_assist_color_1')
 	
 	match statlist.hair_back: 
-		'very_long':
+		'very_long', 'double_tail', 'ponytail_long': 
 			length = 5
-		'double_tail', 'ponytail_long' :
-			color_parts.push_back('hair_back_color_1')
-			match exterior.hair_back_length:
-				'long':
-					length = int(max(length, 5))
-				'middle':
-					length = int(max(length, 4))
-				'short', 'default':
-					length = int(max(length, 3))
+#		'double_tail', 'ponytail_long' :
+#			color_parts.push_back('hair_back_color_1')
+#			match exterior.hair_back_length:
+#				'long':
+#					length = int(max(length, 5))
+#				'middle':
+#					length = int(max(length, 4))
+#				'short', 'default':
+#					length = int(max(length, 3))
 		'twin_braids':
 			color_parts.push_back('hair_back_color_1')
 			match exterior.hair_back_length:
