@@ -75,10 +75,11 @@ func setup_upgrade(upgrade_id):
 		set_inactive()
 	#setup progress
 	$Progress.visible = true
-	if ResourceScripts.game_res.upgrade_progresses.has(upgrade_id):
-		$Progress/Label.text = "%d/%d" % [ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
-		$Progress.max_value = upgrade_next_state.taskprogress
-		$Progress.value = ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress
+	if ResourceScripts.game_res.tasks_progresses.has(upgrade_id):
+		var prdata = ResourceScripts.game_res.tasks_progresses[upgrade_id]
+		$Progress/Label.text = "%d/%d" % [prdata.progress, prdata.progress_limit]
+		$Progress.max_value = prdata.progress_limit
+		$Progress.value = prdata.progress
 		$bg.modulate = Color("b13899")
 #	elif upgrade_state != null:
 #		$Progress/Label.text = "%d/%d" % [upgrade_state.taskprogress, upgrade_state.taskprogress]

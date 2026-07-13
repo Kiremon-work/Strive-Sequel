@@ -109,7 +109,7 @@ func build_description(upgrade_id):
 		desc_panel.get_node("VBoxContainer/resources").visible = false
 		work_cost.get_parent().visible = false
 		can_upgrade = false
-		text += "\n" + tr('UPGRADEPURCHASEDQUEUED') % [ResourceScripts.game_res.upgrade_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
+		text += "\n" + tr('UPGRADEPURCHASEDQUEUED') % [ResourceScripts.game_res.tasks_progresses[upgrade_id].progress, upgrade_next_state.taskprogress]
 #	elif ResourceScripts.game_res.upgrade_progresses.has(upgrade_id):
 #		desc_panel.get_node("VBoxContainer/MarginContainer/ScrollContainer").visible = false
 #		desc_panel.get_node("VBoxContainer/resources").visible = false
@@ -209,12 +209,13 @@ func build_queue_list():
 
 func update_progresses(upgrade, newbutton, currentupgradelevel):
 	var level = int(currentupgradelevel)
-	if ResourceScripts.game_res.upgrade_progresses.has(upgrade.code):
+	if ResourceScripts.game_res.crafting_lists.building.has(upgrade.code):
+		var prdata = ResourceScripts.game_res.tasks_progresses[upgrade.code]
 		newbutton.get_node("progress").visible = true
-		newbutton.get_node("progress").value = ResourceScripts.game_res.upgrade_progresses[upgrade.code].progress
-		newbutton.get_node("progress").max_value = upgrade.levels[level + 1].taskprogress
-		newbutton.get_node("progress/Label").text = "%d/%d" % [ResourceScripts.game_res.upgrade_progresses[upgrade.code].progress, upgrade.levels[level + 1].taskprogress]
-		return upgrade.levels[level + 1].taskprogress - ResourceScripts.game_res.upgrade_progresses[upgrade.code].progress
+		newbutton.get_node("progress").value = prdata.progress
+		newbutton.get_node("progress").max_value = prdata.progress_limit
+		newbutton.get_node("progress/Label").text = "%d/%d" % [prdata.progress, prdata.progress_limit]
+		return prdata.progress_limit - prdata.progress
 	else:
 		newbutton.get_node("progress").visible = false
 		return 0
