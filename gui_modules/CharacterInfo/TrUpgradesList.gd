@@ -292,7 +292,7 @@ func open_servant_unlock_dialogue():
 	options.append({code = 'close', text = tr('SERVANTUNLOCK_LEAVE'), reqs = []})
 	var dialogue_data = {
 		text = tr('SERVANTUNLOCK_DIALOGUE_TEXT') % person.get_short_name(),
-		image = 'noevent',
+		image = 'handshake',
 		tags = ['custom_effect'],
 		options = options,
 	}
@@ -305,6 +305,7 @@ func build_training_header():
 	$training/trainer_frame/icon.texture = trainer.get_icon()
 	$training/name.text = tr("TRAINING_TRAINER_NAME") % trainer.get_full_name()
 	$training/spirit.value = person.get_stat('loyalty')
+	$training/spirit/percent_label.text = "%d%%" % int(person.get_stat('loyalty'))
 	$training/resistance.visible = false
 
 	var tp_label = $training/loyalty

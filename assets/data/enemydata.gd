@@ -87,7 +87,7 @@ var encounters = {
 	rouge_drukar_fight = {unittype = 'randomgroup', unitcode = 'bandits_medium_boss', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'rouge_tax_drukar_victory', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]},
 	nixx_group = {unittype = 'randomgroup', unitcode = 'nixx_boss', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'kuro3_win', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]}, #fix
 	act4_sebastian_kharzug_undead = {unittype = 'randomgroup', unitcode = 'skeletons_zombies2', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'act4_sebastian_kharzug_after_undead_1', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]},
-	act4_sebastian_kharzug_tomb_woman = {unittype = 'randomgroup', unitcode = 'skeletons_lich_boss', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'act4_sebastian_kharzug_tomb_victory_1', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]},
+	act4_sebastian_kharzug_tomb_woman = {unittype = 'randomgroup', unitcode = 'rilu_maddened_boss', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'act4_sebastian_kharzug_tomb_victory_1', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]},
 
 	jean_golems_door = {unittype = 'randomgroup', unitcode = 'jean_golems_door', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'jean_sidequest_mansion_golems_2', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]}, #fix
 	jean_golems_door_2 = {unittype = 'randomgroup', unitcode = 'jean_golems_door_2', bg = 'default', bgm = 'default', win_effects = [{code = 'start_event', data = 'jean_sidequest_mansion_rynn_intro_1', args = []}], lose_effects = [{code = 'start_event', data = 'generic_lose_scene', args = []}]}, #fix
@@ -185,6 +185,7 @@ var enemygroups = {
 	skeletons_zombies2 = {reqs = [], units = {skeleton_archer = [1,2], zombie = [2,3]}, challenges = [['event_enemy_dexterity_sneak', 1],['event_enemy_strength_scare',0.8]], challenge_chance = 0.4},
 	skeletons_lich = {reqs = [], units = {skeleton_melee = [2,3], skeleton_archer = [1,2], undead_lich = [1,1]}, challenges = [['event_enemy_dexterity_sneak', 1],['event_enemy_strength_scare',0.8]], challenge_chance = 0.4},
 	skeletons_lich_boss = {maxunits = 6, reqs = [], units = {undead_lich = [1,1], skeleton_archer = [2,2], zombie = [3,3]}},
+	rilu_maddened_boss = {reqs = [], units = {rilu_maddened = [1,1]}},
 
 	rebel_group_mines = {reqs = [], units = {rebel_recruit = [3,3], rebel_mage = [1,1]}, challenges = [['event_enemy_dexterity_sneak', 1],['event_enemy_charm_avoid',0.8]], challenge_chance = 0.4},
 	demon_kurdan = {reqs = [], units = {demoness = [1,1],kurdan = [1,1], rebel_recruit = [2,2]}},
@@ -3677,6 +3678,32 @@ var enemies = {
 		ai = [['basic', 33]],
 		ai_position = ['ranged'],
 		xpreward = 30,
+	},
+	rilu_maddened = {
+		code = 'rilu_maddened',
+		name = '',
+		descript = '',
+		hpmax = 2200,
+		armor = 40,
+		mdef = 140,
+		hitrate = 130,
+		evasion = 40,
+		armorpenetration = 20,
+		atk = 25,
+		matk = 95,
+		speed = 60,
+		resists = {dark = 30, mind = 30, light = -40},
+		status_resists = {stun = 60, freeze = 40, silence = 40},
+		race = 'humanoid',
+		loot = 'lich_loot',
+		icon = "res://assets/images/enemies/rilu.png",
+		skills = ['attack', 'darkness', 'malediction', 'black_tendrils', 'skill_void'],
+		traits = ['boss_resists'],
+		tags = ['human','boss'],
+		ai = [['damage_spot', 40], ['ads', 40], ['aoe', 40], ['ultimate', 20]],
+		ai_position = ['ranged'],
+		xpreward = 60,
+		allowed_mastery = ['dark','mind'],
 	},
 }
 

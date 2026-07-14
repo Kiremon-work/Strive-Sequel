@@ -29253,10 +29253,9 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 
 
 
-	# Act 4 - Sebastian railroad quest
-	ACT4_SEBASTIAN_RAILROAD_NAME = "The Steel Road",
-	ACT4_SEBASTIAN_RAILROAD_SUMMARY = "Sebastian of the Trading Guild is pursuing a railroad project into the dwarven lands.",
-	ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN = "Find a dwarven technician who can advise Sebastian on the railroad route.",
+	ACT4_SEBASTIAN_RAILROAD_NAME = "Strictly Business",
+	ACT4_SEBASTIAN_RAILROAD_SUMMARY = "Sebastian of the Trading Guilds of Empire seeks to expand their influence onto other lands.",
+	ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN = "Find a dwarven technician who can advise Sebastian on the railroad route. Perhaps one goblin engineer would be interested too...",
 	ACT4_SEBASTIAN_STAGE_REPORT_TECHNICIAN = "Report the selected dwarven technician to Sebastian in the Empire Capital.",
 	ACT4_SEBASTIAN_STAGE_WAIT_PREPARATION = "Wait while Sebastian prepares the railroad survey materials.",
 	ACT4_SEBASTIAN_STAGE_INVESTIGATE_TROUBLE = "Speak with the selected technician in the Dwarven Capital about the railroad trouble.",
@@ -29274,8 +29273,9 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 	ACT4_SEBASTIAN_STAGE_BUY_WAREHOUSE = "Return to the warehouse owner and buy the alternative property.",
 	ACT4_SEBASTIAN_STAGE_REPORT_WAREHOUSE_SOLUTION = "Report the warehouse solution to Ginny at Celena's church.",
 	ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION = "Wait for Sebastian to contact you again.",
-	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = "Report Kharzug Deep to Sebastian",
+	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = "Find Sebastian",
 	ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH = "Visit Celena's church",
+	ACT4_SEBASTIAN_CHURCH_ENTER_OPTION = "About Sebastian's business...",
 	ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN = "Return to Sebastian",
 	ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH = "Visit the new church",
 	ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE = "Visit the warehouse",
@@ -29285,6 +29285,8 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN = "Speak with the technician",
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG = "Investigate Kharzug Deep",
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB = "Search the lower tomb",
+	QUEST_KHARZUG_DEEP_TEXT = "Kharzug Deep",
+	QUEST_KHARZUG_DEEP_DESC = "A dwarven settlement along the railroad line, overrun by undead.",
 	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL = "Visit Central Square",
 	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_REPORT_TECHNICIAN = "Report to Sebastian",
 	ACT4_SEBASTIAN_PARISHIONER_TASK_NAME = "Convince Parishioners",
@@ -29442,7 +29444,7 @@ One of the workers notices you and murmurs something to him. The older dwarf loo
 {color=yellow|Older Dwarf: — You need something, outsider?}""",
 	ACT4_SEBASTIAN_KARGUN_INTRO_3 = """The older dwarf gives you a short, impatient nod.
 
-{color=yellow|Kargun: — Name is Kargun. Watcha want?}
+{color=yellow|Older Dwarf: — Name is Kargun. Watcha want?}
 
 You explain Sebastian's proposal and the need for a dwarven technician who can scout possible routes into the mountains.
 
@@ -29723,6 +29725,7 @@ He adjusts his gloves, still smiling.
 Its owner is inside counting bundled inventory. He looks up as you enter, surprised to receive the mayor rather than another supplier.
 
 {color=yellow|Warehouse Owner: — Mayor [name]? If this is about the loose gutter, I already paid someone to fix it. He has merely chosen not to arrive yet.}""",
+	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_1B = "He sets his ledger aside, giving you his full attention, waiting to hear why the mayor is really here.",
 	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_2 = "{color=yellow|Warehouse Owner: — Trading Guild? No. First I've heard of any interest from them. I have been considering selling, though. Business has been moving closer to the eastern yards, and this place is more space than I need now. Three thousand gold, and I will sign it over without making either of us spend a month pretending to bargain.}",
 	ACT4_SEBASTIAN_WAREHOUSE_PURCHASE = """The owner checks the payment carefully, then produces a folded deed from a locked drawer beneath his accounts.
 
@@ -29800,5 +29803,116 @@ Sebastian leaves, although you can feel his steps are heavier than usual.
 	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_3 = "The warehouse meets your requirements. Use it and leave the church alone.",
 	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_4 = "You asked me to solve this. I did. Take the warehouse.",
 
+	KURO_SEASIDE_START = """The afternoon has dragged itself into a kind of punishment. By now the ink has started drying too quickly on the page, your wrist aches from signatures, and every completed document seems to uncover two more beneath it. The heat sits heavily in the office, turning the still air between the shelves and your desk into something almost solid.
+
+You have just reached for the next ledger when the shadow beside the bookshelf thickens. A familiar black tail slips out of it first, followed by Kuro, who steps into the room.
+
+{color=yellow|Kuro: — Still sitting here? I expected as much.}
+
+She looks over the desk with an unreadable expression.
+
+{color=yellow|Kuro: — You are overworking. Again. Also, this time of season is really hot.}""",
+	KURO_SEASIDE_OPTION_BUSY = "I'm busy because someone has to keep this place running.",
+	KURO_SEASIDE_OPTION_WEATHER = "If you came here to complain about the weather, you picked a strange time.",
+	KURO_SEASIDE_OPTION_WORRIED = "You sound almost worried about me.",
+	KURO_SEASIDE_OFFICE_2_1 = """Kuro gives the documents another brief glance.
+
+{color=yellow|Kuro: — Yes, and if you collapse into them, I am sure they will become much more obedient.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OFFICE_2_2 = """{color=yellow|Kuro: — I did not come to complain. I am merely noting an obvious seasonal inconvenience before presenting a solution to it.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OFFICE_2_3 = """Kuro's eyes roll dismissively.
+
+{color=yellow|Kuro: — Sure, be snarky all you want.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OPTION_ACCEPT = "Fine, I guess we could have a vacation.",
+	KURO_SEASIDE_OPTION_REFUSE = "I'd rather continue with my tasks.",
+	KURO_SEASIDE_ACCEPT_1 = """For a brief moment, Kuro smiles. It is small, controlled, and gone almost quickly enough to deny.
+
+{color=yellow|Kuro: — Good. That is a sensible approach.}
+
+She turns slightly toward the shadow she came from, already treating the decision as finalized.
+
+{color=yellow|Kuro: — I have almost finished all preparations already. Transport, lodging, appropriate excuses, and a few measures to keep the more persistent petitioners occupied. You can ready yourself for it without worrying.}""",
+	KURO_SEASIDE_ACCEPT_2 = """{color=yellow|Kuro: — Hope you are looking forward to my bathing costume, I took time selecting it after all.}
+
+She steps back into the shadow, leaving the office cooler by absence alone and the top ledger still crooked on your desk.""",
+	KURO_SEASIDE_REFUSE_1 = """{color=yellow|Kuro: — Too bad.}
+
+She says it without any visible disappointment, which somehow makes it worse.
+
+{color=yellow|Kuro: — The other girls have already been begging for something like this. Several of them have begun making preparations, and I doubt they will take no for an answer now.}
+
+You look down at the paperwork. It remains exactly as tall, exactly as dry, and suddenly much less persuasive.""",
+	KURO_SEASIDE_REFUSE_2 = """{color=yellow|Kuro: — Consider this a consequence of poor time management. If you had intended to refuse a vacation, you should have done so before I arranged one.}
+
+With that, she fades back into the office shadows, leaving you alone with the unavoidable realization that the day's work has just lost a battle.""",
+	KURO_SEASIDE_RESORT_ARRIVAL = """The resort stands a short distance from the shore, new enough that its pale wood still looks freshly cut. A few other guests linger near the water at first, but the arrival of your group quickly changes the balance of the place. Some retreat toward the resort buildings, some scatter down the beach, and soon the stretch of sand ahead is mostly yours.
+
+The girls waste little time spreading out. Their voices overlap with the waves as they rush toward the water, argue over towels, compare bathing outfits, and call for you.""",
+	KURO_SEASIDE_REVEAL = """Kuro appears a few steps away from the darker shade beneath the resort walkway, already dressed for the beach. Her sea outfit is obviously selected with care: a dark bathing top, a loose wrap at her hips, and tinted glasses resting above her eyes. She looks slightly exhausted and calm in a way contrasting with others. She does not seem exactly in her element here. The bright sun, open space, and excited crowd of girls all work against her. Even so, the unfamiliar attire draws the eye, framing her dark hair, pale skin, and black tail in a way that makes her presence difficult to ignore.
+
+{color=yellow|Kuro: — This place is quite something.}
+
+Before you can answer, several of the girls call for you at once. One catches your arm, another insists you need to see the water first. Kuro watches you get dragged away with a faint smile.""",
+	KURO_SEASIDE_THANKS = """By the time the sun has moved lower, you have been pulled through enough swimming, games, food, and aimless beach wandering to make the stress from earlier seem almost stationary by comparison. The girls gather around you with bright, tired faces, their earlier excitement softened into sincere gratitude.
+
+— Thank you for bringing us here, [master] [name]. This trip is wonderful.""",
+	KURO_SEASIDE_OPTION_GLAD = "I am glad you are enjoying yourselves.",
+	KURO_SEASIDE_OPTION_SATISFY = "I had to satisfy your request, didn't I?",
+	KURO_SEASIDE_THANKS_GLAD = """The answer earns a chorus of smiles and a few overlapping thanks. Even the quieter girls seem pleased, standing close together with the relaxed ease of people who have briefly forgotten their usual duties.""",
+	KURO_SEASIDE_THANKS_REFUSED = """The girls exchange confused looks.
+
+— Our request? We didn't think we could request something like this from you.
+
+Another girl nods quickly.
+
+— When Kuro told us about the trip, we all said it sounded wonderful, but none of us thought we could ask our master to do such a thing for us.
+
+Their gratitude becomes a little more earnest after that, and you realize Kuro's version of events may have been arranged with the same care as the vacation itself.""",
+	KURO_SEASIDE_EVENING = """Eventually the group disperses again, some returning to the water and others chasing the last snacks left beneath the resort awnings. That leaves you with a moment to look for Kuro.
+
+You find her resting in the shadow of a beach tent, one knee drawn up, tail curled neatly beside her. She appears relaxed at first glance, but her red eyes follow you the entire time you approach. She responds to your questioning look.
+
+{color=yellow|Kuro: — I am not particularly good with crowds and heat. But it's a nice break of pace after all.}
+
+She shifts slightly deeper into the shade, watching the others play in the distance.""",
+	KURO_SEASIDE_OPTION_COMPANY = "I am not great with crowds either. Let me keep you company.",
+	KURO_SEASIDE_OPTION_LEAVE = "Then I'll leave you to rest and go back to the others.",
+	KURO_SEASIDE_OPTION_WITS = "[Wits Check] You just wanted me to get some rest, didn't you?",
+	KURO_SEASIDE_WITS_HIDDEN = "???",
+	KURO_SEASIDE_WITS_1 = """Kuro's expression softens into something teasing.
+
+{color=yellow|Kuro: — Perhaps. But if you are clever enough to notice that, you should also be clever enough to answer something for me.}
+
+She adjusts the edge of her bathing top with deliberate care.
+
+{color=yellow|Kuro: — Do you enjoy my bathing costume?}""",
+	KURO_SEASIDE_OPTION_PLEASURE = "It's a pleasure to look at.",
+	KURO_SEASIDE_OPTION_USUAL = "Your usual attire fits you more.",
+	KURO_SEASIDE_WITS_PLEASURE = """Kuro's tail moves once against the sand.
+
+{color=yellow|Kuro: — So it was worth the hassle then.}""",
+	KURO_SEASIDE_WITS_USUAL = """Kuro gives a quiet, amused breath.
+
+{color=yellow|Kuro: — I suspected you might say that. Unfortunately, my usual attire is poorly suited for sand and seawater, so you will have to endure this version for today.}""",
+	KURO_SEASIDE_WITS_CONVERGE = """For a moment, she looks past you toward the rest of the beach. The girls are already waving again.""",
+	KURO_SEASIDE_END_COMPANY = """Kuro looks up at you for a moment, searching for mockery and finding none.
+
+{color=yellow|Kuro: — And I thought you are far more social than this. Or you are doing your best to please me too? One awful womanizer you are.}
+
+You settle beside her beneath the tent. For a while neither of you says much. The noise of the beach remains at a comfortable distance, the shade cools your skin, and Kuro's shoulder eventually rests against yours with deliberate casualness.
+
+It is not the kind of intimacy that announces itself loudly, but it stays with you all the same.""",
+	KURO_SEASIDE_END_LEAVE = """Kuro gives a small nod, her gaze already moving back toward the water.
+
+{color=yellow|Kuro: — Go on. They will start competing for your attention again if you make them wait too long.}
+
+You leave her in the shade and return to the others, carrying with you the strange certainty that Kuro is still watching.""",
+
+	ENEMYRILU_MADDENED = "Strange girl",
 
 }

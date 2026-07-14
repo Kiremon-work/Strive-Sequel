@@ -2547,7 +2547,7 @@ var sex_traits = { #only for interaction tab
 		starting = true,
 		random_generation = true,
 		negative = false,
-		acquire_reqs = [{code = "actor_check", value = [{code = "stat", type = "satisfied_partners", operant = "eq", value = 1}]}],
+		acquire_reqs = [{code = "actor_check", value = [{code = "stat", type = "satisfied_partners", operant = "eq", value = 1}]}, {code = "relatives_check"}],
 		reqs = [],
 		effects = [],
 	},

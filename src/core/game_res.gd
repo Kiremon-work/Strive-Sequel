@@ -167,7 +167,7 @@ func _add_farming_task(res):
 
 func _add_craft_job():
 	if !tasks_progresses.has('crafting'):
-		tasks_progresses.crafting = {id = 'crafting', status = 'permanent', workers = [], workers_handled = {}, messages = [], location = 'aliron', name = 'TASKCRAFTNAME', descript = 'TASKCRAFTDESCRIPT', icon = "res://assets/images/gui/inventory/icon_craft64x64.png", type = 'permanent'}
+		tasks_progresses.crafting = {id = 'crafting', status = 'permanent', workers = [], workers_handled = {}, messages = [], location = 'aliron', name = 'TASKCRAFTNAME', descript = 'TASKCRAFTDESCRIPT', icon = "res://assets/images/gui/icon_craft64x64.png", type = 'permanent'}
 
 
 func _add_farm_job():

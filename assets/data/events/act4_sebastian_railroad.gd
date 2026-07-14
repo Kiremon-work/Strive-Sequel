@@ -484,6 +484,7 @@ var data = {
 			type = "next_dialogue",
 			bonus_effects = [
 				{code = "progress_quest", value = "sebastian_railroad_quest", stage = "investigate_kharzug"},
+				{code = "make_quest_location", value = "quest_kharzug_deep"},
 				{code = "update_city"}
 			]
 		}]
@@ -528,6 +529,7 @@ var data = {
 			type = "next_dialogue",
 			bonus_effects = [
 				{code = "progress_quest", value = "sebastian_railroad_quest", stage = "investigate_kharzug"},
+				{code = "make_quest_location", value = "quest_kharzug_deep"},
 				{code = "update_city"}
 			]
 		}]
@@ -592,7 +594,7 @@ var data = {
 	},
 	act4_sebastian_kharzug_tomb_2 = {
 		image = null,
-		character = null,
+		character = "rilu",
 		character2 = null,
 		tags = ["dialogue_scene"],
 		text = "ACT4_SEBASTIAN_KHARZUG_TOMB_2",
@@ -600,7 +602,7 @@ var data = {
 	},
 	act4_sebastian_kharzug_tomb_3 = {
 		image = null,
-		character = null,
+		character = "rilu",
 		character2 = null,
 		tags = ["dialogue_scene"],
 		text = "ACT4_SEBASTIAN_KHARZUG_TOMB_3",
@@ -608,7 +610,7 @@ var data = {
 	},
 	act4_sebastian_kharzug_tomb_victory_1 = {
 		image = null,
-		character = null,
+		character = "rilu",
 		character2 = null,
 		tags = ["dialogue_scene"],
 		text = "ACT4_SEBASTIAN_KHARZUG_TOMB_VICTORY_1",
@@ -627,6 +629,7 @@ var data = {
 			type = "next_dialogue",
 			bonus_effects = [
 				{code = "progress_quest", value = "sebastian_railroad_quest", stage = "return_to_technician"},
+				{code = "remove_quest_location", value = "quest_kharzug_deep"},
 				{code = "update_city"}
 			]
 		}]
@@ -1057,7 +1060,7 @@ var data = {
 		character = null,
 		character2 = null,
 		tags = ["dialogue_scene"],
-		text = "",
+		text = "ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_1B",
 		options = [
 			{code = "act4_sebastian_find_warehouse_owner_3", text = "ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_1", reqs = [], type = "next_dialogue"},
 			{code = "act4_sebastian_find_warehouse_owner_3", text = "ACT4_SEBASTIAN_WAREHOUSE_OWNER_OPTION_2", reqs = [], type = "next_dialogue"}

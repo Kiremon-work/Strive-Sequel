@@ -534,6 +534,36 @@ func apply_training(code):
 	if result_data.training_points != 0:
 		effect_text += statdata.statdata.training_points.name + " + " + str(result_data.training_points) + "\n"
 
+	#affection/respect adjustments from training outcome
+	var trainer_is_master = ch_trainer.has_profession('master')
+	var affection_delta = 0
+	if cat == 'positive':
+		if result in ['success', 'crit_success']:
+			if trainer_is_master:
+				affection_delta += globals.rng.randi_range(7, 10)
+		else:
+			var respect_loss = globals.rng.randi_range(5, 7)
+			parent.get_ref().add_stat('respect', -respect_loss)
+			effect_text += statdata.statdata.respect.name + " - " + str(respect_loss) + "\n"
+	if disposition == 'kink' and result in ['success', 'crit_success']:
+		if trainer_is_master:
+			affection_delta += globals.rng.randi_range(5, 10)
+		else:
+			ResourceScripts.game_party.add_relationship_value(parent.get_ref().id, trainer, globals.rng.randi_range(5, 8))
+	if cat in ['physical', 'humiliation', 'sexual', 'social']:
+		if result in ['success', 'crit_success']:
+			var respect_gain = globals.rng.randi_range(3, 6)
+			if trainer_is_master:
+				respect_gain = int(round(respect_gain * 1.5))
+			parent.get_ref().add_stat('respect', respect_gain)
+			effect_text += statdata.statdata.respect.name + " + " + str(respect_gain) + "\n"
+		elif trainer_is_master:
+			affection_delta -= globals.rng.randi_range(5, 8)
+	if affection_delta != 0:
+		parent.get_ref().add_stat('affection', affection_delta)
+		var affection_sign = "+" if affection_delta > 0 else "-"
+		effect_text += statdata.statdata.affection.name + " " + affection_sign + " " + str(abs(affection_delta)) + "\n"
+
 	if data.has('disposition_affects'):
 		for tag in data.disposition_affects:
 			if tag is Array:

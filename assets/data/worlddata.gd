@@ -722,24 +722,9 @@ var fixed_location_options = { #override serialized data
 			args = [{code = 'start_event', data = 'act4_sebastian_report_kharzug_1', args = []}]
 		},
 		{
-			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'speak_to_church'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_church_visit', args = []}]
-		},
-		{
 			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN"),
 			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'return_ginny_refusal'}],
 			args = [{code = 'start_event', data = 'act4_sebastian_return_ginny_refusal_1', args = []}]
-		},
-		{
-			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'offer_alternative_site'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_offer_alternative_site_1', args = []}]
-		},
-		{
-			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'parishioners_persuaded'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_ginny_parishioners_persuaded', args = []}]
 		},
 		{
 			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH"),
@@ -755,11 +740,6 @@ var fixed_location_options = { #override serialized data
 			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE"),
 			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'buy_warehouse'}],
 			args = [{code = 'start_event', data = 'act4_sebastian_revisit_warehouse_owner', args = []}]
-		},
-		{
-			text = tr("ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'report_warehouse_solution'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_report_warehouse_solution_1', args = []}]
 		},
 		{
 			text = tr("LIRA_QUEST2_CITY_OPTION"),
@@ -1240,16 +1220,6 @@ var fixed_location_options = { #override serialized data
 			args = [{code = 'start_event', data = 'act4_sebastian_trouble_kargun_1', args = []}]
 		},
 		{
-			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'investigate_kharzug'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_arrive_1', args = []}]
-		},
-		{
-			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB"),
-			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'clear_lower_tomb'}],
-			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_tomb_1', args = []}]
-		},
-		{
 			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN"),
 			reqs = [
 				{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'return_to_technician'},
@@ -1345,6 +1315,18 @@ var fixed_location_options = { #override serialized data
 			text = tr("DWARF_CAPITAL_DURIM"),
 			reqs = [{type = 'active_quest_stage', value = 'meteorite_quest', stage = 'search_durim'}],
 			args = [{code = 'start_event', data = 'meteor_durim_start', args = []}]
+		}
+	],
+	quest_kharzug_deep = [
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'investigate_kharzug'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_arrive_1', args = []}]
+		},
+		{
+			text = tr("ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB"),
+			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'clear_lower_tomb'}],
+			args = [{code = 'start_event', data = 'act4_sebastian_kharzug_tomb_1', args = []}]
 		}
 	],
 	beastkin_capital = [

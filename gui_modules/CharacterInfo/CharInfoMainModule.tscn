@@ -1,4 +1,4 @@
-[gd_scene load_steps=220 format=2]
+[gd_scene load_steps=214 format=2]
 
 [ext_resource path="res://MainFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/Themes_v2/CHAR_INFO/CHI_Professions_Panel.tres" type="StyleBox" id=2]
@@ -168,7 +168,6 @@
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/training/master_tr_pressed.png" type="Texture" id=195]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/training/master_tr_hover.png" type="Texture" id=196]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/training/minor_normal.png" type="Texture" id=197]
-[ext_resource path="res://assets/images/gui/gui icons/icon_meat.png" type="Texture" id=198]
 [ext_resource path="res://assets/images/gui/gui icons/icon_lfood.png" type="Texture" id=199]
 [ext_resource path="res://assets/images/gui/gui icons/icon_dlfood.png" type="Texture" id=200]
 [ext_resource path="res://gui_modules/CharacterInfo/MUpgradesList.gd" type="Script" id=201]
@@ -185,11 +184,6 @@
 [ext_resource path="res://assets/Textures_v2/craft/enchant/button_item_default.png" type="Texture" id=212]
 [ext_resource path="res://assets/Textures_v2/icon_question_small_alt.png" type="Texture" id=213]
 [ext_resource path="res://assets/Textures_v2/CHAR_CREATION/Buttons/buttonsquare_pressed2.png" type="Texture" id=214]
-[ext_resource path="res://gui_modules/CharacterInfo/SignedTextureBar.tscn" type="PackedScene" id=215]
-[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/affection_low.png" type="Texture" id=216]
-[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/affection_high.png" type="Texture" id=217]
-[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/respect_low.png" type="Texture" id=218]
-[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/respect_high.png" type="Texture" id=219]
 
 [sub_resource type="StyleBoxTexture" id=13]
 texture = ExtResource( 111 )
@@ -749,52 +743,6 @@ margin_left = 14.869
 margin_right = 58.8691
 margin_bottom = 44.001
 texture = ExtResource( 166 )
-
-[node name="food" type="Control" parent="SlaveInfoModule/Panel/maininfo" groups=["hide_master"]]
-visible = false
-margin_top = 295.0
-margin_right = 268.0
-margin_bottom = 339.0
-rect_min_size = Vector2( 0, 44 )
-
-[node name="foodliked" type="TextureRect" parent="SlaveInfoModule/Panel/maininfo/food"]
-margin_left = 19.0
-margin_top = 5.0
-margin_right = 62.0
-margin_bottom = 34.0
-texture = ExtResource( 199 )
-expand = true
-stretch_mode = 6
-
-[node name="foodlikedicon" type="TextureRect" parent="SlaveInfoModule/Panel/maininfo/food"]
-margin_left = 86.0
-margin_top = 5.0
-margin_right = 117.0
-margin_bottom = 35.0
-texture = ExtResource( 198 )
-
-[node name="fooddisliked" type="TextureRect" parent="SlaveInfoModule/Panel/maininfo/food"]
-margin_left = 142.695
-margin_top = 5.3371
-margin_right = 186.695
-margin_bottom = 34.3371
-texture = ExtResource( 200 )
-expand = true
-stretch_mode = 6
-
-[node name="fooddislikedicons" type="HBoxContainer" parent="SlaveInfoModule/Panel/maininfo/food"]
-margin_left = 198.0
-margin_top = 5.0
-margin_right = 262.0
-margin_bottom = 35.0
-alignment = 1
-
-[node name="Button" type="TextureRect" parent="SlaveInfoModule/Panel/maininfo/food/fooddislikedicons"]
-visible = false
-margin_left = 16.0
-margin_right = 47.0
-margin_bottom = 30.0
-texture = ExtResource( 198 )
 
 [node name="DescriptionButton" type="Button" parent="SlaveInfoModule"]
 margin_left = 971.0
@@ -4094,83 +4042,48 @@ custom_fonts/font = ExtResource( 10 )
 text = "PERSONALITYCURRENT"
 align = 1
 
-[node name="RelationshipStats" type="VBoxContainer" parent="SlaveSiblingsModule"]
-margin_left = 42.0
-margin_top = 400.0
-margin_right = 282.0
-margin_bottom = 540.0
-custom_constants/separation = 6
+[node name="food" type="Control" parent="SlaveSiblingsModule"]
+margin_left = 20.0
+margin_top = 460.0
+margin_right = 270.0
+margin_bottom = 504.0
+rect_min_size = Vector2( 0, 44 )
 
-[node name="AffectionLabel" type="Label" parent="SlaveSiblingsModule/RelationshipStats"]
-margin_right = 240.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
-custom_fonts/font = ExtResource( 10 )
-text = "STATAFFECTION"
-align = 1
-
-[node name="Affection" parent="SlaveSiblingsModule/RelationshipStats" instance=ExtResource( 215 )]
-margin_top = 39.0
-margin_right = 240.0
-margin_bottom = 57.0
-
-[node name="LowIcon" type="TextureRect" parent="SlaveSiblingsModule/RelationshipStats/Affection"]
-margin_left = -40.0
-margin_top = -10.0
-margin_right = -5.0
-margin_bottom = 25.0
-mouse_filter = 2
-texture = ExtResource( 216 )
+[node name="foodliked" type="TextureRect" parent="SlaveSiblingsModule/food"]
+margin_left = 0.0
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 34.0
+texture = ExtResource( 199 )
 expand = true
 stretch_mode = 6
 
-[node name="HighIcon" type="TextureRect" parent="SlaveSiblingsModule/RelationshipStats/Affection"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 10.0
-margin_top = -10.0
-margin_right = 45.0
-margin_bottom = 25.0
-mouse_filter = 2
-texture = ExtResource( 217 )
+[node name="foodlikedicon" type="TextureRect" parent="SlaveSiblingsModule/food"]
+margin_left = 45.0
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 35.0
+
+[node name="fooddisliked" type="TextureRect" parent="SlaveSiblingsModule/food"]
+margin_left = 100.0
+margin_top = 5.3371
+margin_right = 135.0
+margin_bottom = 34.3371
+texture = ExtResource( 200 )
 expand = true
 stretch_mode = 6
 
-[node name="RespectLabel" type="Label" parent="SlaveSiblingsModule/RelationshipStats"]
-margin_top = 63.0
-margin_right = 240.0
-margin_bottom = 96.0
-custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
-custom_fonts/font = ExtResource( 10 )
-text = "STATRESPECT"
-align = 1
+[node name="fooddislikedicons" type="HBoxContainer" parent="SlaveSiblingsModule/food"]
+margin_left = 145.0
+margin_top = 5.0
+margin_right = 250.0
+margin_bottom = 35.0
+alignment = 1
 
-[node name="Respect" parent="SlaveSiblingsModule/RelationshipStats" instance=ExtResource( 215 )]
-margin_top = 102.0
-margin_right = 240.0
-margin_bottom = 120.0
-
-[node name="LowIcon" type="TextureRect" parent="SlaveSiblingsModule/RelationshipStats/Respect"]
-margin_left = -40.0
-margin_top = -10.0
-margin_right = -5.0
-margin_bottom = 25.0
-mouse_filter = 2
-texture = ExtResource( 218 )
-expand = true
-stretch_mode = 6
-
-[node name="HighIcon" type="TextureRect" parent="SlaveSiblingsModule/RelationshipStats/Respect"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 10.0
-margin_top = -10.0
-margin_right = 45.0
-margin_bottom = 25.0
-mouse_filter = 2
-texture = ExtResource( 219 )
-expand = true
-stretch_mode = 6
+[node name="Button" type="TextureRect" parent="SlaveSiblingsModule/food/fooddislikedicons"]
+visible = false
+margin_right = 31.0
+margin_bottom = 30.0
 
 [node name="Button" type="Button" parent="SlaveSiblingsModule"]
 margin_left = 5.0

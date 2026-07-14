@@ -1562,6 +1562,24 @@ var unique_sprites = {
 			path = "kuro_wed_body",
 			face_path = "kuro_wed",
 			},
+		beach = {
+			name = "Beach",
+			descript = "",
+			path = "kuro_beach_body",
+			face_path = "kuro_beach",
+			},
+		beach_lewd = {
+			name = "Beach (Untied)",
+			descript = "",
+			path = "kuro_beach_halfnude_body",
+			face_path = "kuro_beach",
+			},
+		beach_nude = {
+			name = "Beach (Nude)",
+			descript = "",
+			path = "kuro_beach_nude_body",
+			face_path = "kuro_beach_nude",
+			},
 	},
 	rouge = {
 		default = {

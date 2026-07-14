@@ -36,6 +36,8 @@ func _ready():
 #	for i in $factors.get_children():
 #		globals.connecttexttooltip(i, ResourceScripts.game_party.get_master().translate(statdata.statdata[i.name].descript))
 	globals.connecttexttooltip(get_node("VBoxContainer2/TextureRect2/Exp"), statdata.statdata["base_exp"].descript)
+	globals.connecttexttooltip($RelationshipStats/Affection, tr("STATAFFECTIONDESCRIPT"))
+	globals.connecttexttooltip($RelationshipStats/Respect, tr("STATRESPECTDESCRIPT"))
 	$VBoxContainer2/TextureRect4/NextClassExp.hint_tooltip = tr("NEXTCLASSEXP")# + str(person.get_next_class_exp())
 #	globals.connecttexttooltip($GridContainer/SkillsButton, tr("BUTTONCLASS"))#"Class and Skills")
 #	globals.connecttexttooltip($GridContainer/SiblingsButton, tr("BUTTONTRAINING"))#"Training and Rules")
@@ -229,6 +231,15 @@ func show_summary():
 	person = selected_person
 	globals.build_attrs_for_char(self, person)
 	$Name/name.text = person.get_full_name()
+
+	var show_relationship_stats = person.get_stat('slave_class') != 'master'
+	$RelationshipStats.visible = show_relationship_stats
+	if show_relationship_stats:
+		$RelationshipStats/Affection.value = person.get_stat('affection')
+		$RelationshipStats/Affection.get_node("Label").text = tr("STATAFFECTION")
+		$RelationshipStats/Respect.value = person.get_stat('respect')
+		$RelationshipStats/Respect.get_node("Label").text = tr("STATRESPECT")
+
 	$VBoxContainer2/TextureRect3/BaseExp.text = str(floor(person.get_stat("base_exp")))
 	$VBoxContainer2/TextureRect4/NextClassExp.text = str(person.get_next_class_exp())
 	

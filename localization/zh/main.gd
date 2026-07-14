@@ -29538,6 +29538,7 @@ A steady stream of people comes to the stall, drawn by the vendor's shouts, yet 
 	ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION = """Wait for Sebastian to contact you again.""", # MISSING TRANSLATION
 	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = """Report Kharzug Deep to Sebastian""", # MISSING TRANSLATION
 	ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH = """Visit Celena's church""", # MISSING TRANSLATION
+	ACT4_SEBASTIAN_CHURCH_ENTER_OPTION = """About Sebastian's business...""", # MISSING TRANSLATION
 	ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN = """Return to Sebastian""", # MISSING TRANSLATION
 	ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH = """Visit the new church""", # MISSING TRANSLATION
 	ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE = """Visit the warehouse""", # MISSING TRANSLATION

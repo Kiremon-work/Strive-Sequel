@@ -70,6 +70,7 @@ var scenes = {
 	erdyna_wedding = ["erdyna_wedding_2","erdyna_wedding_3","erdyna_wedding_4","erdyna_wedding_5","erdyna_wedding_6","erdyna_wedding_7","erdyna_wedding_8","erdyna_wedding_9","erdyna_wedding_10","erdyna_wedding_11"],
 	lira_bonus_scene1 = ["lira_bonus1_1","lira_bonus1_2","lira_bonus1_3","lira_bonus1_4","lira_bonus1_5"],
 	lira_bonus_scene2 = ["lira_bonus2_1","lira_bonus2_2","lira_bonus2_3","lira_bonus2_4","lira_bonus2_5","lira_bonus2_6"],
+	kuro_seaside = ["kuro_seaside_leisure_start","kuro_seaside_leisure_office_2","kuro_seaside_leisure_accept","kuro_seaside_leisure_accept_2","kuro_seaside_leisure_refuse","kuro_seaside_leisure_refuse_2","kuro_seaside_leisure_resort","kuro_seaside_leisure_reveal","kuro_seaside_leisure_thanks","kuro_seaside_leisure_thanks_glad","kuro_seaside_leisure_thanks_refused","kuro_seaside_leisure_evening","kuro_seaside_leisure_wits","kuro_seaside_leisure_wits_2","kuro_seaside_leisure_wits_converge","kuro_seaside_leisure_end_company","kuro_seaside_leisure_end_leave"],
 }
 #was forced to add a id to scene lists for unlock purpose
 var scenes_order = [
@@ -85,7 +86,7 @@ var scenes_order = [
 	'heleviel_bar_sex', 'heleviel_forest_sex', 'heleviel_wedding',
 	'mae_sex_behind', 'mae_sex_ritual', 'mae_spirit_northern_ritual', 'mae_wedding',
 	'jean_wedding', 'jean_dream', 'rouge_sex',
-	'erdyna_campfire', 'erdyna_wedding', 'lira_bonus_scene1', 'lira_bonus_scene2'
+	'erdyna_campfire', 'erdyna_wedding', 'lira_bonus_scene1', 'lira_bonus_scene2', 'kuro_seaside'
 	]
 var story_scenes = ['anastasia_event_alive', 'elven_temple_scene', 'act1_art', 'act2_art'] #maybe we should define this as 'scenes' unlocks and ero_scenes as 'backgrounds' unlocks - but for now there are no more and i can't add something like 'daisyevent' or 'aire_death'
 var ero_scenes = [

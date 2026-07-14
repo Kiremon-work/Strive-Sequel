@@ -312,6 +312,15 @@ texture_over = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 texture_progress_offset = Vector2( 29, 3 )
 
+[node name="percent_label" type="Label" parent="training/spirit"]
+mouse_filter = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+text = "100%"
+align = 1
+valign = 1
+
 [node name="cd" type="Label" parent="training"]
 light_mask = 0
 margin_left = 173.7
@@ -548,10 +557,10 @@ valign = 1
 clip_text = true
 
 [node name="UnlockList" type="VBoxContainer" parent="training_servant"]
-margin_left = 16.0
+margin_left = 138.0
 margin_top = 110.0
-margin_right = 400.0
-margin_bottom = 260.0
+margin_right = 522.0
+margin_bottom = 299.0
 custom_constants/separation = 6
 
 [node name="working" type="HBoxContainer" parent="training_servant/UnlockList"]

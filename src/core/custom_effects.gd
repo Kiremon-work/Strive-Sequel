@@ -119,7 +119,7 @@ func negotiation_open(category):
 
 	var dialogue_data = {
 		text = tr(hesitation_key) % character.get_short_name(),
-		image = 'noevent',
+		image = 'praise',
 		tags = ['custom_effect', 'active_character_translate'],
 		options = options,
 	}
@@ -160,7 +160,7 @@ func negotiation_finish(log_text):
 	var closing_text = log_text + "\n\n" + tr('NEGOTIATION_UNLOCKED_TEXT') % [person.get_short_name(), category_label]
 	var dialogue_data = {
 		text = closing_text,
-		image = 'noevent',
+		image = 'praise',
 		tags = ['active_character_translate'],
 		options = [{code = 'close', text = tr('DIALOGUECLOSE'), reqs = []}],
 	}

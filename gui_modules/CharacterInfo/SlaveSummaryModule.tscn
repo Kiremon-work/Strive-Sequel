@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/Themes_v2/MANSION/Sex_Buttons_Font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/images/portraits/cali_collar_prt.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/Textures_v2/Universal/Bars/bar_big_mp.png" type="Texture" id=9]
 [ext_resource path="res://assets/Textures_v2/Universal/Bars/bar_big_lust.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/RoundoShadow40.font" type="BitmapFont" id=11]
+[ext_resource path="res://assets/Textures_v2/panel_slave_splitter.png" type="Texture" id=12]
 [ext_resource path="res://assets/images/gui/gui icons/icon_physics.png" type="Texture" id=13]
 [ext_resource path="res://assets/images/gui/gui icons/icon_charm.png" type="Texture" id=14]
 [ext_resource path="res://assets/images/gui/gui icons/icon_sex.png" type="Texture" id=15]
@@ -27,10 +28,10 @@
 [ext_resource path="res://assets/Fonts_v2/FontThemes/MainSmallBold.tres" type="DynamicFont" id=26]
 [ext_resource path="res://assets/images/gui/gui icons/magic_factor.png" type="Texture" id=27]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO old/Buttons/buttonskill_prof.png" type="Texture" id=28]
+[ext_resource path="res://assets/Textures_v2/panel_slave_square.png" type="Texture" id=29]
 [ext_resource path="res://assets/Textures_v2/MANSION/Skills/Buttons/buttonskill_empty.png" type="Texture" id=30]
 [ext_resource path="res://assets/Fonts_v2/FontThemes/TitlesBig.tres" type="DynamicFont" id=31]
 [ext_resource path="res://gui_modules/CharacterInfo/SlaveSummaryModule.gd" type="Script" id=32]
-[ext_resource path="res://assets/Themes_v2/CHAR_INFO/CHI_Slave_Summary_Panel.tres" type="StyleBox" id=33]
 [ext_resource path="res://assets/Themes_v2/CHAR_INFO/CHI_Professions_Panel.tres" type="StyleBox" id=34]
 [ext_resource path="res://assets/Fonts_v2/FontThemes/MainMiddle.tres" type="DynamicFont" id=35]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO old/Buttons/arrow_charswap.png" type="Texture" id=36]
@@ -42,13 +43,26 @@
 [ext_resource path="res://assets/Textures_v2/CITY/Buttons/buttonbig_city.png" type="Texture" id=46]
 [ext_resource path="res://assets/Textures_v2/CITY/Buttons/buttonbig_city_hover.png" type="Texture" id=47]
 [ext_resource path="res://assets/Textures_v2/CITY/Buttons/buttonbig_city_disabled.png" type="Texture" id=48]
+[ext_resource path="res://gui_modules/CharacterInfo/SignedTextureBar.tscn" type="PackedScene" id=49]
+[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/affection_low.png" type="Texture" id=50]
+[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/affection_high.png" type="Texture" id=51]
+[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/respect_low.png" type="Texture" id=52]
+[ext_resource path="res://assets/Textures_v2/CHAR_INFO/relationship/respect_high.png" type="Texture" id=53]
 
-[node name="SlaveSummaryModule" type="Panel"]
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 220, 6 )
+
+[node name="SlaveSummaryModule" type="NinePatchRect"]
 light_mask = 0
 margin_right = 220.0
 margin_bottom = 1050.0
 rect_min_size = Vector2( 220, 1050 )
-custom_styles/panel = ExtResource( 33 )
+texture = ExtResource( 29 )
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 13
+patch_margin_bottom = 12
 script = ExtResource( 32 )
 
 [node name="Portrait" type="TextureRect" parent="."]
@@ -85,23 +99,50 @@ __meta__ = {
 }
 
 [node name="age" type="TextureRect" parent="."]
-margin_left = 7.15825
+margin_left = 6.15825
 margin_top = 173.551
-margin_right = 47.1583
+margin_right = 46.1583
 margin_bottom = 213.551
 texture = ExtResource( 43 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 215.0
+margin_right = 220.0
+margin_bottom = 219.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+margin_top = 320.0
+margin_right = 220.0
+margin_bottom = 324.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+margin_top = 363.0
+margin_right = 220.0
+margin_bottom = 367.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="HSeparator4" type="HSeparator" parent="."]
+margin_top = 320.0
+margin_right = 220.0
+margin_bottom = 324.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="HSeparator5" type="HSeparator" parent="."]
+margin_top = 477.0
+margin_right = 220.0
+margin_bottom = 481.0
+custom_styles/separator = SubResource( 1 )
 
 [node name="base_stats" type="VBoxContainer" parent="." groups=["hide_stranger"]]
 light_mask = 0
 margin_left = 30.0
-margin_top = 232.0
+margin_top = 228.0
 margin_right = 190.0
-margin_bottom = 333.0
+margin_bottom = 329.0
 custom_constants/separation = 13
 
 [node name="hp" type="TextureProgress" parent="base_stats"]
@@ -211,12 +252,12 @@ expand = true
 [node name="factors" type="VBoxContainer" parent="."]
 light_mask = 0
 margin_left = 31.0
-margin_top = 555.0
+margin_top = 485.0
 margin_right = 152.0
-margin_bottom = 835.0
+margin_bottom = 765.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_constants/separation = 0
+custom_constants/separation = -3
 
 [node name="growth_factor" type="TextureRect" parent="factors" groups=["hide_master"]]
 light_mask = 0
@@ -246,9 +287,9 @@ __meta__ = {
 
 [node name="physics_factor" type="TextureRect" parent="factors"]
 light_mask = 0
-margin_top = 35.0
+margin_top = 32.0
 margin_right = 50.0
-margin_bottom = 70.0
+margin_bottom = 67.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -269,9 +310,9 @@ clip_text = true
 
 [node name="magic_factor" type="TextureRect" parent="factors"]
 light_mask = 0
-margin_top = 70.0
+margin_top = 64.0
 margin_right = 50.0
-margin_bottom = 105.0
+margin_bottom = 99.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -292,9 +333,9 @@ clip_text = true
 
 [node name="wits_factor" type="TextureRect" parent="factors"]
 light_mask = 0
-margin_top = 105.0
+margin_top = 96.0
 margin_right = 50.0
-margin_bottom = 140.0
+margin_bottom = 131.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -315,9 +356,9 @@ clip_text = true
 
 [node name="charm_factor" type="TextureRect" parent="factors"]
 light_mask = 0
-margin_top = 140.0
+margin_top = 128.0
 margin_right = 50.0
-margin_bottom = 175.0
+margin_bottom = 163.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -338,9 +379,9 @@ clip_text = true
 
 [node name="sexuals_factor" type="TextureRect" parent="factors"]
 light_mask = 0
-margin_top = 175.0
+margin_top = 160.0
 margin_right = 50.0
-margin_bottom = 210.0
+margin_bottom = 195.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -361,9 +402,9 @@ clip_text = true
 
 [node name="tame_factor" type="TextureRect" parent="factors" groups=["hide_master"]]
 light_mask = 0
-margin_top = 210.0
+margin_top = 192.0
 margin_right = 50.0
-margin_bottom = 245.0
+margin_bottom = 227.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -384,9 +425,9 @@ clip_text = true
 
 [node name="authority_factor" type="TextureRect" parent="factors" groups=["hide_master"]]
 light_mask = 0
-margin_top = 245.0
+margin_top = 224.0
 margin_right = 50.0
-margin_bottom = 280.0
+margin_bottom = 259.0
 rect_min_size = Vector2( 50, 35 )
 mouse_filter = 0
 size_flags_horizontal = 0
@@ -404,16 +445,103 @@ margin_bottom = 33.0
 custom_fonts/font = ExtResource( 35 )
 text = "25"
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="RelationshipStats" type="VBoxContainer" parent="."]
+light_mask = 0
+margin_left = 11.0
+margin_top = 776.0
+margin_right = 207.0
+margin_bottom = 836.0
+custom_constants/separation = 24
+
+[node name="Affection" parent="RelationshipStats" instance=ExtResource( 49 )]
+margin_right = 196.0
+margin_bottom = 18.0
+
+[node name="LowIcon" type="TextureRect" parent="RelationshipStats/Affection"]
+margin_left = -4.84175
+margin_top = -29.0
+margin_right = 20.1582
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 50 )
+expand = true
+stretch_mode = 6
+
+[node name="HighIcon" type="TextureRect" parent="RelationshipStats/Affection"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -19.0
+margin_top = -29.0
+margin_right = 6.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 51 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="RelationshipStats/Affection"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = -38.0
+margin_right = 78.0
+margin_bottom = -9.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 26 )
+text = "STATAFFECTION"
+align = 1
+clip_text = true
+
+[node name="Respect" parent="RelationshipStats" instance=ExtResource( 49 )]
+margin_top = 42.0
+margin_right = 196.0
+margin_bottom = 60.0
+
+[node name="LowIcon" type="TextureRect" parent="RelationshipStats/Respect"]
+margin_left = -6.0
+margin_top = -24.0
+margin_right = 19.0
+margin_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 52 )
+expand = true
+stretch_mode = 6
+
+[node name="HighIcon" type="TextureRect" parent="RelationshipStats/Respect"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -19.0
+margin_top = -25.0
+margin_right = 6.0
+mouse_filter = 2
+texture = ExtResource( 53 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="RelationshipStats/Respect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = -34.0
+margin_right = 79.0
+margin_bottom = -5.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 26 )
+text = "STATRESPECT"
+align = 1
+clip_text = true
 
 [node name="VBoxContainer2" type="Control" parent="."]
 light_mask = 0
 margin_left = 8.0
-margin_top = 352.0
+margin_top = 330.0
 margin_right = 213.0
-margin_bottom = 519.0
+margin_bottom = 497.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -454,18 +582,18 @@ texture = ExtResource( 13 )
 [node name="wits" type="TextureRect" parent="VBoxContainer2/TextureRect2"]
 light_mask = 0
 margin_left = 13.0
-margin_top = 94.0
+margin_top = 81.0
 margin_right = 41.0
-margin_bottom = 119.0
+margin_bottom = 106.0
 mouse_filter = 0
 texture = ExtResource( 8 )
 
 [node name="charm" type="TextureRect" parent="VBoxContainer2/TextureRect2"]
 light_mask = 0
 margin_left = 13.0
-margin_top = 141.0
+margin_top = 116.0
 margin_right = 41.0
-margin_bottom = 166.0
+margin_bottom = 141.0
 mouse_filter = 0
 texture = ExtResource( 14 )
 
@@ -516,9 +644,9 @@ clip_text = true
 [node name="wits" type="Label" parent="VBoxContainer2/TextureRect3"]
 light_mask = 0
 margin_left = -6.0
-margin_top = 86.0
+margin_top = 73.0
 margin_right = 72.0
-margin_bottom = 121.0
+margin_bottom = 108.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 35 )
 text = "Wits"
@@ -528,9 +656,9 @@ clip_text = true
 [node name="charm" type="Label" parent="VBoxContainer2/TextureRect3"]
 light_mask = 0
 margin_left = -6.0
-margin_top = 133.0
+margin_top = 108.0
 margin_right = 72.0
-margin_bottom = 168.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 35 )
 text = "Charm"
@@ -584,9 +712,9 @@ clip_text = true
 
 [node name="wits2" type="Label" parent="VBoxContainer2/TextureRect4"]
 light_mask = 0
-margin_top = 86.0
+margin_top = 73.0
 margin_right = 50.0
-margin_bottom = 121.0
+margin_bottom = 108.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 35 )
 text = "Wits"
@@ -595,9 +723,9 @@ clip_text = true
 
 [node name="charm2" type="Label" parent="VBoxContainer2/TextureRect4"]
 light_mask = 0
-margin_top = 133.0
+margin_top = 108.0
 margin_right = 50.0
-margin_bottom = 168.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 35 )
 text = "Charm"

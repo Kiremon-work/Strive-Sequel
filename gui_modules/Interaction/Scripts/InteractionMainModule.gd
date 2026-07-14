@@ -3412,6 +3412,12 @@ func acquire_valuecheck(r, actor):
 					condition += 1
 			if condition < 3:
 				check = false
+		'relatives_check':
+			check = false
+			for partner in actor.satisfied_partners:
+				if ResourceScripts.game_party.checkifrelatives(actor.person.id, partner.person.id):
+					check = true
+					break
 	return check
 
 func has_master():

@@ -2,7 +2,8 @@ extends Node
 
 var season_events_range = {
 	halloween = {start = [15,10], end = [15,11], event = 'halloween_start', event_reqs = []},
-	christmas = {start = [15,12], end = [15,13], event = 'christmas_pre_start', event_reqs = []}
+	christmas = {start = [15,12], end = [15,13], event = 'christmas_pre_start', event_reqs = []},
+	kuro_seaside = {start = [1,6], end = [30,8], event = 'kuro_seaside_leisure_start', event_reqs = []}
 }
 
 var comic_events = {

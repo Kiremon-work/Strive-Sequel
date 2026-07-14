@@ -738,7 +738,7 @@ func test_mode():
 				{code = 'make_story_character', value = 'Mae'},
 				{code = 'make_story_character', value = 'Kuro'},
 				{code = 'make_story_character', value = 'Lilia'},
-				{code = 'make_story_character', value = 'Anastasia'},
+				{code = 'make_story_character', value = 'Hara'},
 				{code = 'affect_unique_character', name = 'mae', type = 'add_trait', trait = 'spirit_owl'},
 				{code = 'affect_unique_character', name = 'lilia', type = 'turn_into_unique', value = 'Lilith'},
 			]
@@ -886,6 +886,10 @@ func test_mode():
 
 		ResourceScripts.game_progress.completed_quests.append("princess_search")
 		ResourceScripts.game_progress.completed_quests.append("act4_capital")
+		ResourceScripts.game_progress.completed_quests.append("visit_dwarfs_quest")
+		ResourceScripts.game_progress.decisions.append("act1_finish")
+		ResourceScripts.game_progress.decisions.append("act4_start")
+		globals.common_effects([{code = 'progress_quest', value = 'act_4_capital', stage = 'enter_capital'}])
 		#input_handler.interactive_message('purchased_cali', '', {})
 
 		#ResourceScripts.game_progress.decisions.append("fred_bribe_taken")
