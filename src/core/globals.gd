@@ -3341,5 +3341,5 @@ func make_sfx_params(anim_dict, last_iteration = false):
 		params.no_delays = true
 	if anim_dict.has('alt_slot'): params.alt_slot = anim_dict.alt_slot
 	if anim_dict.has('force_flip'): params.force_flip = anim_dict.force_flip
-	if anim_dict.target == 'caster': params.reverse_flip = true
+	if anim_dict.has("target") and anim_dict.target == 'caster': params.reverse_flip = true
 	return params
