@@ -29,7 +29,7 @@ var tutorials = {
 		},
 		#1
 		{
-			buttons = ['first_skill_btn'],
+			buttons = ['mentor_skill_btn'],
 			text = "TUTORIAL_TRAINING2",
 			panel_pos = Vector2(733,150)
 		},{
@@ -83,7 +83,12 @@ var tutorials = {
 			panel_pos = Vector2(50,850),
 			delay = 1.0
 		},{
-			buttons = ['obedience_btn'],
+			buttons = ['event_opt_1'],
+			text = "TUTORIAL_TRAINING14_1",
+			panel_pos = Vector2(50,850),
+			delay = 1.0
+		},{
+			buttons = ['training_bonus_btn'],
 			text = "TUTORIAL_TRAINING15",
 			panel_pos = Vector2(733,50)
 		},{
@@ -391,7 +396,7 @@ var tutorials = {
 			buttons = ['combat_skill_2'],
 			text = 'TUTORIAL_COMBAT22',
 			panel_pos = Vector2(733,50),
-			delay = 0.5
+			delay = 0.8
 		},{
 			buttons = ['combat_ally'],
 			text = 'TUTORIAL_COMBAT22',
@@ -687,7 +692,9 @@ func prepare_general_tut():
 	globals.common_effects([{code = 'make_story_character', value = 'Daisy'}])
 	character = ResourceScripts.game_party.get_unique_slave('daisy')
 	character.remove_trait('training_obedience')
-	character.add_stat('loyalty', 25)
+	character.add_trait('untrained')#Rebellious
+	character.add_stat('loyalty', 99)
+	character.add_stat('training_points', 40)
 	character.set_brothel_rule('waitress', false)
 	ResourceScripts.game_res.money = 800
 	ResourceScripts.game_res.materials['wood'] = 10
