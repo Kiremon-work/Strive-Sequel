@@ -447,10 +447,10 @@ but still will keep all your characters, items and inventory. Use this mode to l
 	CHARTYPESLAVE_TRAINEDF = "Trained Slave",
 	CHARTYPEMASTERDESCRIPT = "[Master] of the mansion has no restrictions on type of actions they can perform. ",
 	CHARTYPESLAVEDESCRIPT = "Slaves are considered to be property. Their life solely belongs to their master, however they must be monitored on their assigned tasks by a trainer. ",
-	CHARTYPESERVANTDESCRIPT = "Subordinates are free people who choose to serve under you. Compared to slaves they have faster Loyalty Growth, and gain additional Mastery Points based on Growth Factor but can't be sold or given away for quests. They also receive a payment as a fraction of their value each week.",
+	CHARTYPESERVANTDESCRIPT = "Subordinates are free people who choose to serve under you. Compared to slaves they gain more Proficiencies, additional Mastery Points based on Growth Factor but can't be sold or given away for quests. They also receive a payment as a fraction of their value each week.",
 	CHARTYPEHEIRDESCRIPT = """Mansion's heir are children born of [Master] and their spouse.
 
-[color=aqua]Heir's Obedience drain 50% slower and Loyalty is 50% faster. Heir has 20% penalty to Collection, Farming and Fishing.[/color] """,
+[color=aqua]Heir start with all tasks unlocked has 20% penalty to Collection, Farming and Fishing.[/color] """,
 	CHARTYPESPOUSEDESCRIPT = "Spouse of mansion's [Master]. While not possessing any outstanding qualities on [his] own, children of [Master] and spouse will obtain Heir status and can be assigned to special training while growing up.",
 	CHARTYPESLAVE_TRAINEDDESCRIPT = "These slaves have finished their training and accepted their new fate to heart. They no longer require a trainer assigned to them. ",
 	MSLMCONTEXT_OPEN = "Open Info",
@@ -459,7 +459,6 @@ but still will keep all your characters, items and inventory. Use this mode to l
 	MSLMCONTEXT_OPEN_CUSTOMIZATION_TAB = "  Customization",
 	MSLMCONTEXT_OPEN_OCCUPATION = "Occupation",
 	MSLMCONTEXT_INVENTORY = "Inventory",
-	SLAVEINFOMODULEOBEDIENCE = "Obedience",
 	CHARINFO_IMAGE_OPACITY_TOOLTIP = "Image Opacity",
 	CHARINFO_DESCRIPTION_LABEL = "Description",
 	CHARINFO_SEARCH_PLACEHOLDER = "Search",
@@ -484,7 +483,6 @@ but still will keep all your characters, items and inventory. Use this mode to l
 	CHARINFO_SET_ABILITIES_TOOLTIP = "Set Abilities for combat",
 	SIMRESIST = "Resists",
 	SIMLOYALTYGAIN = "Loyalty Gain",
-	SIMOBEDIENCEDRAIN = "Obedience Drain",
 	SIMATK = "ATK:",
 	SIMDEF = "DEF:",
 	SIMHITRATE = "Hit:",
@@ -776,7 +774,7 @@ Food type: Fish, Vegetables.""",
 
 Applied to: {color=yellow|Neck, Ass, Crotch}
 
-Loyalty +0.5 per day, Spirit -0.5 per day.
+Loyalty +0.5 per day.
 Can only be applied once.
 Works only during training.""",
 	MATERIALINK_MAKEUPDESCRIPT = """A set of tools and ink allowing to apply a certain magical signature on the subject. While makeup might not be enough to turn the Beast into the Beauty, it's a favorable option for the lazy.
@@ -805,7 +803,7 @@ Applied to: {color=yellow|Face, Chest, Arms, Legs}
 
 When applied to Face: +5 Health
 Otherwise: +3 Physics""",
-	TATTOOBRANDDESCRIPT = "A sign of your ownership. Loyalty +0.5 per day, Spirit -0.5 per day.",
+	TATTOOBRANDDESCRIPT = "A sign of your ownership. Loyalty +0.5 per day.",
 	TATTOOLUSTDESCRIPT = "Lust Growth: +10%",
 	TATTOOLUST2DESCRIPT = "Lust Growth: +20%",
 	TATTOOMAKEUPDESCRIPT = "Charm: +10",
@@ -1185,6 +1183,8 @@ Reduced by enemy's evasion""",
 	BLACKSMITH = "Blacksmith",
 	CRAFTCHARACTERS = "Characters",
 	CRAFTORDER = "Craft Order",
+	CRAFTORDERMATERIALS = "Craft Order: Materials",
+	CRAFTORDERITEMS = "Craft Order: Items",
 	CRAFTTAILORING = "Tailoring",
 	CRAFTENCHANT = "Enchant",
 	CRAFTFILTERALL = "All",
@@ -1580,7 +1580,7 @@ Hotkey: 3""",
 	SKILLRADIANCEDESCRIPT = "Deals 80% of MATK as {color=yellow|Light} damage to all enemies and Shatter them for 3 turns.",
 	SKILLE_RES = "Mass Resurrection",
 	SKILLE_RESDESCRIPT = "Resurrect every ally (except undead) with 80% of their Maximum HP.",
-	SKILLDARKNESS = "Darkness",
+	SKILLDARKNESS = "Shadow Bolt",
 	SKILLDARKNESSDESCRIPT = "Deals 75% of MATK as {color=yellow|Dark} damage and applies Blind for 1 turn. Duration improves with Dark Mastery.",
 	SKILLDARKNESSDESCRIPT_1 = "Deals 75% of MATK as {color=yellow|Dark} damage and applies Blind for 2 turns.",
 	SKILLBLACK_TENDRILS = "Black Tendrils",
@@ -2047,13 +2047,86 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	ACTIONMINDCONTROLSCENETEXT = "[name1] uses strong magic to dominate [name2]'s mind, slowly rewriting it into a nice obedient slave.",
 	ACTIONEDGINGSCENETEXT = "[name1] teasingly brings [name2] to orgasm but in the last moment stops [his1] movements, preventing [name2] from cumming. This goes on for a few more times until [name2] gives up begging for release. ",
 	TRAININGFINISHHEADER = "Skills by the end of training:",
-	TRAININGSTATUS1 = "Spirit status: Broken",
-	TRAININGSTATUS2 = "Spirit status: Damaged",
-	TRAININGSTATUS3 = "Spirit status: Retained",
-	TRAININGSTATUS4 = "Spirit status: Preserved",
+	SERVANTUNLOCK_WORKING = "Working",
+	SERVANTUNLOCK_COMBAT = "Combat",
+	SERVANTUNLOCK_DATING = "Dating",
+	SERVANTUNLOCK_SEX = "Sex",
+	SERVANTUNLOCK_SEXSERVICE = "Sex Service",
+	SERVANTUNLOCK_UNLOCKED = "Unlocked",
+	SERVANTUNLOCK_LOCKED = "Locked",
+	SERVANTUNLOCK_TALK_BUTTON = "Negotiate",
+	SERVANTUNLOCK_TALK_BUTTON_COOLDOWN = "Negotiate (%d days)",
+	SERVANTUNLOCK_LEAVE = "Leave",
+	SERVANTUNLOCK_DIALOGUE_TEXT = "What would you like %s to learn?",
+	SERVANTUNLOCK_REQ_AFFECTION = "needs 25+ Affection",
+	SERVANTUNLOCK_REQ_CONSENT = "needs 2+ Consent",
+	NEGOTIATION_PAY = "Offer %d gold for this",
+	NEGOTIATION_PERSUADE_CHARGE = "[Persuasion Challenge] Try to convince [him]",
+	NEGOTIATION_PERSUADE_BREAK = "Offer [him] a couple days off first",
+	NEGOTIATION_CANCEL = "Never mind",
+	NEGOTIATION_HESITATION_BREAK = "%s complains [he] already has too much on [his] hands and could use a break.",
+	NEGOTIATION_LOG_BREAK = "[He] agreed to your proposal, and will follow through once [his] break is over.",
+	NEGOTIATION_LOG_FORCE_BREAKDOWN = "The ordeal was too much, and [he] needs some time alone to recover.",
+	NEGOTIATION_LOG_INSTANT = "[He] doesn't even hesitate — [his] trust in you makes this an easy yes.",
+	NEGOTIATION_UNLOCKED_TEXT = "%s has accepted [his] new duty: %s.",
+
+	NEGOTIATION_HESITATION_WORKING_CHARGE = "%s hesitates, unsure about taking on more responsibility.",
+	NEGOTIATION_HESITATION_WORKING_FORCE = "%s flatly refuses, arguing with a hint of entitlement that [he] already does enough for you.",
+	NEGOTIATION_PERSUADE_FORCE_WORKING = "Remind [him] who's in charge",
+	NEGOTIATION_LOG_PAID_WORKING = "Slip [him] %d gold as a bonus. [His] resolve crumbles, and [he] caves in, agreeing to take on more work.",
+	NEGOTIATION_LOG_CHARGE_WORKING = "Won [him] over with a Persuasion Challenge. [He] agreed to take on more work.",
+	NEGOTIATION_LOG_FORCE_WORKING = "Made it clear this wasn't a request, browbeating [him] until [he] reluctantly gives in and agrees to work harder. [His] respect for you falls by %d and [his] affection by %d.",
+
+	NEGOTIATION_HESITATION_COMBAT_CHARGE = "%s hesitates, unsure about taking on the danger of fighting for you.",
+	NEGOTIATION_HESITATION_COMBAT_FORCE = "%s flatly refuses, arguing with a hint of entitlement that risking [his] life isn't part of the deal.",
+	NEGOTIATION_PERSUADE_FORCE_COMBAT = "Remind [him] that refusal isn't an option",
+	NEGOTIATION_LOG_PAID_COMBAT = "Slip [him] %d gold as a bonus. [His] resolve crumbles, and [he] caves in, agreeing to fight for you.",
+	NEGOTIATION_LOG_CHARGE_COMBAT = "Won [him] over with a Persuasion Challenge. [He] agreed to fight for you.",
+	NEGOTIATION_LOG_FORCE_COMBAT = "Made it clear refusal wasn't an option, intimidating [him] until [he] reluctantly gives in and agrees to fight. [His] respect for you falls by %d and [his] affection by %d.",
+
+	NEGOTIATION_HESITATION_DATING_CHARGE = "%s hesitates, unsure about taking on that kind of closeness with you.",
+	NEGOTIATION_HESITATION_DATING_FORCE = "%s flatly refuses, arguing with a hint of entitlement that [he] shouldn't be rushed into that kind of closeness.",
+	NEGOTIATION_PERSUADE_FORCE_DATING = "Insist that [he] stop being so shy about it",
+	NEGOTIATION_LOG_PAID_DATING = "Slip [him] %d gold as a gift. [His] resolve crumbles, and [he] caves in, agreeing to date you.",
+	NEGOTIATION_LOG_CHARGE_DATING = "Won [him] over with a Persuasion Challenge. [He] agreed to date you.",
+	NEGOTIATION_LOG_FORCE_DATING = "Brushed aside [his] hesitation with a firm hand, forcing [him] to reluctantly agree to date you. [His] respect for you falls by %d and [his] affection by %d.",
+
+	NEGOTIATION_HESITATION_SEX_CHARGE = "%s hesitates, unsure about taking on that responsibility.",
+	NEGOTIATION_HESITATION_SEX_FORCE = "%s flatly refuses, arguing with a hint of entitlement that [his] body isn't part of the arrangement.",
+	NEGOTIATION_PERSUADE_FORCE_SEX = "Remind [him] that [his] body belongs to you now",
+	NEGOTIATION_LOG_PAID_SEX = "Slip [him] %d gold as a bonus. [His] resolve crumbles, and [he] caves in, agreeing to serve this way.",
+	NEGOTIATION_LOG_CHARGE_SEX = "Won [him] over with a Persuasion Challenge. [He] agreed to serve this way.",
+	NEGOTIATION_LOG_FORCE_SEX = "Made it clear [his] body belongs to you, forcing [him] to reluctantly agree to serve this way. [His] respect for you falls by %d and [his] affection by %d.",
+
+	NEGOTIATION_HESITATION_SEXSERVICE_CHARGE = "%s hesitates, unsure about taking on that kind of responsibility.",
+	NEGOTIATION_HESITATION_SEXSERVICE_FORCE = "%s flatly refuses, arguing with a hint of entitlement that being sold to strangers was never part of the deal.",
+	NEGOTIATION_PERSUADE_FORCE_SEXSERVICE = "Remind [him] that [his] consent was never really needed",
+	NEGOTIATION_LOG_PAID_SEXSERVICE = "Slip [him] %d gold as a bonus. [His] resolve crumbles, and [he] caves in, accepting [his] new role.",
+	NEGOTIATION_LOG_CHARGE_SEXSERVICE = "Won [him] over with a Persuasion Challenge. [He] agreed to it.",
+	NEGOTIATION_LOG_FORCE_SEXSERVICE = "Made it clear [his] consent was never needed, forcing [him] to reluctantly accept [his] new role. [His] respect for you falls by %d and [his] affection by %d.",
+	TRAININGRESULT_FAIL = "Fail",
+	TRAININGRESULT_RESIST = "Resist",
+	TRAININGRESULT_SUCCESS = "Success",
+	TRAININGRESULT_CRIT_SUCCESS = "Critical Success",
+	CHANCELOG_DEBUG_NOTE = "[Debug Info - disposition not actually known]",
+	CHANCELOG_BASE = "Base (%s): Fail %.0f, Resist %.0f, Success %.0f, Crit %.0f",
+	CHANCELOG_TAMEFACTOR = "Tame Factor (%.0f): %s",
+	CHANCELOG_SRC_TRAINERCLASS = "Trainer (%s)",
+	CHANCELOG_SRC_DISPOSITION = "Disposition (%s)",
+	CHANCELOG_FINAL = "Final: Fail %.0f%%, Resist %.0f%%, Success %.0f%%, Crit %.0f%%",
+	CHANCELOG_FAIL = "Fail",
+	CHANCELOG_RESIST = "Resist",
+	CHANCELOG_SUCCESS = "Success",
+	CHANCELOG_CRIT_SUCCESS = "Crit",
+	TRAININGCOMPLETEDANNOUNCE = "%s's training is finished. ",
+	TRAININGBROKENINANNOUNCE = "%s is broken in.",
+	TRAININGNEGATIVETRAITGAINED = "%s's resistance to training has left a mark: acquired %s.",
+	TRAININGDECAYSIN = "Loyalty decays in %d day(s) (-%.0f/day)",
+	TRAININGDECAYING = "Loyalty is decaying: -%.0f/day",
+	LOYALTYDECAYTOOLTIP = "Loyalty decays if the slave goes too long without training. Decay speed and grace period depend on Authority Factor.",
 	TRAININGRESISTANCEINCREASE = "Resistance increased to %.0f.",
 	TRAININGLABELSPIRIT = "Character Spirit: %.0f",
-	TRAININGLABELLOYALTY = "%.0f",
+	TRAININGLABELLOYALTY = "%.0f/%.0f",
 	TRAININGLABELLOYALTYGROW = "%.0f + %.2f",
 	TRAININGLABELRESISTANCE = "%.0f",
 	TRAININGLABELRESISTANCEDROP = "%.0f - %.0f",
@@ -2061,18 +2134,7 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	TRAINING_SLAVES_ASSIGNED = "%s - Slaves Assigned: %d/%d",
 	TRAINING_ASSIGN_TRAINER_BUTTON = "Assign trainer",
 	TRAINING_RESET_BUTTON = "Reset Training",
-	TRAINING_FINISH_BUTTON = "Finish Training",
-	TRAININGTOOLTIPRESISTANCE = """Slave Resistance reduces training efficiency of non-{color=yellow|Positive} actions.
-%s's resistance drops by %.0f per turn.""",
-	TRAININGTOOLTIPRESISTULT = "Current resistance too high for training.",
-	TRAININGTOOLTIPRESISTHIGH = "Current resistance high.",
-	TRAININGTOOLTIPRESISTMOD = "Current resistance moderate.",
-	TRAININGTOOLTIPRESISTLOW = "Current resistance low.",
-	TRAINSERVTOOLTIPRESISTANCE = """Subordinate Resistance prevents Loyalty build-up.
-%s's resistance drops by %.0f per turn.""",
-	TRAINSERVTOOLTIPLOYALTY = """Loyalty is used to unlock character's actions and is obtained with time.
-%s gain loyalty by %.2f per turn.""",
-	TRAININGCOST = "Trait unlock: %d loyalty",
+	TRAININGCOST = "Trait unlock: %d Training Points",
 	TRAININGCOSTGOLD = "Trait unlock: %d gold",
 	TRAINNOTRAINER = "[name] has no trainer",
 	TRAINNOWORKTRAIT = "[name] lacks Trait: Worker",
@@ -2101,8 +2163,8 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 """,
 	DISPOSITIONSETKINK = """Disposition to %s is now kink
 """,
-	SPIRITTOOLTIP = "Spirit represents character's leftover will. If it drops too low they will become broken on training completion and suffer considerable penalties. ",
-	LOYALTYTOOLTIP = "Loyalty is used to unlock character's actions and is obtained from doing training once a day.",
+	LOYALTYTOOLTIP = "Loyalty rises with training. Once it's full, training completes automatically. Loyalty decays if the slave goes too long without training.",
+	TRAININGPOINTSTOOLTIP = "Training Points are earned from training actions and are spent to unlock training bonuses after training is finished. The amount you can obtain is capped based on Tame Factor.",
 	CLICKTOCHANGE = "Click to change",
 	WITSREVEALDISPOSITION = "Disposition figured out:",
 	MINDREADREVEALDISPOSITION = "Dispositions revealed:",
@@ -2144,7 +2206,15 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	TASKREST = "Rest",
 	TASKRESTSERVICE = "Service",
 	TASKRESTDESCRIPT = "Select a service the character will provide at local facilities, or switch to rest when necessary.",
-	TASKRESTINFO = "Resting will make a character's wounds heal faster and Obedience stop draining, but they also gain no Loyalty.",
+	TASKCRAFT = "Crafting",
+	TASKCRAFTNAME = "Crafting",
+	TASKCRAFTDESCRIPT = "Set up priority of character's crafting activities.",
+	TASKRESTINFO = "Resting will make a character's wounds heal faster.",
+	CRAFTRULES2TITLE = "Craft Rules - %s",
+	PREDICTEDTASKLABEL = "Predicted task:",
+	MATERIALSORDERLABEL = "Materials order",
+	ITEMSORDERLABEL = "Items order",
+	CRAFTRULES2TOOLTIP = """Toggle which crafting tasks the character is allowed to perform. Enabled tasks are attempted in the priority order shown; drag entries in the order lists to rearrange priority. Top is high priority, bottom is low. Disabled tasks will be skipped. \n\nPredicted task shows which job the character will perform next. Materials are always crafted before Items.""",
 	NOSERVICECAPITAL = "Can't provide services outside of cities!",
 	TASKFARMING_VEGES = "Vegetables",
 	TASKFARMING_VEGESDESCRIPT = "Work at farm, raising vegetables. Vegetables are a food staple for many races.",
@@ -2186,7 +2256,6 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	NODATEWEEK = "You have no dates left this week",
 	SEXTOOLTIPSHORT = "Character can be assigned to sexual interaction today",
 	TRAINTOOLTIP = "Character can be trained today",
-	TOOLTIPLOYALTYOBEDIENCE = "Loyalty points are gained every turn based on Tame Factor. You can unlock new actions and passives with it. ",
 	TOOLTIPVALUE = "Character's value means their market price. It's based on their Growth Factor, Race, Training, Fame and certain features. Higher value characters will earn more money when providing services and prostitution.",
 	TOOLTIPFAME = "Fame is a character's renown among people. It can grow through certain actions but also diminishes over time. A character's value, servant's allowance, training, and recruitment efficiency are affected by fame.",
 	SERVICEREST = "[name] will rest. Uncheck [color=aqua]Rest[/color] to switch to work state.",
@@ -2630,11 +2699,11 @@ You won't be able to finish turn if your total number of characters is bigger th
 	STATSEXUALS_BONUS = "Sexuals",
 	STATTRAINEE_AMOUNT = "Training Slots",
 	STATTRAINING_LOYALTY = "Loyalty from Training",
-	STATTRAINING_SPIRIT = "Spirit from Training",
+	STATTRAINING_POINTS_BONUS = "Training Points from Training",
 	STATRESISTANCE_RED = "Resistance Drop Speed",
 	STATTRAINER_LOYALTY_BONUS = "Loyalty for trainee",
 	STATTRAINING_LOYALTYDESCRIPT = "Loyalty bonus gained by this character from Training",
-	STATTRAINING_SPIRITDESCRIPT = "Adjustment for Spirit decline during Training",
+	STATTRAINING_POINTS_BONUSDESCRIPT = "Adjustment for Training Points gained during Training",
 	STATRESISTANCE_REDDESCRIPT = "Speed of slave's Resistance dropping with time",
 	STATTRAINER_LOYALTY_BONUSDESCRIPT = "Loyalty bonus received by this character's trainee",
 	STATTRAINEE_AMOUNTDESCRIPT = "Maximal number of trainee",
@@ -2658,7 +2727,8 @@ You won't be able to finish turn if your total number of characters is bigger th
 	TRAITSTANDING_SWORN_SERVANTDESCRIPT = "Productivity is increased by 10%.",
 	TRAITSTANDING_BELOVED = "Beloved",
 	TRAITSTANDING_BELOVEDDESCRIPT = "Character upkeep is reduced by 50%.",
-	STATSPIRIT = "Spirit",
+	STATTRAINING_POINTS = "Training Points",
+	STATTRAINING_POINTSDESCRIPT = "Training Points are earned from training actions and spent to unlock training traits.",
 	TRAITTRAINING_WORKFORCE = "Training: Workforce",
 	TRAITTRAINING_WORKFORCEDESCRIPT = """Set for labor slavery.
 Productivity increased by 40%.""",
@@ -2668,14 +2738,8 @@ Value increased by 50%.""",
 	TRAITTRAINING_WARRIOR = "Training: Combat",
 	TRAITTRAINING_WARRIORDESCRIPT = """Asset as a combat slave.
 Damage +15%, Health +20.""",
-	TRAITTRAINING_DAMAGED = "Damaged Spirit",
-	TRAITTRAINING_DAMAGEDDESCRIPT = "Reduces value by 15%, Experience gain by 10%.",
-	TRAITTRAINING_BROKEN = "Broken",
-	TRAITTRAINING_BROKENDESCRIPT = "Reduces Value by 25%, Experience gain by 20%. Can't pass Persuasion and Wisdom challenges.",
-	STATOBEDIENCE = "Obedience",
-	STATOBEDIENCEDESCRIPT = "Obedience is a character's willingness to obey your orders. Obedience is gained by using social skills. When depleted character can escape and will be lost in case that happens. ",
 	STATLOYALTY = "Loyalty",
-	STATLOYALTYDESCRIPT = "Loyalty points allow you to unlock new abilities for your servants. Loyalty is gained passively based on character's Tame Factor but can also be improved on dates and usage of social skills.",
+	STATLOYALTYDESCRIPT = "Loyalty allows slave character to finish training.",
 	STATAFFECTION = "Affection",
 	STATAFFECTIONDESCRIPT = "Affection represents how positively or negatively this character feels about you.",
 	STATRESPECT = "Respect",
@@ -2691,10 +2755,6 @@ Damage +15%, Health +20.""",
 	EVENT_EFFECT_TRAIT_LOST = "%s Trait lost",
 	STATRESISTANCE = "Resistance",
 	STATRESISTANCEDESCRIPT = "Resistance DESCRIPT PLACEHOLDER.",
-	STATSUBMISSION = "Submission",
-	STATSUBMISSIONDESCRIPT = "Submission is built with punishing skills. It will decrease with time unless maxed out. Maxed out Submission will no longer require Obedience for work and stops escapes.",
-	STATAUTHORITY = "Authority",
-	STATAUTHORITYDESCRIPT = "Authority represents a character's respect for you. Authority is built by punishments and dates, and determines how quickly Loyalty is built. Low authority and obedience makes possible for character to attempt escape.",
 	STATLUST = "Lust",
 	STATLUSTDESCRIPT = "Lust increases with time and allows the use of specific skills. Lust can be a powerful control and resource tool when utilized correctly.",
 	STATPRODUCTIVITY = "Productivity",
@@ -2707,7 +2767,6 @@ Damage +15%, Health +20.""",
 	STATLOYALTY_GAIN_MOD = "Loyalty Gain",
 	STATLOYALTY_GAIN = "Loyalty Gain",
 	STATLUSTTICK = "Lust Growth",
-	STATOBEDIENCE_DRAIN = "Obedience Drain",
 	STATMOD_BUILD = "Upgrading",
 	STATMOD_COLLECT = "Collection",
 	STATMOD_HUNT = "Hunt",
@@ -2859,6 +2918,7 @@ Damage +15%, Health +20.""",
 	PRICEDESC_TRAITS_NEG = "Negative traits",
 	PRICEDESC_CUMULATIVE = "Cumulative bonus %s of",
 	PRICEDESC_LESS = "Can't be less than",
+	PRICEDESC_NOT_BROKEN_IN = "Not broken in",
 	MASTER_POINTS = "Master Points",
 	TOOLTIPENERGY = "Energy is restored during sleep and is required for tasks. When a character is forced to work with no energy left, their Exhaustion increases. ",
 	TOOLTIPFATIGUE = "Fatigue increases with time and dissipates with entertainment. When unmanaged it may cause a performance penalty.",
@@ -2929,8 +2989,7 @@ Spell Mana cost reduced by 15%
 	INFOCONSENT = "Consent defines what sexual related actions character will be willing to perform. Consent can be increased by pushing character into new practices by dating and sex options. Consent will affect prostitution related jobs.",
 	INFOCONSENTMASTER = """Consent defines what sexual related actions character will be willing to perform. Consent can be increased by pushing character into new practices by dating and sex options.
 {color=green|[Master] has no Consent requirements for any actions.}""",
-	INFOTRAINING = "Slave type characters will be trained by selected person in various actions. Every slave has different {color=aqua|Dispositions} towards different kind of actions. Properly selected actions will award more Loyalty and drain less spirit, but most actions have additional effects.",
-	INFOTRAININGSUBORDINATE = "Subordinate type characters will accomodate loyalty points with time. ",
+	INFOTRAINING = "Slave type characters will be trained by selected person in various actions. Every slave has different {color=aqua|Dispositions} towards different kind of actions. Properly selected actions will award more Training Points while bad results can make characters receive negative traits. However, most actions have additional effects.",
 	INFORESISTANCE = "Character's Resistance will reduce efficiency of training. Resistance weakens with time and resets on performing training.",
 	INFOSLAVETRAINER = "Assign a Trainer to oversee and train untrained slave. Trainer have a limited number of slaves they can work with. Slaves with nobody overseeing them will not do any work until fully trained.",
 	TRAINREADY = "Ready",
@@ -2960,7 +3019,6 @@ Spell Mana cost reduced by 15%
 	PERSONALITYCURRENT = "Current Personality: ",
 	PERSONALITYREBEL = """
 {color=red|Due to [his] rebellious character, [name] has not accepted this treatment to heart and [his] personality shifted into the opposite direction.} """,
-	LOYALTYSPECTOOLTIP = "Can only unlock 1 specialization per character. Stats will increase with every loyalty level. Loyalty required will grow exponentially.",
 	SLAVEPROFNAME_COMBAT = "Spc: Combat",
 	SLAVEPROFNAME_SERVICE = "Spc: Service",
 	SLAVEPROFNAME_PRESTIGE = "Spc: Prestige",
@@ -2984,9 +3042,9 @@ Spell Mana cost reduced by 15%
 {color=green|Maxed Physics Factor increases natural Health Regeneration.}""",
 	STATMAGIC_FACTORDESCRIPT = """{color=yellow|Magic Factor} represents character's magic affinity. The higher it is, the more mana you have and the stronger magic classes you can unlock. Also affects mana regeneration.
 {color=green|Maxed Magic Factor provides MATK bonus.}""",
-	STATTAME_FACTORDESCRIPT = """{color=yellow|Tame Factor} represents how easy it is to befriend the character. It reduces the price of unlocking loyalty traits for subordinates.
+	STATTAME_FACTORDESCRIPT = """{color=yellow|Tame Factor} represents how easy it is to befriend the character. It reduces the price of unlocking tasks for subordinates.
 
-{color=green|Maxed Tame Factor increases Loyalty Gain.}""",
+{color=green|Maxed Tame Factor doubles Training Points gained and gives a 50% chance to instantly agree to unlock requests for free instead of 20%.}""",
 	STATAUTHORITY_FACTORDESCRIPT = """{color=yellow|Authority Factor} represents capability of inflict character's authority over others. The higher it is, the more efficient is character's training and more trainees are available to them.
 
 {color=green|Maxed Authority Factor reduces Damage Taken.}""",
@@ -3004,11 +3062,11 @@ Spell Mana cost reduced by 15%
 	CHARM_FACTORBONUSDESCRIPT = "Charm Factor: Social Skills Efficiency: +20%%",
 	SEXUALS_FACTORBONUSDESCRIPT = "Sex Factor: Speed: +10",
 	MAGIC_FACTORBONUSDESCRIPT = "Magic Factor: MATK: +10%%",
-	TAME_FACTORBONUSDESCRIPT = "Tame Factor: Spirit damage from trainings is halved",
+	TAME_FACTORBONUSDESCRIPT = "Tame Factor: Training points gained from trainings are doubled. 50%% chance to instantly agree to unlock requests for free instead of 20%%",
 	TIMID_FACTORBONUSDESCRIPT = "Authority Factor: Damage taken: -15%%",
 	STATFOOD_LOVE = "Loved Food",
 	STATFOOD_HATE = "Hated Food",
-	STATFOOD_LOVEDESCRIPT = "When a favorite food is eaten, it gives a minor boost to Productivity and Obedience for the next day. Food made of both loved and hated ingredients will be considered as neutral and give no bonus or penalty. ",
+	STATFOOD_LOVEDESCRIPT = "When a favorite food is eaten, it gives a minor boost to Productivity for the next day. Food made of both loved and hated ingredients will be considered as neutral and give no bonus or penalty. ",
 	STATFOOD_HATEDESCRIPT = "When hated food is eaten, it will lower Productivity for the next day. Food made of both loved and hated ingredients will be considered as neutral and give no bonus or penalty.",
 	STATTASK_EFFICIENCY_TOOL = "Task Efficiency Bonus",
 	STATTASK_EFFICIENCY_AXE = "Task Efficiency - Axe",
@@ -3742,10 +3800,6 @@ Satisfied by the time together, you and [name] grow closer.""",
 	DATING_FEARFUL_1 = """
 
 {color=red|Fearful Mood}: """,
-	DATING_OBEDIENCE_1 = """
-Obedience: +""",
-	DATING_AUTHORITY_1 = """
-Authority: +""",
 	DATING_PHYSF_BONUS_1 = " ([Master]'s Physics Factor Bonus: +",
 	DATING_PHYSF_BONUS_2 = """
 
@@ -3987,7 +4041,7 @@ Sexual Training actions have lower chance to fail.""",
 	TRAITPETDESCRIPT = "Prostitution is 25% more efficient.",
 	TRAITSEXTOYDESCRIPT = "Prostitution is 50% more efficient.",
 	TRAITWITCRITDESCRIPT = "Increases critical strike chance by 3% per Wits Factor.",
-	TRAITDIRECTORDESCRIPT = "Training actions have lower impact on Spirit. ",
+	TRAITDIRECTORDESCRIPT = "Training actions provide more Training Points to trainee. ",
 	TRAITOCCULTISTDESCRIPT = "+15% Damage vs targets that are Cursed, Silenced, Blind or Feared",
 	TRAITVALKYRIE_SPEARDESCRIPT = "+10 Speed while equipped with Spear.",
 	TRAITEMPYRIANDESCRIPT = "Add Burn to Light attacks.",
@@ -4021,7 +4075,7 @@ Single target magic spells have 100% chance to be followed up with a basic melee
 	TRAITSHIELDBEARERDESCRIPT = "{color=brown|Shield Counter}: If equipped with a shield that grants Evasion, counter enemy attacks in melee range.",
 	TRAITPALADINDESCRIPT = "{color=brown|Smite}: Deal 25% more damage and take 15% less damage from Undead and Demon type enemies.",
 	TRAITROUGE = "Ruthless",
-	TRAITROUGEDESCRIPT = "Restore some health and mana when deals killing blow.\nWhen in front row: +35% Damage, +10% Crit Chance.\nCan't be Trained or receive Loyalty Points.",
+	TRAITROUGEDESCRIPT = "Restore some health and mana when deals killing blow.\nWhen in front row: +35% Damage, +10% Crit Chance.\nCan't be Trained or receive Loyalty.",
 	TRAITASSASSINDESCRIPT = "Single target Warfare and Protection skills won't break In The Shadows effect.",
 	TRAITBLOODMAGEDESCRIPT = "{color=brown|Blood Mastery}: Dealing damage to bleeding targets recovers HP and MP and increases MATK until end of fight.",
 	TRAITALIOSDESCRIPT = "{color=brown|Unbound}: When only character is alive in party: gain +50 evasion, +20 speed until end of battle.",
@@ -4193,8 +4247,7 @@ Coercion is no longer needed. Through deed or fear this slave has pledged their 
 
 Requires: Advanced Servitude, Master Acknowledgement""",
 	TRAITLOYALTY_SOULBIND = "Soulbind",
-	TRAITLOYALTY_SOULBINDDESCRIPT = """{color=green|Obedience Drain: 0
-Loyalty Gain: 0}
+	TRAITLOYALTY_SOULBINDDESCRIPT = """{color=green|Loyalty Gain: 0}
 
 The mind is such a fickle thing, a proper mage can exploit this as has been shown in this now exceptionally obedient specimen.
 
@@ -4246,10 +4299,10 @@ Requires: Sex:Advanced""",
 	TRAITMASTER_MENTOR = "Mentor",
 	TRAITMASTER_MENTORDESCRIPT = "Training actions have lower impact on spirit.",
 	TRAITUNTRAINED = "Rebellious",
-	TRAITUNTRAINEDDESCRIPT = """[name] has not been subjected to any training yet. [His] resisting attitude makes it hard to make [him] do any work.
--50% Productivity, -30% Damage""",
+	TRAITUNTRAINEDDESCRIPT = """[name] has not been subjected to any training yet. [His] resisting attitude makes it hard to make [him] do any work, or sell him. Perform at least one successful training to break [him].
+-50% Productivity, -30% Damage, Sell value -66%, Can't be submitted to quests.'""",
 	TRAITTRAINING_BROKE_IN = "Break In",
-	TRAITTRAINING_BROKE_INDESCRIPT = "Break [name]'s Rebellious state, making [him] respect your possession of [him] and follow your orders with no visible reluctance.",
+	TRAITTRAINING_BROKE_INDESCRIPT = "Break [name]'s Rebellious state, making [him] respect your possession of [him] and follow your orders with no visible reluctance. Required to submit [him] for quests; without it [he] can only be sold for a third of [his] value.",
 	TRAITTRAINING_OBEDIENCE = "Obedience",
 	TRAITTRAINING_OBEDIENCEDESCRIPT = "Make [name] give up on [his] autonomy, which will allow to freely sell or give [him] away.",
 	TRAITTRAINING_CALLMASTER = "Master Acknowledgement",
@@ -4314,7 +4367,6 @@ Only one attunement can be taken""",
 	TRAITSUCCUBUS_COMBAT = "Combat attunement",
 	TRAITSUCCUBUS_COMBATDESCRIPT = """HP Factor: +20%; HP Regen: +100%; Gain lust when taking damage.
 Only one attunement can be taken""",
-	FINISHTRAINING = "Finish training? Leftover spirit will be used to purchase additional bonuses.",
 	TRAITTRAINING_VALUE = "Trained spec",
 	TRAITTRAINING_VALUEDESCRIPT = "+25% Value",
 	TRAITTRAINING_PRODUCTIVITY = "Trained spec",
@@ -4381,7 +4433,7 @@ Increased Health, DEF and MDEF""",
 	TRAITEFFECTHARDWORK = "Hard Work: +50%% Productivity",
 	TRAITEFFECTPHYSBUF = "Elixir of Ogre's Strength: +80 Physics",
 	TRAITEFFECTWITSBUF = "Elixir of Expanded Mind: +80 Wits",
-	TRAITEFFECTALCOHOL = "Wasted: -1 Loyalty Gain, +1 Spirit Gain, -15%% Productivity",
+	TRAITEFFECTALCOHOL = "Wasted: -1 Loyalty Gain, -15%% Productivity",
 	TRAITEFFECTFAVFOOD = "Favorite Food: +5%% Productivity, +5%% Experience Gain",
 	TRAITEFFECTHATEDFOOD = "Hated Food: -10%% Productivity",
 	TRAITEFFECTSTARVE = "Starvation: -50%% Productivity, -50%% Damage",
@@ -4390,9 +4442,9 @@ Increased Health, DEF and MDEF""",
 	TRAITEFFECTDISCIPLINE = "Discipline: +50%% Labor and craft efficiencies",
 	TRAITEFFECTSEDUCE = "Seduce: -7 Obedience drain",
 	TRAITEFFECTGREATSEDUCE = "Great Seduce: Prevents escapes; -9 Obedience drain, +50%% Lust growth",
-	TRAITEFFECTALLURE = "Allure: -5 Obedience drain, +1 Loyalty Gain",
+	TRAITEFFECTALLURE = "Allure: +1 Loyalty Gain",
 	TRAITEFFECTSEDATED = "Sedated: -10 Obedience drain",
-	TRAITEFFECTFEAR = "Fear: -6 Obedience drain, -1 Loyalty Gain",
+	TRAITEFFECTFEAR = "Fear: -1 Loyalty Gain",
 	TRAITEFFECTMINDCONTROLLED = "Mind Controlled",
 	TRAITEFFECTINSPIRED = "Inspired: +20%% damage, DEF and MDEF",
 	TRAITEFFECTCOMMANDED = "Commanded: +50%% ATK and MATK",
@@ -4460,7 +4512,6 @@ Social skills effect: +10%.""",
 	TRAITEFFECTHYBRISCURSE = "Hybris' Curse: -50%% DEF",
 	TRAITEFFECTFREYACURSE = "Freya's Curse: -50 Evasion and Hit Rate.",
 	TRAITEFFECTDATEBONUS = "Loyalty Gain increased by 0.5.",
-	TRAITEFFECTRESISTSTATE = "Resist state: Can't gain obedience from positive abilities. Can't use exploration skills. Positive actions during dates less effective.",
 	TRAITEFFECTISPREGNANT = "Is pregnant: -10 Speed, -20 Physics",
 	TRAITEFFECTISPREGNANT2 = "Is heavily pregnant: -20 Speed, -40 Physics",
 	TRAITSTUNIMMUNITYDESCRIPT = "Can't be stunned in combat.",
@@ -4823,7 +4874,7 @@ At +10 stack, become Stun for 2 turns and remove all stack of Arousal.""",
 	EFFECT_SWALLOWED_DESCRIPT = """Cannot Act. Cannot be Healed. Lose 20% HP on their turn.
 Last until this Ashmedai is hit by physical attack 6 times.""",
 	TRAIT_SLIPPERY_THICK_SKIN = 'Reduce Ranged damage taken by 20%. If Wet, ranged attacks including spells have 30% to miss this unit.',
-	RESETTRAINREQ = "Reset training to step 0 and restore Spirit. Requires Oblivion potion.",
+	RESETTRAINREQ = "Reset training and all purchased perks. Requires Oblivion potion.",
 	RESETTRAINING = "All training progress will be discarded. Are you sure?",
 	BUFFDESCRIPTDEFENDER = "Defender: Will shield allies from attacks unless stunned.",
 	BUFFDESCRIPTCOMMANDBONUS = "Increased Damage Dealt and reduce Damage Received.",
@@ -4852,7 +4903,7 @@ Fear grows from punishing actions, but when pushed too high will make partner br
 	PROFHEADGIRL = "Headgirl",
 	PROFHEADGIRLALT = "Butler",
 	PROFHEADGIRLDESCRIPT = """A servant with higher authority that is allowed to direct multiple lower servants at once.
-Positive, Social, Physical and Humilation actions provide more loyalty.""",
+Positive, Social, Physical and Humilation actions provide more Loyalty.""",
 	PROFTRAINER = "Trainer",
 	PROFTRAINERDESCRIPT = "Trainers can dramatically change the attitude of a very rebellious slave. ",
 	PROFWORKER = "Worker",
@@ -5116,7 +5167,7 @@ Positive, Social, Physical and Humilation actions provide more loyalty.""",
 	UPGRADESEX_TIMEBONUS1 = "Increase daily sex interactions to 2",
 	UPGRADESEX_TIMEBONUS2 = "Increase daily sex interactions to 3",
 	UPGRADERESTING = "Bath",
-	UPGRADERESTINGDESCRIPT = "Spirit impact from slave trainings is slightly reduced. Increases mana regeneration by 20%.",
+	UPGRADERESTINGDESCRIPT = "Increases mana regeneration by 20%.",
 	UPGRADERESTINGBONUS1 = "",
 	UPGRADEACADEMY = "Academy",
 	UPGRADEACADEMYDESCRIPT = "Allows to send newborn children for Academy training.",
@@ -5660,7 +5711,7 @@ Forces target to orgasm against their will with slight impact over consent. 7 Ma
 	STATREQ_IS_NOT_SLAVE_TYPE = "Must not be",
 	STATREQ_IS_FREE = "Must be free of quests and at mansion",
 	STATREQ_IS_NOT_FREE = "Must be on quest or out of mansion",
-	STATREQ_TRAINING_OBEDIENCE = "Obedience must be trained",
+	STATREQ_TRAINING_OBEDIENCE = "Needs to be broke in",
 	STATREQ_WORKRULE_LOCK = "Character is Locked",
 	DIALOGUECLOSE = "Close",
 	DIALOGUECONFIRM = "Confirm",
@@ -8482,11 +8533,11 @@ At the bottom left you can select items, unlock new classes and configure additi
 	JOBTUTORIAL3 = "On the right you can see the list of characters available at the present location. By clicking on them they will be assigned to the selected task.",
 	TRAINTUTORIAL1 = "Every character besides Master will have some of their functionality locked. Characters can be slaves or subordinates. Slaves must be trained by assigning a trainer to them.",
 	TRAINTUTORIAL2 = "Assigned trainer will allow to put a slave on work or into combat, however to get out the most out of the slave, they must be trained to accept their role as your property.",
-	TRAINTUTORIAL3 = "Training is done via trainer actions. Training a slave reduces their {color=aqua|Spirit}. By draining their spirit too much during the training, they will become a broken version of themselves.",
-	TRAINTUTORIAL4 = "Each slave has their own hidden disposition towards different action types. By finding out which action type works the best, it will be a lot easier to obtain Loyalty Points without draining their spirit too much.",
+	TRAINTUTORIAL3 = "Training is done via trainer actions. Once loyalty bar is filled, training is over and you can use Training Points to unlock additional bonuses.",
+	TRAINTUTORIAL4 = "Each slave has their own hidden disposition towards different action types. By finding out which action type works the best, it will be a lot easier to obtain Training Points.",
 	COMBATSKILLSTUTORIAL = "Some combat skills can be learned automatically after purchasing certain classes. Besides that, they can be unlocked with Skill Points. Skill Points are obtained from combat. Many skills will require certain specilizations, which are obtained from classes.",
 	MARRYTUTORIAL = "After resolving the civil war, you are able to marry one of your subordinates. Firstly, you'll have to get their agreement during the date. Then, proceed with wedding preparations from church. You can only marry 1 person and you can't divorce at current state of the game. ",
-	MARRY2TUTORIAL = "Your spouse will receive a new class. Their growth will be set to maximum and their obedience will no longer drain. Also your mutual children will be of status [color=aqua]Heir[/color], which will have them slower Obedience Drain and higher Loyalty Gain, however they receive penalty on Collection, Farming and Fishing. ",
+	MARRY2TUTORIAL = "Your spouse will receive a new class. Their growth will be set to maximum. Also your mutual children will be of status [color=aqua]Heir[/color], which will have them slower Obedience Drain and higher Loyalty Gain, however they receive penalty on Collection, Farming and Fishing. ",
 	ITEMHAIRDYE = "Hair Dye",
 	ITEMHAIRDYEDESCRIPT = "Allow you to change a person's hair color.",
 	ITEMMINORUS_POTION = "Minorus Potion",
@@ -8538,7 +8589,7 @@ At the bottom left you can select items, unlock new classes and configure additi
 Boosts Productivity by 25%.
 {color=yellow|Character won't gain Experience or Work Stats (Physical, etc) while working.} """,
 	WORKRULECONSTRAIN = "Coerced Labor",
-	WORKRULECONSTRAINDESCRIPT = "Character is forced to work at their best via strict regulations. Boosts productivity by 15%. Passive Loyalty gain disabled.",
+	WORKRULECONSTRAINDESCRIPT = "Character is forced to work at their best via strict regulations. Boosts productivity by 15%. ",
 	WORKRULELUXURY = "Private Room",
 	WORKRULELUXURYDESCRIPT = "Character will have a personal room to live at. Productivity and Experience Gain +5%, Loyalty Gain +0.5 per day.",
 	WORKRULECONTRACEPTIVE = "Contraceptive",
@@ -8556,7 +8607,7 @@ Boosts Productivity by 25%.
 	SERVICEENSLAVE = "Enslave",
 	SERVICEENSLAVEDESCRIPT = """Makes chosen character into a Slave.
 
-[color=aqua]Slaves suffer 10% damage reduction but gain various collection bonuses and but their Loyalty can be increased by punishing skills.[/color]""",
+[color=aqua]Slaves suffer 10% damage reduction but gain various collection bonuses and they need no payment.[/color]""",
 	NEWGAMESETTINGINFO = "These settings can be changed in Options at any point in future",
 	SETTINGFUTA_NAME = "Futa",
 	SETTINGFUTA_DESCRIPT = "Allows random generation of futanari (dickgirl) characters.",
@@ -9367,7 +9418,7 @@ You can keep playing indefinitely.""",
 	QUESTTUTORIAL2 = "Once you've completed a quest, or procured the required items, you can submit it and receive your reward from the Journal tab.",
 	QUESTTUTORIAL3 = "Select \"Complete\" when on the selected quest to finish it.",
 	SKILLSTUTORIAL1 = "At the bottom of the screen you can see abilities available to the currently selected character. Abilities are acquired from Classes and can be used on characters in the same location as caster. Social abilities are helpful to get the best out of your characters outside of combat. ",
-	SKILLSTUTORIAL2 = "Loyalty can be used to make their respect for you stronger and reduce their Obedience Drain while also unlock new abilities.",
+	SKILLSTUTORIAL2 = "Training Points can be used to unlock new abilities.",
 	SKILLSTUTORIAL3 = "After selecting an ability you'll have to select a target for it. Remember that only targets from the same location are viable.",
 	SKILLSTUTORIAL4 = "At the right side you can switch to combat abilities set up. While you can't use them outside of combat, you can still check their descriptions and prepare yourself before it.",
 	EXPLORATIONTUTORIAL1 = "While browsing non-city locations you'll have access to the list of presented characters and a combat party setup. Drag and drop characters onto the party setup to assign them to it.",
@@ -9431,8 +9482,8 @@ Proceed? (original save file will stay untouched, but won't work with the curren
 	TUTORIAL_TRAINING11 = "Daisy is classified as an untrained slave and requires a trainer to oversee and conduct her training. Untrained slaves will not work without a trainer.",
 	TUTORIAL_TRAINING12 = "Assign your Master as her trainer by selecting them.",
 	TUTORIAL_TRAINING13 = "To issue training, select the Praise action.",
-	TUTORIAL_TRAINING14 = "Different slaves have different preferences for training actions, which affects their effectiveness. Try to keep their spirit high by the end of the training.",
-	TUTORIAL_TRAINING15 = "Daisy has accumulated enough Loyalty points to unlock Obedience training. This basic training is required for some tasks and quests that involve giving characters away.",
+	TUTORIAL_TRAINING14 = "Different slaves have different preferences for training actions, which affects their effectiveness. Bad training results can lead to obtaining bad traits.",
+	TUTORIAL_TRAINING15 = "Daisy has finished her training and can spend her Training Points.",
 	TUTORIAL_TRAINING16 = "Confirm the unlock.",
 	TUTORIAL_TRAINING17 = "On the second tab, you can find special proficiencies that provide additional enhancements to a character.",
 	TUTORIAL_TRAINING18 = "These proficiencies take time and money to complete, but they do not make the character unavailable for other work.",
@@ -9812,8 +9863,6 @@ The princess notices Aire tensing up in response to the question.
 {color=red|[name] lacks Prostitution Training to be assigned to this service}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] lacks Prostitution Training and will only earn 2/3 of the potential gold from it.}""",
-	STATOBDRAINREDUCTION = "Obedience Drain Decrease",
-	STATOBDRAININCREASE = "Obedience Drain Increase",
 	ITEMCHEST_ADV_CLOTH = "Coat",
 	ITEMLEGS_ADV_CLOTH = "Mantle",
 	ITEMCHEST_ADV_LEATHER = "Advanced Medium Armor",
@@ -22365,10 +22414,6 @@ In combat restore the amount of health equal to your health regeneration at the 
 	CURSEDECLINE_MINORDESCRIPT = "Earned XP -25%",
 	CURSEDECLINE_MAJOR = "Curse of Decline (major)",
 	CURSEDECLINE_MAJORDESCRIPT = "Earned XP -50%",
-	CURSEDISTRUST_MINOR = "Curse of Distrust (minor)",
-	CURSEDISTRUST_MINORDESCRIPT = "+25% Obedience Drain",
-	CURSEDISTRUST_MAJOR = "Curse of Distrust (major)",
-	CURSEDISTRUST_MAJORDESCRIPT = "+50% Obedience Drain",
 	CURSEHIDEOUS_MAJOR = "Curse of Hideous (minor)",
 	CURSEHIDEOUS_MAJORDESCRIPT = "Charm -30",
 	CURSEHIDEOUS_MINOR = "Curse of Hideous (major)",
@@ -29208,10 +29253,9 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 
 
 
-	# Act 4 - Sebastian railroad quest
-	ACT4_SEBASTIAN_RAILROAD_NAME = "The Steel Road",
-	ACT4_SEBASTIAN_RAILROAD_SUMMARY = "Sebastian of the Trading Guild is pursuing a railroad project into the dwarven lands.",
-	ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN = "Find a dwarven technician who can advise Sebastian on the railroad route.",
+	ACT4_SEBASTIAN_RAILROAD_NAME = "Strictly Business",
+	ACT4_SEBASTIAN_RAILROAD_SUMMARY = "Sebastian of the Trading Guilds of Empire seeks to expand their influence onto other lands.",
+	ACT4_SEBASTIAN_STAGE_FIND_TECHNICIAN = "Find a dwarven technician who can advise Sebastian on the railroad route. Perhaps one goblin engineer would be interested too...",
 	ACT4_SEBASTIAN_STAGE_REPORT_TECHNICIAN = "Report the selected dwarven technician to Sebastian in the Empire Capital.",
 	ACT4_SEBASTIAN_STAGE_WAIT_PREPARATION = "Wait while Sebastian prepares the railroad survey materials.",
 	ACT4_SEBASTIAN_STAGE_INVESTIGATE_TROUBLE = "Speak with the selected technician in the Dwarven Capital about the railroad trouble.",
@@ -29229,8 +29273,9 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 	ACT4_SEBASTIAN_STAGE_BUY_WAREHOUSE = "Return to the warehouse owner and buy the alternative property.",
 	ACT4_SEBASTIAN_STAGE_REPORT_WAREHOUSE_SOLUTION = "Report the warehouse solution to Ginny at Celena's church.",
 	ACT4_SEBASTIAN_STAGE_WAIT_CONTINUATION = "Wait for Sebastian to contact you again.",
-	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = "Report Kharzug Deep to Sebastian",
+	ACT4_SEBASTIAN_ALIRON_OPTION_REPORT_KHARZUG = "Find Sebastian",
 	ACT4_SEBASTIAN_ALIRON_OPTION_CHURCH = "Visit Celena's church",
+	ACT4_SEBASTIAN_CHURCH_ENTER_OPTION = "About Sebastian's business...",
 	ACT4_SEBASTIAN_ALIRON_OPTION_SEBASTIAN = "Return to Sebastian",
 	ACT4_SEBASTIAN_ALIRON_OPTION_NEW_CHURCH = "Visit the new church",
 	ACT4_SEBASTIAN_ALIRON_OPTION_WAREHOUSE = "Visit the warehouse",
@@ -29240,6 +29285,8 @@ With one final, deep thrust, you buried yourself to the hilt inside her. Her bod
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TECHNICIAN = "Speak with the technician",
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_KHARZUG = "Investigate Kharzug Deep",
 	ACT4_SEBASTIAN_DWARF_CAPITAL_OPTION_TOMB = "Search the lower tomb",
+	QUEST_KHARZUG_DEEP_TEXT = "Kharzug Deep",
+	QUEST_KHARZUG_DEEP_DESC = "A dwarven settlement along the railroad line, overrun by undead.",
 	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL = "Visit Central Square",
 	ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_REPORT_TECHNICIAN = "Report to Sebastian",
 	ACT4_SEBASTIAN_PARISHIONER_TASK_NAME = "Convince Parishioners",
@@ -29397,7 +29444,7 @@ One of the workers notices you and murmurs something to him. The older dwarf loo
 {color=yellow|Older Dwarf: — You need something, outsider?}""",
 	ACT4_SEBASTIAN_KARGUN_INTRO_3 = """The older dwarf gives you a short, impatient nod.
 
-{color=yellow|Kargun: — Name is Kargun. Watcha want?}
+{color=yellow|Older Dwarf: — Name is Kargun. Watcha want?}
 
 You explain Sebastian's proposal and the need for a dwarven technician who can scout possible routes into the mountains.
 
@@ -29678,6 +29725,7 @@ He adjusts his gloves, still smiling.
 Its owner is inside counting bundled inventory. He looks up as you enter, surprised to receive the mayor rather than another supplier.
 
 {color=yellow|Warehouse Owner: — Mayor [name]? If this is about the loose gutter, I already paid someone to fix it. He has merely chosen not to arrive yet.}""",
+	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_1B = "He sets his ledger aside, giving you his full attention, waiting to hear why the mayor is really here.",
 	ACT4_SEBASTIAN_FIND_WAREHOUSE_OWNER_2 = "{color=yellow|Warehouse Owner: — Trading Guild? No. First I've heard of any interest from them. I have been considering selling, though. Business has been moving closer to the eastern yards, and this place is more space than I need now. Three thousand gold, and I will sign it over without making either of us spend a month pretending to bargain.}",
 	ACT4_SEBASTIAN_WAREHOUSE_PURCHASE = """The owner checks the payment carefully, then produces a folded deed from a locked drawer beneath his accounts.
 
@@ -29755,5 +29803,116 @@ Sebastian leaves, although you can feel his steps are heavier than usual.
 	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_3 = "The warehouse meets your requirements. Use it and leave the church alone.",
 	ACT4_SEBASTIAN_REPORT_WAREHOUSE_OPTION_4 = "You asked me to solve this. I did. Take the warehouse.",
 
+	KURO_SEASIDE_START = """The afternoon has dragged itself into a kind of punishment. By now the ink has started drying too quickly on the page, your wrist aches from signatures, and every completed document seems to uncover two more beneath it. The heat sits heavily in the office, turning the still air between the shelves and your desk into something almost solid.
+
+You have just reached for the next ledger when the shadow beside the bookshelf thickens. A familiar black tail slips out of it first, followed by Kuro, who steps into the room.
+
+{color=yellow|Kuro: — Still sitting here? I expected as much.}
+
+She looks over the desk with an unreadable expression.
+
+{color=yellow|Kuro: — You are overworking. Again. Also, this time of season is really hot.}""",
+	KURO_SEASIDE_OPTION_BUSY = "I'm busy because someone has to keep this place running.",
+	KURO_SEASIDE_OPTION_WEATHER = "If you came here to complain about the weather, you picked a strange time.",
+	KURO_SEASIDE_OPTION_WORRIED = "You sound almost worried about me.",
+	KURO_SEASIDE_OFFICE_2_1 = """Kuro gives the documents another brief glance.
+
+{color=yellow|Kuro: — Yes, and if you collapse into them, I am sure they will become much more obedient.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OFFICE_2_2 = """{color=yellow|Kuro: — I did not come to complain. I am merely noting an obvious seasonal inconvenience before presenting a solution to it.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OFFICE_2_3 = """Kuro's eyes roll dismissively.
+
+{color=yellow|Kuro: — Sure, be snarky all you want.}
+
+{color=yellow|Kuro: — A new seaside leisure resort has opened near the coast. Fresh facilities, private rooms, enough distance from Aliron that most people here can't reach you with another stack of demands. I thought it might be an efficient place to spend a few days. The sea breeze should make the heat less obnoxious, and a temporary rest would give your subordinates a chance to prove they are not decorative furniture.}""",
+	KURO_SEASIDE_OPTION_ACCEPT = "Fine, I guess we could have a vacation.",
+	KURO_SEASIDE_OPTION_REFUSE = "I'd rather continue with my tasks.",
+	KURO_SEASIDE_ACCEPT_1 = """For a brief moment, Kuro smiles. It is small, controlled, and gone almost quickly enough to deny.
+
+{color=yellow|Kuro: — Good. That is a sensible approach.}
+
+She turns slightly toward the shadow she came from, already treating the decision as finalized.
+
+{color=yellow|Kuro: — I have almost finished all preparations already. Transport, lodging, appropriate excuses, and a few measures to keep the more persistent petitioners occupied. You can ready yourself for it without worrying.}""",
+	KURO_SEASIDE_ACCEPT_2 = """{color=yellow|Kuro: — Hope you are looking forward to my bathing costume, I took time selecting it after all.}
+
+She steps back into the shadow, leaving the office cooler by absence alone and the top ledger still crooked on your desk.""",
+	KURO_SEASIDE_REFUSE_1 = """{color=yellow|Kuro: — Too bad.}
+
+She says it without any visible disappointment, which somehow makes it worse.
+
+{color=yellow|Kuro: — The other girls have already been begging for something like this. Several of them have begun making preparations, and I doubt they will take no for an answer now.}
+
+You look down at the paperwork. It remains exactly as tall, exactly as dry, and suddenly much less persuasive.""",
+	KURO_SEASIDE_REFUSE_2 = """{color=yellow|Kuro: — Consider this a consequence of poor time management. If you had intended to refuse a vacation, you should have done so before I arranged one.}
+
+With that, she fades back into the office shadows, leaving you alone with the unavoidable realization that the day's work has just lost a battle.""",
+	KURO_SEASIDE_RESORT_ARRIVAL = """The resort stands a short distance from the shore, new enough that its pale wood still looks freshly cut. A few other guests linger near the water at first, but the arrival of your group quickly changes the balance of the place. Some retreat toward the resort buildings, some scatter down the beach, and soon the stretch of sand ahead is mostly yours.
+
+The girls waste little time spreading out. Their voices overlap with the waves as they rush toward the water, argue over towels, compare bathing outfits, and call for you.""",
+	KURO_SEASIDE_REVEAL = """Kuro appears a few steps away from the darker shade beneath the resort walkway, already dressed for the beach. Her sea outfit is obviously selected with care: a dark bathing top, a loose wrap at her hips, and tinted glasses resting above her eyes. She looks slightly exhausted and calm in a way contrasting with others. She does not seem exactly in her element here. The bright sun, open space, and excited crowd of girls all work against her. Even so, the unfamiliar attire draws the eye, framing her dark hair, pale skin, and black tail in a way that makes her presence difficult to ignore.
+
+{color=yellow|Kuro: — This place is quite something.}
+
+Before you can answer, several of the girls call for you at once. One catches your arm, another insists you need to see the water first. Kuro watches you get dragged away with a faint smile.""",
+	KURO_SEASIDE_THANKS = """By the time the sun has moved lower, you have been pulled through enough swimming, games, food, and aimless beach wandering to make the stress from earlier seem almost stationary by comparison. The girls gather around you with bright, tired faces, their earlier excitement softened into sincere gratitude.
+
+— Thank you for bringing us here, [master] [name]. This trip is wonderful.""",
+	KURO_SEASIDE_OPTION_GLAD = "I am glad you are enjoying yourselves.",
+	KURO_SEASIDE_OPTION_SATISFY = "I had to satisfy your request, didn't I?",
+	KURO_SEASIDE_THANKS_GLAD = """The answer earns a chorus of smiles and a few overlapping thanks. Even the quieter girls seem pleased, standing close together with the relaxed ease of people who have briefly forgotten their usual duties.""",
+	KURO_SEASIDE_THANKS_REFUSED = """The girls exchange confused looks.
+
+— Our request? We didn't think we could request something like this from you.
+
+Another girl nods quickly.
+
+— When Kuro told us about the trip, we all said it sounded wonderful, but none of us thought we could ask our master to do such a thing for us.
+
+Their gratitude becomes a little more earnest after that, and you realize Kuro's version of events may have been arranged with the same care as the vacation itself.""",
+	KURO_SEASIDE_EVENING = """Eventually the group disperses again, some returning to the water and others chasing the last snacks left beneath the resort awnings. That leaves you with a moment to look for Kuro.
+
+You find her resting in the shadow of a beach tent, one knee drawn up, tail curled neatly beside her. She appears relaxed at first glance, but her red eyes follow you the entire time you approach. She responds to your questioning look.
+
+{color=yellow|Kuro: — I am not particularly good with crowds and heat. But it's a nice break of pace after all.}
+
+She shifts slightly deeper into the shade, watching the others play in the distance.""",
+	KURO_SEASIDE_OPTION_COMPANY = "I am not great with crowds either. Let me keep you company.",
+	KURO_SEASIDE_OPTION_LEAVE = "Then I'll leave you to rest and go back to the others.",
+	KURO_SEASIDE_OPTION_WITS = "[Wits Check] You just wanted me to get some rest, didn't you?",
+	KURO_SEASIDE_WITS_HIDDEN = "???",
+	KURO_SEASIDE_WITS_1 = """Kuro's expression softens into something teasing.
+
+{color=yellow|Kuro: — Perhaps. But if you are clever enough to notice that, you should also be clever enough to answer something for me.}
+
+She adjusts the edge of her bathing top with deliberate care.
+
+{color=yellow|Kuro: — Do you enjoy my bathing costume?}""",
+	KURO_SEASIDE_OPTION_PLEASURE = "It's a pleasure to look at.",
+	KURO_SEASIDE_OPTION_USUAL = "Your usual attire fits you more.",
+	KURO_SEASIDE_WITS_PLEASURE = """Kuro's tail moves once against the sand.
+
+{color=yellow|Kuro: — So it was worth the hassle then.}""",
+	KURO_SEASIDE_WITS_USUAL = """Kuro gives a quiet, amused breath.
+
+{color=yellow|Kuro: — I suspected you might say that. Unfortunately, my usual attire is poorly suited for sand and seawater, so you will have to endure this version for today.}""",
+	KURO_SEASIDE_WITS_CONVERGE = """For a moment, she looks past you toward the rest of the beach. The girls are already waving again.""",
+	KURO_SEASIDE_END_COMPANY = """Kuro looks up at you for a moment, searching for mockery and finding none.
+
+{color=yellow|Kuro: — And I thought you are far more social than this. Or you are doing your best to please me too? One awful womanizer you are.}
+
+You settle beside her beneath the tent. For a while neither of you says much. The noise of the beach remains at a comfortable distance, the shade cools your skin, and Kuro's shoulder eventually rests against yours with deliberate casualness.
+
+It is not the kind of intimacy that announces itself loudly, but it stays with you all the same.""",
+	KURO_SEASIDE_END_LEAVE = """Kuro gives a small nod, her gaze already moving back toward the water.
+
+{color=yellow|Kuro: — Go on. They will start competing for your attention again if you make them wait too long.}
+
+You leave her in the shade and return to the others, carrying with you the strange certainty that Kuro is still watching.""",
+
+	ENEMYRILU_MADDENED = "Strange girl",
 
 }

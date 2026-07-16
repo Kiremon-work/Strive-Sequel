@@ -74,24 +74,8 @@ var statdata = {
 		tags = ['numeric', 'integer', 'custom_setter', 'update_state'],
 		default_bonus = 'set',
 	},
-	spirit = {
-		code = 'spirit',
-		name = '',
-		descript = '',
-		baseicon = 'stat_cf',
-		type = 'mental_stat',
-		tags = ['numeric', 'integer']
-	},
-	spirit_1 = {
-		code = 'spirit_1',
-		name = '',
-		descript = '',
-		baseicon = 'stat_cf',
-		type = 'mental_stat',
-		tags = ['numeric', 'integer']
-	},
-	resistance = {
-		code = 'resistance',
+	training_points = {
+		code = 'training_points',
 		name = '',
 		descript = '',
 		baseicon = 'stat_cf',
@@ -752,8 +736,8 @@ var statdata = {
 		tags = ['integer'],
 		show_info = {category = 'non_combat'}
 	},
-	training_spirit = {
-		code = 'training_spirit',
+	training_points_bonus = {
+		code = 'training_points_bonus',
 		name = '',
 		descript = '',
 		baseicon = 'stat_df',
@@ -770,17 +754,6 @@ var statdata = {
 		type = '',
 		direct = false,
 		tags = ['integer', 'custom_bonuses'],
-		show_info = {category = 'non_combat'}
-	},
-	resistance_red = {
-		code = 'resistance_red',
-		name = '',
-		descript = '',
-		baseicon = 'stat_df',
-		type = '',
-		direct = false,
-		tags = ['custom_bonuses'],
-		default_bonus = 'add_part',
 		show_info = {category = 'non_combat'}
 	},
 	trainer_loyalty_bonus = {

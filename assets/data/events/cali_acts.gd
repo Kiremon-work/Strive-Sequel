@@ -35,12 +35,6 @@ var data = {
 					type = "add_trait",
 					trait = "training_broke_in"
 					},
-					{
-					code = "affect_unique_character",
-					name = "cali",
-					type = "add_trait",
-					trait = "training_obedience"
-					},
 				]}
 		],
 		options = [ {

@@ -1,15 +1,19 @@
 extends Control
 
 var person
-var selected_resource
-var selected_job = {}
-var stored_spec_job = {}
+var selected_job = null
 var selected_location = "aliron"
 
 var mode_farm = false
 
 func _ready():
 	$CloseButton.connect("pressed", self, 'close_job_pannel')
+	$CraftRules2/Label2.text = tr("PREDICTEDTASKLABEL")
+	$CraftRules2/filters/checks1/Label.text = tr("INVENTORYMATERIAL")
+	$CraftRules2/filters/checks2/Label.text = tr("ITEMS_LABEL")
+	$CraftRules2/filters/order1/Label.text = tr("MATERIALSORDERLABEL")
+	$CraftRules2/filters/order2/Label.text = tr("ITEMSORDERLABEL")
+	globals.connecttexttooltip($CraftRules2/crafttooltip2, tr("CRAFTRULES2TOOLTIP"))
 	globals.connecttexttooltip($BrothelRules/rulestooltip, tr("BROTHELTOOLTIP"))
 	gui_controller.add_close_button(self, "bigger_offset")#.connect("pressed", self, 'close_job_pannel')
 	$mod_select/occupation.connect('pressed', self, 'build_occupation')
@@ -27,12 +31,15 @@ func _ready():
 	input_handler.register_btn_source('daisy_work', self, 'tut_get_daisy_work')
 	input_handler.register_btn_source('close_work', self, 'tut_get_CloseButton')
 
+
 func tut_get_building():
 	for work in $Resourses/GridContainer.get_children():
 		if work.get_meta('work', {code = ''}).code == 'building':
 			return work
+
 func tut_get_servicebutton():
 	return servicebutton
+
 func tut_get_daisy_work():
 	for line in $CharacterList/GridContainer.get_children():
 		if line.get_meta('slave').get_stat('unique') == 'daisy':
@@ -48,7 +55,7 @@ func rebuild():
 	selected_slot = null
 	build_occupation()
 	if restbutton != null:
-		select_resource({code = "rest"}, "rest", restbutton)
+		select_resource("rest", restbutton)
 
 
 func build_occupation():
@@ -70,6 +77,8 @@ func build_occupation():
 	$WorkunitLabel.text = ""
 	$Modlabel.text = ""
 	$BrothelRules.hide()
+	$CraftRules.hide()
+	$CraftRules2.hide()
 	$Workmod.hide()
 	$Workstat.hide()
 	$Worktool.hide()
@@ -94,6 +103,8 @@ func build_farm():
 	$gridcontainerpanel.visible = false
 	$GridContainer2.visible = false
 	$BrothelRules.visible = false
+	$CraftRules.visible = false
+	$CraftRules2.visible = false
 	$NavigationModule.visible = false
 	
 	$DescriptionLabel.bbcode_text = ""
@@ -119,6 +130,9 @@ func update_characters():
 	if loc == null:
 		print("error - selected location invalid")
 		return
+	var job_data
+	if selected_job != null and selected_job != 'rest':
+		job_data = ResourceScripts.game_res.tasks_progresses[selected_job]
 	input_handler.ClearContainer($CharacterList/GridContainer)
 	for i in ResourceScripts.game_party.character_order: 
 		var ch = ResourceScripts.game_party.characters[i]
@@ -129,18 +143,18 @@ func update_characters():
 		newbutton.get_node("Name").text = ch.get_stat("name")
 		newbutton.get_node("Icon").texture = ch.get_icon_small()
 		newbutton.disabled = false
-		if (selected_job == null or selected_resource == null) and !mode_farm:
+		if selected_job == null and !mode_farm:
 			newbutton.disabled = true 
 			globals.connecttexttooltip(newbutton, tr("SELECT_RES_FIRST_LABEL"))
 		if (selected_slot == null) and mode_farm:
 			newbutton.disabled = true 
 			globals.connecttexttooltip(newbutton, tr("SELECT_SLOT_FIRST_LABEL"))
 		if !ch.is_worker() and !mode_farm:
-			if !(selected_job != null and selected_job.has("code") and selected_job.code == ch.get_work()):
+			if !(selected_job != null and selected_job == ch.get_work()):
 				newbutton.disabled = true
 			globals.connecttexttooltip(newbutton, ch.translate("[name]" + " " + tr("LACKS_BASIC_SERV_LABEL"))) #change translation
-		if selected_job != null and selected_job.has("code"):
-			if selected_job.code == "prostitution":
+		if selected_job != null:
+			if selected_job == "service":
 				if ch.has_status('no_sex'):
 					newbutton.disabled = true
 					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("REFUSE_TO_WHORE_LABEL")))
@@ -150,15 +164,12 @@ func update_characters():
 				if !ch.has_status('sexservice'):  #or mb advanced
 					newbutton.disabled = true
 					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("LACKS_PROSTITUTUION_LABEL")))
-			if selected_job.code in ['smith','alchemy','tailor','cooking']:
+			if selected_job == 'crafting':
 				if ch.has_status('no_craft'): 
 					newbutton.disabled = true
-			if selected_job.code == "building":
-				if ch.has_status('no_upgrade'): 
+			if job_data != null and job_data.id == 'gathering':
+				if ch.has_status('no_collect'): 
 					newbutton.disabled = true
-		if !(selected_resource in [null, 'rest', 'brothel', 'gold', 'smith','alchemy','tailor','cooking', 'building']):
-			if ch.has_status('no_collect'): 
-				newbutton.disabled = true
 		if newbutton.disabled == true && selected_job != null:
 			newbutton.get_node('Name').set("custom_colors/font_color", variables.hexcolordict['red'])
 		newbutton.set_meta('slave', ch)
@@ -170,18 +181,14 @@ func update_characters():
 		newbutton.get_node("stats/mp").value = ch.mp
 		newbutton.get_node("stats").hint_tooltip = "HP: " + str(round(ch.hp)) + "/" + str(round(ch.get_stat('hpmax'))) + "\nMP: " + str(round(ch.mp)) + "/" + str(round(ch.get_stat('mpmax')))
 		#speed update
-		if selected_job != null and selected_resource != null:
-			if selected_resource in ["rest", 'brothel']:
-				newbutton.get_node("Speed").text = ""
-			elif selected_resource in ['special', 'recruiting']:
-				newbutton.get_node("Speed").text = ""
+		newbutton.get_node("Speed").text = ""
+		if job_data != null and job_data.id == 'gathering':
+			var val
+			if job_data.type in ['gather_limited', 'gather_simple']:
+				val = ch.get_progress_resource(job_data.job, false) / job_data.progress_limit
 			else:
-				var number = ""
-				if selected_job.has("production_code"):
-					number = ch.get_progress_task(selected_job.code, selected_job.production_code)/selected_job.progress_per_item
-				else:
-					number = ch.xp_module.get_progress_resource(selected_job.code)/selected_job.progress_per_item
-				newbutton.get_node("Speed").text = str(stepify(number * 4, 0.1))
+				val = ch.get_job_value(tasks.find_task_for_res(job_data.job), false) / job_data.progress_limit
+			newbutton.get_node("Speed").text = str(stepify(val * 4, 0.1))
 		#status update
 		update_status(newbutton, ch)
 
@@ -193,18 +200,10 @@ func update_status(newbutton, ch):
 			newbutton.get_node("Status").texture = load("res://assets/images/gui/icon_bed.png")
 		if !ch.is_worker():
 			newbutton.disabled = true
-	elif ch.get_work() == 'special':
-		var task = ch.find_worktask()
-		newbutton.get_node("Status").texture = load(task.icon)
 	else:
-		if !gatherable:
-			var work = tasks.tasklist[ch.get_work()]
-			if work.has("production_icon"):
-				newbutton.get_node("Status").texture = work.production_icon
-			elif work.has("production_item"):
-				newbutton.get_node("Status").texture = Items.materiallist[work.production_item].icon
-		else:
-			newbutton.get_node("Status").texture = Items.materiallist[ch.get_work()].icon
+		var prdata = ResourceScripts.game_res.tasks_progresses[ch.get_work()]
+		if prdata.id != 'farming':
+			newbutton.get_node("Status").texture = load(prdata.icon)
 
 
 func character_selected(button, ch):
@@ -285,7 +284,6 @@ func build_accessible_locations():
 
 
 func select_location(location):
-	selected_resource = null
 	selected_job = null
 	selected_location = location
 	rebuild()
@@ -299,7 +297,6 @@ func select_location(location):
 
 
 func close_job_pannel():
-	selected_resource = null
 	selected_job = null
 	get_parent().SlaveListModule.update()
 	get_parent().TaskModule.update_progresses()
@@ -312,81 +309,68 @@ func close_job_pannel():
 	input_handler.get_spec_node(input_handler.NODE_TEXTTOOLTIP).hide()
 	get_parent().mansion_state_set("default")
 
+
 var restbutton
 var servicebutton
+var craftbutton
+
 func update_resources():
 	input_handler.ClearContainer($Resourses/GridContainer)
 	
 	restbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
-	if selected_job != null:
-		if selected_job.has("code"):
-			if selected_job.code == "rest":
-				restbutton.pressed = true
+	if selected_job != null and selected_job == "rest":
+		restbutton.pressed = true
 	restbutton.get_node("TextureRect").texture = load("res://assets/images/gui/icon_bed.png")
-	restbutton.connect("pressed", self, "select_resource", [{code = "rest"}, "rest", restbutton])
+	restbutton.connect("pressed", self, "select_resource", ["rest", restbutton])
 	globals.connecttexttooltip(restbutton, tr('TASKREST'))
 	
 	var person_location = selected_location
 	var location = ResourceScripts.world_gen.get_location_from_code(person_location)
 	
 	if location.type == 'capital':
+		ResourceScripts.game_res._add_service_job()
 		servicebutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
-		if selected_job != null:
-			if selected_job.has("code"):
-				if selected_job.code == "brothel":
-					servicebutton.pressed = true
+		if selected_job != null and selected_job == 'service':
+			servicebutton.pressed = true
 		servicebutton.get_node("TextureRect").texture = load("res://assets/images/gui/service.png")
-		servicebutton.connect("pressed", self, "select_resource", [{code = "brothel"}, "brothel", servicebutton])
+		servicebutton.connect("pressed", self, "select_resource", ["service", servicebutton])
 		globals.connecttexttooltip(servicebutton, tr('TASKRESTSERVICE'))
 	
 	for r_task in ['recruit_easy', 'recruit_hard']:
 		if location.has('tags') and location.tags.has(r_task):
+			var newjob = ResourceScripts.game_res.add_recruiting_job_temp(r_task, person_location)
+			var jobdata = ResourceScripts.game_res.tasks_progresses[newjob]
 			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
-			var jobdata = tasks.tasklist[r_task]
-			if selected_job != null:
-				if selected_job.has("code"):
-					if selected_job.code == "recruiting":
-						newbutton.pressed = true
-			newbutton.get_node("TextureRect").texture = jobdata.production_icon
-			var max_workers_count = jobdata.base_workers
+			if selected_job != null and selected_job == newjob:
+				newbutton.pressed = true
+			newbutton.get_node("TextureRect").texture = load(jobdata.icon)
+			var max_workers_count = jobdata.max_workers
 			var text = ""
-			var current_workers_count = 0
-			var active_tasks = ResourceScripts.game_party.active_tasks
-			for task in active_tasks:
-				if (task.code == r_task) && (task.task_location == selected_location):
-					current_workers_count = task.workers.size()
+			var current_workers_count = jobdata.workers.size()
 			text += str(current_workers_count) + "/" + str(max_workers_count)
 			newbutton.get_node("Label").text = text
 			#newbutton.disabled = current_workers_count == max_workers_count
 			if current_workers_count >= max_workers_count:
 				newbutton.get_node("Label").set("custom_colors/font_color", Color(0.9,0.48,0.48, 1))
-			
-			newbutton.connect("pressed", self, "select_resource", [jobdata, "recruiting", newbutton])
-			
-			globals.connecttexttooltip(newbutton, jobdata.descript)
+			newbutton.connect("pressed", self, "select_resource", [newjob, newbutton])
+			globals.connecttexttooltip(newbutton, tr(jobdata.descript))
 	
-	for task in ResourceScripts.game_party.active_tasks:
-		if (task.code == 'special') && (task.task_location == selected_location):
-			var current_workers_count = task.workers.size()
+	for task_id in ResourceScripts.game_res.active_tasks.special:
+		var jobdata = ResourceScripts.game_res.tasks_progresses[task_id]
+		if jobdata.location == selected_location:
 			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
-			var jobdata = tasks.tasklist.special
-			var max_workers_count = task.max_workers
+			var current_workers_count = jobdata.workers.size()
+			var max_workers_count = jobdata.max_workers
 			var text = ""
 			text += str(current_workers_count) + "/" + str(max_workers_count)
 			newbutton.get_node("Label").text = text
-			newbutton.get_node("TextureRect").texture = load(task.icon)
-			newbutton.set_meta('spec_job', task)
-			
-			if selected_job != null:
-				if selected_job.has("code"):
-					if selected_job.code == "special" and stored_spec_job == task:
-						newbutton.pressed = true
-			
-			newbutton.connect("pressed", self, "select_resource", [jobdata, "special", newbutton])
-			globals.connecttexttooltip(newbutton, tr(task.name))
-			
+			newbutton.get_node("TextureRect").texture = load(jobdata.icon)
+			newbutton.set_meta('task', task_id)
+			if selected_job != null and selected_job == task_id:
+				newbutton.pressed = true
+			newbutton.connect("pressed", self, "select_resource", [task_id, newbutton])
+			globals.connecttexttooltip(newbutton, tr(jobdata.name))
 	
-#	person = get_parent().active_person
 	var gatherable_resources = []
 	
 	var location_type
@@ -396,12 +380,9 @@ func update_resources():
 	if person_location != 'aliron':
 		location_type = location.type
 		if location_type == "dungeon":
-#			if location.completed == true:
 			gatherable_resources = location.gather_limit_resources
-#			servicebutton.visible = false
 		elif location_type == 'encounter':
 			pass
-#			servicebutton.visible = false
 		else:
 			if location.has("gather_resources"):
 				gatherable_resources = location.gather_resources
@@ -413,8 +394,18 @@ func update_resources():
 			print("warning: area %s has gatherable_resources, while it should not" % location.area)
 			gatherable_resources = area_dict.gatherable_resources
 		#------------
+		craftbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
+		if selected_job != null and selected_job == 'crafting':
+			craftbutton.pressed = true
+		ResourceScripts.game_res._add_craft_job()
+		craftbutton.get_node("TextureRect").texture = load("res://assets/images/gui/icon_craft64x64.png")
+		craftbutton.connect("pressed", self, "select_resource", ["crafting", craftbutton])
+		globals.connecttexttooltip(craftbutton, tr('TASKCRAFT'))
+		#------------
 		for i in tasks.tasklist.values():
 			if i.code in ["rest", "brothel", "recruit_easy", "recruit_hard"] or i.tags.has('special'):
+				continue
+			if i.tags.has('crafting'):
 				continue
 			if globals.checkreqs(i.reqs) == false:
 				continue
@@ -422,137 +413,67 @@ func update_resources():
 			if i.has('upgrade_code') && i.has('workers_per_upgrade') && i.has('base_workers'):
 				if i.base_workers + i.workers_per_upgrade * ResourceScripts.game_res.findupgradelevel(i.upgrade_code) <= 0:
 					continue
+			var newjob = ResourceScripts.game_res.add_gathering_job_temp(i.code, person_location)
+			var jobdata = ResourceScripts.game_res.tasks_progresses[newjob]
 			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
 			newbutton.get_node("Label").set("custom_colors/font_color", Color(0.97,0.88,0.5, 1))
 			#newbutton.get_child(0).text = i.name
-			newbutton.pressed = selected_job == i
-			newbutton.set_meta("work", i)
-			
+			if selected_job != null and selected_job == newjob:
+				newbutton.pressed = true
+			newbutton.set_meta("task", newjob)
 			if Items.materiallist.has(i.production_item):
 				globals.connectmaterialtooltip(newbutton, Items.materiallist[i.production_item])
 			else:
 				globals.connecttexttooltip(newbutton, tr(i.name))
-			var tmp_job = i
-			var tmp_res
-			if i.has("production_item"):
-				tmp_res = i.production_item
-			newbutton.connect("pressed", self, "select_resource", [tmp_job, tmp_res, newbutton])
-			if i.has("production_icon"):
-				newbutton.get_node("TextureRect").texture = i.production_icon
-			elif i.has("production_item"):
-				newbutton.get_node("TextureRect").texture = Items.materiallist[i.production_item].icon
-			# start checking maximum persons per work in aliron
-			if i.has('upgrade_code') && i.has('workers_per_upgrade') && i.has('base_workers'):
-				var upgrade_level = ResourceScripts.game_res.findupgradelevel(i.upgrade_code)
-				var max_workers_count = i.base_workers + i.workers_per_upgrade * upgrade_level
-				var text = ""#i.name
-				var current_workers_count = 0
-				var active_tasks = ResourceScripts.game_party.active_tasks
-				for task in active_tasks:
-					if (task.code == i.code) && (task.task_location == person_location):
-						current_workers_count = task.workers.size()
-						break
-				text += str(current_workers_count) + "/" + str(max_workers_count)
-				newbutton.get_node("Label").text = text
-				#newbutton.disabled = current_workers_count == max_workers_count
-				if current_workers_count >= max_workers_count:
-					newbutton.get_node("Label").set("custom_colors/font_color", Color(0.9,0.48,0.48, 1))
-			elif i.code == "cooking" or i.code == "brothel":
-				var current_workers_count = 0
-				var active_tasks = ResourceScripts.game_party.active_tasks
-				for task in active_tasks:
-					if (task.code == i.code) && (task.task_location == person_location):
-						current_workers_count = task.workers.size()
-				newbutton.get_node("Label").text = str(current_workers_count)
-	for resource in gatherable_resources:
-		if !ResourceScripts.game_progress.can_gather_item(resource) and location_type != "dungeon":
-			continue
-		var text = ""
-		var max_workers_count = 0
-		var current_workers_count = 0
-		var item_dict = Items.materiallist[resource]
-		var progress_formula = Items.materiallist[resource].progress_formula
-		#text =  "Gather " + item_dict.name.capitalize()
-		var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
-		newbutton.get_node("Label").set("custom_colors/font_color", Color(0.97,0.88,0.5, 1))
-		if selected_job != null and item_dict != null:
-			if selected_job.has("production_item") and item_dict.has("code"):
-				newbutton.pressed = selected_job.production_item == item_dict.code
-		newbutton.set_meta("resource", resource)
-		
-		var t_job = item_dict
-		if location_type != "dungeon":
-			for i in tasks.tasklist.values():
-				if i.has("production_item"):
-					if i.production_item == t_job.code:
-						t_job = i.duplicate(true)
-		var t_res
-		if t_job.has("production_item"):
-			t_res = t_job.production_item
-		elif t_job.has("code"):
-			t_res = t_job.code
-		
-		if person_location != 'aliron' && location_type != "dungeon":
-			t_job.erase('base_workers')
-			max_workers_count = gatherable_resources[resource]
-			var active_tasks = ResourceScripts.game_party.active_tasks
-			for task in active_tasks:
-				if ((task.code == resource) || (task.product == resource)) && (task.task_location == person_location):
-					current_workers_count = task.workers.size()
-			text +=  str(current_workers_count) + "/" + str(max_workers_count)
-			#newbutton.disabled = current_workers_count == max_workers_count
+			newbutton.get_node("TextureRect").texture = load(jobdata.icon)
+			newbutton.connect("pressed", self, "select_resource", [newjob, newbutton])
+			var current_workers_count = jobdata.workers.size()
+			var max_workers_count = jobdata.max_workers
+			var text = ""
+			text += str(current_workers_count) + "/" + str(max_workers_count)
+			newbutton.get_node("Label").text = text
 			if current_workers_count >= max_workers_count:
-				newbutton.get_node("Label").set("custom_colors/font_color", Color(0.97,0.88,0.5, 1))
-		elif location_type == "dungeon":
-			t_job.erase('base_workers')
+				newbutton.get_node("Label").set("custom_colors/font_color", Color(0.9,0.48,0.48, 1))
+	for resource in gatherable_resources:
+		if location_type == "dungeon":
 			if gatherable_resources[resource] == 0:
-				for button in $Resourses/GridContainer.get_children():
-					if button.name == "Button" || !button.has_meta('resource'): continue
-					if button.get_meta("resource") == resource: button.queue_free()
 				continue
+			var newjob = ResourceScripts.game_res.add_gathering_limited_job_temp(resource, person_location)
+			var jobdata = ResourceScripts.game_res.tasks_progresses[newjob]
+			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
+			newbutton.get_node("Label").set("custom_colors/font_color", Color(0.97,0.88,0.5, 1))
+			var text = ""
 			text += str(gatherable_resources[resource])
-		newbutton.get_node("Label").text = text
-		newbutton.set_meta("work", item_dict)
-		newbutton.get_node("TextureRect").texture = item_dict.icon
-		
-		newbutton.connect("pressed", self, "select_resource", [t_job, t_res, newbutton])
+			newbutton.get_node("Label").text = text
+			newbutton.set_meta("task", newjob)
+			newbutton.get_node("TextureRect").texture = load(jobdata.icon)
+			newbutton.connect("pressed", self, "select_resource", [newjob, newbutton])
+		else:
+			if !ResourceScripts.game_progress.can_gather_item(resource):
+				continue
+			var newjob = ResourceScripts.game_res.add_gathering_res_temp(resource, person_location)
+			var jobdata = ResourceScripts.game_res.tasks_progresses[newjob]
+			var newbutton = input_handler.DuplicateContainerTemplate($Resourses/GridContainer)
+			var current_workers_count = jobdata.workers.size()
+			var max_workers_count = jobdata.max_workers
+			var text = ""
+			text += str(current_workers_count) + "/" + str(max_workers_count)
+			newbutton.get_node("Label").text = text
+			newbutton.get_node("TextureRect").texture = load(jobdata.icon)
+			newbutton.set_meta("task", newjob)
+			newbutton.connect("pressed", self, "select_resource", [newjob, newbutton])
 
 
-func select_resource(job, resource, newbutton):
+func select_resource(job_id, newbutton):
 	$BrothelRules.hide()
+	$CraftRules.hide()
+	$CraftRules2.hide()
 	# part 1
 	$ToolLabel.text = ""
-	var work_tools
-	if job.has("worktool"):
-		work_tools = statdata.worktoolnames[job.worktool]
-	if ((job.has("tool_type") && job.tool_type != '' ) || job.has("worktool")):# && work_tools != "":
-		if job.has("worktool"):
-			work_tools = statdata.worktoolnames[job.worktool]
-		if job.has("tool_type"):
-			work_tools = statdata.worktoolnames[job.tool_type]
-		$ToolLabel.text = work_tools
-		## Work tools checking
-#		if person.equipment.gear.tool != null:
-#			var worktool
-#			var item = ResourceScripts.game_res.items[person.equipment.gear.tool]
-#			if job.has("worktool"):
-#				worktool = "worktool"
-#			if job.has("tool_type"):
-#				worktool = "tool_type"
-	for button in $Resourses/GridContainer.get_children():
-		if !button.has_meta("work"): 
-			continue
-		button.pressed = button.get_meta("work") == job
-	
 	# part 2
 	for button in $Resourses/GridContainer.get_children():
 		button.pressed = button == newbutton
-	selected_resource = resource
-	selected_job = job
-	if job.code == 'special':
-		stored_spec_job = newbutton.get_meta('spec_job')
-	else:
-		stored_spec_job = {}
+	selected_job = job_id
 	$Workunit.hide()
 	$Worktool.hide()
 	$Workstat.hide()
@@ -560,102 +481,78 @@ func select_resource(job, resource, newbutton):
 	$WorkunitLabel.hide()
 	$Modlabel.hide()
 	$WorkunitLabel.text = ""
-	if job.code == "rest":
+	if job_id == "rest":
 		$DescriptionLabel.bbcode_text = tr("TASKRESTINFO")
-	elif job.code == "brothel":
+	elif job_id == "service":
 		$DescriptionLabel.bbcode_text = tr("TASKRESTDESCRIPT")
-	elif job.has("descript"):
-		var text = job.descript
-		if job.code == 'special':
-			text = tr(stored_spec_job.descript) + "\n" + tr("TASKRONMISSIONCOMPLETE")
-		elif job.has('worktool') || job.has('tool_type'):
-			$Worktool.show()
-			globals.connecttexttooltip($Worktool, tr("JOBWORKTOOLTOOLTIP"))
-		if !job.tags.has('hide_progress_ratio'):
+	elif job_id == "crafting":
+		$DescriptionLabel.bbcode_text = tr("TASKCRAFTDESCRIPT")
+	else:
+		var job = ResourceScripts.game_res.tasks_progresses[job_id]
+		var work_tools
+		if job.has("worktool"):
+			work_tools = statdata.worktoolnames[job.worktool]
+			$ToolLabel.text = work_tools
+		if job.has("descript"):
+			var text = tr(job.descript)
+			if job.id == 'special':
+				text += "\n" + tr("TASKRONMISSIONCOMPLETE")
+			elif job.has('worktool'):
+				$Worktool.show()
+				globals.connecttexttooltip($Worktool, tr("JOBWORKTOOLTOOLTIP"))
+#			if !job.tags.has('hide_progress_ratio'):
 			$Workunit.show()
 			$WorkunitLabel.show()
-			$WorkunitLabel.text = "%.1f" % job.progress_per_item
+			$WorkunitLabel.text = "%.1f" % job.progress_limit
 			globals.connecttexttooltip($Workunit, tr("JOBWORKUNITTOOLTIP"))
-		
-		if job.has('workstat'):
-			$Workstat.texture = stat_icons[job.workstat]
-			$Workstat.show()
-			if job.code != 'brothel':
-				globals.connecttexttooltip($Workstat, tr("JOBSTATTOOLTIP") % tr("STAT"+job.workstat.to_upper()))
-			else:
-				globals.connecttexttooltip($Workstat, tr("JOBSTATBROTHELDESCRIPT"))
-		if job.has('mod') and job.mod != "":
-			$Modlabel.show()
-			$Workmod.show()
-			$Modlabel.text = tr("STAT" + job.mod.to_upper())
-			globals.connecttexttooltip($Workmod, tr("JOBMODTOOLTIP"))
-		elif job.has('workmod'):
-			$Modlabel.show()
-			$Workmod.show()
-			$Modlabel.text = tr("STAT" + job.workmod.to_upper())
-			globals.connecttexttooltip($Workmod, tr("JOBMODTOOLTIP"))
 			
-		
-		$DescriptionLabel.bbcode_text = text
+			if job.has('workstat'):
+				$Workstat.texture = stat_icons[job.workstat]
+				$Workstat.show()
+				if job_id != 'service':
+					globals.connecttexttooltip($Workstat, tr("JOBSTATTOOLTIP") % tr("STAT"+job.workstat.to_upper()))
+				else:
+					globals.connecttexttooltip($Workstat, tr("JOBSTATBROTHELDESCRIPT"))
+			if job.has('mod') and job.mod != "":
+				$Modlabel.show()
+				$Workmod.show()
+				$Modlabel.text = tr("STAT" + job.mod.to_upper())
+				globals.connecttexttooltip($Workmod, tr("JOBMODTOOLTIP"))
+			
+			$DescriptionLabel.bbcode_text = text
 	update_characters() # change for Speed update (and tool check? idk)
 	show_faces()
 
+
 func show_faces():
 	input_handler.ClearContainer($GridContainer2)
-	if selected_job.has("code"):
-		if selected_job.code == "rest":
-			$gridcontainerpanel.hide()
-			return
+	if selected_job == "rest":
+		$gridcontainerpanel.hide()
+		return
+	var jobdata = ResourceScripts.game_res.tasks_progresses[selected_job]
 	var max_workers_count = 0
+	var current_workers_count = jobdata.workers.size()
+	if jobdata.has('max_workers'):
+		max_workers_count = jobdata.max_workers
 	var locdata = ResourceScripts.world_gen.get_location_from_code(selected_location)
-	if selected_job.has('upgrade_code') && selected_job.has('workers_per_upgrade') && selected_job.has('base_workers'):
-		var upgrade_level = ResourceScripts.game_res.findupgradelevel(selected_job.upgrade_code)
-		max_workers_count = selected_job.base_workers + selected_job.workers_per_upgrade * upgrade_level
-	elif selected_job.has('base_workers'):
-		max_workers_count = selected_job.base_workers
-		if selected_job.code == "special" and stored_spec_job.has('max_workers'):
-			max_workers_count = stored_spec_job.max_workers
-	elif locdata.type != "capital" && locdata.type != "dungeon":
-		if selected_job.has("production_item"):
-			max_workers_count = locdata.gather_resources[selected_job.production_item]
-		else:
-			var gatherable_resources = locdata.gather_resources
-			max_workers_count = gatherable_resources[selected_job.code]
-		#selected_job.type != "dungeon" &&
-#	elif locdata.type == "dungeon":
-#		max_workers_count = 0
+	
 	var any_workers = false
 	for p in ResourceScripts.game_party.characters.values():
 		var work = p.get_work()
-		var ok = false
-		if selected_job.has('code') || selected_job.has('production_item'):
-			if selected_job.code == "special":
-				ok = stored_spec_job.workers.has(p.id)
-			elif selected_job.has("production_item"):
-				if (selected_job.code == work || selected_job.production_item == work) and p.get_location() == selected_location:
-					ok = true
-			else:
-				if selected_job.code == work and p.get_location() == selected_location:
-					ok = true
-			if ok:
-				var b = input_handler.DuplicateContainerTemplate($GridContainer2)
-				b.connect('pressed', self, 'set_rest', [null, p])
-				b.get_node("TextureRect").texture = p.get_icon_small()
-				if b.get_node('TextureRect').texture == null:
-					b.get_node('TextureRect').texture = p.get_class_icon()
-#					if p.has_profession('master'):
-#						b.get_node('TextureRect').texture = images.icons.class_master
-#					elif p.get_stat('slave_class') == 'servant':
-#						b.get_node('TextureRect').texture = images.icons.class_servant
-#					else:
-#						b.get_node('TextureRect').texture = images.icons.class_slave
-#				b.get_node("Label").text = p.get_stat("name")
-				b.get_node("Label").text = p.get_short_name()
-				max_workers_count -= 1
-				any_workers = true
+		var ok = work == selected_job
+		if ok:
+			var b = input_handler.DuplicateContainerTemplate($GridContainer2)
+			b.connect('pressed', self, 'set_rest', [null, p])
+			b.get_node("TextureRect").texture = p.get_icon_small()
+			if b.get_node('TextureRect').texture == null:
+				b.get_node('TextureRect').texture = p.get_class_icon()
+			b.get_node("Label").text = p.get_short_name()
+			max_workers_count -= 1
+			any_workers = true
 	$gridcontainerpanel.visible = any_workers || max_workers_count > 0
 	for i in max_workers_count:
-			input_handler.DuplicateContainerTemplate($GridContainer2)
+		input_handler.DuplicateContainerTemplate($GridContainer2)
+
 
 func focus_on_person_task(ch):
 	if ch == null:
@@ -673,55 +570,30 @@ func focus_on_person_task(ch):
 		return
 	if work_code == '':
 		if restbutton != null:
-			select_resource({code = "rest"}, "rest", restbutton)
+			select_resource("rest", restbutton)
 		return
-	if work_code == 'brothel':
+	if work_code == 'service':
 		if servicebutton != null:
-			select_resource({code = "brothel"}, "brothel", servicebutton)
+			select_resource("service", servicebutton)
 			show_brothel_options()
 			return
-	if work_code == 'special':
-		var spec_button = _find_special_button_for_char(person)
-		select_resource(tasks.tasklist.special, 'special', spec_button)
-		return
-	var work_product = person.xp_module.workproduct
-	var job_data = null
-	var resource = work_product
-	if tasks.tasklist.has(work_code):
-		job_data = tasks.tasklist[work_code]
-		if resource == null:
-			if job_data.has('production_item'):
-				resource = job_data.production_item
-			else:
-				resource = job_data.code
-	elif Items.materiallist.has(work_code):
-		job_data = Items.materiallist[work_code]
-		if resource == null:
-			resource = job_data.code
-	if job_data == null:
-		return
-	var resource_button = _find_resource_button_for_job(job_data)
-	select_resource(job_data, resource, resource_button)
+	if work_code == 'crafting':
+		if craftbutton != null:
+			select_resource("crafting", craftbutton)
+			#open_my_craft()
+			open_mavs_craft()
+			return
+	var spec_button = _find_task_button_for_char(work_code)
+	select_resource(work_code, spec_button)
 
 
-func _find_resource_button_for_job(job):
+func _find_task_button_for_char(job):
 	if job == null:
 		return null
 	for button in $Resourses/GridContainer.get_children():
-		if !button.has_meta("work"):
+		if !button.has_meta("task"):
 			continue
-		if button.get_meta("work") == job:
-			return button
-	return null
-
-func _find_special_button_for_char(character):
-	if character == null:
-		return null
-	for button in $Resourses/GridContainer.get_children():
-		if !button.has_meta("spec_job"):
-			continue
-		var task = button.get_meta('spec_job')
-		if task.workers.has(character.id):
+		if button.get_meta("task") == job:
 			return button
 	return null
 
@@ -731,92 +603,42 @@ var stat_icons = {
 	wits = load("res://assets/images/gui/gui icons/icon_wits64.png"),
 	charm = load("res://assets/images/gui/gui icons/icon_charm64.png"),
 	sex_skills = load("res://assets/images/gui/gui icons/icon_sex64.png"),
-	
 }
 
-func select_job(button, person):
-	self.person = person
-	if selected_job.code == "rest":
+
+func select_job(button, newperson):
+	person = newperson
+	if selected_job == "rest":
 		set_rest(button, person)
 #		show_brothel_options()
 		return
-	if selected_job.code == "brothel":
-		person.assign_to_task('brothel', 'brothel')
+	if selected_job == "service":
+		person.assign_to_task('service')
 		show_brothel_options()
 		update_status(button, person)
 		update_resources()
 		show_faces()
 		return
-	if selected_job.code == person.get_work():
-		set_rest(button, person)
-		return
-	if selected_job.has('production_item') and selected_job.production_item == person.get_work():
-		set_rest(button, person)
-		return
-	if selected_job.code == 'special':
-		person.assign_to_special_task(stored_spec_job)
+	if selected_job == "crafting":
+		person.assign_to_task('crafting')
+		#open_my_craft()
+		open_mavs_craft()
 		update_status(button, person)
 		update_resources()
 		show_faces()
 		return
-	# disable 
-	var location = ResourceScripts.world_gen.get_location_from_code(person.get_location())
+	if selected_job == person.get_work():
+		set_rest(button, person)
+		return
 	
-	if selected_job.has('upgrade_code') && selected_job.has('workers_per_upgrade') && selected_job.has('base_workers'):
-		var upgrade_level = ResourceScripts.game_res.findupgradelevel(selected_job.upgrade_code)
-		var max_workers_count = selected_job.base_workers + selected_job.workers_per_upgrade * upgrade_level
-		var current_workers_count = 0
-		var active_tasks = ResourceScripts.game_party.active_tasks
-		for task in active_tasks:
-			if (task.code == selected_job.code) && (task.task_location == person.get_location()):
-				current_workers_count = task.workers.size()
-		if current_workers_count >= max_workers_count:
-			input_handler.SystemMessage(tr("NO_FREE_SLOTS"))
-			return
-	elif selected_job.has('base_workers'):
-		var max_workers_count = selected_job.base_workers
-		var current_workers_count = 0
-		var active_tasks = ResourceScripts.game_party.active_tasks
-		for task in active_tasks:
-			if (task.code == selected_job.code) && (task.task_location == person.get_location()):
-				current_workers_count = task.workers.size()
-				if task.has("max_workers"):
-					max_workers_count = task.max_workers
-		if current_workers_count >= max_workers_count:
-			input_handler.SystemMessage(tr("NO_FREE_SLOTS"))
-			return
-	elif  person.get_location() != 'aliron' && location.type != "dungeon":
-		var gatherable_resources = ResourceScripts.world_gen.get_location_from_code(selected_location).gather_resources
-		var max_workers_count = gatherable_resources[selected_resource]
-		var current_workers_count = 0
-		var active_tasks = ResourceScripts.game_party.active_tasks
-		for task in active_tasks:
-			if (task.code == selected_job.code) && (task.task_location == person.get_location()):
-				current_workers_count = task.workers.size()
-		#newbutton.disabled = current_workers_count == max_workers_count
-		if current_workers_count >= max_workers_count:
-			input_handler.SystemMessage(tr("NO_FREE_SLOTS"))
-			return
-			
-	elif location.type == "dungeon":
-		pass
+	var jobdata = ResourceScripts.game_res.tasks_progresses[selected_job]
 	
-	var gatherable = Items.materiallist.has(selected_job.code)
-	if location.type == "dungeon":
-		if selected_job.has("production_item"):
-			person.assign_to_task(selected_job.production_item, selected_job.production_item)
-		elif selected_job.has("code"):
-			person.assign_to_task(selected_job.code, selected_job.code)
-	else:
-		if !gatherable:
-			person.assign_to_task(selected_job.code, selected_resource)
-		else:
-			person.assign_to_task(selected_job.code, selected_job.code)
-	if selected_job.code in ["building"]:
-		get_parent().TaskModule.task_index = 0
-	else:
-		get_parent().TaskModule.task_index = 1
-	get_parent().TaskModule.change_button()
+	if jobdata.has('max_workers'):
+		if jobdata.workers.size() >= jobdata.max_workers:
+			input_handler.SystemMessage(tr("NO_FREE_SLOTS"))
+			return
+	
+	person.assign_to_task(selected_job)
 	update_resources()
 	#update_characters() # change for status update
 	update_status(button, person)
@@ -833,25 +655,11 @@ var brothel_rules = {
 }
 
 func show_brothel_options():
-	
 	$BrothelRules.show()
 	$BrothelRules/Label.text = tr("FARMSERVICERULES") % person.get_short_name()
 	input_handler.ClearContainer($BrothelRules/GridContainer)
 	
 	var location = ResourceScripts.world_gen.get_location_from_code(person.get_location())
-	
-#	for i in ['rest']:
-#		var newbutton = input_handler.DuplicateContainerTemplate($BrothelRules/GridContainer)
-#		newbutton.text = tr("TASKREST")
-#		var text = person.translate(tr("TASKRESTINFO"))
-#		if location.type != 'capital':
-#			newbutton.disabled = true
-#			text += '\n' + tr('NOSERVICECAPITAL')
-#		globals.connecttexttooltip(newbutton, text)
-#		newbutton.pressed = person.get_work() == ''
-#		if newbutton.pressed:
-#			switch_rest(newbutton)
-#		newbutton.connect('pressed', self, 'switch_rest', [newbutton])
 	
 	for i in brothel_rules.non_sex:
 		var newbutton = input_handler.DuplicateContainerTemplate($BrothelRules/GridContainer)
@@ -893,14 +701,8 @@ func show_brothel_options():
 		text = ''
 	
 	for i in brothel_rules.sexes:
-		globals.connecttexttooltip(get_node("BrothelRules/sexes_container/"+i), person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT")))
+		globals.connecttexttooltip(get_node("BrothelRules/sexes_container/" + i), person.translate(tr("BROTHEL" + i.to_upper() + "DESCRIPT")))
 		get_node("BrothelRules/sexes_container/"+i).pressed = person.check_brothel_rule(i)
-		
-#		var newbutton = input_handler.DuplicateContainerTemplate($BrothelRules/GridContainer)
-#		newbutton.text = tr("BROTHEL"+i.to_upper())
-#		globals.connecttexttooltip(newbutton, person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT")))
-#		newbutton.pressed = person.check_brothel_rule(i)
-#		newbutton.connect('pressed', self, 'switch_brothel_option',[newbutton, i])
 	
 	update_brothel_text()
 	if true: #add condition for boosters
@@ -950,20 +752,6 @@ func switch_brothel_option(button, option):
 	person.set_brothel_rule(option, button.pressed)
 	update_brothel_text()
 
-#func switch_rest(button):
-#	if button.pressed:
-#		set_rest(null, person)
-#		update_brothel_text()
-#		restbutton.get_node("TextureRect").texture = load("res://assets/images/gui/gui icons/icon_rest_brothel.png")
-##		for nd in get_tree().get_nodes_in_group('sex_option'):
-##			nd.disabled = true
-#	else:
-#		person.assign_to_task('brothel', 'brothel')
-#		update_characters()
-#		show_faces()
-#		show_brothel_options()
-#		update_resources()
-#		restbutton.get_node("TextureRect").texture = load("res://assets/images/gui/gui icons/icon_rest_brothel.png")
 
 func set_rest(button, person):
 	person.remove_from_task()
@@ -975,41 +763,24 @@ func set_rest(button, person):
 		update_status(button, person)
 	show_faces()
 
+
 func character_hovered(button, person): 
 	# k_yellow = base color
 	if $ToolLabel.text == "":
 		return
 	$ToolLabel.set("custom_colors/font_color", variables.hexcolordict['red'])
-	var req_tool = null
-	if selected_job.has("worktool"):
-		req_tool = selected_job.worktool
-	if selected_job.has("tool_type"):
-		req_tool = selected_job.tool_type
-	if req_tool != null:
-		if person.get_gear('tool_' + req_tool) != null:
-			$ToolLabel.set("custom_colors/font_color", variables.hexcolordict['green'])
+	if selected_job != null and selected_job != 'rest':
+		var jobdata = ResourceScripts.game_res.tasks_progresses[selected_job]
+		var req_tool = null
+		if jobdata.has("worktool"):
+			req_tool = jobdata.worktool
+		if req_tool != null:
+			if person.get_gear('tool_' + req_tool) != null:
+				$ToolLabel.set("custom_colors/font_color", variables.hexcolordict['green'])
 
 
 func build_farm_slots():
 	input_handler.ClearContainer($Frame_farm/Farm_scroll/FarmSlots, ['Button'])
-#	var n = ResourceScripts.game_res.get_farm_slots()
-#	for i in ResourceScripts.game_party.character_order: 
-#		var person = ResourceScripts.game_party.characters[i]
-#		if person.get_location() != ResourceScripts.world_gen.get_location_from_code(selected_location).id or person.is_on_quest():
-#			continue
-#		if person.get_work() != 'farming': 
-#			continue
-#		n -= 1
-#		var newbutton = input_handler.DuplicateContainerTemplate($Frame_farm/Farm_scroll/FarmSlots, 'Button')
-#		newbutton.connect('pressed', self, 'build_char_farm', [i])
-#		newbutton.get_node('icon').texture = person.get_icon_small()
-#		if selected != null:
-#			newbutton.pressed = (i == selected)
-#		else:
-#			newbutton.pressed = false
-#	for i in range(n):
-#		var newbutton = input_handler.DuplicateContainerTemplate($Frame_farm/Farm_scroll/FarmSlots, 'Button')
-#		newbutton.disabled = true
 	var slots = ResourceScripts.game_party.get_farm()
 	for slot in slots:
 		var newbutton = input_handler.DuplicateContainerTemplate($Frame_farm/Farm_scroll/FarmSlots, 'Button')
@@ -1051,14 +822,9 @@ func build_char_farm(char_id):
 	$Frame_farm/char_panel.visible = true
 	var ch = characters_pool.get_char_by_id(char_id)
 	farming_char = ch
-	if ch.get_work() == 'produce':
+	if ch.get_work() == 'farming':
 		ResourceScripts.game_party.remove_char_from_farm(char_id)
-#		$Frame_farm/char_panel/Choose.visible = false
-#		$Frame_farm/char_panel/Remove.visible = true
-#	else:
-#		$Frame_farm/char_panel/Choose.visible = true
-#		$Frame_farm/char_panel/Remove.visible = false
-	ch.set_work('produce')
+	ch.assign_to_task('farming')
 	ResourceScripts.game_party.farming_slots[selected_slot] = char_id
 	build_farm_slots()
 	$Frame_farm/char_panel/Choose.visible = false
@@ -1094,17 +860,15 @@ func build_char_farm(char_id):
 	else:
 		$Frame_farm/char_panel/Label.text = tr("FARMAVAILABLEPRDODUCTSNO")
 	
-	
-	
 	var text = ""
-	
 	
 	text = tr("FARMDETAILS") % [str(items_set), str(ch.get_farming_limit())]
 	
 	$Frame_farm/char_panel/desc.bbcode_text = text
 
+
 func set_to_farm():
-	farming_char.set_work('produce')
+	farming_char.assign_to_task('farming')
 	build_farm()
 
 
@@ -1145,15 +909,6 @@ func build_boosters():
 			text += " - " + tr("FARMACTIVATED")
 		
 		newbutton.get_node('Label').text = text
-#		if f:
-#			if ResourceScripts.game_res.materials.has(boost_data.res) and ResourceScripts.game_res.materials[boost_data.res] > 1:
-#				newbutton.disabled = false
-#				newbutton.connect('pressed', self, 'set_booster', [id, !boost_data.value])
-#			else:
-#				newbutton.disabled = true
-#				f = false
-#		else:
-#			newbutton.disabled = true
 		newbutton.connect('pressed', self, 'set_booster', [id, !boost_data.value])
 
 
@@ -1167,3 +922,245 @@ func set_booster(id, value, rebuild = true):
 		set_booster(id + 1, false, false)
 	if rebuild:
 		build_boosters()
+
+
+#new crafting
+var list1 = ['cooking', 'smith', 'tailor', 'alchemy']
+var list2 = ['smith', 'tailor', 'alchemy', 'cooking', 'building']
+
+func predict_active_task():
+	if person == null:
+		return null
+	var joborder = person.get_job_order(true) 
+	for job in joborder:
+		var real_job = job + '_material'
+		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
+		if curupgrade != null:
+			return curupgrade
+	
+	joborder = person.get_job_order(false) 
+	for job in joborder:
+		var real_job = job
+		if job != 'building':
+			real_job += '_item'
+		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
+		if curupgrade != null:
+			return curupgrade
+	return null
+
+
+func build_predicted(root):
+	var task_id = predict_active_task()
+	if task_id == null:
+		root.get_node('icon').texture = load("res://assets/images/gui/icon_bed.png")
+	else:
+		var task = ResourceScripts.game_res.tasks_progresses[task_id]
+		if task.job == 'building':
+			var udata = upgradedata.upgradelist[task.id]
+			root.get_node('icon').texture = images.get_icon(udata.icon)
+		else:
+			var recipe_data = Items.recipes[task.id]
+			var item_data
+			if task.job.ends_with('_material'):
+				item_data = Items.materiallist[recipe_data.resultitem]
+			else:
+				item_data = Items.itemlist[recipe_data.resultitem]
+			root.get_node('icon').texture = item_data.icon
+			if recipe_data.crafttype == 'modular':
+				root.get_node('icon').material = load("res://assets/ItemShader.tres").duplicate()
+	root.get_node('icon').visible = true
+
+
+#mavs gui
+var temporder1 = []
+var temporder2 = []
+
+func open_mavs_craft():
+	if person != null:
+		$CraftRules2/Label.text = tr("CRAFTRULES2TITLE") % person.get_short_name()
+		gather_orders()
+		rebuild_orders()
+	else:
+		$CraftRules2/icon.visible = false
+	$CraftRules2.visible = true
+
+
+func gather_orders():
+	temporder1 = person.get_job_order(true)
+	for id in list1:
+		if !temporder1.has(id):
+			temporder1.push_back(id)
+	temporder2 = person.get_job_order(false)
+	for id in list2:
+		if !temporder2.has(id):
+			temporder2.push_back(id)
+
+
+func rebuild_orders():
+	var enabled_list_1 = person.get_jobs_enabled(true)
+	var enabled_list_2 = person.get_jobs_enabled(false)
+	input_handler.ClearContainer($CraftRules2/filters/checks1, ['Label', 'Button'])
+	input_handler.ClearContainer($CraftRules2/filters/checks2, ['Label', 'Button'])
+	input_handler.ClearContainer($CraftRules2/filters/order1, ['Label', 'Button'])
+	input_handler.ClearContainer($CraftRules2/filters/order2, ['Label', 'Button'])
+	for job in list1:
+		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/checks1, 'Button')
+		var taskdata = tasks.tasklist[job]
+		if enabled_list_1.has(job):
+			newnode.pressed = true
+			newnode.text = tr(taskdata.name)
+			newnode.connect('pressed', self, 'toggle_category_2', [job, false, true])
+		else:
+			newnode.pressed = false
+			newnode.text = tr(taskdata.name)
+			newnode.connect('pressed', self, 'toggle_category_2', [job, true, true])
+	for job in list2:
+		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/checks2, 'Button')
+		var taskdata = tasks.tasklist[job]
+		if enabled_list_2.has(job):
+			newnode.pressed = true
+			newnode.text = tr(taskdata.name)
+			newnode.connect('pressed', self, 'toggle_category_2', [job, false, false])
+		else:
+			newnode.pressed = false
+			newnode.text = tr(taskdata.name)
+			newnode.connect('pressed', self, 'toggle_category_2', [job, true, false])
+	for job in temporder1:
+		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/order1, 'Button')
+		var taskdata = tasks.tasklist[job]
+		newnode.get_node('Label').text = tr(taskdata.name)
+		if enabled_list_1.has(job):
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
+		else:
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['gray'])
+		newnode.arraydata = job
+		newnode.parentnodearray = temporder1
+		newnode.target_node = self
+		newnode.target_function = 'validate_orders'
+	for job in temporder2:
+		var newnode = input_handler.DuplicateContainerTemplate($CraftRules2/filters/order2, 'Button')
+		var taskdata = tasks.tasklist[job]
+		newnode.get_node('Label').text = tr(taskdata.name)
+		if enabled_list_2.has(job):
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['green'])
+		else:
+			newnode.get_node('Label').set("custom_colors/font_color", variables.hexcolordict['gray'])
+		newnode.arraydata = job
+		newnode.parentnodearray = temporder2
+		newnode.target_node = self
+		newnode.target_function = 'validate_orders'
+	build_predicted($CraftRules2)
+
+
+func toggle_category_2(cat, value, materials = true):
+	person.set_job_enabled(cat, value, materials)
+	validate_orders()
+	rebuild_orders()
+
+
+func validate_orders():
+	person.set_job_orders(temporder1, true)
+	person.set_job_orders(temporder2, false)
+	rebuild_orders()
+
+#ykocs gui
+func open_my_craft():
+	if person != null:
+		build_priorities()
+	else:
+		$CraftRules/icon.visible = false
+	$CraftRules.visible = true
+
+
+func build_priorities():
+	var enabled_list_1 = person.get_job_order(true)
+	var enabled_list_2 = person.get_job_order(false)
+	var disabled_list_1 = []
+	var disabled_list_2 = []
+	
+	for job in list1:
+		if !enabled_list_1.has(job):
+			disabled_list_1.push_back(job)
+	for job in list2:
+		if !enabled_list_2.has(job):
+			disabled_list_2.push_back(job)
+	
+	for i in range(0, 4):
+		var nd = $CraftRules/Container/materials.get_node("pos_e_%d" % (i + 1))
+		if enabled_list_1.size() > i:
+			var job = enabled_list_1[i]
+			var jobdata = tasks.tasklist[job]
+			nd.get_node('icon').texture = load(jobdata.production_icon)
+			nd.data = job
+			nd.order = 4 - i
+			nd.materials = true
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+		else:
+			nd.get_node('icon').texture = null
+			nd.data = null
+			nd.order = 4 - i
+			nd.materials = true
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+	for i in range(0, 4):
+		var nd = $CraftRules/Container/materials.get_node("pos_d_%d" % (i + 1))
+		if disabled_list_1.size() > i:
+			var job = disabled_list_1[i]
+			var jobdata = tasks.tasklist[job]
+			nd.get_node('icon').texture = load(jobdata.production_icon)
+			nd.data = job
+			nd.order = 0
+			nd.materials = true
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+		else:
+			nd.get_node('icon').texture = null
+			nd.data = null
+			nd.order = 0
+			nd.materials = true
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+	for i in range(0, 5):
+		var nd = $CraftRules/Container/items.get_node("pos_e_%d" % (i + 1))
+		if enabled_list_2.size() > i:
+			var job = enabled_list_2[i]
+			var jobdata = tasks.tasklist[job]
+			nd.get_node('icon').texture = load(jobdata.production_icon)
+			nd.data = job
+			nd.order = 5 - i
+			nd.materials = false
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+		else:
+			nd.get_node('icon').texture = null
+			nd.data = null
+			nd.order = 5 - i
+			nd.materials = false
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+	for i in range(0, 5):
+		var nd = $CraftRules/Container/items.get_node("pos_d_%d" % (i + 1))
+		if disabled_list_2.size() > i:
+			var job = disabled_list_2[i]
+			var jobdata = tasks.tasklist[job]
+			nd.get_node('icon').texture = load(jobdata.production_icon)
+			nd.data = job
+			nd.order = 0
+			nd.materials = false
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+		else:
+			nd.get_node('icon').texture = null
+			nd.data = null
+			nd.order = 0
+			nd.materials = false
+			nd.target_function = 'set_job_order'
+			nd.target_node = self
+	
+	build_predicted($CraftRules)
+
+
+func set_job_order(job, value, materials):
+	person.set_job_order(job, value, materials)
+	build_priorities()

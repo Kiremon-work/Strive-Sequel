@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://MainFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/Fonts_v2/FontThemes/MainMiddle.tres" type="DynamicFont" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/Textures_v2/Universal/Panels/frame_skill_hover.png" type="Texture" id=10]
 [ext_resource path="res://assets/Textures_v2/Universal/Panels/frame_skill_active.png" type="Texture" id=11]
 [ext_resource path="res://gui_modules/CharacterInfo/TrUpgradesList.gd" type="Script" id=12]
+[ext_resource path="res://assets/Themes_v2/UNIVERSAL/DecorButton.tres" type="Theme" id=13]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/loyalty/Assign trainer/button_Assign_trainer_default.png" type="Texture" id=14]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/loyalty/Assign trainer/button_Assign_trainer_hover.png" type="Texture" id=15]
 [ext_resource path="res://assets/Textures_v2/CHAR_INFO/loyalty/Training status/button_Reset training_pressed.png" type="Texture" id=16]
@@ -163,7 +164,7 @@ anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 154.0
 margin_right = -20.0
-margin_bottom = -154.0
+margin_bottom = -65.0
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 scroll_horizontal_enabled = false
@@ -204,6 +205,7 @@ valign = 1
 clip_text = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="training"]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 13.0
@@ -299,10 +301,10 @@ clip_text = true
 
 [node name="spirit" type="TextureProgress" parent="training"]
 light_mask = 0
-margin_left = 217.0
-margin_top = 99.0
-margin_right = 477.0
-margin_bottom = 127.0
+margin_left = 164.502
+margin_top = 481.756
+margin_right = 424.502
+margin_bottom = 509.756
 rect_scale = Vector2( 1.25, 1.25 )
 value = 100.0
 texture_under = ExtResource( 5 )
@@ -310,12 +312,21 @@ texture_over = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 texture_progress_offset = Vector2( 29, 3 )
 
+[node name="percent_label" type="Label" parent="training/spirit"]
+mouse_filter = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+text = "100%"
+align = 1
+valign = 1
+
 [node name="cd" type="Label" parent="training"]
 light_mask = 0
-margin_left = 180.0
-margin_top = 48.0
-margin_right = 474.0
-margin_bottom = 83.0
+margin_left = 173.7
+margin_top = 56.8194
+margin_right = 467.7
+margin_bottom = 91.8194
 custom_fonts/font = ExtResource( 2 )
 text = "TRAINREADY"
 valign = 1
@@ -336,6 +347,7 @@ valign = 1
 clip_text = true
 
 [node name="complete_button" type="TextureButton" parent="training"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -372,6 +384,7 @@ __meta__ = {
 }
 
 [node name="TextureRect2" type="TextureRect" parent="training"]
+visible = false
 margin_left = 152.827
 margin_top = 82.939
 margin_right = 193.827
@@ -381,10 +394,10 @@ texture = ExtResource( 37 )
 [node name="TextureRect" type="TextureRect" parent="training"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = -131.0
-margin_right = 65.0
-margin_bottom = -89.0
+margin_left = 519.969
+margin_top = -61.5199
+margin_right = 568.969
+margin_bottom = -19.5199
 texture = ExtResource( 18 )
 expand = true
 stretch_mode = 6
@@ -393,16 +406,17 @@ stretch_mode = 6
 light_mask = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 87.0
-margin_top = -130.0
-margin_right = 142.0
-margin_bottom = -95.0
+margin_left = 590.969
+margin_top = -60.5199
+margin_right = 645.969
+margin_bottom = -25.5199
 custom_fonts/font = ExtResource( 2 )
 text = "100"
 valign = 1
 clip_text = true
 
 [node name="resistance" type="Control" parent="training"]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 478.0
@@ -433,7 +447,6 @@ valign = 1
 clip_text = true
 
 [node name="training_servant" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -464,6 +477,7 @@ texture = ExtResource( 29 )
 expand = true
 
 [node name="cost" type="Label" parent="training_servant"]
+visible = false
 light_mask = 0
 margin_left = 13.0
 margin_top = 264.0
@@ -488,6 +502,7 @@ expand = true
 stretch_mode = 6
 
 [node name="loyalty" type="Control" parent="training_servant"]
+visible = false
 margin_left = 16.0
 margin_top = 320.0
 margin_right = 201.0
@@ -513,6 +528,7 @@ valign = 1
 clip_text = true
 
 [node name="resistance" type="Control" parent="training_servant"]
+visible = false
 margin_left = 209.0
 margin_top = 313.0
 margin_right = 355.0
@@ -539,6 +555,136 @@ custom_fonts/font = ExtResource( 2 )
 text = "100 - 10"
 valign = 1
 clip_text = true
+
+[node name="UnlockList" type="VBoxContainer" parent="training_servant"]
+margin_left = 138.0
+margin_top = 110.0
+margin_right = 522.0
+margin_bottom = 299.0
+custom_constants/separation = 6
+
+[node name="working" type="HBoxContainer" parent="training_servant/UnlockList"]
+margin_right = 384.0
+margin_bottom = 33.0
+custom_constants/separation = 20
+
+[node name="name" type="Label" parent="training_servant/UnlockList/working"]
+margin_right = 84.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Working"
+valign = 1
+
+[node name="status" type="Label" parent="training_servant/UnlockList/working"]
+margin_left = 104.0
+margin_right = 384.0
+margin_bottom = 33.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Locked"
+align = 2
+valign = 1
+
+[node name="combat" type="HBoxContainer" parent="training_servant/UnlockList"]
+margin_top = 39.0
+margin_right = 384.0
+margin_bottom = 72.0
+custom_constants/separation = 20
+
+[node name="name" type="Label" parent="training_servant/UnlockList/combat"]
+margin_right = 81.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Combat"
+valign = 1
+
+[node name="status" type="Label" parent="training_servant/UnlockList/combat"]
+margin_left = 101.0
+margin_right = 384.0
+margin_bottom = 33.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Locked"
+align = 2
+valign = 1
+
+[node name="dating" type="HBoxContainer" parent="training_servant/UnlockList"]
+margin_top = 78.0
+margin_right = 384.0
+margin_bottom = 111.0
+custom_constants/separation = 20
+
+[node name="name" type="Label" parent="training_servant/UnlockList/dating"]
+margin_right = 66.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Dating"
+valign = 1
+
+[node name="status" type="Label" parent="training_servant/UnlockList/dating"]
+margin_left = 86.0
+margin_right = 384.0
+margin_bottom = 33.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Locked"
+align = 2
+valign = 1
+
+[node name="sex" type="HBoxContainer" parent="training_servant/UnlockList"]
+margin_top = 117.0
+margin_right = 384.0
+margin_bottom = 150.0
+custom_constants/separation = 20
+
+[node name="name" type="Label" parent="training_servant/UnlockList/sex"]
+margin_right = 36.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sex"
+valign = 1
+
+[node name="status" type="Label" parent="training_servant/UnlockList/sex"]
+margin_left = 56.0
+margin_right = 384.0
+margin_bottom = 33.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Locked"
+align = 2
+valign = 1
+
+[node name="sexservice" type="HBoxContainer" parent="training_servant/UnlockList"]
+margin_top = 156.0
+margin_right = 384.0
+margin_bottom = 189.0
+custom_constants/separation = 20
+
+[node name="name" type="Label" parent="training_servant/UnlockList/sexservice"]
+margin_right = 115.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sex Service"
+valign = 1
+
+[node name="status" type="Label" parent="training_servant/UnlockList/sexservice"]
+margin_left = 135.0
+margin_right = 384.0
+margin_bottom = 33.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Locked"
+align = 2
+valign = 1
+
+[node name="TalkButton" type="Button" parent="training_servant"]
+margin_left = 184.0
+margin_top = 358.0
+margin_right = 468.0
+margin_bottom = 398.0
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 2 )
+text = "Negotiate"
 
 [node name="trainer_list" type="Control" parent="."]
 visible = false
@@ -671,6 +817,7 @@ margin_right = -149.0
 margin_bottom = -215.0
 
 [node name="list" type="Label" parent="finished/VBoxContainer"]
+visible = false
 margin_right = 464.0
 margin_bottom = 53.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
@@ -680,9 +827,7 @@ align = 1
 clip_text = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="finished/VBoxContainer"]
-margin_top = 57.0
 margin_right = 464.0
-margin_bottom = 57.0
 custom_constants/separation = 5
 
 [node name="Button" type="TextureRect" parent="finished/VBoxContainer/HBoxContainer2"]
@@ -701,9 +846,9 @@ texture = ExtResource( 29 )
 expand = true
 
 [node name="select_text" type="Label" parent="finished/VBoxContainer"]
-margin_top = 61.0
+margin_top = 4.0
 margin_right = 464.0
-margin_bottom = 114.0
+margin_bottom = 57.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "TRAININGBONUSES"
@@ -711,9 +856,9 @@ align = 1
 clip_text = true
 
 [node name="HBoxContainer3" type="GridContainer" parent="finished/VBoxContainer"]
-margin_top = 118.0
+margin_top = 61.0
 margin_right = 464.0
-margin_bottom = 118.0
+margin_bottom = 61.0
 columns = 5
 
 [node name="Button" type="TextureButton" parent="finished/VBoxContainer/HBoxContainer3"]
@@ -745,14 +890,26 @@ text = "500"
 align = 1
 valign = 1
 
+[node name="tp_icon" type="TextureRect" parent="finished"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -70.0
+margin_right = 81.0
+margin_bottom = -28.0
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+
 [node name="status" type="Label" parent="finished"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 51.0
+margin_left = 90.0
 margin_top = -76.0
-margin_right = 385.0
+margin_right = 386.0
 margin_bottom = -23.0
 custom_colors/font_color = Color( 0.976471, 0.882353, 0.505882, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "TRAININGTRAINEES"
+valign = 1
 clip_text = true

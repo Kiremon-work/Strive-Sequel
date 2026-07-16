@@ -1,18 +1,30 @@
 Added Lira's questline
 Added handling for act 2 transition in case when you refuse Zephyra at the end of act 1 and prevented church being blocked by it
+Added visual animation to unit attacks in combat
 Added Universal Aptitude racial skill to Humans. Allows to copy one race restricted class from a selected character
 Added multiple new dungeon background variations
 Added new stats: Affection and Respect - to represent character relations towards master.
-Added few new bosses
-Added animation to combat skills
+Added a few new bosses
+Added animation to combat skillse
+Added dynamic speed update in combat
+Revamped slave training and traits to be a bit more intuitive and straightforward
+Slaves now are capped at 2 proficiencies
 Improved handling of other languages and incorrect syntax
 Renamed multiple key locations and areas to have less abstract names
 Multiple combat fixes
 Fame now provides Manhunt stat instead of recruitment bonus
+Maxed tame factor now has more relevant bonuses
+Reduced the amount of money from faction slave requests to 3500 from 4500 on tier 1 and to 7500 from 9000 on tier 2
+Hide cooldown increased 0 > 1
+Darkness renamed to Shadow Bolt
+Unique character wedding sprites now properly require their marriage achievment
+Cleared out some descriptions and tutorials from mentioning legacy mechanics
 Fixed sexuals_bonus mod still existing on some items and effects
+Fixed repeatable quests not using all map poold
 Fixed character upkeep values being too low 
 Fixed Rouge and Mae wedding dress sprites
 Fixed some text issues with dating
+Fixed Windwall and Air Shield granting far less ranged resistance than intended due to a scaling bug
 Fixed certain random events
 0.14.3b
 Sex minigame:

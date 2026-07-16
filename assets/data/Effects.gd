@@ -325,7 +325,7 @@ var effect_table = {
 	work_rule_masturbation = {
 		type = 'simple',
 		conditions = [{code = 'workrule', check = true, value = 'masturbation'}],
-		statchanges = {resistance_red = 0.2, productivity = -0.1},
+		statchanges = {productivity = -0.1},
 	},
 	
 	e_tr_copy_25 = { 
@@ -1063,9 +1063,9 @@ var effect_table = {
 		}]
 	},
 	#items
-	e_i_shackles = rebuild_simple_dot(['loyalty', 'spirit'], [1, -1], variables.TR_DAY),
-	e_i_handcuffs = rebuild_simple_dot(['loyalty', 'spirit'], [0.5, -0.5], variables.TR_DAY),
-	e_i_collar = rebuild_simple_dot(['loyalty', 'spirit'], [5, -5], variables.TR_DAY),
+	e_i_shackles = rebuild_simple_dot(['loyalty'], [1], variables.TR_DAY),
+	e_i_handcuffs = rebuild_simple_dot(['loyalty'], [0.5], variables.TR_DAY),
+	e_i_collar = rebuild_simple_dot(['loyalty'], [5], variables.TR_DAY),
 	e_i_pet_suit_bonus = {
 		type = 'simple',
 		conditions = [{code = 'has_profession', profession = 'pet', check = true}],
@@ -1256,7 +1256,7 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration * 2 / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = variables.pregduration / 3},
-			{code = 'trait', trait = 'breeder', check = false}
+			{code = 'has_status', status = 'breeder', check = false}
 		],
 		buffs = [{
 			icon = "res://assets/images/iconsskills/preg_icon1.png",
@@ -1269,7 +1269,7 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = 0},
-			{code = 'trait', trait = 'breeder', check = false}
+			{code = 'has_status', status = 'breeder', check = false}
 		],
 		statchanges = {speed = -20, physics_bonus = -40},
 		buffs = [{
@@ -1284,14 +1284,14 @@ var effect_table = {
 		conditions = [
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'lte', value = variables.pregduration / 3},
 			{code = 'stat', stat = 'pregnancy_duration', operant = 'gt', value = 0},
-			{code = 'trait', trait = 'breeder', check = true}
+			{code = 'has_status', status = 'breeder', check = true}
 		],
 		buffs = [{
 			icon = "res://assets/images/iconsskills/preg_icon1.png",
 			description = "TRAITEFFECTISPREGNANT",
 		}]
 	},
-	e_brand = rebuild_simple_dot(['loyalty', 'spirit'], [0.5, -0.5], variables.TR_DAY),
+	e_brand = rebuild_simple_dot(['loyalty'], [0.5], variables.TR_DAY),
 	e_mkup = {
 		type = 'simple',
 		statchanges = {charm_bonus = 10},

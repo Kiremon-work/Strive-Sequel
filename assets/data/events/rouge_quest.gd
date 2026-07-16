@@ -374,7 +374,6 @@ var data = {
 			{code = "add_trait", trait = "training_s_combat", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
 			{code = "add_trait", trait = "training_s_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
 			{code = "add_trait", trait = "training_s_sexservice", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
-			{code = "add_trait", trait = "training_obedience", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 			{code = "add_trait", trait = "training_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 			{code = "add_trait", trait = "training_sexservice", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 		]}],
@@ -433,7 +432,6 @@ var data = {
 		common_effects = [{code = "unique_character_changes", value = "rouge", args = [
 			{code = "add_trait", trait = "training_s_combat", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
 			{code = "add_trait", trait = "training_s_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
-			{code = "add_trait", trait = "training_obedience", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 			{code = "add_trait", trait = "training_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 		]}],
 		options = [
@@ -1625,7 +1623,6 @@ var data = {
 		common_effects = [{code = "unique_character_changes", value = "rouge", args = [
 			{code = "add_trait", trait = "training_s_combat", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
 			{code = "add_trait", trait = "training_s_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "servant"}]},
-			{code = "add_trait", trait = "training_obedience", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 			{code = "add_trait", trait = "training_relation", reqs = [{code = "stat", stat = "slave_class", operant = "eq", value = "slave"}]},
 		]}],
 		options = [

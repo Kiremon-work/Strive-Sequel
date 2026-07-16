@@ -562,11 +562,12 @@ func build_info(loc = null):
 		if location.has('tags') and location.tags.has(r_task):
 			var newbutton = input_handler.DuplicateContainerTemplate(info_res_node)
 			var jobdata = tasks.tasklist[r_task]
-			newbutton.get_node("Icon").texture = jobdata.production_icon
+			newbutton.get_node("Icon").texture = load(jobdata.production_icon)
 			var max_workers_count = jobdata.base_workers
 			var current_workers_count = 0
-			for task in ResourceScripts.game_party.active_tasks:
-				if (task.code == r_task) && (task.task_location == loc):
+			for task_id in ResourceScripts.game_res.active_tasks.recruiting:
+				var task = ResourceScripts.game_res.tasks_progresses[task_id]
+				if (task.location == loc) and (task.job == r_task):
 					current_workers_count = task.workers.size()
 			newbutton.get_node("amount").text = str(max_workers_count - current_workers_count) + "/" + str(max_workers_count)
 			globals.connecttexttooltip(newbutton, jobdata.descript)
@@ -610,9 +611,9 @@ func build_info(loc = null):
 				else:
 					var max_workers_count = gatherable_resources[i]
 					var current_workers_count = 0
-					var active_tasks = ResourceScripts.game_party.active_tasks
-					for task in active_tasks:
-						if (task.code == i) && (task.task_location == loc):
+					for task_id in ResourceScripts.game_res.active_tasks.gathering:
+						var task = ResourceScripts.game_res.tasks_progresses[task_id]
+						if (task.job == i) && (task.location == loc):
 							current_workers_count = task.workers.size()
 					newbutton.get_node("amount").text = str(max_workers_count - current_workers_count) + "/" + str(max_workers_count)
 					newbutton.set_meta("max_workers", max_workers_count)

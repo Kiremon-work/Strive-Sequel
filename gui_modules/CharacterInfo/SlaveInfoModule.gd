@@ -30,9 +30,6 @@ func _ready():
 	upgrades.get_node("UpgradesList").root = get_parent()
 	upgrades.get_node("SuccubUpgradesList").root = get_parent()
 	
-	globals.connecttexttooltip($Panel/maininfo/food/fooddisliked, "[center]"+ tr("STATFOOD_HATE") + "[/center]\n"+tr("STATFOOD_HATEDESCRIPT"))
-	globals.connecttexttooltip($Panel/maininfo/food/foodliked,"[center]"+ tr("STATFOOD_LOVE") + "[/center]\n"+tr("STATFOOD_LOVEDESCRIPT"))
-	
 	globals.connecttexttooltip($tr_selector/master_upg, tr("SIBLINGMODULETRAININGSMASTER"))
 	globals.connecttexttooltip($tr_selector/succubus, tr("SIBLINGMODULESUCCUBUS"))
 	globals.connecttexttooltip($tr_selector/trainings, tr("SIBLINGMODULETRAININGS"))
@@ -59,13 +56,6 @@ func set_color(value):
 		color = Color(0.99,0.31,0.36,1)
 	return color
 
-
-var foodicons = {
-	meat = load("res://assets/images/gui/gui icons/icon_meat.png"),
-	fish = load("res://assets/images/gui/gui icons/icon_fish.png"),
-	vege = load("res://assets/images/gui/gui icons/icon_veg.png"),
-	grain = load("res://assets/images/gui/gui icons/icon_grain.png"),
-}
 
 func update():
 	if person != input_handler.interacted_character:
@@ -128,13 +118,6 @@ func update():
 		globals.connecttexttooltip($Panel/maininfo/standing, build_standing_tooltip())
 		
 		globals.connecttexttooltip($Panel/maininfo/personality, globals.get_character_personality_tooltip(person.get_stat('personality')))
-		$Panel/maininfo/food/foodlikedicon.texture = foodicons[person.food.food_love]
-		globals.connecttexttooltip($Panel/maininfo/food/foodlikedicon, tr("FOODTYPE" + person.food.food_love.to_upper()))
-		input_handler.ClearContainer($Panel/maininfo/food/fooddislikedicons)
-		for i in person.food.food_hate:
-			var newicon = input_handler.DuplicateContainerTemplate($Panel/maininfo/food/fooddislikedicons)
-			newicon.texture = foodicons[i]
-			globals.connecttexttooltip(newicon, tr("FOODTYPE" + i.to_upper()))
 		$Description/RichTextLabel.bbcode_text = person.make_description()
 		
 		update_traitlist()

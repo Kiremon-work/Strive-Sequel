@@ -445,7 +445,7 @@ func get_worker_count_for_task(worktask):
 
 func complete_quest(quest, state = 'failed'):
 	quest.state = state
-	ResourceScripts.game_party.remove_quest_task(quest.id)
+	ResourceScripts.game_res.remove_quest_task(quest.id)
 	for i in quest.requirements:
 		if i.code in ['complete_location','complete_dungeon']:
 			if i.code == 'complete_location':#dungeon should not be removed

@@ -30,6 +30,7 @@ var allowedtargets = {}
 var turnorder = []
 var next_turnorder = []
 var current_turn_info = {}
+var acted_chars = []
 var last_order_id = -1
 const turn_order_step = 54
 var fightover = false
@@ -482,12 +483,9 @@ func checkdeaths():
 			input_handler.emit_signal('fighter_changed')
 			combatlogadd(tr("LOG_COMBAT_DEFEATED") % tchar.get_short_name())
 			for order_cont in [next_turnorder, turnorder]:
-				for j in range(order_cont.size()):
+				for j in range(order_cont.size() - 1, -1, -1):
 					if order_cont[j].pos == i:
 						order_cont.remove(j)
-#						update_queue_needed = true
-						break#will it work with arrays in speed stat?
-			#turnorder.erase(battlefield[i])
 			if summons.has(i):
 #				tchar.displaynode.queue_free()
 				tchar.displaynode.is_active = false
@@ -504,6 +502,7 @@ func checkdeaths():
 #	if update_queue_needed:
 #		update_queue_asynch()#probaly should be updated only on select_actor
 
+
 func enemy_escape(escaper):
 	escaper.defeated = true
 	escaper.hp = 0
@@ -512,14 +511,9 @@ func enemy_escape(escaper):
 	var i = escaper.position
 #	var update_queue_needed = false
 	for order_cont in [next_turnorder, turnorder]:
-		for j in range(order_cont.size()):
+		for j in range(order_cont.size() - 1, -1, -1):
 			if order_cont[j].pos == i:
 				order_cont.remove(j)
-#				update_queue_needed = true
-				break#will it work with arrays in speed stat?
-#	if update_queue_needed:
-#		update_queue_asynch()#probaly should be updated only on select_actor
-#	escaper.displaynode.queue_free()
 	escaper.displaynode.is_active = false
 #	escaper.displaynode = null
 	escaper.is_active = false
@@ -527,6 +521,7 @@ func enemy_escape(escaper):
 	enemygroup.erase(i)
 	if summons.has(i):
 		summons.erase(i)
+
 
 var playergroupcounter = 0
 func checkwinlose():
@@ -562,8 +557,8 @@ func checkwinlose():
 
 
 func force_newturn():
-	calculateorder()
 	newturn()
+	calculateorder()
 	select_actor()
 
 
@@ -587,6 +582,7 @@ func select_actor():
 		calculateorder()
 		is_new_turn = true
 	else:
+		acted_chars.push_back(current_turn_info)
 		update_order()
 	
 	if !ActionQueue.is_empty():
@@ -595,8 +591,7 @@ func select_actor():
 		yield(ActionQueue, 'queue_empty')
 	
 	currentactor = turnorder[0].pos
-	current_turn_info = turnorder[0]
-	turnorder.remove(0)
+	current_turn_info = turnorder.pop_front()
 	update_queue_asynch(is_new_turn)
 	#currentactor.update_timers()
 	current_turn()
@@ -631,6 +626,7 @@ func newturn():
 		for k in cooldowncleararray:
 			tchar.skills.combat_cooldowns.erase(k)
 		tchar.set_stat('counterattacks', tchar.get_stat('counterattacks_max'))
+	acted_chars.clear()
 
 
 func calculateorder():
@@ -649,51 +645,92 @@ func calculateorder():
 			if tchar.defeated == true:
 				continue
 			for i in range(tchar.get_stat('speed').size()):
-				order_cont.append({dice = randf() * 5, pos = pos, id = make_order_id()})
+				var dice = randf() * 5
+				order_cont.append({speed = i + dice, dice = dice, pos = pos, id = make_order_id()})
 	update_order()
 
+
 func update_order():
-	for order_cont in [turnorder, next_turnorder]:
-		var list_by_pos = {}
-		for i in range(order_cont.size()):
-			var entry = order_cont[i]
-			if entry.pos == 0: continue
-			
-			if !list_by_pos.has(entry.pos):
-				list_by_pos[entry.pos] = []
-			list_by_pos[entry.pos].append(i)
-		
-		var to_remove = []
-		for pos in list_by_pos:
-			var tchar = get_char_by_pos(pos)
-			if tchar.defeated == true: continue
-			
-			var cur_list = list_by_pos[pos]
-#			print("ask speed %s" % tchar.get_short_name())
-			var speed_list = tchar.get_stat('speed')
-#			print("speed_list %s" % speed_list)
-#			print("cur_list %s speed_list %s" % [cur_list.size(), speed_list.size()])
-			for i in range(speed_list.size()):
-				if cur_list.size() < i+1:
-#					print("add new entry!")
-					var dice = randf() * 5
-					order_cont.append({speed = speed_list[i] + dice, dice = dice, pos = pos})
-				else:
-#					print("update entry")
-					var entry = order_cont[cur_list[i]]
-					entry.speed = speed_list[i] + entry.dice
-			if cur_list.size() > speed_list.size():
-				for i in range(speed_list.size(), cur_list.size()):
-#					print("will remove %s" % cur_list[i])
-					to_remove.append(cur_list[i])
-		if !to_remove.empty():
-			for i in range(order_cont.size()-1, -1, -1):
-				if i in to_remove:
-#					print("removing %s" % i)
-					order_cont.remove(i)
-		
-		order_cont.sort_custom(self, 'speedsort')
-#	update_queue_asynch()
+#	for order_cont in [turnorder, next_turnorder]:
+	var list_by_pos = {}
+	var acted_by_pos = {}
+	for i in range(acted_chars.size()):
+		var entry = acted_chars[i]
+		if entry.pos == 0: 
+			continue
+		if !acted_by_pos.has(entry.pos):
+			acted_by_pos[entry.pos] = 0
+		acted_by_pos[entry.pos] += 1
+	for i in range(turnorder.size()):
+		var entry = turnorder[i]
+		if entry.pos == 0: 
+			continue
+		if !list_by_pos.has(entry.pos):
+			list_by_pos[entry.pos] = []
+		list_by_pos[entry.pos].append(i)
+	
+	for pos in list_by_pos:
+		var tchar = get_char_by_pos(pos)
+		if tchar.defeated == true: 
+			continue
+		var cur_list = list_by_pos[pos]
+		var speed_list = tchar.get_stat('speed')
+		var acted = 0
+		if acted_by_pos.has(pos):
+			acted = acted_by_pos[pos]
+		for i in range(speed_list.size()):
+			if i >= acted + cur_list.size():
+				var dice = randf() * 5
+				turnorder.append({speed = speed_list[i] + dice, dice = dice, pos = pos, id = make_order_id()})
+			elif i >= acted:
+				var entry = turnorder[cur_list[i - acted]]
+				entry.speed = speed_list[i] + entry.dice
+		if acted >= speed_list.size():
+			for i in range(cur_list.size()):
+				var entry = turnorder[cur_list[i]]
+				entry.id = null
+		elif acted + cur_list.size() > speed_list.size():
+			for i in range(speed_list.size(), acted + cur_list.size()):
+				var entry = turnorder[cur_list[i - acted]]
+				entry.id = null
+	for i in range(turnorder.size() - 1, -1, -1):
+		if turnorder[i].id == null:
+			turnorder.remove(i)
+	
+	turnorder.sort_custom(self, 'speedsort')
+	
+	list_by_pos.clear()
+	for i in range(next_turnorder.size()):
+		var entry = next_turnorder[i]
+		if entry.pos == 0: 
+			continue
+		if !list_by_pos.has(entry.pos):
+			list_by_pos[entry.pos] = []
+		list_by_pos[entry.pos].append(i)
+	
+	for pos in list_by_pos:
+		var tchar = get_char_by_pos(pos)
+		if tchar.defeated == true: 
+			continue
+		var cur_list = list_by_pos[pos]
+		var speed_list = tchar.get_stat('speed')
+		for i in range(speed_list.size()):
+			if cur_list.size() < i + 1:
+				var dice = randf() * 5
+				next_turnorder.append({speed = speed_list[i] + dice, dice = dice, pos = pos, id = make_order_id()})
+			else:
+				var entry = next_turnorder[cur_list[i]]
+				entry.speed = speed_list[i] + entry.dice
+		if cur_list.size() > speed_list.size():
+			for i in range(speed_list.size(), cur_list.size()):
+				var entry = next_turnorder[cur_list[i]]
+				entry.id = null
+	for i in range(next_turnorder.size() - 1, -1, -1):
+		if next_turnorder[i].id == null:
+			next_turnorder.remove(i)
+	
+	next_turnorder.sort_custom(self, 'speedsort')
+
 
 func speedsort(first, second):
 	return first.speed > second.speed

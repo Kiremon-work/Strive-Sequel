@@ -2741,7 +2741,6 @@ func endencounter():
 				hate_chance = clamp(final_lack * 0.03, 0.01, 1.0)
 			if randf() < hate_chance:
 				if i.person.training.is_slave():
-					i.person.training.set_resistance(100)
 					var loyalty_loss = round(rand_range(5, 10))
 					i.person.training.add_stat('loyalty', -loyalty_loss)
 					text += i.person.translate(tr("INTERACTION_END_LACK_CONSENT_SLAVE") % [str(loyalty_loss)])
@@ -3413,6 +3412,12 @@ func acquire_valuecheck(r, actor):
 					condition += 1
 			if condition < 3:
 				check = false
+		'relatives_check':
+			check = false
+			for partner in actor.satisfied_partners:
+				if ResourceScripts.game_party.checkifrelatives(actor.person.id, partner.person.id):
+					check = true
+					break
 	return check
 
 func has_master():

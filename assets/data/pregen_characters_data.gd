@@ -38,7 +38,7 @@ var pregen_characters = {
 		ass_size = 'small',
 		tits_size = 'average',
 		sex_traits = ['pushover','dislike_group'],
-		traits = ['prodigy','coward','training_broke_in','training_obedience'],
+		traits = ['prodigy','coward','training_broke_in'],
 		tags = [],
 		personality_kind = 45,
 		personality_bold = -50,
@@ -148,7 +148,7 @@ var pregen_characters = {
 		food_hate = ['meat'],
 		skills = ['take_position'],
 		classes = ['archer','ranger'],
-		traits = ['nimble','inept','training_broke_in','training_obedience','courtly_arms'],
+		traits = ['nimble','inept','training_broke_in','courtly_arms'],
 		training_disposition = {
 			humiliation = 'neutral',
 			physical = 'weak',
@@ -204,7 +204,7 @@ var pregen_characters = {
 		food_like = 'meat',
 		food_hate = ['vege'],
 		classes = ['renown_royalty'],
-		traits = ['frail','training_broke_in','training_obedience','etiquette','literacy','penmanship','courtly_arms'],
+		traits = ['frail','training_broke_in','etiquette','literacy','penmanship','courtly_arms'],
 		training_disposition = {
 			humiliation = 'weak',
 			physical = 'resist',
@@ -260,7 +260,7 @@ var pregen_characters = {
 		food_like = 'meat',
 		food_hate = ['vege'],
 		classes = ['broken_royalty'],
-		traits = ['frail','training_broke_in','training_obedience','training_relation','training_callmaster','training_sexservice','etiquette','courtly_arms'],
+		traits = ['frail','training_broke_in','training_relation','training_callmaster','training_sexservice','etiquette','courtly_arms'],
 		training_disposition = {
 			humiliation = 'weak',
 			physical = 'weak',
@@ -315,7 +315,7 @@ var pregen_characters = {
 		food_hate = ['fish'],
 		skills = [],
 		classes = ['alios_champion'],
-		traits = ['gifted','clumsy','training_broke_in','training_obedience','training_s_combat','training_s_working','training_s_relation','literacy','penmanship'],
+		traits = ['gifted','clumsy','training_broke_in','training_s_combat','training_s_working','training_s_relation','literacy','penmanship'],
 		training_disposition = {
 			humiliation = 'resist',
 			physical = 'neutral',
@@ -804,7 +804,7 @@ var pregen_characters = {
 		food_like = 'fish',
 		food_hate = ['vege'],
 		classes = [],
-		traits = ['bawdy','training_broke_in','training_obedience','training_callmaster','training_sexservice','training_relation','training_sexservice_adv','mentorship','etiquette','table_manners','literacy','foreign_diplomacy'],
+		traits = ['bawdy','training_broke_in','training_callmaster','training_sexservice','training_relation','training_sexservice_adv','mentorship','etiquette','table_manners','literacy','foreign_diplomacy'],
 		training_disposition = {
 			humiliation = 'neutral',
 			physical = 'weak',
@@ -1195,7 +1195,6 @@ var unique_sprites = {
 			descript = "",
 			path = "daisy_wed_body", 
 			face_path = "daisy_wed",
-			unlocked = true
 			},
 	},
 	cali = {
@@ -1231,8 +1230,7 @@ var unique_sprites = {
 			name = "Wed",
 			descript = "",
 			path = "cali_wed_body", 
-			face_path = "cali_wed", 
-			unlocked = true
+			face_path = "cali_wed",
 			},
 	},
 	aire = {
@@ -1292,7 +1290,6 @@ var unique_sprites = {
 			descript = "",
 			path = "anastasia_wed_body", 
 			face_path = "anastasia_wed",
-			unlocked = true
 			},
 	},
 	zephyra = {
@@ -1315,7 +1312,6 @@ var unique_sprites = {
 			descript = "",
 			path = "zephyra_wed_body", 
 			face_path = "zephyra_wed",
-			unlocked = true
 			},
 		miko = {
 			name = "Miko",
@@ -1345,7 +1341,6 @@ var unique_sprites = {
 			descript = "",
 			path = "mae_wed_body",
 			face_path = "mae_wed",
-			unlocked = true
 			},
 	},
 	lilia = {
@@ -1366,9 +1361,8 @@ var unique_sprites = {
 		wed = {
 			name = "Wed",
 			descript = "",
-			path = "lilia_wed_body", 
+			path = "lilia_wed_body",
 			face_path = "lilia_nude",
-			unlocked = true
 			},
 	},
 	lilith = {
@@ -1391,7 +1385,6 @@ var unique_sprites = {
 			descript = "",
 			path = "lilith_wed_body", 
 			face_path = "lilith_wed",
-			unlocked = true
 			},
 	},
 	hara = {
@@ -1414,7 +1407,6 @@ var unique_sprites = {
 			descript = "",
 			path = "hara_wed_body", 
 			face_path = "hara_wed",
-			unlocked = true
 			},
 	},
 	jean = {
@@ -1443,8 +1435,7 @@ var unique_sprites = {
 			name = "Wed",
 			descript = "",
 			path = "jean_wed_body", 
-			face_path = "jean_wed", 
-			unlocked = true
+			face_path = "jean_wed",
 			},
 	},
 	heleviel = {
@@ -1479,7 +1470,6 @@ var unique_sprites = {
 			descript = "",
 			path = "heleviel_wed_body", 
 			face_path = "heleviel_wed",
-			unlocked = true
 			},
 	},
 	lira = {
@@ -1503,7 +1493,6 @@ var unique_sprites = {
 			path = "lira_wed_body", 
 #			path = "", 
 			face_path = "lira_wed",
-			unlocked = true
 			},
 	},
 	amelia = {
@@ -1526,7 +1515,6 @@ var unique_sprites = {
 			descript = "",
 			path = "amelia_wed_body", 
 			face_path = "amelia_wed",
-			unlocked = true
 			},
 		halloween = {
 			name = "Halloween",
@@ -1573,7 +1561,24 @@ var unique_sprites = {
 			descript = "",
 			path = "kuro_wed_body",
 			face_path = "kuro_wed",
-			unlocked = true
+			},
+		beach = {
+			name = "Beach",
+			descript = "",
+			path = "kuro_beach_body",
+			face_path = "kuro_beach",
+			},
+		beach_lewd = {
+			name = "Beach (Untied)",
+			descript = "",
+			path = "kuro_beach_halfnude_body",
+			face_path = "kuro_beach",
+			},
+		beach_nude = {
+			name = "Beach (Nude)",
+			descript = "",
+			path = "kuro_beach_nude_body",
+			face_path = "kuro_beach_nude",
 			},
 	},
 	rouge = {
@@ -1596,7 +1601,6 @@ var unique_sprites = {
 			descript = "",
 			path = "rouge_wed_body", 
 			face_path = "rouge_wed",
-			unlocked = true
 			},
 	},
 	

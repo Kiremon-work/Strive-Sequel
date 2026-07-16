@@ -781,7 +781,7 @@ var effects = {
 		duration = 2,
 		stack = 'alcohol',
 		tick_event = [variables.TR_TICK],
-		statchanges = {training_loyalty = -1, training_spirit = 1, productivity = -0.15},
+		statchanges = {training_loyalty = -1, training_points_bonus = 1, productivity = -0.15},
 		tags = ['alcohol'],
 		buffs = [{
 			icon = "res://assets/images/iconsitems/icon_beer.png",

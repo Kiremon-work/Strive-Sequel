@@ -302,7 +302,7 @@ func tick_quests():
 		quest.time_limit -= 1
 		if quest.time_limit <= 0:
 			quest.state = states.failed
-			ResourceScripts.game_party.remove_quest_task(quest.id)
+			ResourceScripts.game_res.remove_quest_task(quest.id)
 
 func is_quest_active(quest_id) -> bool:
 	return get_quest(quest_id).state == states.active

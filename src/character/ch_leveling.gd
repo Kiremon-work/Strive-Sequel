@@ -5,10 +5,25 @@ var base_exp = 0 setget base_exp_set
 var sleep = ''
 var work = ''
 var previous_work = ''
-var workproduct = null
-var previous_workproduct = null
+#var workproduct = null
+#var previous_workproduct = null
 var previous_location = ResourceScripts.game_world.mansion_location
 var work_rules = {lock = false, ration = false, shifts = false, constrain = false, luxury = false, contraceptive = false, bindings = false, nudity = false, personality_lock = false, relationship = true, masturbation = false}
+
+var priority_materials = {
+	cooking = 4,
+	smith = 3,
+	tailor = 2,
+	alchemy = 1
+}
+var priority_items = {
+	smith = 5,
+	tailor = 4,
+	alchemy = 3,
+	cooking = 2,
+	building = 1
+}
+
 var brothel_rules = {
 		waitress = true,
 		hostess = false,
@@ -75,6 +90,128 @@ func set_work_rule(rule, value):
 		parent.get_ref().reset_rebuild()
 
 
+func get_job_order(materials = true):
+	var res = []
+	var src
+	if materials:
+		src = priority_materials
+	else:
+		src = priority_items
+	var buffer = {}
+	for type in src:
+		if src[type] == 0:
+			continue
+		buffer[src[type]] = type
+	var keys = buffer.keys().duplicate()
+	keys.sort()
+	for val in keys:
+		res.push_back(buffer[val])
+	res.invert()
+	return res
+
+
+func get_job_priority(job, materials = true):
+	var src
+	if materials:
+		src = priority_materials
+	else:
+		src = priority_items
+	return src[job]
+
+
+func get_jobs_enabled(materials = true):
+	var res = []
+	var src
+	if materials:
+		src = priority_materials
+	else:
+		src = priority_items
+	for type in src:
+		if src[type] == 0:
+			continue
+		res.push_back(type)
+	return res
+
+
+func set_job_orders(value, materials = true): 
+	var src
+	if materials:
+		src = priority_materials
+	else:
+		src = priority_items
+	var cur_val = src.size()
+	for job in value:
+		if src[job] != 0:
+			src[job] = cur_val
+			cur_val -= 1
+
+
+func set_job_order(job, value, materials = true): 
+	var src
+	if materials:
+		src = priority_materials
+		if !src.has(job):
+			print("ERROR: no %s in materials priority" % job)
+			return
+	else:
+		src = priority_items
+		if !src.has(job):
+			print("ERROR: no %s in items priority" % job)
+			return
+	
+	var tmp = src[job]
+	if value == tmp:
+		return
+	var border = src.size() - get_jobs_enabled(materials).size()
+	if value == 0:
+		for type in src:
+			if src[type] == 0:
+				continue
+			if src[type] < tmp:
+				src[type] += 1
+		src[job] = 0
+	elif tmp == 0:
+		if value < border:
+			value = border
+		for type in src:
+			if src[type] == 0:
+				continue
+			if src[type] <= value:
+				src[type] -= 1
+		src[job] = value
+	elif tmp > value:
+		if value < border + 1:
+			value = border + 1
+		for type in src:
+			if src[type] == 0:
+				continue
+			if src[type] < tmp and src[type] >= value:
+				src[type] += 1
+		src[job] = value
+	else:
+		for type in src:
+			if src[type] == 0:
+				continue
+			if src[type] > tmp and src[type] <= value:
+				src[type] -= 1
+		src[job] = value
+
+
+func set_job_enabled(job, value, materials = true): #reimplement this to change data structure
+	var src
+	if materials:
+		src = priority_materials
+	else:
+		src = priority_items
+	if value: 
+		if src[job] == 0:
+			var amount = get_jobs_enabled(materials).size()
+			set_job_order(job, src.size() - amount, materials)
+	else:
+		if src[job] > 0:
+			set_job_order(job, 0, materials)
+
+
 func check_brothel_rule(rule):
 	if !variables.brothel_rules.has(rule):
 		return false
@@ -92,8 +229,6 @@ func set_brothel_rule(rule, value):
 func set_farm_res(res, value):
 	if variables.farming_rules.has(res):
 		farming_rules[res] = value
-		if value and work == 'produce':
-			assign_to_farm_task(res)
 
 
 func check_farm_res(res):
@@ -137,12 +272,15 @@ func update_exp(value, is_set):
 func fix_serialize():
 	if parent.get_ref().travel.travel_time <= 0 and work == 'travel':
 		work = ''
+	for type in priority_items:
+		priority_items[type] = int(priority_items[type])
+	for type in priority_materials:
+		priority_materials[type] = int(priority_materials[type])
 
 
 func fix_import():
 	is_on_quest = false
 	work = ''
-	workproduct = null
 	previous_work = ''
 
 
@@ -160,144 +298,40 @@ func get_next_class_exp():
 #tasks
 func clean_prev_data():
 	previous_work = ''
-	previous_workproduct = null
 	previous_location = ResourceScripts.game_world.mansion_location
 
 
 func save_prev_data():
 	previous_work = work
-	previous_workproduct = workproduct
 	previous_location = parent.get_ref().get_location()
 
 
 func check_prev_data():
 	if previous_location != parent.get_ref().get_location():
 		return false
-	if find_worktask(previous_location, previous_work, previous_workproduct) == null:
+	if find_worktask(previous_work) == null:
 		return false
 	return true
 
 
-func find_worktask(loc, task = work, prod = workproduct):
-	for i in ResourceScripts.game_party.active_tasks:
-		if i.task_location != loc:
-			continue
-		if i.code != task:
-			continue
-		if i.product != prod:
-			continue
-		if i.code == 'special' and !i.workers.has(parent.get_ref().id):
-			continue
-		return i
+func find_worktask(task = work):
+	if ResourceScripts.game_res.tasks_progresses.has(task):
+		return ResourceScripts.game_res.tasks_progresses[task]
 	return null
 
 
-func check_task(task): #not check actual work, only data consistency
-	if task.task_location != parent.get_ref().get_location():
-		return false
-	if task.code != work:
-		return false
-	if task.product != workproduct:
-		return false
-	return true
-
-
-func assign_to_task(taskcode, taskproduct):
+func assign_to_task(task):
+	if task == work:
+		return
+	var tdata = find_worktask(task)
+	if tdata.has('max_workers') and tdata.max_workers <= tdata.workers.size():
+		return
 	#remove existing work
-	
 	remove_from_task()
-	if taskcode == '':
-		work = ''
-		return
-	var gatherable = Items.materiallist.has(taskcode)
-	var task
-	if !gatherable:
-		task = tasks.tasklist[taskcode]
-	else:
-		task = Items.materiallist[taskcode]
-	#check if task is existing and add slave to it if it does
-	var task_location = parent.get_ref().get_location()
-	var tmp = find_worktask(task_location, taskcode, taskproduct)
-	if tmp != null:
-		var max_workers_count = ResourceScripts.game_world.get_worker_count_for_task(tmp)
-		if max_workers_count >= 0 and max_workers_count <= tmp.workers.size():
-			return
-		work = taskcode
-		workproduct = taskproduct
-		save_prev_data()
-		tmp.workers.append(parent.get_ref().id)
-		return
-	#make new task if it didn't exist
-	work = taskcode
-	workproduct = taskproduct
 	save_prev_data()
-	var dict
-	if !gatherable:
-		dict = {code = taskcode,
-		product = taskproduct,
-		progress = 0,
-		threshold = task.progress_per_item,
-		workers = [],
-		workers_count = 1,
-		task_location = task_location,
-		messages = [],
-		mod = task.mod}
-	else:
-		dict = {code = taskcode,
-		product = taskproduct,
-		progress = 0,
-		threshold = task.progress_per_item,
-		workers = [],
-		workers_count = 1,
-		task_location = task_location,
-		messages = [],
-		mod = ""}
-	dict.workers.append(parent.get_ref().id)
-	ResourceScripts.game_party.active_tasks.append(dict)
-	globals.emit_signal("task_added")
-
-
-func assign_to_special_task(worktask):
-	remove_from_task()
-	var max_workers_count = worktask.max_workers
-	if max_workers_count >= 0 and max_workers_count <= worktask.workers.size():
-		return
-	work = 'special'
-	workproduct = 'special'
-#	save_prev_data() cause it's difficult to find worktask for it
-	worktask.workers.append(parent.get_ref().id)
-
-
-func assign_to_farm_task(res):
-	var currenttask = find_worktask(parent.get_ref().get_location(), 'produce', res)
-	if currenttask != null:
-		if currenttask.workers.has(parent.get_ref().id):
-			return
-		currenttask.workers.push_back(parent.get_ref().id)
-		globals.emit_signal("task_added")
-		return
-	var dict = {code = 'produce',
-	product = res,
-	progress = 0,
-	threshold = 1,
-	workers = [],
-	task_location = parent.get_ref().get_location(),
-	messages = [],
-	mod = ""}
-	dict.workers.append(parent.get_ref().id)
-	ResourceScripts.game_party.active_tasks.append(dict)
-	globals.emit_signal("task_added")
-
-
-func remove_from_farm(res):
-	var currenttask = find_worktask(parent.get_ref().get_location(), 'produce', res)
-	if currenttask != null:
-		if currenttask.workers.has(parent.get_ref().id):
-			currenttask.workers.erase(parent.get_ref().id)
-		else:
-			print("error - %s is not in it's farmtask's workers at %s" % [parent.get_ref().id, res])
-	else:
-		print("error - %s is not farming %s" % [parent.get_ref().id, res])
+	
+	tdata.workers.push_back(parent.get_ref().id)
+	work = task
 
 
 func remove_from_task(travel = false):
@@ -307,13 +341,7 @@ func remove_from_task(travel = false):
 	if work == 'travel' and !travel:
 		print("There is a critical error - attempting to stop travelling a wrong way. Please try to remember and report chain of actions that can be its cause. All saves after this may (or may not) be broken.")
 		return
-	if work == 'produce':
-		for res in farming_rules:
-			if !farming_rules[res]: continue
-			remove_from_farm(res)
-		work = ''
-		return
-	var task = find_worktask(parent.get_ref().get_location())
+	var task = find_worktask()
 	if task == null: 
 		work = ''
 		return
@@ -327,12 +355,14 @@ func remove_from_task(travel = false):
 
 func return_to_task():
 	if check_prev_data():
-		assign_to_task(previous_work, previous_workproduct)
+		assign_to_task(previous_work)
 	elif previous_location == parent.get_ref().get_location(): 
 		clean_prev_data()
 
+
 func get_work():
 	return work
+
 
 func is_on_quest():
 	return is_on_quest
@@ -372,8 +402,10 @@ func make_avaliable():
 		quest_time_remains = 0
 		unaval_time_remains = -1
 
+
 func is_unavaliable():
 	return work == "disabled"
+
 
 func assign_to_quest_and_make_unavalible(quest, work_time):
 	parent.get_ref().remove_from_travel()
@@ -401,12 +433,14 @@ func assign_to_learning(learning_type):
 #	parent.get_ref().set_combat_position(0)
 	quest_time_init = int(variables.tutduration)
 
+
 func get_tutelage_type(): #stub, 2add data etc
 	return tr(quest_id)
 
 
 func get_quest_time_remains():
 	return int(quest_time_remains)
+
 
 func get_unaval_string():
 	if unaval_time_remains <= 0:
@@ -416,6 +450,7 @@ func get_unaval_string():
 		return tr("CHAR_UNAVALIABLE_TURN") % (5 - ResourceScripts.game_globals.hour)
 	else:
 		return tr("CHAR_UNAVALIABLE_DAY") % unaval_time_remains
+
 
 func quest_day_tick():
 	if quest_time_remains > 0:
@@ -468,7 +503,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			if parent.get_ref().get_stat('slave_class') in ['slave', 'slave_trained']:
 				parent.get_ref().add_trait('training_broke_in')
-				parent.get_ref().add_trait('training_obedience')
 				parent.get_ref().add_trait('training_relation')
 				parent.get_ref().add_trait('training_callmaster')
 				parent.get_ref().add_trait('training_sexservice')
@@ -488,7 +522,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')
@@ -507,7 +540,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')
@@ -526,7 +558,6 @@ func finish_learning():
 				res_text += "\n%s + 1" % statdata.statdata.authority_factor.name
 			
 			parent.get_ref().add_trait('training_broke_in')
-			parent.get_ref().add_trait('training_obedience')
 			parent.get_ref().add_trait('training_relation')
 			parent.get_ref().add_trait('training_callmaster')
 			parent.get_ref().add_trait('training_sexservice')
@@ -708,6 +739,7 @@ func update_brothel_log(ch_name, gold, data, customer_gender = ""):
 #		yield(globals.get_tree(), 'idle_frame')
 #		ServiceLog.scroll_vertical = ServiceLog.get_v_scrollbar().max_value
 
+
 func apply_boosters(value):
 	var mul = 1.0
 	for i in range(3):
@@ -749,155 +781,42 @@ func quest_tick():
 		work_tick_values(input_handler.random_from_array(['physics', 'charm', 'wits']))
 
 
-func recruit_tick(task): #maybe incomplete
-	var taskdata = tasks.tasklist[task.code]
-	var val = 1
-	if taskdata.has('function'):
-		val = call(taskdata.function)
-	task.progress += val
-	work_tick_values(taskdata.workstat)
-	while task.progress >= task.threshold:
-		task.progress -= task.threshold
-		globals.roll_hirelings(task.task_location, parent.get_ref())
-		globals.text_log_add('mansion', tr("HIRELINGFOUND"))
-		input_handler.PlaySound("ding")
-
-
-func special_tick(task): #maybe incomplete
-	parent.get_ref().add_stat("base_exp", 3)
-	var val = 1
-	if task.has('function'):
-		val = call(task.function)
-	task.progress += val
-	if task.has('workstat'):
-		work_tick_values(task.workstat)
-	if task.progress >= task.threshold:
-		globals.common_effects(task.args)
-		ResourceScripts.game_party.clean_task(task)
-		ResourceScripts.game_party.active_tasks.erase(task)
-		globals.text_log_add('mansion', tr("SPECTASKCOMPLETED") + " - " + tr(task.name))
-		input_handler.PlaySound("ding")
-
-
-func setup_farm():
+func get_farming_rules():
+	var tmp = []
 	for res in farming_rules:
 		if !farming_rules[res]:
 			continue
 		var task = tasks.farm_tasks[res]
 		if !parent.get_ref().checkreqs(task.reqs):
 			farming_rules[res] = false
-			remove_from_farm(res)
 		else:
-			assign_to_farm_task(res)
+			tmp.push_back(res)
+	return tmp
 
 
-func farm_tick():
-	for res in farming_rules:
-		if !farming_rules[res]:
-			continue
-		var task = tasks.farm_tasks[res]
-		var currenttask = find_worktask(parent.get_ref().get_location(), 'produce', res)
-		if !parent.get_ref().checkreqs(task.reqs):
-			farming_rules[res] = false
-			remove_from_farm(res)
-		else:
-			var val = call(task.formula)
-			currenttask.progress += val
-			while currenttask.progress >= currenttask.threshold: 
-				currenttask.progress -= currenttask.threshold
-				ResourceScripts.game_res.materials[res] += 1
-
-
-func work_tick():
-	
+func _work_check():
 	if is_on_quest:
-		return
-	
-	if work == 'produce':
-		farm_tick()
-		return
-	
-	var currenttask = find_worktask(parent.get_ref().get_location())
-	
-	if currenttask == null or parent.get_ref().has_status('no_job'):
-		work = ''
-		parent.get_ref().rest_tick()
-		return
+		return false
 	
 	if !parent.get_ref().is_worker():
 		if !messages.has("refusedwork"):
 			globals.text_log_add('char', parent.get_ref().get_short_name() + ": Refused to work")
 			messages.append("refusedwork")
-		return
-	
-	if currenttask.code == 'brothel':
-		select_brothel_activity()
-		return
-	
-	if currenttask.product == 'recruiting':
-		recruit_tick(currenttask)
-		return
-	
-	if currenttask.code == 'special':
-		special_tick(currenttask)
-		return
-	
-	var prodvalue = get_progress_task(currenttask.code, currenttask.product, true)
-	
-	if ['smith','alchemy','tailor','cooking'].has(currenttask.product) && currenttask.code != 'building':
-		if ResourceScripts.game_res.add_craft_value(currenttask, prodvalue, parent.get_ref()):
-			work_tick_values(tasks.tasklist[currenttask.code].workstat)
-		else:
-			parent.get_ref().rest_tick()
-	elif currenttask.code == 'building':
-		if ResourceScripts.game_res.add_build_value(currenttask, prodvalue, parent.get_ref()):
-			work_tick_values(tasks.tasklist[currenttask.code].workstat)
-		else:
-			parent.get_ref().rest_tick()
-	else:
-		var person_location = parent.get_ref().get_location()
-		var location = ResourceScripts.world_gen.get_location_from_code(person_location)
-		var gatherable = Items.materiallist.has(currenttask.code)
-		if !gatherable:
-			work_tick_values(tasks.tasklist[currenttask.code].workstat)
-			currenttask.progress += prodvalue
-		else:
-			currenttask.progress += get_progress_resource(currenttask.code, true)
-			work_tick_values(Items.materiallist[currenttask.code].workstat)
-		while currenttask.threshold <= currenttask.progress:
-			currenttask.progress -= currenttask.threshold
-			if !gatherable:
-				if tasks.tasklist[currenttask.code].production_item == 'gold':
-					ResourceScripts.game_res.money += 1
-					parent.get_ref().add_stat('metrics_goldearn', 1)
-				else:
-					ResourceScripts.game_res.materials[tasks.tasklist[currenttask.code].production_item] += 1
-					add_metric_for_outcome(tasks.tasklist[currenttask.code].production_item)
-			else:
-				if person_location != "aliron" && location.type == "dungeon":
-					if ResourceScripts.world_gen.get_location_from_code(person_location).gather_limit_resources[currenttask.code] > 0:
-						ResourceScripts.game_res.materials[currenttask.code] += 1
-						ResourceScripts.world_gen.get_location_from_code(person_location).gather_limit_resources[currenttask.code] -= 1
-					if ResourceScripts.world_gen.get_location_from_code(person_location).gather_limit_resources[currenttask.code] <= 0:
-						globals.text_log_add('char', parent.get_ref().get_short_name() + ": " + "No more resources to gather.")
-						remove_from_task()
-						if !ResourceScripts.game_party.active_tasks.empty():
-							for task in ResourceScripts.game_party.active_tasks:
-								if task.code == currenttask.code && task.task_location == location.id:
-									ResourceScripts.game_party.active_tasks.erase(task)
-				else:
-					ResourceScripts.game_res.materials[currenttask.code] += 1
-				add_metric_for_outcome(currenttask.code)
+		return false
+	return true
 
 
-func add_metric_for_outcome(res_id):
-	var matdata = Items.materiallist[res_id]
-	if matdata.type == 'food':
-		parent.get_ref().add_stat('metrics_foodearn', 1)
-	#2add correct material check
+func add_metric_for_outcome(res_id, amount = 1):
+	if res_id == 'gold':
+		parent.get_ref().add_stat('metrics_goldearn', amount)
 	else:
-		parent.get_ref().add_stat('metrics_materialearn', 1)
-#	parent.get_ref().add_stat('metrics_goldearn', 1)
+		var matdata = Items.materiallist[res_id]
+		if matdata.type == 'food':
+			parent.get_ref().add_stat('metrics_foodearn', amount)
+		#2add correct material check
+		else:
+			parent.get_ref().add_stat('metrics_materialearn', amount)
+
 
 
 func work_tick_values(workstat):
@@ -960,21 +879,17 @@ func fill_task_mods_res(task):
 		task_mods.crit = 0
 
 
-func get_progress_task(temptask, tempsubtask, count_crit = false):
-	if !tasks.tasklist.has(temptask): return null
+func get_job_value(temptask, count_crit = false):
+	if !tasks.tasklist.has(temptask): 
+		return 0
+	if !_work_check():
+		 return 0
 	var location = ResourceScripts.world_gen.get_location_from_code(parent.get_ref().get_location())
 	var task = tasks.tasklist[temptask]
-	#var subtask = task.production_code
 	var value = call(task.progress_function)
-#	var item
-#	if parent.get_ref().equipment.gear.tool != null:
-#		item = ResourceScripts.game_res.items[parent.get_ref().equipment.gear.tool]
-#	if item != null && task.has('worktool') && (task.worktool in item.toolcategory || ResourceScripts.game_res.upgrades.has('tool_swapper')):
-#		if item.bonusstats.has("task_efficiency_tool"):
-#			value = value + value*item.bonusstats.task_efficiency_tool
 	fill_task_mods(task)
 	value *= 1.0 + get_task_efficiency_tool()
-	value = value * (parent.get_ref().get_stat('productivity') * parent.get_ref().get_stat(task.mod)/100.0)#*(productivity*get(currenttask.mod)/100)
+	value = value * (parent.get_ref().get_stat('productivity') * parent.get_ref().get_stat(task.mod)/100.0)
 	
 	if count_crit == true && randf() <= get_task_crit_chance():
 		value = value * 2
@@ -992,7 +907,7 @@ func get_progress_resource(tempresource, count_crit = false):
 	fill_task_mods_res(resource)
 	
 	value *= 1.0 + get_task_efficiency_tool()
-	value = value * (parent.get_ref().get_stat('productivity') * parent.get_ref().get_stat(resource.workmod)/100.0) #*(productivity*get(currenttask.mod)/100)
+	value = value * (parent.get_ref().get_stat('productivity') * parent.get_ref().get_stat(resource.workmod)/100.0) 
 	
 	if count_crit == true && randf() <= get_task_crit_chance():
 		value = value * 2
@@ -1006,6 +921,27 @@ func get_progress_resource(tempresource, count_crit = false):
 func get_progress_farm(res):
 	var task = tasks.farm_tasks[res]
 	return call(task.formula)
+
+
+func recruit_tick(task): #maybe incomplete
+	var taskdata = tasks.tasklist[task.job]
+	var val = 1
+	if taskdata.has('function'):
+		val = call(taskdata.function)
+	val += val * parent.get_ref().get_fame_bonus('recruit_bonus')
+	work_tick_values(taskdata.workstat)
+	return val
+
+
+func special_tick(task): #maybe incomplete
+	parent.get_ref().add_stat("base_exp", 3)
+	var val = 1
+	if task.has('function'):
+		val = call(task.function)
+	if task.has('workstat'):
+		work_tick_values(task.workstat)
+	return val
+
 
 func get_farming_limit():
 	return max(parent.get_ref().get_stat('growth_factor') - 2, 1)

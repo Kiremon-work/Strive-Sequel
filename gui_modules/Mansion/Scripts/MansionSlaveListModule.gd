@@ -36,12 +36,7 @@ var mass_rule_list = []
 var mass_service_list = []
 var mass_select_press_effect = false
 
-func _apply_task_color(job_label, task_data):
-	if typeof(task_data) != TYPE_DICTIONARY:
-		return
-	if !task_data.has("mod"):
-		return
-	var mod_value = task_data.mod
+func _apply_task_color(job_label, mod_value):
 	if typeof(mod_value) != TYPE_STRING or mod_value == "":
 		return
 	if JOB_SERVICE_MODS.has(mod_value):
@@ -546,9 +541,8 @@ func update_button(newbutton, t_mode = mode):
 	var job_label = newbutton.get_node("job/Label")
 	_set_job_label_color_from_key(job_label, JOB_COLOR_DEFAULT)
 	var work_code = person.get_work()
-	var gatherable = Items.materiallist.has(work_code)
 	var is_traveling = person.travel.location == "travel" || person.check_location('travel') || work_code == 'travel'
-
+	
 	newbutton.get_node("stats/hp").max_value = person.get_stat('hpmax')
 	newbutton.get_node("stats/hp").value = person.hp
 	newbutton.get_node("stats/mp").max_value = person.get_stat('mpmax')
@@ -576,19 +570,14 @@ func update_button(newbutton, t_mode = mode):
 			_set_job_label_color_from_key(job_label, JOB_COLOR_REST)
 	elif work_code == 'learning':
 		newbutton.get_node('progress').value = variables.tutduration - person.get_quest_time_remains()
-	elif work_code == 'special':
-		var task = person.find_worktask()
-		job_label.text = tr("TASKMISSION")
+#	elif work_code == 'special':
+#		var task = person.find_worktask()
+#		job_label.text = tr("TASKMISSION")
 	else:
-		if !gatherable:
-			if tasks.tasklist.has(work_code):
-				job_label.text = tasks.tasklist[work_code].name
-				_apply_task_color(job_label, tasks.tasklist[work_code])
-			else:
-				job_label.text = work_code.capitalize()
-		else:
-			job_label.text = Items.materiallist[work_code].name
-			_set_job_label_color_from_key(job_label, JOB_COLOR_GATHER)
+		var task = person.find_worktask()
+		job_label.text = tr(task.name)
+		if task.has('mod'):
+			_apply_task_color(job_label, task.mod)
 	
 	if person.get_next_class_exp() <= person.get_stat('base_exp'):
 		newbutton.get_node("explabel").set("custom_colors/font_color", Color(variables.hexcolordict.levelup_text_color))

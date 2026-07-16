@@ -694,17 +694,17 @@ func get_combined_hairs_data():
 			color_parts.erase('hair_assist_color_1')
 	
 	match statlist.hair_back: 
-		'very_long':
+		'very_long', 'double_tail', 'ponytail_long': 
 			length = 5
-		'double_tail', 'ponytail_long' :
-			color_parts.push_back('hair_back_color_1')
-			match exterior.hair_back_length:
-				'long':
-					length = int(max(length, 5))
-				'middle':
-					length = int(max(length, 4))
-				'short', 'default':
-					length = int(max(length, 3))
+#		'double_tail', 'ponytail_long' :
+#			color_parts.push_back('hair_back_color_1')
+#			match exterior.hair_back_length:
+#				'long':
+#					length = int(max(length, 5))
+#				'middle':
+#					length = int(max(length, 4))
+#				'short', 'default':
+#					length = int(max(length, 3))
 		'twin_braids':
 			color_parts.push_back('hair_back_color_1')
 			match exterior.hair_back_length:
@@ -1470,7 +1470,7 @@ func baby_transform(mother):
 func tick():
 	update_stat('lust', parent.get_ref().get_stat('lusttick'), 'add')
 	if pregnancy.pregnancy_duration > 0 && pregnancy.pregnancy_baby != null:
-		var is_breeder = parent.get_ref().check_trait('breeder')
+		var is_breeder = parent.get_ref().has_status('breeder')
 		pregnancy.pregnancy_duration -= 1
 		if pregnancy.pregnancy_duration * 3 <= variables.pregduration * 2 and !parent.get_ref().has_status('pregnant'):
 			if !pregnancy.pregnancy_reported:

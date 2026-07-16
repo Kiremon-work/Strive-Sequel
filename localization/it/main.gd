@@ -1184,6 +1184,8 @@ Ridotto dall'evasione del nemico""",
 	BLACKSMITH = "Fabbro",
 	CRAFTCHARACTERS = "Personaggi",
 	CRAFTORDER = "Ordine di Creazione",
+	CRAFTORDERMATERIALS = """Craft Order: Materials""", # MISSING TRANSLATION
+	CRAFTORDERITEMS = """Craft Order: Items""", # MISSING TRANSLATION
 	CRAFTTAILORING = "Sartoria",
 	CRAFTENCHANT = "Incantamento",
 	CRAFTFILTERALL = "Tutti",
@@ -1861,6 +1863,20 @@ Migliora la disposizione verso {color=yellow|Azioni Casuali}. Costa 5 Mana.""",
 	ACTIONMINDCONTROLSCENETEXT = "[name1] usa una forte magia per dominare la mente di [name2], riscrivendola lentamente in un simpatico schiavo obbediente.",
 	ACTIONEDGINGSCENETEXT = "[name1] porta in modo stuzzicante [name2] all'orgasmo ma all'ultimo momento interrompe i suoi movimenti, impedendo [name2] di venire. Questo va avanti ancora per un paio di volte fino a quando non [name2] smette di implorare per il rilascio. ",
 	TRAININGFINISHHEADER = "Competenze acquisite al termine dell'addestramento:",
+	SERVANTUNLOCK_WORKING = """Working""", # MISSING TRANSLATION
+	SERVANTUNLOCK_COMBAT = """Combat""", # MISSING TRANSLATION
+	SERVANTUNLOCK_DATING = """Dating""", # MISSING TRANSLATION
+	SERVANTUNLOCK_SEX = """Sex""", # MISSING TRANSLATION
+	SERVANTUNLOCK_SEXSERVICE = """Sex Service""", # MISSING TRANSLATION
+	SERVANTUNLOCK_UNLOCKED = """Unlocked""", # MISSING TRANSLATION
+	SERVANTUNLOCK_LOCKED = """Locked""", # MISSING TRANSLATION
+	SERVANTUNLOCK_TALK_BUTTON = """Talk""", # MISSING TRANSLATION
+	SERVANTUNLOCK_DIALOGUE_TEXT = """What would you like %s to learn?""", # MISSING TRANSLATION
+	TRAININGRESULT_FAIL = """Fail""", # MISSING TRANSLATION
+	TRAININGRESULT_RESIST = """Resist""", # MISSING TRANSLATION
+	TRAININGRESULT_SUCCESS = """Success""", # MISSING TRANSLATION
+	TRAININGRESULT_CRIT_SUCCESS = """Critical Success""", # MISSING TRANSLATION
+	TRAININGCOMPLETEDANNOUNCE = """%s's training is over.""", # MISSING TRANSLATION
 	TRAININGSTATUS1 = "Stato dello Spirito: Rotto",
 	TRAININGSTATUS2 = "Stato dello Spirito: Danneggiato",
 	TRAININGSTATUS3 = "Stato dello Spirito: Mantenuto",
@@ -1917,6 +1933,7 @@ La resistenza di %s diminuisce di %.0f per turno.""",
 """,
 	SPIRITTOOLTIP = "Lo spirito rappresenta la volontà residua del personaggio. Se scende troppo in basso, si romperanno al termine dell'allenamento e subiranno penalità considerevoli. ",
 	LOYALTYTOOLTIP = "La lealtà viene utilizzata per sbloccare le azioni del personaggio e si ottiene facendo allenamento una volta al giorno.",
+	TRAININGPOINTSTOOLTIP = """Training Points are earned from training actions and are spent to unlock training traits. The amount you can hold is capped based on Tame Factor.""", # MISSING TRANSLATION
 	CLICKTOCHANGE = "Clicca per modificare",
 	WITSREVEALDISPOSITION = "Disposizione capito:",
 	MINDREADREVEALDISPOSITION = "Disposizioni rivelate:",
@@ -1958,7 +1975,14 @@ La resistenza di %s diminuisce di %.0f per turno.""",
 	TASKREST = "Riposo",
 	TASKRESTSERVICE = "Servizio",
 	TASKRESTDESCRIPT = "Seleziona un servizio che il personaggio fornirà presso le strutture locali o passa al riposo quando necessario.",
+	TASKCRAFT = """Crafting""", # MISSING TRANSLATION
+	TASKCRAFTDESCRIPT = """Set up priority of character's crafting activities.""", # MISSING TRANSLATION
 	TASKRESTINFO = "Il riposo farà guarire le ferite più velocemente e non farà sì che il carattere prosciughi l'obbedienza, ma non guadagnerà nemmeno lealtà.",
+	CRAFTRULES2TITLE = """Craft Rules - %s""", # MISSING TRANSLATION
+	PREDICTEDTASKLABEL = """Predicted task:""", # MISSING TRANSLATION
+	MATERIALSORDERLABEL = """Materials order""", # MISSING TRANSLATION
+	ITEMSORDERLABEL = """Items order""", # MISSING TRANSLATION
+	CRAFTRULES2TOOLTIP = """Toggle which crafting tasks the character is allowed to perform. Enabled tasks (green) are attempted in the priority order shown; drag entries in the order lists to rearrange priority. Disabled tasks (grey) will be skipped. Predicted task shows which job the character will perform next.""", # MISSING TRANSLATION
 	NOSERVICECAPITAL = "Non è possibile fornire servizi al di fuori delle città!",
 	TASKFARMING_VEGES = "Verdura",
 	TASKFARMING_VEGESDESCRIPT = "Lavoro in fattoria, coltivazione di ortaggi. Le verdure sono un alimento base per molte razze.",
@@ -2444,10 +2468,12 @@ Non potrai completare il turno se il numero totale dei tuoi personaggi è superi
 	STATSEXUALS_BONUS = "Sessuali",
 	STATTRAINEE_AMOUNT = "Slot di Allenamento",
 	STATTRAINING_LOYALTY = "Fedeltà dalla formazione",
+	STATTRAINING_POINTS_BONUS = """Training Points from Training""", # MISSING TRANSLATION
 	STATTRAINING_SPIRIT = "Spirito dall'allenamento",
 	STATRESISTANCE_RED = "Velocità di Perdita di Resistenza",
 	STATTRAINER_LOYALTY_BONUS = "Fedeltà per tirocinante",
 	STATTRAINING_LOYALTYDESCRIPT = "Bonus fedeltà ottenuto da questo personaggio grazie all'allenamento",
+	STATTRAINING_POINTS_BONUSDESCRIPT = """Adjustment for Training Points gained during Training""", # MISSING TRANSLATION
 	STATTRAINING_SPIRITDESCRIPT = "Adeguamento per il calo di spirito durante l'allenamento",
 	STATRESISTANCE_REDDESCRIPT = "Velocità di diminuzione della resistenza dello schiavo nel tempo",
 	STATTRAINER_LOYALTY_BONUSDESCRIPT = "Bonus fedeltà ricevuto dall'apprendista di questo personaggio",
@@ -2470,6 +2496,8 @@ Non potrai completare il turno se il numero totale dei tuoi personaggi è superi
 	TRAITSTANDING_SWORN_SERVANT = """Sworn Servant""", # MISSING TRANSLATION
 	TRAITSTANDING_SWORN_SERVANTDESCRIPT = """Productivity is increased by 10%.""", # MISSING TRANSLATION
 	STATSPIRIT = "Spirito",
+	STATTRAINING_POINTS = """Training Points""", # MISSING TRANSLATION
+	STATTRAINING_POINTSDESCRIPT = """Training Points are earned from training actions and spent to unlock training traits.""", # MISSING TRANSLATION
 	TRAITTRAINING_WORKFORCE = "Addestramento: Forza lavoro",
 	TRAITTRAINING_WORKFORCEDESCRIPT = """Impostato per la schiavitù del lavoro. 
 La produttività è aumentata del 40%.""",
@@ -2662,6 +2690,7 @@ Danno +15%, Salute +20.""",
 	PRICEDESC_TRAITS_NEG = "Tratti negativi",
 	PRICEDESC_CUMULATIVE = "Bonus cumulativo %s di",
 	PRICEDESC_LESS = "Non può essere inferiore a",
+	PRICEDESC_NOT_BROKEN_IN = """Not broken in""", # MISSING TRANSLATION
 	MASTER_POINTS = "Punti di Maestria",
 	TOOLTIPENERGY = "L'energia viene ripristinata durante il sonno ed è necessaria per le attività. Quando un personaggio è costretto a lavorare senza energia rimasta, la sua Stanchezza aumenta. ",
 	TOOLTIPFATIGUE = "La stanchezza aumenta con il tempo e si dissipa con l'intrattenimento. Se non gestito, può causare una riduzione delle prestazioni.",

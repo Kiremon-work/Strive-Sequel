@@ -240,7 +240,7 @@ var effects = {
 		rem_event = [variables.TR_COMBAT_F, variables.TR_DEATH],
 		duration = 'arg',
 		tags = ['buff', 'shield'],
-		statchanges = {resist_earth = 40, resist_ranged = 0.1},
+		statchanges = {resist_earth = 40, resist_ranged = 10},
 		buffs = [
 			{
 				icon = "res://assets/images/traits/speeddebuf.png",

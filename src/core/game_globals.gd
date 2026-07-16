@@ -117,13 +117,13 @@ func advance_hour():
 		i.act_prepared()
 	for i in ResourceScripts.game_party.characters.values():
 		i.tick()
+	ResourceScripts.game_res.tick()
 	hour += 1
 	
 	ResourceScripts.game_world.advance_hour()
 	ResourceScripts.char_events.advance_hour()
 	if hour > variables.HoursPerDay:
 		advance_day()
-		
 
 
 func advance_day():
@@ -136,8 +136,6 @@ func advance_day():
 	#guilds and shops check
 	ResourceScripts.game_world.advance_day()
 	
-	
-	
 	#weeks check
 	if int(date) % variables.DaysPerWeek == 1 or variables.DaysPerWeek == 1:
 		reset_limits()
@@ -147,6 +145,7 @@ func advance_day():
 	
 	if gui_controller.current_screen == gui_controller.mansion:
 		gui_controller.mansion.rebuild_mansion()
+
 
 func reset_limits():
 	weekly_sex_max = 2 + ceil(ResourceScripts.game_party.get_master().get_stat('sexuals_factor') * 0.5) + ResourceScripts.game_res.upgrades.sex_times

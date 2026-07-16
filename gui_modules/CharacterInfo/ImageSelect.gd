@@ -62,7 +62,10 @@ func build_unique_sprites():
 		return
 	for sprite_id in worlddata.pregen_character_sprites[unique]:
 		var i = worlddata.pregen_character_sprites[unique][sprite_id]
-		if (!(i.has("unlocked") and i.unlocked)
+		if sprite_id == 'wed':
+			if !input_handler.achievements.has_wed_achimnt(unique):
+				continue
+		elif (!(i.has("unlocked") and i.unlocked)
 				and !input_handler.is_unique_sprite_unlocked(unique, sprite_id)):
 			continue
 		var newbutton = get_parent().get_node("ScrollContainer/GridContainer/Button").duplicate()

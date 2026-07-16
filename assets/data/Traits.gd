@@ -1220,7 +1220,7 @@ var traits = {
 		icon = "res://assets/images/iconstraits/l_communicative.png",
 		effects = [],
 		bonusstats = {
-			chg_persuasion = 3,
+			chg_persuasion_max = 3,
 			mastery_leadership = 2
 			},
 		reqs = [],
@@ -1314,9 +1314,9 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/broke_in.png",
 		effects = [],
-		bonusstats = {}, 
+		bonusstats = {},
 		reqs = [],
-		tags = ['training', 'simple_icon', 'remove_untrained']
+		tags = ['simple_icon', 'remove_untrained']
 	},
 	training_obedience = {
 		code = 'training_obedience',
@@ -1325,9 +1325,9 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/l_crown.png",
 		effects = [],
-		reqs = [{code = 'trait', trait = 'training_broke_in', check = true}],
-		bonusstats = {}, 
-		tags = ['training', 'tr_obedience', 'simple_icon', 'tr_obed_donate']
+		reqs = [],
+		bonusstats = {},
+		tags = [] #kept only so old saves referencing this trait code still resolve; no longer granted or checked anywhere
 	},
 	training_callmaster = {
 		code = 'training_callmaster',
@@ -2547,7 +2547,7 @@ var sex_traits = { #only for interaction tab
 		starting = true,
 		random_generation = true,
 		negative = false,
-		acquire_reqs = [{code = "actor_check", value = [{code = "stat", type = "satisfied_partners", operant = "eq", value = 1}]}],
+		acquire_reqs = [{code = "actor_check", value = [{code = "stat", type = "satisfied_partners", operant = "eq", value = 1}]}, {code = "relatives_check"}],
 		reqs = [],
 		effects = [],
 	},

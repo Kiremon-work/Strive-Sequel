@@ -2473,19 +2473,19 @@ var transforms = {
 			{type = 'texture', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_dishevel.png"},
 			{type = 'texture', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_dishevel.png"},
 		],
-		double_tail = [
+		double_tail = [ #bugged for man
 			{type = 'node_attr', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = true},
-			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = true},
-			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', attr = 'visible', value = false},
+			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = false},
+			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', attr = 'visible', value = true},
 			{type = 'texture', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_double_tail_long.png"},
-			{type = 'texture', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_double_tail_long.png"},
+			{type = 'texture', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_double_tail_long.png"},
 		],
-		ponytail_long = [
+		ponytail_long = [ #bugged for man
 			{type = 'node_attr', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = true},
-			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = true},
-			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', attr = 'visible', value = false},
+			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = false},
+			{type = 'node_attr', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', attr = 'visible', value = true},
 			{type = 'texture', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_ponytail_long.png"},
-			{type = 'texture', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_ponytail_long.png"},
+			{type = 'texture', node = 'Female_pose/HumanF1/Spine/Head/Hairs_back_long_mesh', texture = "res://Character_generator/images/06_hairs_back/hair_back_ponytail_long.png"},
 		],
 		spiral = [
 			{type = 'node_attr', node = 'male_pose/HumanF1/Spine/Head/Hairs_back_mesh', attr = 'visible', value = true},

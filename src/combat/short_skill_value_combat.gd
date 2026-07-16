@@ -31,6 +31,15 @@ func clone():
 	var tmp_ = get_script().new(null, tmp)
 	return tmp_
 
+
+func calculate_reduction(defvalue):
+	if defvalue < 100:
+		return defvalue/200.0
+	if defvalue > 250:
+		return 0.9
+	return -320.0/27.0 + defvalue * (13.0/18.0 - defvalue * (1.0/1125.0 + defvalue / 675000.0))
+
+
 func apply_atomic(tmp):
 	if template.nomod: return
 	if tmp.stat == 'is_drain':
@@ -134,18 +143,20 @@ func calculate_dmg():
 	#current formulae add ap to spell damage cap
 	cap += parent.armor_p * 0.5
 	var reduction = 0
-	if parent.ability_type == 'skill':
-#		reduction = max(0, parent.target.get_stat('armor') - parent.armor_p)
-		reduction = parent.target.get_stat('armor')
-		if reduction <= 2 * parent.armor_p:
-			reduction *= 0.25
+	if parent.target.is_players_character:
+		if parent.ability_type == 'skill':
+			reduction = max(0, parent.target.get_stat('armor') - parent.armor_p)
 		else:
-			reduction -= 1.25 * parent.armor_p
-		reduction = max(0, reduction)
-	elif parent.ability_type == 'spell':
-		reduction = max(0, parent.target.get_stat('mdef'))
-	if !template.nodef and !template.nomod and !parent.get_tags().has('nodef'):
-		value -= reduction
+			reduction = max(0, parent.target.get_stat('mdef'))
+		if !template.nodef and !template.nomod and !parent.tags.has('nodef'):
+			value -= reduction
+	else:
+		if parent.ability_type == 'skill':
+			reduction = calculate_reduction(parent.target.get_stat('armor') * (1.0 - 0.01 * parent.armor_p))
+		else:
+			reduction = calculate_reduction(parent.target.get_stat('mdef'))
+		if !template.nodef and !template.nomod and !parent.tags.has('nodef'):
+			value *= (1.0 - reduction)
 	
 	value = max(value, cap)
 	#reduction

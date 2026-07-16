@@ -15,7 +15,7 @@ var skills = {
 		effects = [Effectdata.rebuild_template({effect = 'e_t_hide2', duration = 3})], 
 		cost = {mp = 4},
 		charges = 0,
-		combatcooldown = 0,
+		combatcooldown = 1,
 		cooldown = 0,
 		catalysts = {},
 		target = 'self',

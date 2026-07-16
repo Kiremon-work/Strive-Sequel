@@ -42,7 +42,7 @@ func _init():
 #	authority_factor = '',
 #
 #	training_loyalty = '',
-#	training_spirit = '',
+#	training_points_bonus = '',
 #
 #	mod_cook = "",
 #}
@@ -1231,7 +1231,7 @@ var itemlist = {
 		reqs = [],
 		effects = [], 
 		tags = [],
-		basestats = {resistance_red = 0.2, mod_service = 0.1},
+		basestats = {mod_service = 0.1},
 	},
 	elegant_choker = {
 		code = 'elegant_choker',
@@ -1248,7 +1248,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {resistance_red = 0.1, training_spirit = 1, mod_service = 0.05},
+		basestats = {training_points_bonus = 1, mod_service = 0.05},
 	},
 	steel_collar = {
 		code = 'steel_collar',
@@ -1265,7 +1265,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {resistance_red = 0.25, mod_service = 0.05,},
+		basestats = {mod_service = 0.05},
 	},
 	test_collar = {
 		code = 'test_collar',
@@ -1282,7 +1282,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = ['no_random'],
-		basestats = {resistance_red = 0.2},
+		basestats = {},
 	},
 	amulet_of_recognition = {
 		code = 'amulet_of_recognition',
@@ -1299,7 +1299,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = ['no_random'],
-		basestats = {trainer_loyalty_bonus = 0.2, physics_bonus = 5, wits_bonus = 5, charm_bonus = 5},
+		basestats = {training_points_bonus = 1, physics_bonus = 5, wits_bonus = 5, charm_bonus = 5},
 	},
 	animal_ears = {#
 		code = 'animal_ears',
@@ -1370,7 +1370,7 @@ var itemlist = {
 		effects = [#'e_i_pet_suit',
 			 'e_i_pet_suit_bonus'], #? 
 		tags = [],
-		basestats = {training_loyalty = 1, training_spirit = 1, mod_service = 0.15, charm_bonus = 15},
+		basestats = {training_loyalty = 1, training_points_bonus = 1, mod_service = 0.15, charm_bonus = 15},
 	},
 	maid_dress = {
 		code = 'maid_dress',
@@ -1387,7 +1387,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {charm_bonus = 10, training_loyalty = 1, training_spirit = 1, mod_service = 0.1},
+		basestats = {charm_bonus = 10, training_loyalty = 1, training_points_bonus = 1, mod_service = 0.1},
 	},
 	worker_outfit = {
 		code = 'worker_outfit',
@@ -1438,7 +1438,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {charm_bonus = 5, training_spirit = 1, mod_service = 0.1},
+		basestats = {charm_bonus = 5, training_points_bonus = 1, mod_service = 0.1},
 	},
 	seethrough_underwear = {
 		code = 'seethrough_underwear',
@@ -1696,7 +1696,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'anastasia'}],
 		effects = [],
 		tags = ['no_random'],
-		basestats = {training_loyalty = 3, training_spirit = 1, charm_bonus = 5},
+		basestats = {training_loyalty = 3, training_points_bonus = 1, charm_bonus = 5},
 	},
 	
 	anastasia_broken_bracelet = {#
@@ -1732,7 +1732,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'daisy'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {charm_bonus = 15, training_loyalty = 3, training_spirit = 3},
+		basestats = {charm_bonus = 15, training_loyalty = 3, training_points_bonus = 3},
 	},
 	daisy_dress_lewd = {
 		code = 'daisy_dress_lewd',
@@ -1749,7 +1749,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'daisy'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {lusttick = 0.35, mod_pros = 0.2, training_loyalty = 2, training_spirit = 1},
+		basestats = {lusttick = 0.35, mod_pros = 0.2, training_loyalty = 2, training_points_bonus = 1},
 	},
 	jacket = {
 		code = 'jacket',
@@ -1924,7 +1924,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'cali'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {training_loyalty = 2, training_spirit = -1},
+		basestats = {training_loyalty = 2, training_points_bonus = 1},
 	},
 	cali_exquisite_collar = {
 		code = 'cali_exquisite_collar',
@@ -1941,7 +1941,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'cali'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {training_loyalty = 3, training_spirit = 1},
+		basestats = {training_loyalty = 3, training_points_bonus = 1},
 	},
 	cali_collar_enchanted = {
 		code = 'cali_collar_enchanted',
@@ -1958,7 +1958,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'cali'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {training_loyalty = 4, training_spirit = -2, mod_service = 0.1},
+		basestats = {training_loyalty = 4, training_points_bonus = 2, mod_service = 0.1},
 	},
 	cali_collar_enchanted_2 = {
 		code = 'cali_collar_enchanted_2',
