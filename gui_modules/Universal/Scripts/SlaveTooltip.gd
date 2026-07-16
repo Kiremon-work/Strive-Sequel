@@ -48,13 +48,11 @@ func update():
 		if person.get_stat('sex') != 'male':
 			slavename += "F"
 		text = tr('TYPE_LABEL' + ': ' + "[color=yellow]") + person.translate(slavename) + "[/color]\n"
-		var gatherable = Items.materiallist.has(person.get_work())
 		if person.is_players_character == true:
 			if person.get_work() != 'disabled' and person.get_work() != '' and person.get_work() != 'Assignment' and person.get_work() != 'learning':
-				if !gatherable:
-					text = tasks.tasklist[person.get_work()].name
-				else:
-					text = Items.materiallist[person.get_work()].progress_formula.capitalize()
+				var task_id = person.get_work()
+				var task = ResourceScripts.game_res.task_progresses[task_id]
+				text += tr(task.name)
 			else:
 				text += "Occupation: None"
 			text += "\n"

@@ -353,7 +353,7 @@ func update_resources():
 			if current_workers_count >= max_workers_count:
 				newbutton.get_node("Label").set("custom_colors/font_color", Color(0.9,0.48,0.48, 1))
 			newbutton.connect("pressed", self, "select_resource", [newjob, newbutton])
-			globals.connecttexttooltip(newbutton, jobdata.descript)
+			globals.connecttexttooltip(newbutton, tr(jobdata.descript))
 	
 	for task_id in ResourceScripts.game_res.active_tasks.special:
 		var jobdata = ResourceScripts.game_res.tasks_progresses[task_id]
@@ -369,7 +369,7 @@ func update_resources():
 			if selected_job != null and selected_job == task_id:
 				newbutton.pressed = true
 			newbutton.connect("pressed", self, "select_resource", [task_id, newbutton])
-			globals.connecttexttooltip(newbutton, tr(task_id.name))
+			globals.connecttexttooltip(newbutton, tr(jobdata.name))
 	
 	var gatherable_resources = []
 	
@@ -701,7 +701,7 @@ func show_brothel_options():
 		text = ''
 	
 	for i in brothel_rules.sexes:
-		globals.connecttexttooltip(get_node("BrothelRules/sexes_container/"+i), person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT")))
+		globals.connecttexttooltip(get_node("BrothelRules/sexes_container/" + i), person.translate(tr("BROTHEL" + i.to_upper() + "DESCRIPT")))
 		get_node("BrothelRules/sexes_container/"+i).pressed = person.check_brothel_rule(i)
 	
 	update_brothel_text()
