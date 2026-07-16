@@ -193,7 +193,7 @@ func show_resources_info():
 				newtask.get_node("progress").visible = false
 				newtask.get_node("ProgressBar").max_value = work_time_init
 				newtask.get_node("ProgressBar").value = work_time_init - work_time
-				newtask.get_node("Task").text = ch.get_short_name() + " : " + ch.get_work()
+				newtask.get_node("Task").text = ch.get_short_name() + " : " + tr(ch.find_worktask().name)
 #			else:
 #				var newtask = input_handler.DuplicateContainerTemplate(TaskContainer)
 #				newtask.show()

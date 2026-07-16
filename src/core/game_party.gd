@@ -682,7 +682,7 @@ func get_farm():
 		if !person.is_active:
 			farming_slots[slot] = null
 			continue
-		if person.get_work() != 'produce':
+		if person.get_work() != 'farming':
 			farming_slots[slot] = null
 			continue
 	return farming_slots
