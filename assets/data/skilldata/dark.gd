@@ -201,7 +201,7 @@ var effects = {
 		sub_effects = [
 			Effectdata.rebuild_remove_effect('buff'), #fill proper tags
 			Effectdata.rebuild_remove_effect('positive'),
-			'e_s_silence'
+			'silence'
 			],
 		buffs = []
 	},
