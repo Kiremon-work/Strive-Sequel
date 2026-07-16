@@ -13,6 +13,7 @@ func _ready():
 	$VBoxContainer/options.connect("pressed", self, "open_menu")
 	input_handler.register_btn_source('upgrades_button', self, 'tut_get_UpgradesButton')
 	input_handler.register_btn_source('work_button', self, 'tut_get_WorkButton')
+	input_handler.register_btn_source('craft_button', self, 'tut_get_CraftButton')
 	input_handler.register_btn_source('inventory_button', self, 'tut_get_InventoryButton')
 	input_handler.register_btn_source('journal_button', self, 'tut_get_Journal')
 
@@ -22,6 +23,8 @@ func tut_get_WorkButton():
 	return $VBoxContainer/WorkButton
 func tut_get_InventoryButton():
 	return $VBoxContainer/InventoryButton
+func tut_get_CraftButton():
+	return $VBoxContainer/CraftButton
 func tut_get_Journal():
 	return $VBoxContainer/Journal
 
