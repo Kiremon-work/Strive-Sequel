@@ -398,6 +398,7 @@ func update_resources():
 		if selected_job != null and selected_job == 'crafting':
 			craftbutton.pressed = true
 		ResourceScripts.game_res._add_craft_job()
+		ResourceScripts.game_res._add_farm_job()
 		craftbutton.get_node("TextureRect").texture = load("res://assets/images/gui/icon_craft64x64.png")
 		craftbutton.connect("pressed", self, "select_resource", ["crafting", craftbutton])
 		globals.connecttexttooltip(craftbutton, tr('TASKCRAFT'))

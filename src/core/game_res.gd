@@ -184,7 +184,7 @@ func _add_craft_job():
 
 func _add_farm_job():
 	if !tasks_progresses.has('farming'):
-		tasks_progresses.farming = {id = 'farming', status = 'permanent', workers = [], messages = [], location = 'aliron', type = 'permanent'} 
+		tasks_progresses.farming = {id = 'farming', status = 'permanent', workers = [], messages = [], location = 'aliron', type = 'permanent', name = 'TASKPRODUCE', descript = 'TASKPRODUCEDESCRIPT'} 
 
 
 func _add_service_job():
