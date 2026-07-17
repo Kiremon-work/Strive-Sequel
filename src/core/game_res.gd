@@ -118,7 +118,17 @@ func _add_upgrade_task(upgrade_id):
 	if !tasks_progresses.has(upgrade_id):
 		var upgrade_lv = findupgradelevel(upgrade_id)
 		var tdata = upgradedata.upgradelist[upgrade_id]
-		tasks_progresses[upgrade_id] = {id = upgrade_id, level = upgrade_lv + 1, progress = 0, progress_limit = tdata.levels[int(upgrade_lv + 1)].taskprogress, type = 'progress_item', status = 'init', job = 'building'}
+		tasks_progresses[upgrade_id] = {
+			id = upgrade_id, 
+			level = upgrade_lv + 1, 
+			progress = 0, 
+			progress_limit = tdata.levels[int(upgrade_lv + 1)].taskprogress, 
+			type = 'progress_item', 
+			status = 'init', 
+			job = 'building',
+			workstat = 'physics',
+			worktool = 'hammer',
+		}
 
 
 func add_recipe_task(recipe_id, parts = {}, amount = {fixed = 1}):
@@ -137,6 +147,8 @@ func add_recipe_task(recipe_id, parts = {}, amount = {fixed = 1}):
 		workstat = tdata.workstat,
 		mod = tdata.mod,
 	}
+	if tdata.has('worktool'):
+		template.worktool = tdata.worktool
 	template.job = rdata.worktype + '_' + rdata.resultitemtype
 	
 	if amount.has('fixed'):
@@ -784,7 +796,7 @@ func add_upgrade_to_queue(upgrade_id):
 				money -= int(upgrade_next_state.cost[i])
 			else:
 				materials[i] -= int(upgrade_next_state.cost[i])
-		u_task.status == 'active'
+		u_task.status = 'active'
 	
 	if ResourceScripts.game_globals.instant_upgrades:
 		level_up_upgrade(upgrade_id)

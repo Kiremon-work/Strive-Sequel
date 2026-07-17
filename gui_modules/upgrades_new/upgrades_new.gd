@@ -245,14 +245,13 @@ func build_characters():
 
 		# globals.connectslavetooltip(newbutton, person)
 		update_button(newbutton, person)
-		newbutton.pressed = (person.get_work() == "building")
+		newbutton.pressed = (person.get_work() == "crafting")
 		newbutton.connect('toggled', self, 'set_to_upgrading', [person])
 
 
 func update_button(newbutton, person):
 	newbutton.get_node("Icon").texture = person.get_icon_small()
 	newbutton.get_node("name").text = person.get_short_name()
-	var gatherable = Items.materiallist.has(person.get_work())
 	if person.get_work() == '' or !person.is_avaliable():
 		if person.is_on_quest():
 			var time_left = int(person.get_quest_time_remains())
@@ -268,29 +267,31 @@ func update_button(newbutton, person):
 				newbutton.get_node("job/Label").text = person.get_unaval_string()
 		else:
 			newbutton.get_node("job/Label").text = tr("TASKREST")
+	elif person.get_work() == 'travel':
+		newbutton.get_node("job/Label").text = tr("TASKTRAVEL")
 	else:
-		if !gatherable:
-			newbutton.get_node("job/Label").text = tasks.tasklist[person.get_work()].name
-		else:
-			newbutton.get_node("job/Label").text = tr('UPGRADEGATHERING') % Items.materiallist[person.get_work()].name
+		var prdata = person.find_worktask()
+		newbutton.get_node("job/Label").text = tr(prdata.name)
 
 
 func can_add_worker():
-	var count = 0
-	var max_count
-	var task = tasks.tasklist.building
-	max_count = task.base_workers + task.workers_per_upgrade * ResourceScripts.game_res.findupgradelevel(task.upgrade_code)
-	for i in ResourceScripts.game_party.character_order:
-		var person = ResourceScripts.game_party.characters[i]
-		if !person.check_location(ResourceScripts.game_world.mansion_location, true): continue
-		if person.get_work() == "building":
-			count += 1
-	return count < max_count
+	return true
+#	var count = 0
+#	var max_count
+#	var task = tasks.tasklist.building
+#	max_count = task.base_workers + task.workers_per_upgrade * ResourceScripts.game_res.findupgradelevel(task.upgrade_code)
+#	for i in ResourceScripts.game_party.character_order:
+#		var person = ResourceScripts.game_party.characters[i]
+#		if !person.check_location(ResourceScripts.game_world.mansion_location, true): continue
+#		if person.get_work() == "building":
+#			count += 1
+#	return count < max_count
 
 func set_to_upgrading(pressed, person):
+	ResourceScripts.game_res._add_craft_job()
 	if pressed:
 		if can_add_worker():
-			person.assign_to_task("building", "building")
+			person.assign_to_task("crafting")
 		else:
 			input_handler.SystemMessage(tr("NO_FREE_SLOTS"))
 	else:

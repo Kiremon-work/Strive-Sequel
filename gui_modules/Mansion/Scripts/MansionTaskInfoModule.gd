@@ -45,7 +45,7 @@ func ClearContainerCustom(container):
 
 func show_upgrades_info():
 	var first = true
-	for upgrade in ResourceScripts.game_res.crafting_lists.upgardes:
+	for upgrade in ResourceScripts.game_res.crafting_lists.building:
 		var progress_data = ResourceScripts.game_res.tasks_progresses[upgrade]
 		var upgrade_product = upgradedata.upgradelist[upgrade]
 		
