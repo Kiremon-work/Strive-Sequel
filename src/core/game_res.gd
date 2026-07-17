@@ -740,6 +740,10 @@ func _add_gather_value(tprogress, value, character):
 			materials[tprogress.job] += limit
 		character.add_metric_for_outcome(tprogress.job, limit)
 	
+	if tprogress.type == 'gather_limited':
+		var locdata = ResourceScripts.world_gen.get_location_from_code(tprogress.location)
+		locdata.gather_limit_resources[tprogress.job] -= limit
+	
 	if limit == limit2:
 		tprogress.status = 'completed'
 	else:
