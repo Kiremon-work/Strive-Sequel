@@ -137,8 +137,8 @@ var skills = {
 		dialogue_report = '',
 		dialogue_show_repeat = false,
 		dialogue_image = 'charm',
-		value = [['caster.charm_factor', '+5'], ['50']],
-		damagestat = ['+loyalty', '-resistance'],
+		value = [['caster.charm_factor', '+5'],],
+		damagestat = ['+loyalty',],
 	},
 	turn_succubus = { 
 		code = 'turn_succubus',
