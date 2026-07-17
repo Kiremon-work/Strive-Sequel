@@ -2218,12 +2218,12 @@ var data = {
 						stat = "loyalty",
 						value = "var_pray_loyalty"
 					},
-					{
-						code = "real_affect_scene_characters",
-						type = "stat",
-						stat = "resistance",
-						value = "var_pray_resistance"
-					},
+#					{
+#						code = "real_affect_scene_characters",
+#						type = "stat",
+#						stat = "resistance",
+#						value = "var_pray_resistance"
+#					},
 					{code = "real_affect_scene_characters", type = "stat", stat = "affection", value = 20},
 				]
 			},
@@ -2332,12 +2332,12 @@ var data = {
 						stat = "loyalty",
 						value = "var_letter_loyalty"
 					},
-					{
-						code = "real_affect_scene_characters",
-						type = "stat",
-						stat = "resistance",
-						value = "var_letter_resistance"
-					},
+#					{
+#						code = "real_affect_scene_characters",
+#						type = "stat",
+#						stat = "resistance",
+#						value = "var_letter_resistance"
+#					},
 					{
 						code = "unique_character_changes",
 						value = "master",

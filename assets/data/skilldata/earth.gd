@@ -346,7 +346,7 @@ var effects = {
 		],
 		args = {duration = {obj = 'self', func = 'dr', dr = 3},},
 		req_skill = true,
-		sub_effects = ['e_s_stun'],
+		sub_effects = ['stun'],
 	},
 	e_impale = {
 		type = 'temp_s',
