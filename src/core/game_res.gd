@@ -448,7 +448,7 @@ func _active_task_find(list):
 func clean_task(id):
 	var val = tasks_progresses[id]
 	if val.has('workers'):
-		for ch_id in val.workers:
+		for ch_id in val.workers.duplicate():
 			var tchar = characters_pool.get_char_by_id(ch_id)
 			tchar.remove_from_task()
 	match val.type:
@@ -457,6 +457,7 @@ func clean_task(id):
 	if active_tasks.has(val.id):
 		active_tasks[val.id].erase(id)
 	tasks_progresses.erase(id)
+	globals.emit_signal("task_removed")
 
 
 func tasks_cleanup():
