@@ -9861,7 +9861,7 @@ The princess notices Aire tensing up in response to the question.
 	SIGMUND_ANSWER4 = "{color=yellow|— Argh, darn, fine, as long as you deal with it.}",
 	SIGMUND_EXTRA1 = "{color=yellow|— Ya know, I wasn't around at da time of the king's death. Yah, non-humans weren't allowed to take any major posts. I dun really like the whole war business, but obviously ya won't see me siding with fans of those times.}",
 	LACKSEXTRAINING = """
-{color=red|[name] lacks Prostitution Training to be assigned to this service}""",
+{color=red|[name] is not trained enough to be assigned to this service}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] lacks Prostitution Training and will only earn 2/3 of the potential gold from it.}""",
 	ITEMCHEST_ADV_CLOTH = "Coat",

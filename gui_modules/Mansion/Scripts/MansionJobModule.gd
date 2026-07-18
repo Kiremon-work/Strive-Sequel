@@ -686,14 +686,19 @@ func show_brothel_options():
 #		text += "Minimum consent: {color=aqua|" + tr(variables.consent_dict[tasks.gold_tasks_data[i].min_consent]) + "},"
 #		if person.is_master() == false:
 #			text +=  "[name]'s consent: {color=aqua|" + tr(variables.consent_dict[int(person.get_stat('consent'))]) + "}\n"
-		newbutton.text = tr("BROTHEL"+i.to_upper())
-		text += person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT")) 
+		newbutton.text = tr("BROTHEL" + i.to_upper())
+		text += person.translate(tr("BROTHEL" + i.to_upper() + "DESCRIPT")) 
 		newbutton.pressed = person.check_brothel_rule(i)
-		newbutton.connect('pressed', self, 'switch_brothel_option',[newbutton, i])
+		newbutton.connect('pressed', self, 'switch_brothel_option', [newbutton, i])
 		newbutton.add_to_group('sex_option')
 		#if person.get_work() == '':
 		#	newbutton.disabled = true
-		if !person.has_status('sexservice'):
+		if person.has_status('no_sex'):
+			globals.connecttexttooltip(newbutton, person.translate("[name] " + " " + tr("REFUSE_TO_WHORE_LABEL")))
+		elif person.has_status('no_whoring'):
+			newbutton.disabled = true
+			globals.connecttexttooltip(newbutton, person.translate("[name] " + " " + tr("REFUSE_THIS_TASK_LABEL")))
+		elif !person.has_status('sexservice'):
 			newbutton.disabled = true
 			text += tr("LACKSEXTRAINING")
 		globals.connecttexttooltip(newbutton, person.translate(text))
@@ -711,7 +716,7 @@ func show_brothel_options():
 	
 	for i in brothel_rules.sexes:
 		globals.connecttexttooltip(get_node("BrothelRules/sexes_container/" + i), person.translate(tr("BROTHEL" + i.to_upper() + "DESCRIPT")))
-		get_node("BrothelRules/sexes_container/"+i).pressed = person.check_brothel_rule(i)
+		get_node("BrothelRules/sexes_container/" + i).pressed = person.check_brothel_rule(i)
 	
 	update_brothel_text()
 	if true: #add condition for boosters
