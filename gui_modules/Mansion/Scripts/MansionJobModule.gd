@@ -694,6 +694,7 @@ func show_brothel_options():
 		#if person.get_work() == '':
 		#	newbutton.disabled = true
 		if person.has_status('no_sex'):
+			newbutton.disabled = true
 			globals.connecttexttooltip(newbutton, person.translate("[name] " + " " + tr("REFUSE_TO_WHORE_LABEL")))
 		elif person.has_status('no_whoring'):
 			newbutton.disabled = true
