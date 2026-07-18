@@ -158,15 +158,18 @@ func update_characters():
 			globals.connecttexttooltip(newbutton, ch.translate("[name]" + " " + tr("LACKS_BASIC_SERV_LABEL"))) #change translation
 		if selected_job != null:
 			if selected_job == "service":
-				if ch.has_status('no_sex'):
+				if !ch.is_worker():
 					newbutton.disabled = true
-					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("REFUSE_TO_WHORE_LABEL")))
-				if ch.has_status('no_whoring'):
-					newbutton.disabled = true
-					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("REFUSE_THIS_TASK_LABEL")))
-				if !ch.has_status('sexservice'):  #or mb advanced
-					newbutton.disabled = true
-					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("LACKS_PROSTITUTUION_LABEL")))
+					globals.connecttexttooltip(newbutton, ch.get_short_name() + ": Refused to work")
+#				if ch.has_status('no_sex'):
+#					newbutton.disabled = true
+#					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("REFUSE_TO_WHORE_LABEL")))
+#				if ch.has_status('no_whoring'):
+#					newbutton.disabled = true
+#					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("REFUSE_THIS_TASK_LABEL")))
+#				if !ch.has_status('sexservice'):  #or mb advanced
+#					newbutton.disabled = true
+#					globals.connecttexttooltip(newbutton, ch.translate("[name] " + " " + tr("LACKS_PROSTITUTUION_LABEL")))
 			if selected_job == 'crafting':
 				if ch.has_status('no_craft'): 
 					newbutton.disabled = true
@@ -672,9 +675,10 @@ func show_brothel_options():
 		else:
 			newbutton.text = tr("BROTHEL"+i.to_upper())
 		globals.connecttexttooltip(newbutton, person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT")))
+		
 		newbutton.pressed = person.check_brothel_rule(i)
 		newbutton.connect('pressed', self, 'switch_brothel_option',[newbutton, i])
-		newbutton.add_to_group('sex_option')
+		newbutton.add_to_group('non_sex_option')
 #		if person.get_work() == '':
 #			newbutton.disabled = true
 	for i in brothel_rules.sexual:
@@ -692,16 +696,20 @@ func show_brothel_options():
 		newbutton.add_to_group('sex_option')
 		#if person.get_work() == '':
 		#	newbutton.disabled = true
-		if person.is_master() == false:
-			if !person.has_status(tasks.gold_tasks_data[i].req_training):
-				if person.get_stat('slave_class') != 'slave':
-					newbutton.disabled = true
-					text += tr("LACKSEXTRAINING")
-				else:
-					newbutton.set("custom_colors/font_color", variables.hexcolordict['red'])
-					newbutton.set("custom_colors/font_color_pressed", variables.hexcolordict['red'])
-					text += tr("LACKSEXTRAININGSLAVE")
-				globals.connecttexttooltip(newbutton, person.translate(text))
+		if !person.has_status('sexservice'):
+			newbutton.disabled = true
+			text += tr("LACKSEXTRAINING")
+		globals.connecttexttooltip(newbutton, person.translate(text))
+#		if person.is_master() == false:
+#			if !person.has_status(tasks.gold_tasks_data[i].req_training):
+#				if person.get_stat('slave_class') != 'slave':
+#					newbutton.disabled = true
+#					text += tr("LACKSEXTRAINING")
+#				else:
+#					newbutton.set("custom_colors/font_color", variables.hexcolordict['red'])
+#					newbutton.set("custom_colors/font_color_pressed", variables.hexcolordict['red'])
+#					text += tr("LACKSEXTRAININGSLAVE")
+#				globals.connecttexttooltip(newbutton, person.translate(text))
 		text = ''
 	
 	for i in brothel_rules.sexes:
