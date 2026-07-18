@@ -694,6 +694,24 @@ var statdata = {
 		direct = false,
 		tags = ['integer', 'custom_bonuses'],
 	},
+	desirability_bonus = {
+		code = 'desirability_bonus',
+		name = '',
+		descript = '',
+		baseicon = 'food_love',
+		direct = false,
+		tags = ['custom_bonuses'],
+	},
+	desirability = {
+		code = 'desirability',
+		name = '',
+		descript = '',
+		baseicon = 'stat_charm',
+		type = 'misc',
+		direct = false,
+		tags = [],
+		show_info = {category = 'non_combat'}
+	},
 	#lust
 	lust = {
 		code = 'lust',

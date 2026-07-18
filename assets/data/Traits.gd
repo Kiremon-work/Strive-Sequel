@@ -70,6 +70,26 @@ var traits = {
 		bonusstats = {wits_factor = 1, wits_bonus = 10, exp_gain_mod = 0.2},
 		tags = ['simple_icon', 'mansion_only']
 	},
+	harlot = {
+		code = 'harlot',
+		name = '',
+		descript = '',
+		visible = true,
+		icon = "res://assets/images/iconsclasses/Whore.png",
+		effects = [],
+		bonusstats = {},
+		tags = ['simple_icon']
+	},
+	courtesan = {
+		code = 'courtesan',
+		name = '',
+		descript = '',
+		visible = true,
+		icon = "res://assets/images/iconsclasses/Geisha.png",
+		effects = [],
+		bonusstats = {},
+		tags = ['simple_icon']
+	},
 	#body upgrades
 	upgrade_thick_skin = {
 		name = '',
@@ -96,8 +116,8 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/l_pregnancy.png",
 		effects = [],
-		bonusstats = {mod_pros = 0.1}, 
-		reqs = [],  
+		bonusstats = {mod_pros = 0.1, desirability_bonus = 5},
+		reqs = [],
 		visible = false,
 		tags = ['body_upgrade']
 	},
@@ -106,8 +126,8 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/l_pregnancy.png",
 		effects = [],
-		bonusstats = {mod_pros = 0.1}, 
-		reqs = [],  
+		bonusstats = {mod_pros = 0.1, desirability_bonus = 5},
+		reqs = [],
 		visible = false,
 		tags = ['body_upgrade']
 	},

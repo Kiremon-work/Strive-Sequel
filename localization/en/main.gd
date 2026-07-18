@@ -2256,13 +2256,16 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	NODATEWEEK = "You have no dates left this week",
 	SEXTOOLTIPSHORT = "Character can be assigned to sexual interaction today",
 	TRAINTOOLTIP = "Character can be trained today",
-	TOOLTIPVALUE = "Character's value means their market price. It's based on their Growth Factor, Race, Training, Fame and certain features. Higher value characters will earn more money when providing services and prostitution.",
+	TOOLTIPVALUE = "Character's value means their market price. It's based on their Growth Factor, Race, Training, Fame and certain features.",
 	TOOLTIPFAME = "Fame is a character's renown among people. It can grow through certain actions but also diminishes over time. A character's value, servant's allowance, training, and recruitment efficiency are affected by fame.",
 	SERVICEREST = "[name] will rest. Uncheck [color=aqua]Rest[/color] to switch to work state.",
 	SERVICESEXUALPENETRATIVE = "[name] will entertain clients by serving and sleeping with them if they find [him] appealing.",
 	SERVICEPREGNANT = "[He] can lose virginity and get pregnant from penetration.",
 	SERVICESEXUALNONPENETRATIVE = "[name] will entertain clients by serving them and provide them with light sexual services not involving penetration.",
 	SERVICENOSEX = "[name] will serve and entertain clients but will refuse any sexual services.",
+	SERVICEESTVALUE = "Estimated income: %s gold",
+	SERVICEDESIRABILITY = "Desirability: %s%%",
+	SERVICEDESIRABILITYVALUE = "Desirability: %s",
 	TASKMAINSTAT = "Main characteristic",
 	JOBPROSTITUTEGOLDDESCRIPT = "Earn gold by prostitution.",
 	JOBCOOKINGCRAFTDESCRIPT = "Cook food in kitchen.",
@@ -2276,11 +2279,14 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""",
 	LOGCHARTOOLTIP = "Character events",
 	LOGQUESTTOOLTIP = "Quests events",
 	BROTHELLOGSEX = "%s earned %s gold performing %s with a %s customer.",
+	BROTHELLOGSEXPARTIAL = "%s failed to fully attract a customer and earned only %s gold performing %s with a %s customer.",
 	BROTHELLOGNO_SEX = "%s earned %s gold working as a %s.",
 	BROTHELTOOLTIP = """You can select which tasks the character will be allowed to perform while working at brothel. By toggling specific tasks only those will be allowed. Client sexes only affect sexual tasks.
-Higher character Value increases earnings, higher Charm increases likelihood of being requested for sex.
-Different tasks improve and scale from different stats.
-Service is a global modifier for this assignment.""",
+Service is a global modifier for this assignment.
+When character attempts sex service, Desireability shows a chance for them to receive full estimated value, if it fails they only receive 50%. Desireability above 100 further boosts gold reward.
+Desireability is derived from {color=aqua|Charm Factor} and increase further if character is at least skilled in actions which they offer. 
+Sex skills will increase income of related actions.
+Lack of consent will reduce gold income by 40%.""",
 	BROTHELWARNING = "Sex services won't work if you don't select at least 1 allowed customer.",
 	CAPTURETOOLTIP = "These characters have been found by your team and can be recruited into your mansion or sold for quick cash as if you were selling them manually. If location has been forgotten, all characters are sold automatically.",
 	CAPTURESELLTOOLTIP = "Quicksell this character for %d gold. This is equal to selling character to market, but won't let you buyback them. ",
@@ -2299,7 +2305,7 @@ You won't be able to finish turn if your total number of characters is bigger th
 	FACTOR_INCREASE_TOOLTIP = "By sacrificing unneeded characters you can boost factors of other characters as long as donor character's stat is higher than receiver's. Growth Factor only can be increased by 1 per donor. End price is defined by receiver's value.",
 	COMBAT_CHARACTER_CAPTURED = "Character",
 	BROTHELWAITRESS = "Waitress",
-	BROTHELWAITRESSDESCRIPT = "[name] will work as waitress and serve customers with food and drinks. One of the most innocent assignments out there. Scales with {color=yellow|Charm}",
+	BROTHELWAITRESSDESCRIPT = "[name] will work as waitress and serve customers with food and drinks. One of the most innocent assignments out there. {color=yellow|Slaves in training will earn training points on this assignement.}",
 	BROTHELWAITRESSALT = "Waiter",
 	BROTHELHOSTESS = "Hostess",
 	BROTHELHOSTESSALT = "Host",
@@ -2759,6 +2765,8 @@ Damage +15%, Health +20.""",
 	STATLUSTDESCRIPT = "Lust increases with time and allows the use of specific skills. Lust can be a powerful control and resource tool when utilized correctly.",
 	STATPRODUCTIVITY = "Productivity",
 	STATPRODUCTIVITYDESCRIPT = "Affects all productive tasks. Total productivity applies to all occupations, while efficiency will boost specific tasks.",
+	STATDESIRABILITY = "Desirability",
+	STATDESIRABILITYDESCRIPT = "{color=yellow|Desirability} affects how likely a character is to earn full gold from sex service instead of a reduced amount, and boosts non-sex service income once it rises above 50. Grows from Charm Factor, Charm, fame, and certain clothes or traits.",
 	STATCONSENT = "Consent",
 	STAMINA_LABEL = "Stamina",
 	STATCONSENTDESCRIPT = "Affects consent for actions during sex interactions. Each action has different consent based on traits, partners and other factors. This number represents only the unaltered value. Basic consent grows when having positive results, trying new actions and partners. Also slightly increased from discipline skills. ",
@@ -2914,6 +2922,7 @@ Damage +15%, Health +20.""",
 	FAMEDESC_UPKEEP = "Subordinate weekly upkeep",
 	FAMEDESC_LOYALTY_BONUS = "Loyalty for trainee",
 	FAMEDESC_MANHUNT_BONUS = "Manhunt bonus",
+	FAMEDESC_DESIRABILITY_BONUS = "Desirability bonus",
 	PRICEDESC_TRAITS_POS = "Positive traits",
 	PRICEDESC_TRAITS_NEG = "Negative traits",
 	PRICEDESC_CUMULATIVE = "Cumulative bonus %s of",
@@ -3043,6 +3052,7 @@ Spell Mana cost reduced by 15%
 	STATMAGIC_FACTORDESCRIPT = """{color=yellow|Magic Factor} represents character's magic affinity. The higher it is, the more mana you have and the stronger magic classes you can unlock. Also affects mana regeneration.
 {color=green|Maxed Magic Factor provides MATK bonus.}""",
 	STATTAME_FACTORDESCRIPT = """{color=yellow|Tame Factor} represents how easy it is to befriend the character. It reduces the price of unlocking tasks for subordinates.
+Tame Factor directly affects non-sexual service income.
 
 {color=green|Maxed Tame Factor doubles Training Points gained and gives a 50% chance to instantly agree to unlock requests for free instead of 20%.}""",
 	STATAUTHORITY_FACTORDESCRIPT = """{color=yellow|Authority Factor} represents capability of inflict character's authority over others. The higher it is, the more efficient is character's training and more trainees are available to them.
@@ -3052,9 +3062,12 @@ Spell Mana cost reduced by 15%
 
 {color=green|Maxed Wits Factor increases experience gain.}""",
 	STATCHARM_FACTORDESCRIPT = """{color=yellow|Charm Factor} represents character's appeal potential. It increases [color=aqua]Charm[/color] growth. [Master]'s charm also increases gold and reputation rewards from repeatable quests and number of dates per week.
+Charm Factor increases Desireablity which affects service tasks.
+Charm Factor directly affects non-sexual service income.
 
 {color=green|Maxed Charm Factor increases Service Productivity and grants additional Persuasion Check.}""",
 	STATSEXUALS_FACTORDESCRIPT = """{color=yellow|Sex Factor} represents character's sex development potential. It speeds sexual skills' acquirement, makes Consent easier to progress and inceases number of turns in Sex Encounter minigame. [Master]'s Sex factor also increases number of sex interactions per week.
+Sex Factor directly affects sexual service income.
 
 {color=green|Maxed Sex Factor provides Speed bonus}.""",
 	PHYSICS_FACTORBONUSDESCRIPT = "Physics Factor: Health Regeneration: x2",
@@ -4034,7 +4047,6 @@ Training has higher chance of success.""",
 	TRAITBREEDERDESCRIPT = """Allows breeding with any race.
 Pregnancy Debuffs are weaker
 Offspring will inherit only this parent's stats.""",
-	TRAITHARLOTDESCRIPT = "Prostitution is 50% more efficient.",
 	TRAITSUCCUBUSDESCRIPT = """Sex activities provide 50% more experience.
 Can infallibly recruit random characters by using Lust.
 Sexual Training actions have lower chance to fail.""",
@@ -4517,6 +4529,7 @@ Social skills effect: +10%.""",
 	TRAITSTUNIMMUNITYDESCRIPT = "Can't be stunned in combat.",
 	TRAITEFFECTCURSE = "All resists are reduced",
 	TRAITEFFECTHASTE = "Speed is Increased",
+	TRAITEFFECTVEIL = "Shadow Veil: +30 Light and Dark Resist, MDEF increased based on caster's MATK",
 	EFFECTCOFFIBLESS = "Increased Experience gain by 20%%",
 	EUPHORIABUFF = "Euphoria: Damage Increased",
 	FIREARROWBUFF = "Fire Arrows: your attacks burn your enemies.",
@@ -4928,7 +4941,7 @@ Positive, Social, Physical and Humilation actions provide more Loyalty.""",
 	PROFBREEDERDESCRIPT = "One who finds purpose in bringing a new generation into being. They can accept any partner, but their children will carry on their lineage.",
 	PROFHARLOT = "Harlot",
 	PROFHARLOTDESCRIPT = "The oldest profession might not seem like much, but so far it's always in demand.",
-	PROFGEISHA = "Geisha",
+	PROFGEISHA = "Courtesan",
 	PROFGEISHADESCRIPT = "Consummate entertainers that entertain patrons through song, dance, and conversation.",
 	PROFDANCER = "Dancer",
 	PROFDANCERDESCRIPT = "Dancers can entice with their looks and moves. Effective for entertainment. ",
@@ -9869,9 +9882,11 @@ The princess notices Aire tensing up in response to the question.
 	SIGMUND_ANSWER4 = "{color=yellow|— Argh, darn, fine, as long as you deal with it.}",
 	SIGMUND_EXTRA1 = "{color=yellow|— Ya know, I wasn't around at da time of the king's death. Yah, non-humans weren't allowed to take any major posts. I dun really like the whole war business, but obviously ya won't see me siding with fans of those times.}",
 	LACKSEXTRAINING = """
-{color=red|[name] is not trained enough to be assigned to this service}""",
+{color=red|[name] refuses to do this task at this moment.}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] lacks Prostitution Training and will only earn 2/3 of the potential gold from it.}""",
+	BROTHELMINCONSENT = "Consent Level: {color=aqua|%s}",
+	BROTHELSKILLLEVEL = "Skill level: {color=aqua|%s}",
 	ITEMCHEST_ADV_CLOTH = "Coat",
 	ITEMLEGS_ADV_CLOTH = "Mantle",
 	ITEMCHEST_ADV_LEATHER = "Advanced Medium Armor",
@@ -24837,6 +24852,10 @@ Allies in the same column recover 10 HP at the end of the global turn.""",
 Restore 4 mana after casting a spell on an ally or yourself.""",
 	TRAITSPIRIT_OWL = "Guardian Spirit: Noctara",
 	TRAITSPIRIT_OWLDESCRIPT = "Wits Factor +1, Wits bonus +10, XP bonus +20%",
+	TRAITHARLOT = "Harlot",
+	TRAITHARLOTDESCRIPT = "Desirability can never rise above 75. When performing a service action [he] is at least skilled in, there is a 50% chance to double the gold earned; if mastered, that chance instead triples it.\nProstitution is 50% more efficient.",
+	TRAITCOURTESAN = "Courtesan",
+	TRAITCOURTESANDESCRIPT = "Fame can rise up to level 5 from service tasks instead of the usual cap, and the desirability bonus granted by fame is doubled.",
 	JEAN_SIDEQUEST_START_1 = """A few days pass after Jean settles into your mansion. She keeps mostly to herself, spending long hours locked in her room or staring into space with an unreadable expression while performing her duties. Unlike some of the others, she does not openly seek your attention - or at least, that was the case up until this evening.
 
 Jean approaches you after midnight, when most of the mansion has already settled into silence. She pretends to be relaxed, but her posture is tense, shoulders slightly raised as if bracing for refusal.

@@ -689,8 +689,18 @@ func show_brothel_options():
 #		text += "Minimum consent: {color=aqua|" + tr(variables.consent_dict[tasks.gold_tasks_data[i].min_consent]) + "},"
 #		if person.is_master() == false:
 #			text +=  "[name]'s consent: {color=aqua|" + tr(variables.consent_dict[int(person.get_stat('consent'))]) + "}\n"
-		newbutton.text = tr("BROTHEL" + i.to_upper())
-		text += person.translate(tr("BROTHEL" + i.to_upper() + "DESCRIPT")) 
+
+		newbutton.text = tr("BROTHEL"+i.to_upper())
+		text += person.translate(tr("BROTHEL"+i.to_upper() +"DESCRIPT"))
+		if i in ['petting', 'oral', 'pussy', 'anal', 'penetration']:
+			var skill_level = person.get_stat('sex_training_' + i)
+			match skill_level:
+				'skilled':
+					newbutton.text += " ★"
+				'mastered':
+					newbutton.text += " ★★"
+			text += "\n" + tr("BROTHELSKILLLEVEL") % ResourceScripts.descriptions._sex_training_level_label(skill_level)
+		text += "\n" + tr("BROTHELMINCONSENT") % tr(variables.consent_dict[tasks.gold_tasks_data[i].min_consent])
 		newbutton.pressed = person.check_brothel_rule(i)
 		newbutton.connect('pressed', self, 'switch_brothel_option', [newbutton, i])
 		newbutton.add_to_group('sex_option')
@@ -705,6 +715,12 @@ func show_brothel_options():
 		elif !person.has_status('sexservice'):
 			newbutton.disabled = true
 			text += tr("LACKSEXTRAINING")
+		if person.get_stat('consent') < tasks.gold_tasks_data[i].min_consent:
+			newbutton.set("custom_colors/font_color", variables.hexcolordict['red'])
+			newbutton.set("custom_colors/font_color_pressed", variables.hexcolordict['red'])
+			newbutton.set("custom_colors/font_color_hover", variables.hexcolordict['red'])
+			newbutton.set("custom_colors/font_color_hover_pressed", variables.hexcolordict['red'])
+			newbutton.set("custom_colors/font_color_disabled", variables.hexcolordict['red'])
 		globals.connecttexttooltip(newbutton, person.translate(text))
 #		if person.is_master() == false:
 #			if !person.has_status(tasks.gold_tasks_data[i].req_training):
@@ -763,7 +779,21 @@ func update_brothel_text():
 				break
 		if !has_clients:
 			text += "\n\n{color=red|" + tr("BROTHELWARNING") + "}"
-	
+		text += "\n\n{color=aqua|" + tr("SERVICEDESIRABILITY") % str(round(person.get_service_desirability())) + "}"
+		text += "\n{color=aqua|" + tr("SERVICEESTVALUE") % str(stepify(person.get_estimated_service_value(), 0.1)) + "}"
+	else:
+		var any_non_sex_toggled = false
+		for i in brothel_rules.non_sex:
+			if person.check_brothel_rule(i):
+				any_non_sex_toggled = true
+				break
+		if any_non_sex_toggled:
+			text += "\n\n{color=aqua|" + tr("SERVICEDESIRABILITYVALUE") % str(round(person.get_stat('desirability'))) + "}"
+			text += "\n{color=aqua|" + tr("SERVICEESTVALUE") % str(stepify(person.get_estimated_non_sex_service_value(), 0.1)) + "}"
+
+	for btn in get_tree().get_nodes_in_group('non_sex_option'):
+		btn.disabled = can_do_sex
+
 	$BrothelRules/brothel_descript.bbcode_text = globals.TextEncoder(person.translate(text))
 
 func switch_brothel_option(button, option):

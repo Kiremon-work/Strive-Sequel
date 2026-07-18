@@ -313,6 +313,7 @@ var template_dynamic = {
 	sexuals_bonus = 0.0,
 	charm_bonus = 0.0,
 	charm_cap = variables.basestat_cap,
+	desirability_bonus = 0.0,
 	
 	#challenge charages
 	chg_strength_max = 0,

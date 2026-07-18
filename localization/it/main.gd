@@ -2032,6 +2032,8 @@ La resistenza di %s diminuisce di %.0f per turno.""",
 	SERVICEPREGNANT = "[He] può perdere la verginità e rimanere incinta con la penetrazione.",
 	SERVICESEXUALNONPENETRATIVE = "[name] intratterrà i clienti servendoli e fornendo loro servizi sessuali leggeri che non comportano la penetrazione.",
 	SERVICENOSEX = "[name] servirà e intratterrà i clienti, ma rifiuterà qualsiasi servizio sessuale.",
+	SERVICEESTVALUE = """Estimated value: %s gold""", # MISSING TRANSLATION
+	SERVICEDESIRABILITY = """Desirability: %s%% (chance to earn full gold instead of half)""", # MISSING TRANSLATION
 	TASKMAINSTAT = "Caratteristica principale",
 	JOBPROSTITUTEGOLDDESCRIPT = "Guadagna oro prostituendoti.",
 	JOBCOOKINGCRAFTDESCRIPT = "Cucina il cibo in cucina.",
@@ -2045,6 +2047,7 @@ La resistenza di %s diminuisce di %.0f per turno.""",
 	LOGCHARTOOLTIP = "Eventi Personaggio",
 	LOGQUESTTOOLTIP = "Eventi Missioni",
 	BROTHELLOGSEX = "%s guadagnato %s oro eseguendo %s con un %s cliente.",
+	BROTHELLOGSEXPARTIAL = """%s failed to fully attract a customer and earned only %s gold performing %s with a %s customer.""", # MISSING TRANSLATION
 	BROTHELLOGNO_SEX = "%s guadagnato %s oro lavorando come %s.",
 	BROTHELTOOLTIP = """Puoi selezionare quali compiti il personaggio potrà svolgere mentre lavora in un bordello. Attivando o disattivando attività specifiche, saranno consentite solo quelle disponibili. I sessi dei clienti influenzano solo i compiti sessuali.
 Più alto è il valore del personaggio aumenta i guadagni, più alto è il fascino aumenta la probabilità di essere richiesto per il sesso.
@@ -3798,6 +3801,8 @@ L'allenamento ha maggiori possibilità di successo.""",
 I debuff della gravidanza sono più deboli
 La prole erediterà solo le statistiche di questo genitore.""",
 	TRAITHARLOTDESCRIPT = "La prostituzione è più efficiente del 50%.",
+	TRAITCOURTESAN = """Courtesan""", # MISSING TRANSLATION
+	TRAITCOURTESANDESCRIPT = """Fame can rise up to level 5 from service tasks instead of the usual cap, and the desirability bonus granted by fame is doubled.""", # MISSING TRANSLATION
 	TRAITSUCCUBUSDESCRIPT = """Le attività sessuali forniscono il 50% in più di esperienza.
 Può reclutare infallibilmente personaggi casuali usando la Lussuria.
 Le azioni di Addestramento Sessuale hanno meno possibilità di fallire.""",
@@ -4284,6 +4289,7 @@ Effetto abilità sociali: +10%.""",
 	TRAITSTUNIMMUNITYDESCRIPT = "Non può essere stordito in combattimento.",
 	TRAITEFFECTCURSE = "Tutte le resistenze sono ridotte",
 	TRAITEFFECTHASTE = "La velocità è aumentata",
+	TRAITEFFECTVEIL = """Shadow Veil: +30 Light and Dark Resist, MDEF increased based on caster's MATK""", # MISSING TRANSLATION
 	EFFECTCOFFIBLESS = "Aumenta l'esperienza guadagnata del 20%%",
 	EUPHORIABUFF = "Euforia: Danni aumentati",
 	FIREARROWBUFF = "Frecce infuocate: i tuoi attacchi bruciano i nemici.",
@@ -8015,6 +8021,7 @@ Procedere? (il file di salvataggio originale rimarrà inalterato, ma non funzion
 	TUTORIAL_TRAINING12 = "Assegna il tuo Master come suo addestratore selezionandolo.",
 	TUTORIAL_TRAINING13 = "Per impartire l'addestramento, seleziona l'azione Elogio.",
 	TUTORIAL_TRAINING14 = "Schiave diverse hanno preferenze diverse per le azioni di addestramento, il che influenza la loro efficacia. Cerca di mantenere alto il loro spirito alla fine dell'addestramento.",
+	TUTORIAL_TRAINING14_1 = """Daisy has finished her training.""", # MISSING TRANSLATION
 	TUTORIAL_TRAINING15 = "Daisy ha accumulato abbastanza punti Lealtà per sbloccare l'addestramento all'Obbedienza. Questo addestramento base è richiesto per alcuni compiti e missioni che prevedono la cessione di personaggi.",
 	TUTORIAL_TRAINING16 = "Conferma lo sblocco.",
 	TUTORIAL_TRAINING17 = "Nella seconda scheda, puoi trovare competenze speciali che forniscono miglioramenti aggiuntivi a un personaggio.",
@@ -8035,6 +8042,14 @@ Procedere? (il file di salvataggio originale rimarrà inalterato, ma non funzion
 	TUTORIAL_WORK12 = "Torna al menu Lavoro.",
 	TUTORIAL_WORK13 = "Anche se l'hai selezionata come cameriera, devi prima riassegnarla dall'artigianato al lavoro di servizio.",
 	TUTORIAL_WORK14 = "Qui puoi consultare regole e benefici aggiuntivi del lavoro di servizio. Mentre lavorano, i personaggi generano esperienza e una statistica relativa al loro compito ogni turno.",
+	TUTORIAL_WORK15 = """Open craft menu.""", # MISSING TRANSLATION
+	TUTORIAL_WORK16 = """Choose bread.""", # MISSING TRANSLATION
+	TUTORIAL_WORK16_1 = """Confirm.""", # MISSING TRANSLATION
+	TUTORIAL_WORK17 = """You can adjust quantity. Add 10 more units.""", # MISSING TRANSLATION
+	TUTORIAL_WORK17_1 = """Confirm.""", # MISSING TRANSLATION
+	TUTORIAL_WORK18 = """Close craft window.""", # MISSING TRANSLATION
+	TUTORIAL_WORK19 = """Select crafting task.""", # MISSING TRANSLATION
+	TUTORIAL_WORK20 = """Assign Daisy to the crafting task by selecting her.""", # MISSING TRANSLATION
 	TUTORIAL_LEVELING0 = "A proposito di esperienza, vediamo un altro modo per guadagnarla.",
 	TUTORIAL_LEVELING1 = "Seleziona Inventario per visualizzare i tuoi averi.",
 	TUTORIAL_LEVELING2 = "Seleziona il tuo Master come personaggio attivo da gestire.",
@@ -8397,6 +8412,7 @@ La principessa nota che Aire si irrigidisce in risposta alla domanda.
 {color=red|[name] manca l'addestramento alla Prostituzione per essere assegnata a questo servizio}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] manca di addestramento alla prostituzione e guadagnerà solo 2/3 dell'oro potenziale da esso.}""",
+	BROTHELMINCONSENT = """Minimum consent required: {color=aqua|%s}""", # MISSING TRANSLATION
 	STATOBDRAINREDUCTION = "Diminuzione prosciugamento obbedienza",
 	STATOBDRAININCREASE = "Aumento prosciugamento obbedienza",
 	ITEMCHEST_ADV_CLOTH = "Cappotto",
@@ -23377,6 +23393,7 @@ Ti ritiri lentamente, guardando il tuo sperma colare dal culo, giù per le cosce
 	TRAITSPIRIT_SATYRDESCRIPT = "Fattore Sesso +1, Fattore Autorità +1, MATK +3, MDEF +5\nRipristina 4 mana dopo aver lanciato un incantesimo su un alleato o te stesso.",
 	TRAITSPIRIT_OWL = "Spirito Guardiano: Noctara",
 	TRAITSPIRIT_OWLDESCRIPT = "Fattore Ingegno +1, Bonus Ingegno +10, Bonus EXP +20%",
+	TRAITHARLOT = """Harlot""", # MISSING TRANSLATION
 	JEAN_SIDEQUEST_START_1 = """Passano alcuni giorni da quando Jean si è sistemata nella tua tenuta. Tende a stare per conto suo, trascorrendo lunghe ore chiusa in camera o fissando nel vuoto con un'espressione imperscrutabile mentre svolge le sue mansioni. A differenza di altri, non cerca apertamente la tua attenzione - o almeno, così era fino a questa sera.
 
 Jean ti si avvicina dopo mezzanotte, quando la maggior parte della tenuta si è già acquietata nel silenzio. Finge di essere rilassata, ma la sua postura è tesa, con le spalle leggermente sollevate come se si aspettasse un rifiuto.

@@ -2047,6 +2047,8 @@ Mejora la disposición hacia acciones de {color=yellow|Aleatorio}. Costs 5 Mana.
 	SERVICEPREGNANT = "[He] puede perder la virginidad y quedar embarazada por penetración.",
 	SERVICESEXUALNONPENETRATIVE = "[name] entretendrá a los clientes atendiéndolos y brindándoles servicios sexuales ligeros que no impliquen penetración.",
 	SERVICENOSEX = "[name] atenderá y entretendrá a los clientes pero rechazará cualquier servicio sexual.",
+	SERVICEESTVALUE = """Estimated value: %s gold""", # MISSING TRANSLATION
+	SERVICEDESIRABILITY = """Desirability: %s%% (chance to earn full gold instead of half)""", # MISSING TRANSLATION
 	TASKMAINSTAT = "Característica principal",
 	JOBPROSTITUTEGOLDDESCRIPT = "Ganar oro mediante la prostitución.",
 	JOBCOOKINGCRAFTDESCRIPT = "Cocinar alimentos en la cocina.",
@@ -2060,6 +2062,7 @@ Mejora la disposición hacia acciones de {color=yellow|Aleatorio}. Costs 5 Mana.
 	LOGCHARTOOLTIP = "Eventos de personajes",
 	LOGQUESTTOOLTIP = "Eventos de misiones",
 	BROTHELLOGSEX = "%s ganado %s rendimiento del oro %s con un %s cliente.",
+	BROTHELLOGSEXPARTIAL = """%s failed to fully attract a customer and earned only %s gold performing %s with a %s customer.""", # MISSING TRANSLATION
 	BROTHELLOGNO_SEX = "%s ganado %s el trabajo del oro como %s.",
 	BROTHELTOOLTIP = """Puedes seleccionar las tareas que el personaje podrá realizar mientras trabaja en el burdel. Al activar tareas específicas, solo se permitirán esas. El sexo de los clientes solo afecta las tareas sexuales.
 Un valor de personaje más alto aumenta las ganancias, un encanto más alto aumenta la probabilidad de que te soliciten sexo.
@@ -3278,6 +3281,8 @@ El entrenamiento tiene mayores posibilidades de éxito.""",
 Las desventajas del embarazo son más débiles
 La descendencia heredará únicamente las estadísticas de este padre.""",
 	TRAITHARLOTDESCRIPT = "La prostitución es un 50% más eficiente.",
+	TRAITCOURTESAN = """Courtesan""", # MISSING TRANSLATION
+	TRAITCOURTESANDESCRIPT = """Fame can rise up to level 5 from service tasks instead of the usual cap, and the desirability bonus granted by fame is doubled.""", # MISSING TRANSLATION
 	TRAITSUCCUBUSDESCRIPT = """Las actividades sexuales proporcionan un 50% más de experiencia.
 Puede reclutar infaliblemente personajes aleatorios usando Lujuria.
 Las acciones de Entrenamiento Sexual tienen menor probabilidad de fracasar.""",
@@ -3746,6 +3751,7 @@ Efecto de habilidades sociales: +10%.""",
 	TRAITSTUNIMMUNITYDESCRIPT = "No se puede aturdir en combate.",
 	TRAITEFFECTCURSE = "Se reducen todas las resistencias",
 	TRAITEFFECTHASTE = "La velocidad aumenta",
+	TRAITEFFECTVEIL = """Shadow Veil: +30 Light and Dark Resist, MDEF increased based on caster's MATK""", # MISSING TRANSLATION
 	EFFECTCOFFIBLESS = "Aumento de la ganancia de experiencia en un 20%%",
 	EUPHORIABUFF = "Euforia: daño aumentado",
 	FIREARROWBUFF = """Fire Arrows: your attacks burn your enemies.""", # MISSING TRANSLATION
@@ -7412,6 +7418,7 @@ Esta no es una información muy conocida, pero parece que los rebeldes sabían d
 {color=red|[name] carece de capacitación en prostitución para ser asignado a este servicio}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] carece de entrenamiento en prostitución y solo obtendrá 2/3 del oro potencial con ello.}""",
+	BROTHELMINCONSENT = """Minimum consent required: {color=aqua|%s}""", # MISSING TRANSLATION
 	STATOBDRAINREDUCTION = "Disminución del drenaje por obediencia",
 	STATOBDRAININCREASE = "Aumento del drenaje por obediencia",
 	ITEMCHEST_ADV_CLOTH = "Capa",

@@ -2071,6 +2071,8 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""", # 
 	SERVICEPREGNANT = "[Il] peut perdre sa virginité et tomber enceinte à la suite d'une pénétration",
 	SERVICESEXUALNONPENETRATIVE = "[name] divertira les clients en les servant et en leur fournissant des services sexuels légers n'impliquant pas de pénétration",
 	SERVICENOSEX = "[name] servira et divertira les clients mais refusera tout service sexuel",
+	SERVICEESTVALUE = """Estimated value: %s gold""", # MISSING TRANSLATION
+	SERVICEDESIRABILITY = """Desirability: %s%% (chance to earn full gold instead of half)""", # MISSING TRANSLATION
 	
 	
 	TASKMAINSTAT = "Caractéristique principale",
@@ -2093,6 +2095,7 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""", # 
 	LOGRIGHTLABEL = "Service",
 	LOGRIGHTTOOLTIP = "Affiche les revenus des services",
 	BROTHELLOGSEX = "%s a gagné %s d'or en faisant %s avec %s",
+	BROTHELLOGSEXPARTIAL = """%s failed to fully attract a customer and earned only %s gold performing %s with a %s customer.""", # MISSING TRANSLATION
 	BROTHELLOGNO_SEX = "%s a gagné %s d'or en travaillant comme %s",
 	
 	BROTHELTOOLTIP = "Vous pouvez sélectionner les tâches que le personnage sera autorisé à effectuer lorsqu'il travaille au bordel. En désactivant des tâches spécifiques, seules celles-ci seront autorisées. Les sexes des clients n'affectent que les tâches sexuelles.\nUne valeur de personnage plus élevée augmente les gains, un charme plus élevé augmente la probabilité d'être demandé pour du sexe.\nDifférentes tâches améliorent et augmentent les différentes statistiques.\nLe service est un modificateur global pour cette affectation.",
@@ -3242,6 +3245,8 @@ Wits: -10; EXP Gain: -10%; Sell price is greatly lowered.""", # MISSING TRANSLAT
 	TRAITFARMERDESCRIPT = "L'agriculture est 50% plus efficace. ",
 	TRAITBREEDERDESCRIPT = "Permet de se reproduire avec n'importe quelle race.\nLes effets négatifs de la grossesse sont plus faibles",
 	TRAITHARLOTDESCRIPT = "La prostitution est 50% plus efficace",
+	TRAITCOURTESAN = """Courtesan""", # MISSING TRANSLATION
+	TRAITCOURTESANDESCRIPT = """Fame can rise up to level 5 from service tasks instead of the usual cap, and the desirability bonus granted by fame is doubled.""", # MISSING TRANSLATION
 	TRAITSUCCUBUSDESCRIPT = "Les activités sexuelles fournissent 50% d'expérience en plus.\nPeut infailliblement recruter des personnages aléatoires en utilisant Lust. ",
 	TRAITPETDESCRIPT = "La prostitution est 25% plus efficace",
 	TRAITSEXTOYDESCRIPT = "La prostitution est 50% plus efficace",
@@ -7389,6 +7394,7 @@ La princesse remarque qu'Aire se crispe en réponse à la question.
 	
 	LACKSEXTRAINING = "\n{color=red|[name] lacks Prostitution Training to be assigned to this service}",
 	LACKSEXTRAININGSLAVE = "\n{color=red|[name] lacks Prostitution Training and will only earn 2/3 of the potential gold from it.}",
+	BROTHELMINCONSENT = """Minimum consent required: {color=aqua|%s}""", # MISSING TRANSLATION
 	
 
 	STATOBDRAINREDUCTION = "Diminution du drain d'obéissance",

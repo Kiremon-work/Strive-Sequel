@@ -2196,6 +2196,8 @@ At 2+ stacks of [{color=aqua|Catastrophic Momentum}], cause a shockwave that dea
 	SERVICEPREGNANT = """[name] 可能会失去贞操，并因性交而怀孕。""",
 	SERVICESEXUALNONPENETRATIVE = """[name] 将通过服侍客户并提供不涉及性交的轻度性服务来招待他们。""",
 	SERVICENOSEX = """[name] 会服侍和招待客户，但会拒绝任何性服务。""",
+	SERVICEESTVALUE = """Estimated value: %s gold""", # MISSING TRANSLATION
+	SERVICEDESIRABILITY = """Desirability: %s%% (chance to earn full gold instead of half)""", # MISSING TRANSLATION
 	TASKMAINSTAT = """主要属性""",
 	JOBPROSTITUTEGOLDDESCRIPT = """通过卖淫赚取金币。""",
 	JOBCOOKINGCRAFTDESCRIPT = """在厨房烹饪食物。""",
@@ -2209,6 +2211,7 @@ At 2+ stacks of [{color=aqua|Catastrophic Momentum}], cause a shockwave that dea
 	LOGCHARTOOLTIP = """角色事件""",
 	LOGQUESTTOOLTIP = """任务事件""",
 	BROTHELLOGSEX = """%s 通过与一名 %s 客户进行 %s 服务，赚取了 %s 金币。""",
+	BROTHELLOGSEXPARTIAL = """%s failed to fully attract a customer and earned only %s gold performing %s with a %s customer.""", # MISSING TRANSLATION
 	BROTHELLOGNO_SEX = """%s 作为 %s 工作，赚取了 %s 金币。""",
 	BROTHELTOOLTIP = """你可以选择角色在妓院工作时允许执行的任务。通过切换特定任务，仅允许被选中的任务。客户性别仅影响性任务。
 较高的角色价值会增加收入，较高的魅力值会增加被要求提供性服务的可能性。
@@ -3981,6 +3984,8 @@ No relationship change.""", # MISSING TRANSLATION
 怀孕减益效果较弱。
 后代将仅继承此家长的属性。""",
 	TRAITHARLOTDESCRIPT = """卖淫效率提高 50%。""",
+	TRAITCOURTESAN = """Courtesan""", # MISSING TRANSLATION
+	TRAITCOURTESANDESCRIPT = """Fame can rise up to level 5 from service tasks instead of the usual cap, and the desirability bonus granted by fame is doubled.""", # MISSING TRANSLATION
 	TRAITSUCCUBUSDESCRIPT = """性行为经验获取提高 50%。
 可以通过消耗欲望必定招募随机角色。
 性训练动作失败几率降低。""",
@@ -4469,6 +4474,7 @@ TRAITEFFECTSUCCOMBAT = """欲望消耗：+25%% 攻击力和魔攻。""",
 	TRAITSTUNIMMUNITYDESCRIPT = """战斗中不会被眩晕。""",
 	TRAITEFFECTCURSE = """所有抗性降低。""",
 	TRAITEFFECTHASTE = """速度增加。""",
+	TRAITEFFECTVEIL = """Shadow Veil: +30 Light and Dark Resist, MDEF increased based on caster's MATK""", # MISSING TRANSLATION
 	EFFECTCOFFIBLESS = """经验值获取增加 20%%。""",
 	EUPHORIABUFF = """欣快：伤害增加。""",
 	FIREARROWBUFF = """火焰箭：你的攻击会灼烧敌人。""",
@@ -9422,6 +9428,7 @@ ACHIBONUS_HELEVIEL_START_DESC = """在拥有赫蕾维尔的情况下开始新游
 	TUTORIAL_TRAINING12 = """选择你的主人，将其指定为她的训练师。""",
 	TUTORIAL_TRAINING13 = """要下达训练指令，请选择“赞美（Praise）”行动。""",
 	TUTORIAL_TRAINING14 = """不同的奴隶对训练行动有不同的偏好，这会影响训练的效果。试着在训练结束前让他们的精神保持在高水平。""",
+	TUTORIAL_TRAINING14_1 = """Daisy has finished her training.""", # MISSING TRANSLATION
 	TUTORIAL_TRAINING15 = """黛西已经累积了足够的忠诚度点数来解锁服从度训练。这项基础训练是某些涉及转交角色的任务和工作所必需的。""",
 	TUTORIAL_TRAINING16 = """确认解锁。""",
 	TUTORIAL_TRAINING17 = """在第二个标签页中，你可以找到能为角色提供额外加成的特殊专长。""",
@@ -9442,6 +9449,14 @@ ACHIBONUS_HELEVIEL_START_DESC = """在拥有赫蕾维尔的情况下开始新游
 	TUTORIAL_WORK12 = """返回“工作”菜单。""",
 	TUTORIAL_WORK13 = """虽然你选了她当服务生，但你必须先将她从制造调配到服务工作上来。""",
 	TUTORIAL_WORK14 = """在这里你可以查看服务工作的额外规则和收益。在工作时，角色每回合都会产生经验值以及与任务相关的属性。""",
+	TUTORIAL_WORK15 = """Open craft menu.""", # MISSING TRANSLATION
+	TUTORIAL_WORK16 = """Choose bread.""", # MISSING TRANSLATION
+	TUTORIAL_WORK16_1 = """Confirm.""", # MISSING TRANSLATION
+	TUTORIAL_WORK17 = """You can adjust quantity. Add 10 more units.""", # MISSING TRANSLATION
+	TUTORIAL_WORK17_1 = """Confirm.""", # MISSING TRANSLATION
+	TUTORIAL_WORK18 = """Close craft window.""", # MISSING TRANSLATION
+	TUTORIAL_WORK19 = """Select crafting task.""", # MISSING TRANSLATION
+	TUTORIAL_WORK20 = """Assign Daisy to the crafting task by selecting her.""", # MISSING TRANSLATION
 	TUTORIAL_LEVELING0 = """说到经验值，让我们来看看另一种获取它的方法。""",
 	TUTORIAL_LEVELING1 = """选择“背包”来查看你的财产。""",
 	TUTORIAL_LEVELING2 = """选择你的“主人”作为当前需要管理的角色。""",
@@ -9811,6 +9826,7 @@ ALIRONELECTIONSFINISH_LINE4 = """{color=yellow|Myr: — 哼，所以你现在是
 {color=red|[name] 缺乏卖淫特训，无法指派此项服务}""",
 	LACKSEXTRAININGSLAVE = """
 {color=red|[name] 缺乏卖淫特训，只能赚取潜在金币收益的 2/3。}""",
+	BROTHELMINCONSENT = """Minimum consent required: {color=aqua|%s}""", # MISSING TRANSLATION
 	STATOBDRAINREDUCTION = """服从度流失减缓""",
 	STATOBDRAININCREASE = """服从度流失加剧""",
 	ITEMCHEST_ADV_CLOTH = """高级魔法外套""",
@@ -24439,6 +24455,7 @@ Heleviel没有作声；然而，她脸上的怒火却在不断积聚。""",
 对自己或盟友施放法术后恢复 4 点法力值。""",
 	TRAITSPIRIT_OWL = """守护之灵：诺克塔拉""",
 	TRAITSPIRIT_OWLDESCRIPT = """智慧潜力 +1，智慧加成 +10，经验值加成 +20%""",
+	TRAITHARLOT = """Harlot""", # MISSING TRANSLATION
 	JEAN_SIDEQUEST_START_1 = """琴搬进你的宅邸几天过去了。她大多时间都独自待着，长时间把自己锁在房间里，或者在履行职责时带着令人捉摸不透的表情发呆。和其他人不同，她并不公开寻求你的关注——或者说，在今天晚上之前是这样。
 
 午夜过后，当宅邸大部分地方都陷入沉寂时，琴走向了你。她假装很放松，但姿势僵硬，肩膀微微耸起，仿佛做好了被拒绝的准备。

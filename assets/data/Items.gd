@@ -1489,7 +1489,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {mod_prost = 0.2},
+		basestats = {mod_pros = 0.2},
 	},
 	service_suit = {
 		code = 'service_suit',
@@ -1506,7 +1506,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = [],
-		basestats = {charm_bonus = 15, mod_pros = 0.15, mod_service = 0.15},
+		basestats = {charm_bonus = 15, mod_pros = 0.15, mod_service = 0.15, desirability_bonus = 15},
 	},
 	shackles = {
 		code = 'shackles',
@@ -2153,7 +2153,7 @@ var itemlist = {
 		reqs = [],
 		effects = [],
 		tags = ['no_random'],
-		basestats = {charm_bonus = 20, mod_pros = 0.10, mod_service = 0.10},
+		basestats = {charm_bonus = 20, mod_pros = 0.10, mod_service = 0.10, desirability_bonus = 10},
 	},
 	
 	
