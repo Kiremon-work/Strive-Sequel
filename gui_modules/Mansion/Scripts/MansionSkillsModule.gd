@@ -7,7 +7,7 @@ var active_skill
 func _ready():
 	input_handler.skill_list_node = self
 	$skillpanelswitch.connect("pressed", self, "change_panel_type")
-	input_handler.register_btn_source('first_skill_btn', self, 'tut_get_first_skill_btn')
+	input_handler.register_btn_source('mentor_skill_btn', self, 'tut_get_mentor_skill_btn')
 
 
 func build_skill_panel():
@@ -78,8 +78,10 @@ func build_skill_panel():
 		newbutton.connect('signal_RMB_release',self,'select_skill_for_position', [i])
 
 
-func tut_get_first_skill_btn():
-	return $SkillPanel.get_children()[0]
+func tut_get_mentor_skill_btn():
+	for i in $SkillPanel.get_children():
+		if i.get_meta("skill", "") == "mentor":
+			return i
 
 func select_skill_target(skillcode):
 	input_handler.ActivateTutorial('TUTORIALLIST7')

@@ -29,7 +29,7 @@ func _ready():
 	input_handler.register_btn_source("trainer_btn", self, "tut_get_no_trainer_btn")
 	input_handler.register_btn_source("trainer_select_btn", self, "tut_get_trainer_select")
 	input_handler.register_btn_source("praise_btn", self, "tut_get_praise_btn")
-	input_handler.register_btn_source("obedience_btn", self, "tut_get_obedience_btn")
+	input_handler.register_btn_source("training_bonus_btn", self, "tut_get_training_bonus_btn")
 	
 
 func tut_get_no_trainer_btn():
@@ -38,8 +38,10 @@ func tut_get_trainer_select():
 	return $trainer_list/Container2/Container.get_children()[0]
 func tut_get_praise_btn():
 	return $training/ScrollContainer/VBoxContainer.get_children()[0]
-func tut_get_obedience_btn():
-	return $training/HBoxContainer2.get_children()[1]
+func tut_get_training_bonus_btn():
+	for btn in $finished/VBoxContainer/HBoxContainer3.get_children():
+		if btn.get_meta('trait', "") == "training_productivity":
+			return btn
 
 func hide_all():
 	for cat in get_children():

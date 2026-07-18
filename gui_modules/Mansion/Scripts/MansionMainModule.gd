@@ -328,26 +328,29 @@ func try_rebuild_slave_list():
 	SlaveListModule.rebuild()
 
 func rebuild_task_info():
-#	var char_on_quest = false
-#	for ch in ResourceScripts.game_party.characters.values():
-#		if ch.is_on_quest():
-#			char_on_quest = true
-#			break
-#	if ResourceScripts.game_party.active_tasks.empty() && !char_on_quest:
-#		TaskModule.visible = false
-#		if TaskModule.is_visible():
-#			ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
-#		return
-#	for i in ResourceScripts.game_party.active_tasks:
-#		if !i.workers.empty() || char_on_quest:
-#			if !TaskModule.is_visible():
-#				ResourceScripts.core_animations.UnfadeAnimation(TaskModule, 0.3)
-#			TaskModule.visible = true
-#			break
-#		else:
-#			TaskModule.visible = false
-#			if TaskModule.is_visible():
-#				ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
+	var char_on_quest = false
+	for ch in ResourceScripts.game_party.characters.values():
+		if ch.is_on_quest():
+			char_on_quest = true
+			break
+	if ResourceScripts.game_res.tasks_progresses.empty() && !char_on_quest:
+		TaskModule.visible = false
+		if TaskModule.is_visible():
+			ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
+		return
+	for id in ResourceScripts.game_res.tasks_progresses:
+		var i = ResourceScripts.game_res.tasks_progresses[id]
+		if !i.has('workers'):
+			continue
+		if !i.workers.empty() || char_on_quest:
+			if !TaskModule.is_visible():
+				ResourceScripts.core_animations.UnfadeAnimation(TaskModule, 0.3)
+			TaskModule.visible = true
+			break
+		else:
+			TaskModule.visible = false
+			if TaskModule.is_visible():
+				ResourceScripts.core_animations.FadeAnimation(TaskModule, 0.3)
 	TaskModule.show_task_info()
 
 ### State Managers ###

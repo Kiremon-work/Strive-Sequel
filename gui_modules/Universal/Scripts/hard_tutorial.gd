@@ -17,7 +17,8 @@ var prepare_tutorial_funcs = {
 
 var tutorial_sequence = [
 	'training', 'work_intermedia', 'work',
-	'leveling_intermedia', 'leveling',
+#	'leveling_intermedia',
+	'leveling',
 	'quest_and_combat_intermedia', 'quest_and_combat']
 
 var tutorials = {
@@ -29,7 +30,7 @@ var tutorials = {
 		},
 		#1
 		{
-			buttons = ['first_skill_btn'],
+			buttons = ['mentor_skill_btn'],
 			text = "TUTORIAL_TRAINING2",
 			panel_pos = Vector2(733,150)
 		},{
@@ -83,7 +84,12 @@ var tutorials = {
 			panel_pos = Vector2(50,850),
 			delay = 1.0
 		},{
-			buttons = ['obedience_btn'],
+			buttons = ['event_opt_1'],
+			text = "TUTORIAL_TRAINING14_1",
+			panel_pos = Vector2(50,850),
+			delay = 1.0
+		},{
+			buttons = ['training_bonus_btn'],
 			text = "TUTORIAL_TRAINING15",
 			panel_pos = Vector2(733,50)
 		},{
@@ -115,35 +121,84 @@ var tutorials = {
 		}
 	],
 	work = [
+		#upgrade
+#		{
+#			buttons = ['upgrades_button'],
+#			text = "TUTORIAL_WORK1",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['forge'],
+#			text = "TUTORIAL_WORK2",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['upgrade_confirm'],
+#			text = "TUTORIAL_WORK3",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['upgrade_close_button'],
+#			listen = ['close_by_RMB_sig'],
+#			pass_RMB = true,
+#			text = "TUTORIAL_WORK4",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['work_button'],
+#			text = "TUTORIAL_WORK5",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['building_work'],
+#			text = "TUTORIAL_WORK6",
+#			panel_pos = Vector2(500,150)
+#		},{
+#			buttons = ['daisy_work'],
+#			text = "TUTORIAL_WORK7",
+#			panel_pos = Vector2(500,150)
+#		},{
+#			buttons = ['close_work'],
+#			listen = ['close_by_RMB_sig'],
+#			pass_RMB = true,
+#			text = "TUTORIAL_WORK8",
+#			panel_pos = Vector2(500,150)
+#		},{
+#			buttons = ['finish_turn'],
+#			text = "TUTORIAL_WORK9",
+#			panel_pos = Vector2(733,150)
+#		},
+		#craft
 		{
-			buttons = ['upgrades_button'],
-			text = "TUTORIAL_WORK1",
-			panel_pos = Vector2(733,150)
+			buttons = ['craft_button'],
+			text = "TUTORIAL_WORK15",
+			panel_pos = Vector2(733,50)
 		},{
-			buttons = ['forge'],
-			text = "TUTORIAL_WORK2",
-			panel_pos = Vector2(733,150)
+			buttons = ['bread_button'],
+			text = "TUTORIAL_WORK16",
+			panel_pos = Vector2(733,50)
 		},{
-			buttons = ['upgrade_confirm'],
-			text = "TUTORIAL_WORK3",
-			panel_pos = Vector2(733,150)
+			buttons = ['craft_confirm_button'],
+			text = "TUTORIAL_WORK16_1",
+			panel_pos = Vector2(733,50)
 		},{
-			buttons = ['upgrade_close_button'],
-			listen = ['close_by_RMB_sig'],
-			pass_RMB = true,
-			text = "TUTORIAL_WORK4",
-			panel_pos = Vector2(733,150)
+			buttons = ['craft_plus_button'],
+			text = "TUTORIAL_WORK17",
+			panel_pos = Vector2(733,50)
+		},{
+			buttons = ['craft_confirm2_button'],
+			text = "TUTORIAL_WORK17_1",
+			panel_pos = Vector2(733,50)
+		},{
+			buttons = ['craft_back_button'],
+			text = "TUTORIAL_WORK18",
+			panel_pos = Vector2(733,50)
 		},{
 			buttons = ['work_button'],
 			text = "TUTORIAL_WORK5",
-			panel_pos = Vector2(733,150)
+			panel_pos = Vector2(733,50)
 		},{
-			buttons = ['building_work'],
-			text = "TUTORIAL_WORK6",
+			buttons = ['craft_work'],
+			text = "TUTORIAL_WORK19",
 			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['daisy_work'],
-			text = "TUTORIAL_WORK7",
+			text = "TUTORIAL_WORK20",
 			panel_pos = Vector2(500,150)
 		},{
 			buttons = ['close_work'],
@@ -155,28 +210,30 @@ var tutorials = {
 			buttons = ['finish_turn'],
 			text = "TUTORIAL_WORK9",
 			panel_pos = Vector2(733,150)
-		},{
-			buttons = ['service_mode'],
-			text = "TUTORIAL_WORK10",
-			panel_pos = Vector2(733,50)
-		},{
-			buttons = ['daisy_waitress'],
-			text = "TUTORIAL_WORK11",
-			ban_mass_select = true,
-			panel_pos = Vector2(733,150)
-		},{
-			buttons = ['work_button'],
-			text = "TUTORIAL_WORK12",
-			panel_pos = Vector2(733,150)
-		},{
-			buttons = ['service_work'],
-			text = "TUTORIAL_WORK13",
-			panel_pos = Vector2(500,150)
-		},{
-			buttons = ['daisy_work'],
-			text = "TUTORIAL_WORK14",
-			panel_pos = Vector2(500,150)
-		}
+		},
+		#service, uncomment when service will be fixed
+#		{
+#			buttons = ['service_mode'],
+#			text = "TUTORIAL_WORK10",
+#			panel_pos = Vector2(733,50)
+#		},{
+#			buttons = ['daisy_waitress'],
+#			text = "TUTORIAL_WORK11",
+#			ban_mass_select = true,
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['work_button'],
+#			text = "TUTORIAL_WORK12",
+#			panel_pos = Vector2(733,150)
+#		},{
+#			buttons = ['service_work'],
+#			text = "TUTORIAL_WORK13",
+#			panel_pos = Vector2(500,150)
+#		},{
+#			buttons = ['daisy_work'],
+#			text = "TUTORIAL_WORK14",
+#			panel_pos = Vector2(500,150)
+#		}
 	],
 	leveling_intermedia = [
 		{
@@ -391,7 +448,7 @@ var tutorials = {
 			buttons = ['combat_skill_2'],
 			text = 'TUTORIAL_COMBAT22',
 			panel_pos = Vector2(733,50),
-			delay = 0.5
+			delay = 0.8
 		},{
 			buttons = ['combat_ally'],
 			text = 'TUTORIAL_COMBAT22',
@@ -687,7 +744,9 @@ func prepare_general_tut():
 	globals.common_effects([{code = 'make_story_character', value = 'Daisy'}])
 	character = ResourceScripts.game_party.get_unique_slave('daisy')
 	character.remove_trait('training_obedience')
-	character.add_stat('loyalty', 25)
+	character.add_trait('untrained')#Rebellious
+	character.add_stat('loyalty', 99)
+	character.add_stat('training_points', 40)
 	character.set_brothel_rule('waitress', false)
 	ResourceScripts.game_res.money = 800
 	ResourceScripts.game_res.materials['wood'] = 10
@@ -697,6 +756,7 @@ func prepare_general_tut():
 	ResourceScripts.game_res.materials['fish'] = 50
 	ResourceScripts.game_res.materials['bread'] = 50
 	ResourceScripts.game_res.materials['vegetables'] = 50
+	ResourceScripts.game_res.materials['grain'] = 50
 	globals.AddItemToInventory(globals.CreateUsableItem("exp_scroll", 1))
 #	var has_tut_quest = false
 #	for quest_id in ResourceScripts.game_world.areas['plains'].quests.factions['workers']:

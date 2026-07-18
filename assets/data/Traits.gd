@@ -1316,7 +1316,7 @@ var traits = {
 		effects = [],
 		bonusstats = {},
 		reqs = [],
-		tags = ['simple_icon', 'remove_untrained']
+		tags = ['simple_icon', 'remove_untrained', 'sexservice']
 	},
 	training_obedience = {
 		code = 'training_obedience',

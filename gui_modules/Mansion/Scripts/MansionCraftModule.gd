@@ -50,7 +50,24 @@ func _ready():
 	for i in $filter.get_children():
 		i.connect('pressed',self, 'set_filter', [i.name])
 		globals.connecttexttooltip(i, tr(filtercategories[i.name]))
+	input_handler.register_btn_source('bread_button', self, 'tut_get_bread_btn')
+	input_handler.register_btn_source('craft_confirm_button', self, 'tut_get_confirm_btn')
+	input_handler.register_btn_source('craft_plus_button', self, 'tut_get_plus_btn')
+	input_handler.register_btn_source('craft_confirm2_button', self, 'tut_get_confirm2_btn')
+	input_handler.register_btn_source('craft_back_button', self, 'tut_get_back_btn')
 
+func tut_get_bread_btn():
+	for btn in $CraftSelect/ScrollContainer/VBoxContainer.get_children():
+		if btn.get_meta('item', {code = ""}).code == "bread":
+			return btn
+func tut_get_confirm_btn():
+	return $NumberSelect/NumberConfirm
+func tut_get_plus_btn():
+	return $NumberSelect2/VBoxContainer/HBoxContainer1/pt3/b4
+func tut_get_confirm2_btn():
+	return $NumberSelect2/VBoxContainer/Button
+func tut_get_back_btn():
+	return $CraftSelect/BackButton
 
 func set_filter(type):
 	item_filter = type

@@ -118,7 +118,17 @@ func _add_upgrade_task(upgrade_id):
 	if !tasks_progresses.has(upgrade_id):
 		var upgrade_lv = findupgradelevel(upgrade_id)
 		var tdata = upgradedata.upgradelist[upgrade_id]
-		tasks_progresses[upgrade_id] = {id = upgrade_id, level = upgrade_lv + 1, progress = 0, progress_limit = tdata.levels[int(upgrade_lv + 1)].taskprogress, type = 'progress_item', status = 'init', job = 'building'}
+		tasks_progresses[upgrade_id] = {
+			id = upgrade_id, 
+			level = upgrade_lv + 1, 
+			progress = 0, 
+			progress_limit = tdata.levels[int(upgrade_lv + 1)].taskprogress, 
+			type = 'progress_item', 
+			status = 'init', 
+			job = 'building',
+			workstat = 'physics',
+			worktool = 'hammer',
+		}
 
 
 func add_recipe_task(recipe_id, parts = {}, amount = {fixed = 1}):
@@ -137,6 +147,8 @@ func add_recipe_task(recipe_id, parts = {}, amount = {fixed = 1}):
 		workstat = tdata.workstat,
 		mod = tdata.mod,
 	}
+	if tdata.has('worktool'):
+		template.worktool = tdata.worktool
 	template.job = rdata.worktype + '_' + rdata.resultitemtype
 	
 	if amount.has('fixed'):
@@ -172,7 +184,7 @@ func _add_craft_job():
 
 func _add_farm_job():
 	if !tasks_progresses.has('farming'):
-		tasks_progresses.farming = {id = 'farming', status = 'permanent', workers = [], messages = [], location = 'aliron', type = 'permanent'} 
+		tasks_progresses.farming = {id = 'farming', status = 'permanent', workers = [], messages = [], location = 'aliron', type = 'permanent', name = 'TASKPRODUCE', descript = 'TASKPRODUCEDESCRIPT'} 
 
 
 func _add_service_job():
@@ -436,7 +448,7 @@ func _active_task_find(list):
 func clean_task(id):
 	var val = tasks_progresses[id]
 	if val.has('workers'):
-		for ch_id in val.workers:
+		for ch_id in val.workers.duplicate():
 			var tchar = characters_pool.get_char_by_id(ch_id)
 			tchar.remove_from_task()
 	match val.type:
@@ -445,6 +457,7 @@ func clean_task(id):
 	if active_tasks.has(val.id):
 		active_tasks[val.id].erase(id)
 	tasks_progresses.erase(id)
+	globals.emit_signal("task_removed")
 
 
 func tasks_cleanup():
@@ -460,7 +473,7 @@ func tasks_cleanup():
 func remove_tasks_for_location(location):
 	for id in tasks_progresses.keys().duplicate():
 		var val = tasks_progresses[id]
-		if val.location == location:
+		if val.has("location") and val.location == location:
 			clean_task(id)
 
 
@@ -740,6 +753,10 @@ func _add_gather_value(tprogress, value, character):
 			materials[tprogress.job] += limit
 		character.add_metric_for_outcome(tprogress.job, limit)
 	
+	if tprogress.type == 'gather_limited':
+		var locdata = ResourceScripts.world_gen.get_location_from_code(tprogress.location)
+		locdata.gather_limit_resources[tprogress.job] -= limit
+	
 	if limit == limit2:
 		tprogress.status = 'completed'
 	else:
@@ -780,7 +797,7 @@ func add_upgrade_to_queue(upgrade_id):
 				money -= int(upgrade_next_state.cost[i])
 			else:
 				materials[i] -= int(upgrade_next_state.cost[i])
-		u_task.status == 'active'
+		u_task.status = 'active'
 	
 	if ResourceScripts.game_globals.instant_upgrades:
 		level_up_upgrade(upgrade_id)
