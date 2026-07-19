@@ -575,9 +575,24 @@ func update_button(newbutton, t_mode = mode):
 #		job_label.text = tr("TASKMISSION")
 	else:
 		var task = person.find_worktask()
-		job_label.text = tr(task.name)
-		if task.has('mod'):
-			_apply_task_color(job_label, task.mod)
+		if work_code == 'crafting':
+			var predict_task_id = person.predict_active_task()
+			if predict_task_id == null:
+				job_label.text = tr('TASKREST')
+			else:
+				var predict_task = ResourceScripts.game_res.tasks_progresses[predict_task_id]
+				var predict_task_cat = predict_task.job
+				if predict_task_cat != 'building':
+					predict_task_cat = predict_task_cat.trim_suffix('_item')
+					predict_task_cat = predict_task_cat.trim_suffix('_material')
+				var predict_job = tasks.tasklist[predict_task_cat]
+				job_label.text = tr(predict_job.name)
+				if predict_job.has('mod'):
+					_apply_task_color(job_label, predict_job.mod)
+		else:
+			job_label.text = tr(task.name)
+			if task.has('mod'):
+				_apply_task_color(job_label, task.mod)
 	
 	if person.get_next_class_exp() <= person.get_stat('base_exp'):
 		newbutton.get_node("explabel").set("custom_colors/font_color", Color(variables.hexcolordict.levelup_text_color))
