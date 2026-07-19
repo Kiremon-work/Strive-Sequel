@@ -38,7 +38,7 @@ var chardata = {
 	},
 	base_melee = {
 		name = "melee",
-		masteries = ['warfare', 'protection', 'leadership'],
+		masteries = ['warfare', 'protection', 'leadership','fire'],
 		1 : {
 			stats = {physics_factor = 3, wits_factor = 3, growth_factor = 3, physics = 20, wits = 20},
 			classes1 = ['fighter'],
@@ -50,7 +50,7 @@ var chardata = {
 		2 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 4, physics = 60, wits = 60},
 			classes1 = ['fighter', 'rogue', 'archer'],
-			classes2 = ['knight', 'paladin'],
+			classes2 = ['knight', 'shieldbearer'],
 			optional_classes_amount = 1,
 			mastery_levels = [3, 4],
 			items = ['chest_base_metal', 'legs_base_metal', 'shield', ['sword', 'mace', 'battleaxe', 'club', 'spear']]
@@ -58,7 +58,7 @@ var chardata = {
 		3 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'rogue', 'archer'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight'], ['paladin','shieldbearer']],
 			optional_classes_amount = 1,
 			mastery_levels = 6,
 			items = [['chest_base_metal', 'chest_adv_metal'], ['legs_base_metal', 'legs_adv_metal'], 'shield', ['sword', 'mace', 'battleaxe', 'swordadv', 'spearadv', 'maceadv', 'battleaxeadv', 'club', 'spear']]
@@ -66,15 +66,15 @@ var chardata = {
 		4 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'rogue', 'archer'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight','spellsword','arcane_blade',], ['paladin','shieldbearer','templar','monk']],
 			optional_classes_amount = 1,
-			mastery_levels = 6,
+			mastery_levels = 8,
 			items = ['chest_adv_metal', 'legs_adv_metal', 'shield', ['swordadv', 'spearadv', 'maceadv', 'battleaxeadv']]
 		},
 	},
 	bers_melee = {
 		name = "melee",
-		masteries = ['warfare', 'protection', 'leadership'],
+		masteries = ['warfare', 'protection', 'leadership','fire'],
 		race = 'Orc',
 		1 : {
 			stats = {physics_factor = 3, wits_factor = 3, growth_factor = 3, physics = 20, wits = 20},
@@ -87,7 +87,7 @@ var chardata = {
 		2 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 4, physics = 60, wits = 60},
 			classes1 = ['fighter', 'berserker'],
-			classes2 = ['knight', 'paladin'],
+			classes2 = ['knight', 'shieldbearer'],
 			optional_classes_amount = 1,
 			mastery_levels = [3, 4],
 			items = ['chest_base_metal', 'legs_base_metal', 'shield', ['sword', 'mace', 'battleaxe', 'club', 'spear']]
@@ -95,7 +95,7 @@ var chardata = {
 		3 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'berserker'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight'], ['paladin','shieldbearer']],
 			optional_classes_amount = 1,
 			mastery_levels = 6,
 			items = [['chest_base_metal', 'chest_adv_metal'], ['legs_base_metal', 'legs_adv_metal'], 'shield', ['sword', 'mace', 'battleaxe', 'swordadv', 'spearadv', 'maceadv', 'battleaxeadv', 'club', 'spear']]
@@ -103,15 +103,15 @@ var chardata = {
 		4 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'berserker', 'rogue', 'archer'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight','spellsword','arcane_blade',], ['paladin','shieldbearer','templar','monk']],
 			optional_classes_amount = 1,
-			mastery_levels = 6,
+			mastery_levels = 8,
 			items = ['chest_adv_metal', 'legs_adv_metal', 'shield', ['swordadv', 'spearadv', 'maceadv', 'battleaxeadv']]
 		},
 	},
 	dk_melee = {
 		name = "melee",
-		masteries = ['warfare', 'protection', 'leadership'],
+		masteries = ['warfare', 'protection', 'leadership','fire'],
 		race = 'Dragonkin',
 		1 : {
 			stats = {physics_factor = 3, wits_factor = 3, growth_factor = 3, physics = 20, wits = 20},
@@ -124,7 +124,7 @@ var chardata = {
 		2 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 4, physics = 60, wits = 60},
 			classes1 = ['fighter', 'dragonknight'],
-			classes2 = ['knight', 'paladin'],
+			classes2 = ['knight', 'shieldbearer'],
 			optional_classes_amount = 1,
 			mastery_levels = [3, 4],
 			items = ['chest_base_metal', 'legs_base_metal', 'shield', ['sword', 'mace', 'battleaxe', 'club', 'spear']]
@@ -132,7 +132,7 @@ var chardata = {
 		3 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'dragonknight'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight'], ['paladin','shieldbearer']],
 			optional_classes_amount = 1,
 			mastery_levels = 6,
 			items = [['chest_base_metal', 'chest_adv_metal'], ['legs_base_metal', 'legs_adv_metal'], 'shield', ['sword', 'mace', 'battleaxe', 'swordadv', 'spearadv', 'maceadv', 'battleaxeadv', 'club', 'spear']]
@@ -140,15 +140,15 @@ var chardata = {
 		4 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'dragonknight', 'rogue', 'archer'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight','spellsword','arcane_blade',], ['paladin','shieldbearer','templar','monk']],
 			optional_classes_amount = 1,
-			mastery_levels = 6,
+			mastery_levels = 8,
 			items = ['chest_adv_metal', 'legs_adv_metal', 'shield', ['swordadv', 'spearadv', 'maceadv', 'battleaxeadv']]
 		},
 	},
 	val_melee = {
 		name = "melee",
-		masteries = ['warfare', 'protection', 'leadership'],
+		masteries = ['warfare', 'protection', 'leadership','light'],
 		race = 'Seraph',
 		1 : {
 			stats = {physics_factor = 3, wits_factor = 3, growth_factor = 3, physics = 20, wits = 20},
@@ -161,7 +161,7 @@ var chardata = {
 		2 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 4, physics = 60, wits = 60},
 			classes1 = ['fighter', 'valkyrie'],
-			classes2 = ['knight', 'paladin'],
+			classes2 = ['knight', 'shieldbearer'],
 			optional_classes_amount = 1,
 			mastery_levels = [3, 4],
 			items = ['chest_base_metal', 'legs_base_metal', 'shield', ['sword', 'mace', 'battleaxe', 'club', 'spear']]
@@ -169,7 +169,7 @@ var chardata = {
 		3 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'valkyrie'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight'], ['paladin','shieldbearer']],
 			optional_classes_amount = 1,
 			mastery_levels = 6,
 			items = [['chest_base_metal', 'chest_adv_metal'], ['legs_base_metal', 'legs_adv_metal'], 'shield', ['sword', 'mace', 'battleaxe', 'swordadv', 'spearadv', 'maceadv', 'battleaxeadv', 'club', 'spear']]
@@ -177,9 +177,9 @@ var chardata = {
 		4 : {
 			stats = {physics_factor = 5, wits_factor = 3, growth_factor = 5, physics = 100, wits = 100},
 			classes1 = ['fighter', 'valkyrie', 'rogue', 'archer'],
-			classes2 = [['knight', 'deathknight'], ['paladin','templar']],
+			classes2 = [['knight', 'deathknight','spellsword','arcane_blade',], ['paladin','shieldbearer','templar','monk']],
 			optional_classes_amount = 1,
-			mastery_levels = 6,
+			mastery_levels = 8,
 			items = ['chest_adv_metal', 'legs_adv_metal', 'shield', ['swordadv', 'spearadv', 'maceadv', 'battleaxeadv']]
 		},
 	},
@@ -248,7 +248,7 @@ var chardata = {
 		},
 		4 : {
 			stats = {physics_factor = 4, wits_factor = 4, growth_factor = 5, physics = 100, wits = 100},
-			classes1 = ['archer', 'sniper', 'ranger'],
+			classes1 = ['archer', 'sniper', 'ranger','rogue'],
 			classes2 = [],
 			optional_classes_amount = 0,
 			mastery_levels = 6,
@@ -610,11 +610,11 @@ func make_hero(type, level, position = 1, first = false):
 			if level > 1:
 				character.set_stat('physics_factor', 5)
 				pool1.append_array(pool2)
-				pool2 = ['knight', 'paladin']
+				pool2 = ['knight', 'shieldbearer']
 				for mas in pool3:
 					pool3[mas] = globals.rng.randi_range(3, 4)
 			if level > 2:
-				pool2 = [['knight', 'deathknight'], ['paladin','templar']]
+				pool2 = [['knight', 'deathknight'], ['paladin','shieldbearer']]
 				for mas in pool3:
 					pool3[mas] = 6
 			for prof in pool1:
