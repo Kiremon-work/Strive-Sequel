@@ -532,7 +532,7 @@ func checkwinlose():
 	for i in range(battlefield.size()):
 		if battlefield[i] == null:
 			continue
-		if get_char_by_pos(i).defeated:
+		if get_char_by_pos(i).defeated or get_char_by_pos(i).has_status('non_win_con'):
 			continue
 		if i in range(1,7):
 			playergroupcounter += 1

@@ -1890,6 +1890,30 @@ At 2+ stacks of [{color=aqua|Catastrophic Momentum}], cause a shockwave that dea
 Deal 130% ATK damage and inflict {color=aqua|Arousal}.""",
 	SKILLBURST_FORTH_MY_PULSING_FLESH = 'Burst Forth My Pulsing Flesh!',
 	SKILLBURST_FORTH_MY_PULSING_FLESHDESCRIPT = """Revive all Tentacle Appendages. Deal {color=yellow|Dark} damage to all enemies with a chance to inflict {color=aqua|Stunned}.""",
+	SKILLUMBRAL_REIGN = 'Umbral Reign',
+	SKILLUMBRAL_REIGNDESCRIPT = 'Inflict In the Shadow, Blind, and Lost in Darkness.',
+	SKILLSHADOW_MADE_MANIFEST = 'Shadow Made Manifest',
+	SKILLSHADOW_MADE_MANIFESTDESCRIPT = 'Summon a Shadow Monstrosity.',
+	SKILLSTYGIAN_WAILING = 'Stygian Wailing',
+	SKILLSTYGIAN_WAILINGDESCRIPT = 'Deal low {color=yellow|Dark} magic damage to all enemies. Chance to inflict Silence and Fear.',
+	SKILLTENEBROUS_RAKE = 'Tenebrous Rake',
+	SKILLTENEBROUS_RAKEDESCRIPT = 'Deal {color=yellow|Dark} physical damage to enemies in the melee line and inflict Bleed.',
+	SKILLVOID_DELUGE = 'Void Deluge',
+	SKILLVOID_DELUGEDESCRIPT = 'Deal {color=yellow|Dark} magic damage to random targets. Chance to inflict Blind.',
+	SKILLCALIGINOUS_UNDULATION = 'Caliginous Undulation',
+	SKILLCALIGINOUS_UNDULATIONDESCRIPT = """Deal {color=yellow|Dark} damage to the front-most enemies in each row and inflict Blind.
+	Stun blinded targets.""",
+	SKILLNIXX_ULT = 'Pulvis et Umbra Estis!',
+	SKILLNIXX_ULTDESCRIPT = """Deal {color=yellow|Dark} magic damage to all enemies.
+	Deal increased damage to Blind enemies.
+	Inflict healing reduction on all enemies.
+	Put out Brazier afterward.""",
+	SKILLNOTHING = 'Nothing',
+	SKILLNOTHINGDESCRIPT = 'Do nothing.',
+	SKILLSMOTHER_THE_FLAME = 'Smother the Flame',
+	SKILLSMOTHER_THE_FLAMEDESCRIPT = 'Can only target an Unlit Brazier. Heal for 100% of this unit\'s ATK and remove Burn.',
+	SKILLBUMP_IN_THE_MIDNIGHT = 'Bump in the Midnight',
+	SKILLBUMP_IN_THE_MIDNIGHTDESCRIPT = 'Deal {color=yellow|Dark} physical damage to a target. Inflict Bleed, Shred, and Fear.',
 	STATUSDESC_BLEED = "Bleeding: Take 10% of Maximum HP as neutral damage per turn.",
 	STATUSDESC_POISON = "Poisoned: Take 10% of Maximum HP as neutral damage per turn.",
 	STATUSDESC_BURN = "Burning: Take 8% of Maximum HP as Fire damage per turn.",
@@ -4887,6 +4911,55 @@ At +10 stack, become Stun for 2 turns and remove all stack of Arousal.""",
 	EFFECT_SWALLOWED_DESCRIPT = """Cannot Act. Cannot be Healed. Lose 20% HP on their turn.
 Last until this Ashmedai is hit by physical attack 6 times.""",
 	TRAIT_SLIPPERY_THICK_SKIN = 'Reduce Ranged damage taken by 20%. If Wet, ranged attacks including spells have 30% to miss this unit.',
+	EFFECT_NIXX_TRAIT_DESCRIPT = """Take further reduced damage from DoT effects.
+Enemy gains no benefit from 'In the Shadow' effect.
+Always hit against targets affected by 'In the Shadow'.
+Enemies affected with 'In the Shadow' take 20% of current HP as dark damage every turn.""",
+	EFFECTNAME_INTANGIBLE_OPPRESSIVE_DARKNESS = 'Intangible and Oppressive Darkness',
+	EFFECT_INTANGIBLE_OPPRESSIVE_DARKNESS_DESCRIPT = """While the Brazier is unlit:
+Gain immunity to burn and silence.
+Take -50% damage from all attacks except fire and light damage.
+All units do not lose 'In the Shadow' buff when using move unless it\'s a fire or light move.""",
+	EFFECTNAME_NIXX_WRATH_TRAIT = 'Ire Against the Light',
+	EFFECT_NIXX_WRATH_TRAIT_DESCRIPT = """While the Brazier is lighted, gain a stack of Nixx\'s Wrath at the end of each Nixx's turn.
+At 4+ stack: Cleanse and Gain immunity to Silence.""",
+	EFFECTNAME_NIXX_WRATH = 'Nixx\'s Wrath',
+	EFFECT_NIXX_WRATH_DESCRIPT = """Gain + 7.5% ATK and MATK per stack (Max 4)
+At 4+ stack: Become immune to Silence, clear Silence on self, and allow Pulvis et Umbra Estis! to be used.
+Remove if Brazier were put out.""",
+	NIXX_ULT_WARNING = """
+...The shadow casted by the brazier grow restless.""",
+	EFFECTNAME_KURO_NIXX_STANDOFF = 'Champion\'s Defiance',
+	EFFECT_KURO_NIXX_STANDOFF_DESCRIPT = 'Deal and take +10% damage to Nixx. Kuro is immune to the negative effects of \'In the Shadow\'.',
+	EFFECTNAME_ENVIRONMENTAL_OBJECT = 'Environmental Object',
+	EFFECT_ENVIRONMENTAL_OBJECT_DESCRIPT = 'HP cannot drop below 10%. Does not need to be defeated for the fight to be concluded.',
+	EFFECTNAME_FESTERING_TERROR = 'Festering Terror',
+	EFFECT_FESTERING_TERROR_DESCRIPT = 'Deal 10% more damage and gain +10% Crit Chance for every stack. (Max 5)',
+	EFFECTNAME_BLACK_MIRROR = 'Black Mirror',
+	EFFECT_BLACK_MIRROR_DESCRIPT = 'Reflect single-target spell casted on this unit back at the attacker at half the strength.',
+	EFFECTNAME_BLACK_THORN = 'Black Thorn',
+	EFFECT_BLACK_THORN_DESCRIPT = 'When hit by melee attack, deal 50 Dark damage back to the attacker.',
+	EFFECTNAME_BLACK_GROWTH = 'Black Growth',
+	EFFECT_BLACK_GROWTH_DESCRIPT = 'Regen 16% of HP at the end of each turn.',
+	EFFECTNAME_BLACK_BIND = 'Black Bind',
+	EFFECT_BLACK_BIND_DESCRIPT = 'Attacks from this unit have a 50% chance to inflict Ensnared for 2 turns',
+	EFFECTNAME_LOST_IN_DARKNESS = 'Lost in Darkness',
+	EFFECT_LOST_IN_DARKNESS_DESCRIPT = 'Take additional dark damage when hit by enemies.',
+	EFFECT_UNLIT_BRAZIER_DESCRIPT = """When this unit HP drops to 10%:
+ - Remove \'In the Shadow\' from ALL unit.
+ - Remove Festering Terror from all allies.
+ - Convert 'Intangible and Oppressive Darkness' into 'Ire Against the Light'.
+ - Transform into Lighted Brazier.""",
+	EFFECT_LIGTHED_BRAZIER_DESCRIPT = """When this unit HP drops to 10%:
+ - Apply \'In the Shadow\' to ALL unit.
+ - Apply a stack of Lost in Darkness to all enemies.
+ - Convert 'Ire Against the Light' into 'Intangible and Oppressive Darkness'.
+ - Transform into Unlit Brazier.""",
+	EFFECT_INTANGIBLE_SHADOW_DESCRIPT = """While the Brazier is unlit:
+ - all attacks against this unit have -50 hit rate
+ - gain immunity to burn and silence.
+ - Gain a stack of Festering Terror at the end of each turn.
+When the Brazier is lit, lose 16% of Max HP at the end of their turn.""",
 	RESETTRAINREQ = "Reset training and all purchased perks. Requires Oblivion potion.",
 	RESETTRAINING = "All training progress will be discarded. Are you sure?",
 	BUFFDESCRIPTDEFENDER = "Defender: Will shield allies from attacks unless stunned.",
@@ -8439,6 +8512,9 @@ The woman disappears as quickly as she appeared before you, leaving you in front
 	ENEMYKURO = "Kuro",
 	ENEMYERDYNA = "Erdyna",
 	ENEMYNIXX = "Nixx",
+	ENEMYUNLIT_BRAZIER = 'Unlit Brazier',
+	ENEMYLIGHTED_BRAZIER = 'Lighted Brazier',
+	ENEMYSHADOW_MONSTROSITY = 'Shadow Monstrosity',
 	ENEMYMUTANT = "Mutant",
 	ENEMYMUTANT2 = "Deformed",
 	ENEMYSYLAS = "Sylas",
