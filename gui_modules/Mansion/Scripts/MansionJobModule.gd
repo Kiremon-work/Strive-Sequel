@@ -715,6 +715,9 @@ func show_brothel_options():
 		elif !person.has_status('sexservice'):
 			newbutton.disabled = true
 			text += tr("LACKSEXTRAINING")
+		elif i == 'sextoy' and !person.has_profession('sextoy'):
+			newbutton.hide()
+			continue
 		if person.get_stat('consent') < tasks.gold_tasks_data[i].min_consent:
 			newbutton.set("custom_colors/font_color", variables.hexcolordict['red'])
 			newbutton.set("custom_colors/font_color_pressed", variables.hexcolordict['red'])

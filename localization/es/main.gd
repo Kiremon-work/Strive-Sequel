@@ -2540,6 +2540,8 @@ Daño +15%, Salud +20.""",
 	STATLUSTDESCRIPT = "La lujuria aumenta con el tiempo y permite el uso de habilidades específicas. Si se utiliza correctamente, puede ser una poderosa herramienta de control y de recursos.",
 	STATPRODUCTIVITY = "Productividad",
 	STATPRODUCTIVITYDESCRIPT = "Afecta a todas las tareas productivas. La productividad total se aplica a todas las ocupaciones, mientras que la eficiencia impulsará tareas específicas.",
+	STATDESIRABILITY = """Desirability""", # MISSING TRANSLATION
+	STATDESIRABILITYDESCRIPT = """{color=yellow|Desirability} affects how likely a character is to earn full gold from sex service instead of a reduced amount, and boosts non-sex service income once it rises above 50. Grows from Charm Factor, Charm, fame, and certain clothes or traits.""", # MISSING TRANSLATION
 	STATCONSENT = "Consentir",
 	STAMINA_LABEL = """Stamina""", # MISSING TRANSLATION
 	STATCONSENTDESCRIPT = "Afecta el consentimiento para las acciones durante las interacciones sexuales. Cada acción tiene un consentimiento diferente según los rasgos, las parejas y otros factores. Este número representa solo el valor inalterado. El consentimiento básico aumenta al obtener resultados positivos, al probar nuevas acciones y parejas. También aumenta ligeramente con las habilidades de disciplina.",

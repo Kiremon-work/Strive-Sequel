@@ -566,7 +566,7 @@ var gold_tasks_data = {
 		workstats = [],
 		req_training = 'sexservice_adv',
 		tags = ['virginity','impregnation'],
-		min_consent = 6,
+		min_consent = 0,
 	},
 }
 

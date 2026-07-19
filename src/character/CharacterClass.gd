@@ -140,6 +140,8 @@ func get_stat(statname, nobonus = false, desc_ready = false):
 		if check_trait('courtesan'):
 			fame_desirability *= variables.courtesan_fame_desirability_mult
 		base += fame_desirability
+		if has_profession('petbeast'):
+			base += variables.petbeast_desirability_per_tame_factor * get_stat('tame_factor')
 		if nobonus:
 			if check_trait('harlot'):
 				base = min(base, variables.harlot_desirability_cap)

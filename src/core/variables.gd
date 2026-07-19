@@ -103,8 +103,8 @@ var farm_produce_slots_per_upgrade = 1
 
 #desirability & sex service gold
 var desirability_base = 25.0
-var desirability_per_charm_factor = 5.0
-var desirability_per_charm_stat = 0.6
+var desirability_per_charm_factor = 7.0
+var desirability_per_charm_stat = 0.3
 var desirability_per_enabled_action = 4.0
 var desirability_gold_cap = 100.0 #desirability above this no longer affects full-gold chance, only the gold bonus below
 var desirability_overcap_gold_bonus = 0.01 #gold income % per point of desirability above desirability_gold_cap
@@ -117,6 +117,14 @@ var sex_training_gold_multiplier = {
 	'skilled': 1.0,
 	'mastered': 1.2,
 }
+var group_base_mult = 1.5
+var group_skill_income_bonus = {
+	'novice': 0.0,
+	'skilled': 0.05,
+	'mastered': 0.10,
+}
+var sextoy_base_mult = 0.9
+var sextoy_tame_factor_bonus = 0.10 #income % per point of tame factor above 1
 
 #non-sex service gold
 var non_sex_service_charm_factor_mult = 3.0
@@ -124,6 +132,8 @@ var non_sex_service_tame_factor_mult = 2.5
 var non_sex_desirability_threshold = 50.0 #desirability above this boosts non-sex service income
 var non_sex_desirability_gold_bonus = 0.02 #gold income % per point of desirability above non_sex_desirability_threshold
 var waitress_training_point_chance = 0.5 #chance for a slave currently in training to gain 1 training point from waitress work
+var petbeast_desirability_per_tame_factor = 2.0 #extra desirability per tame factor, petbeast class only
+var petbeast_service_tame_factor_mult = 1.0 #extra non-sex service income per tame factor, petbeast class only
 
 #harlot & courtesan trait perks
 var harlot_desirability_cap = 75.0
