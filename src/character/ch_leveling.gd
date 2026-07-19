@@ -926,12 +926,30 @@ func add_metric_for_outcome(res_id, amount = 1):
 			parent.get_ref().add_stat('metrics_materialearn', amount)
 
 
-
 func work_tick_values(workstat):
 	if !parent.get_ref().has_status('no_working_bonuses'):
 		if workstat.findn("sex_skills") < 0:
 			parent.get_ref().add_stat(workstat, 0.36)
 		parent.get_ref().add_stat('base_exp', 5)
+
+
+func predict_active_task():
+	var joborder = get_job_order(true) 
+	for job in joborder:
+		var real_job = job + '_material'
+		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
+		if curupgrade != null:
+			return curupgrade
+	
+	joborder = get_job_order(false) 
+	for job in joborder:
+		var real_job = job
+		if job != 'building':
+			real_job += '_item'
+		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
+		if curupgrade != null:
+			return curupgrade
+	return null
 
 
 func get_task_crit_chance():

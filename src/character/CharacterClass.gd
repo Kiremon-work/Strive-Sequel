@@ -1493,6 +1493,10 @@ func can_add_farming():
 	return xp_module.can_add_farming()
 
 
+func predict_active_task():
+	return xp_module.predict_active_task()
+
+
 func act_prepared():
 	skills.act_prepared()
 

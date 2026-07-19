@@ -979,22 +979,7 @@ var list2 = ['smith', 'tailor', 'alchemy', 'cooking', 'building']
 func predict_active_task():
 	if person == null:
 		return null
-	var joborder = person.get_job_order(true) 
-	for job in joborder:
-		var real_job = job + '_material'
-		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
-		if curupgrade != null:
-			return curupgrade
-	
-	joborder = person.get_job_order(false) 
-	for job in joborder:
-		var real_job = job
-		if job != 'building':
-			real_job += '_item'
-		var curupgrade = ResourceScripts.game_res._active_task_find(ResourceScripts.game_res.crafting_lists[real_job])
-		if curupgrade != null:
-			return curupgrade
-	return null
+	return person.predict_active_task()
 
 
 func build_predicted(root):
