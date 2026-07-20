@@ -2157,7 +2157,7 @@ Deal 130% ATK damage and inflict {color=aqua|Arousal}.""", # MISSING TRANSLATION
 	TRAININGSTATUS4 = """精神状态：完好""",
 	TRAININGRESISTANCEINCREASE = """抗性增加至 %.0f。""",
 	TRAININGLABELSPIRIT = """角色精神：%.0f""",
-	TRAININGLABELLOYALTY = """%.0f""",
+	TRAININGLABELLOYALTY = """%.0f/%.0f""",
 	TRAININGLABELLOYALTYGROW = """%.0f + %.2f""",
 	TRAININGLABELRESISTANCE = """%.0f""",
 	TRAININGLABELRESISTANCEDROP = """%.0f - %.0f""",
@@ -17521,6 +17521,11 @@ AMELIA_TRIAL_NORMAL_5_OPTION_3 = """我没有其他异议了。""",
 {color=yellow|— 对不起，不知为什么，让我表现得像普通女孩子真的太难了。而且必须穿成这样也太折磨人了……也许我还是放弃这件事吧。}""",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_1 = """你现在还不该轻言放弃。""",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_2 = """也许这行确实不适合你。""",
+	CALI_SERVANTS_NEW_LEADER_END_DIALOGUE = """Cali fidgets with the torn hem of her dress, ears drooping as she searches for something to say. In the end she just gives you an awkward little nod, still clearly unsure of herself.
+
+{color=aqua|Cali: — I'll... keep trying, I guess. Just don't expect too much, okay?}
+
+Without waiting for a reply, she hurries off to change back into her usual clothes.""", # MISSING TRANSLATION
 	CALI_SERVANTS_NEW_LEADER_6 = """{color=yellow|Amelia: — 我看到你的培训了，你叫卡莉对吧？很高兴认识你。}
 
 {color=aqua|卡莉: — 你好……你又是谁？}

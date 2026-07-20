@@ -17843,6 +17843,11 @@ Also forgetting to watch her tongue, she realized that her dress was torn becaus
 {color=yellow|— Sorry, for some reason it's really hard for me to act like normal girls. And having to dress like this is so frustrating... Maybe I should forget about this.}""",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_1 = "You shouldn't give up just yet.",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_2 = "Maybe it isn't for you after all.",
+	CALI_SERVANTS_NEW_LEADER_END_DIALOGUE = """Cali fidgets with the torn hem of her dress, ears drooping as she searches for something to say. In the end she just gives you an awkward little nod, still clearly unsure of herself.
+
+{color=aqua|Cali: — I'll... keep trying, I guess. Just don't expect too much, okay?}
+
+Without waiting for a reply, she hurries off to change back into her usual clothes.""",
 	CALI_SERVANTS_NEW_LEADER_6 = """{color=yellow|Amelia: — I saw your training, Cali is it? Nice to meet you.}
 
 {color=aqua|Cali: — Hello... Who are you?}

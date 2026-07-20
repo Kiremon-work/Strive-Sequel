@@ -3157,7 +3157,13 @@ func update_localization_file(update_loc: String, primary_loc = "en"):
 			
 			# if it's a missing key, insert keys
 			if key in missing_keys.keys():
-				if !is_commented_line and cleared_line.length() > 0 and cleared_line[cleared_line.length() - 1] == ',': 
+				# strip a trailing auto-inserted "# MISSING TRANSLATION" marker before checking
+				# for the line-ending comma, otherwise a previously auto-inserted anchor line
+				# would never match and every key after it would silently stop being inserted
+				var check_line = cleared_line
+				if check_line.ends_with("#MISSINGTRANSLATION"):
+					check_line = check_line.substr(0, check_line.length() - "#MISSINGTRANSLATION".length())
+				if !is_commented_line and check_line.length() > 0 and check_line[check_line.length() - 1] == ',':
 					if inserted_anchors.has(key):
 						continue
 					inserted_anchors[key] = true

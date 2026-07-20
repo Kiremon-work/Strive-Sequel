@@ -2156,7 +2156,7 @@ Migliora la disposizione verso {color=yellow|Azioni Casuali}. Costa 5 Mana.""",
 	TRAININGSTATUS4 = "Stato dello Spirito: Conservato",
 	TRAININGRESISTANCEINCREASE = "La resistenza cresce di %.0f.",
 	TRAININGLABELSPIRIT = "Spirito del personaggio: %.0f",
-	TRAININGLABELLOYALTY = "%.0f", #
+	TRAININGLABELLOYALTY = "%.0f/%.0f", #
 	TRAININGLABELLOYALTYGROW = "%.0f + %.2f", #
 	TRAININGLABELRESISTANCE = "%.0f", #
 	TRAININGLABELRESISTANCEDROP = "%.0f - %.0f", #
@@ -17878,6 +17878,11 @@ Dimenticando anche di guardare la lingua, si rese conto che il suo vestito era s
 {color=yellow|— Mi dispiace, per qualche motivo è davvero difficile per me comportarmi come ragazze normali. E doversi vestire in questo modo è così frustrante... Forse dovrei dimenticarmi di questo.}""",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_1 = "Non dovresti arrenderti ancora.",
 	CALI_SERVANTS_NEW_LEADER_5_OPTION_2 = "Forse non fa per te, dopotutto.",
+	CALI_SERVANTS_NEW_LEADER_END_DIALOGUE = """Cali fidgets with the torn hem of her dress, ears drooping as she searches for something to say. In the end she just gives you an awkward little nod, still clearly unsure of herself.
+
+{color=aqua|Cali: — I'll... keep trying, I guess. Just don't expect too much, okay?}
+
+Without waiting for a reply, she hurries off to change back into her usual clothes.""", # MISSING TRANSLATION
 	CALI_SERVANTS_NEW_LEADER_6 = """{color=yellow|Amelia: — Ho visto il tuo allenamento, Cali? Piacere di conoscerti.}
 
 {color=aqua|Cali: — Ciao... Chi sei?}

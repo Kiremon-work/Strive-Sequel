@@ -1,3 +1,13 @@
+Fixed Lira's quest not triggering properly
+Fixed some key localization issues which should make other localizations more stable with missing translations
+Fixed some missing events keys
+Fixed wave skill type not working correctly in some cases
+Fixed character list giving wrong feedback on character training/date availability
+Fixed shop frame stucking with cursed/blessed item shaders
+Fixed an error related to farm setups
+Fixed some materials not gathering properly
+Fixed a few craft issues
+0.15.0
 Added Lira's questline
 Added Kuro's seasonal event and unlockable costume
 Added handling for act 2 transition in case when you refuse Zephyra at the end of act 1 and prevented church being blocked by it
