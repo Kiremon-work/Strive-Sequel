@@ -277,9 +277,10 @@ func add_gathering_res_temp(res, location):
 			status = 'temporal',
 			type = 'gather_simple',
 			job = res,
-			worktool = resdata.tool_type,
 			mod = resdata.workmod
 		}
+		if resdata.has('tool_type'):
+			template.worktool = resdata.tool_type
 		for st in ['descript', 'name', 'workstat']:
 			template[st] = resdata[st]
 		tasks_progresses[id] = template
