@@ -57,6 +57,7 @@ func update():
 		if is_modular_item:
 			modular_item.set_icon($ItemIcon)
 		else:
+			material = null
 			$ItemIcon.material = null
 	if get_parent().name == "GuildShop":
 		$Button.disabled = $HSlider.value == 0 || (input_handler.active_faction.reputation - (cost / $HSlider.step) * $HSlider.value) < 0
