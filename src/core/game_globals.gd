@@ -31,8 +31,8 @@ var seed_salt = randi()
 var date = 1
 var hour = 1
 
-var daily_sex_left = 1
-var daily_dates_left = 1
+#var daily_sex_left = 1
+#var daily_dates_left = 1
 var weekly_sex_left = 2
 var weekly_sex_max = 1
 var weekly_dates_left = 3

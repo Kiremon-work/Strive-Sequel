@@ -147,9 +147,16 @@ func add_trainee(id): #unsafe - no limit check
 func is_in_training():
 	return enable and trainer != null
 
+func has_category_not_in_cd():
+	for cat in cooldown:
+		if cooldown[cat] < 1:
+			return true
+	return false
+
+
 func can_be_trained():
 #	return enable and trainer != null and cooldown.main < 1
-	return is_in_training()
+	return is_in_training() and has_category_not_in_cd()
 
 func get_disposition_name(value):
 	return tr('DISPOSITION' + value.to_upper())

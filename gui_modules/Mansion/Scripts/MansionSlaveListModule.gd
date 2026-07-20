@@ -662,13 +662,17 @@ func update_button(newbutton, t_mode = mode):
 			globals.connectitemtooltip_v2(newbutton.get_node(slot), item)
 	
 	#checks
-	if !person.has_status('relation'):
+	if ResourceScripts.game_globals.weekly_dates_left <= 0:
+		newbutton.get_node("DateIcon").texture = load("res://assets/Textures_v2/MANSION/no.png")
+	elif !person.has_status('relation'):
 		newbutton.get_node("DateIcon").texture = load("res://assets/Textures_v2/MANSION/no.png")
 	elif person.tags.has("no_date_day"):
 		newbutton.get_node("DateIcon").texture = load("res://assets/Textures_v2/MANSION/no.png")
 	else:
 		newbutton.get_node("DateIcon").texture = load("res://assets/Textures_v2/MANSION/yes.png")
-	if person.has_status('no_sex'):
+	if ResourceScripts.game_globals.weekly_sex_left <= 0:
+		newbutton.get_node("SexIcon").texture = load("res://assets/Textures_v2/MANSION/no.png")
+	elif person.has_status('no_sex'):
 		newbutton.get_node("SexIcon").texture = load("res://assets/Textures_v2/MANSION/no.png")
 	else:
 		newbutton.get_node("SexIcon").texture = load("res://assets/Textures_v2/MANSION/yes.png")
