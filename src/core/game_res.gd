@@ -724,11 +724,12 @@ func _add_craft_value(curupgrade, value, character):
 			else:
 				return 0
 		else: #soft limit = limit1
-			if value > 0:
-				spend_resources(curupgrade) #possible, as limit2 > limit
-				tprogress.progress = value
-			else:
-				tprogress.status = 'init' #next item not started and not paid for
+			if limit > 0:
+				if value > 0:
+					spend_resources(curupgrade) #possible, as limit2 > limit
+					tprogress.progress = value
+				else:
+					tprogress.status = 'init' #next item not started and not paid for
 			return 0
 
 
