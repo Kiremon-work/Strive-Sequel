@@ -494,6 +494,8 @@ func select_resource(job_id, newbutton):
 		$DescriptionLabel.bbcode_text = tr("TASKRESTDESCRIPT")
 	elif job_id == "crafting":
 		$DescriptionLabel.bbcode_text = tr("TASKCRAFTDESCRIPT")
+	elif job_id == "farming":
+		$DescriptionLabel.bbcode_text = tr("TASKTRAVELDESCRIPT")
 	else:
 		var job = ResourceScripts.game_res.tasks_progresses[job_id]
 		var work_tools
@@ -578,6 +580,9 @@ func focus_on_person_task(ch):
 	if work_code == '':
 		if restbutton != null:
 			select_resource("rest", restbutton)
+		return
+	if work_code == 'farming':
+		build_farm()
 		return
 	if work_code == 'service':
 		if servicebutton != null:

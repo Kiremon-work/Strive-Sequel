@@ -277,9 +277,10 @@ func add_gathering_res_temp(res, location):
 			status = 'temporal',
 			type = 'gather_simple',
 			job = res,
-			worktool = resdata.tool_type,
 			mod = resdata.workmod
 		}
+		if resdata.has('tool_type'):
+			template.worktool = resdata.tool_type
 		for st in ['descript', 'name', 'workstat']:
 			template[st] = resdata[st]
 		tasks_progresses[id] = template
@@ -307,9 +308,10 @@ func add_gathering_limited_job_temp(res, location):
 			status = 'temporal',
 			type = 'gather_limited',
 			job = res,
-			worktool = resdata.tool_type,
 			mod = resdata.workmod
 		}
+		if resdata.has('tool_type'):
+			template.worktool = resdata.tool_type
 		for st in ['descript', 'name', 'workstat']:
 			template[st] = resdata[st]
 		tasks_progresses[id] = template
@@ -722,11 +724,12 @@ func _add_craft_value(curupgrade, value, character):
 			else:
 				return 0
 		else: #soft limit = limit1
-			if value > 0:
-				spend_resources(curupgrade) #possible, as limit2 > limit
-				tprogress.progress = value
-			else:
-				tprogress.status = 'init' #next item not started and not paid for
+			if limit > 0:
+				if value > 0:
+					spend_resources(curupgrade) #possible, as limit2 > limit
+					tprogress.progress = value
+				else:
+					tprogress.status = 'init' #next item not started and not paid for
 			return 0
 
 
