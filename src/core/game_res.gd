@@ -420,7 +420,7 @@ func _active_task_find(list):
 			var pdata = tasks_progresses[id]
 			if pdata.status == 'active' and pdata.has('cap_up'):
 				var amount
-				if pdata.job.ends_with('materials'):
+				if pdata.job.ends_with('material'):
 					amount = materials[pdata.id]
 				else: #item case, currently itembase check only
 					amount = get_item_amount(pdata.id)
@@ -428,7 +428,7 @@ func _active_task_find(list):
 					pdata.status = 'stopped'
 			if pdata.status == 'stopped':
 				var amount
-				if pdata.job.ends_with('materials'):
+				if pdata.job.ends_with('material'):
 					amount = materials[pdata.id]
 				else: #item case, currently itembase check only
 					amount = get_item_amount(pdata.id)
@@ -680,11 +680,11 @@ func _add_craft_value(curupgrade, value, character):
 			limit3 = tprogress.repeat
 		else: #permanent task
 			var amount
-			if tprogress.job.ends_with('materials'):
+			if tprogress.job.ends_with('material'):
 				amount = materials[tprogress.id]
 			else: #item case, currently itembase check only
 				amount = get_item_amount(tprogress.id)
-			limit3 = tprogress.cap_up - amount
+			limit3 = int(tprogress.cap_up - amount - 1) / int(tprogress.resultamount) + 1
 			if limit3 < 0:
 				limit3 = 0
 		
