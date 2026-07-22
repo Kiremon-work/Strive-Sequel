@@ -1292,6 +1292,7 @@ func train(person, counter):
 	person.add_stat('physics', value)
 	master.add_stat('physics', value2)
 	self.mood += self.turn
+	self.fear += 15
 	self.turn = 0
 	finish_encounter = true
 
@@ -1309,6 +1310,7 @@ func study(person, counter):
 	person.add_stat('wits', value)
 	master.add_stat('wits', value2)
 	self.mood += self.turn
+	self.fear += 15
 	self.turn = 0
 	finish_encounter = true
 
@@ -1326,6 +1328,7 @@ func charm(person, counter):
 	person.add_stat('charm', value)
 	master.add_stat('charm', value2)
 	self.mood += self.turn
+	self.fear += 15
 	self.turn = 0
 	finish_encounter = true
 

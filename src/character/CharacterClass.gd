@@ -134,6 +134,27 @@ func get_stat(statname, nobonus = false, desc_ready = false):
 				stat_compo_dict.bonuses = dyn_dict.bonuses
 				stat_compo_dict.result = res
 			return res
+	if statname == 'desirability':
+		var base = variables.desirability_base + variables.desirability_per_charm_factor * get_stat('charm_factor') + variables.desirability_per_charm_stat * get_stat('charm')
+		var fame_desirability = get_fame_bonus('desirability_bonus')
+		if check_trait('courtesan'):
+			fame_desirability *= variables.courtesan_fame_desirability_mult
+		base += fame_desirability
+		if has_profession('petbeast'):
+			base += variables.petbeast_desirability_per_tame_factor * get_stat('tame_factor')
+		if nobonus:
+			if check_trait('harlot'):
+				base = min(base, variables.harlot_desirability_cap)
+			return base
+		var dyn_dict = dyn_stats.get_stat_full('desirability_bonus')
+		var res = max(base + dyn_dict.result, 0)
+		if check_trait('harlot'):
+			res = min(res, variables.harlot_desirability_cap)
+		if desc_ready:
+			stat_compo_dict.base_value = base + dyn_dict.base_value
+			stat_compo_dict.bonuses = dyn_dict.bonuses
+			stat_compo_dict.result = res
+		return res
 	if statname.begins_with('mastery_') and !statname.begins_with('mastery_point'):
 		return dyn_stats.get_mastery_level(statname.trim_prefix('mastery_'), desc_ready)
 	if statname == 'base_exp':
@@ -939,6 +960,15 @@ func get_progress_resource(tempresource, count_crit = false):
 
 func get_job_value(temptask, count_crit = false):
 	return xp_module.get_job_value(temptask, count_crit)
+
+func get_service_desirability(enabled_actions = null):
+	return xp_module.get_service_desirability(enabled_actions)
+
+func get_estimated_service_value():
+	return xp_module.get_estimated_service_value()
+
+func get_estimated_non_sex_service_value():
+	return xp_module.get_estimated_non_sex_service_value()
 
 func get_farming_rules():
 	return xp_module.get_farming_rules()
@@ -2879,9 +2909,10 @@ func try_rise_fame(event = null):
 	
 	set_stat("fame_degrade_timer", 0)
 	var cur_fame = get_stat("fame")
-	if (event
-			and variables.fame_rise_events.has(event)
-			and cur_fame >= variables.fame_rise_events[event]):
+	var fame_rise_cap = variables.fame_rise_events.get(event, null)
+	if event == 'service' and check_trait('courtesan'):
+		fame_rise_cap = variables.courtesan_fame_rise_service_cap
+	if event and fame_rise_cap != null and cur_fame >= fame_rise_cap:
 		return
 	if !variables.fame_tiers.has(cur_fame + 1):
 		return

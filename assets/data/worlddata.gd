@@ -1429,28 +1429,28 @@ var fixed_location_options = { #override serialized data
 	],
 	
 	empire_capital = [
-		{
-			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
-			reqs = [
-				{type = 'decision', value = 'JoinCoalition', check = false},
-				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
-				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
-				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
-				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
-			],
-			args = [{code = 'start_event', data = 'act4_sebastian_proposal_dwarf_king_1', args = []}]
-		},
-		{
-			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
-			reqs = [
-				{type = 'decision', value = 'JoinCoalition', check = true},
-				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
-				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
-				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
-				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
-			],
-			args = [{code = 'start_event', data = 'act4_sebastian_proposal_bolthar_1', args = []}]
-		},
+#		{
+#			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
+#			reqs = [
+#				{type = 'decision', value = 'JoinCoalition', check = false},
+#				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
+#				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
+#				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
+#				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
+#			],
+#			args = [{code = 'start_event', data = 'act4_sebastian_proposal_dwarf_king_1', args = []}]
+#		},
+#		{
+#			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_PROPOSAL"),
+#			reqs = [
+#				{type = 'decision', value = 'JoinCoalition', check = true},
+#				{type = 'has_active_quest', name = 'sebastian_railroad_quest', check = false},
+#				{type = 'quest_completed', name = 'sebastian_railroad_quest', check = false},
+#				{type = 'event_seen', value = 'act4_sebastian_proposal_dwarf_king_1', check = false},
+#				{type = 'event_seen', value = 'act4_sebastian_proposal_bolthar_1', check = false}
+#			],
+#			args = [{code = 'start_event', data = 'act4_sebastian_proposal_bolthar_1', args = []}]
+#		},
 		{
 			text = tr("ACT4_SEBASTIAN_EMPIRE_CAPITAL_OPTION_REPORT_TECHNICIAN"),
 			reqs = [{type = 'active_quest_stage', value = 'sebastian_railroad_quest', stage = 'report_technician'}],

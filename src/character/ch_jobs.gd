@@ -49,50 +49,61 @@ func whoring_gold():
 	return (1 + parent.get_ref().get_stat('charm')/80.0)
 
  
+func _non_sex_service_base_income():
+	var tame_factor_mult = variables.non_sex_service_tame_factor_mult
+	if parent.get_ref().has_profession('petbeast'):
+		tame_factor_mult += variables.petbeast_service_tame_factor_mult
+	return variables.non_sex_service_charm_factor_mult * parent.get_ref().get_stat('charm_factor') + tame_factor_mult * parent.get_ref().get_stat('tame_factor')
+
 func gold_waitress():
-	return parent.get_ref().get_stat('mod_waitress') * (1.15 + parent.get_ref().get_stat('charm')/90.0)
+	return parent.get_ref().get_stat('mod_waitress') * _non_sex_service_base_income()
 
 func gold_hostess():
-	return parent.get_ref().get_stat('mod_hostess') * (1.0 + parent.get_ref().get_stat('wits')/60.0)
+	return parent.get_ref().get_stat('mod_hostess') * _non_sex_service_base_income()
 
 func gold_dancer():
-	return parent.get_ref().get_stat('mod_dancer') * (0.8 + parent.get_ref().get_stat('charm')/75.0 + parent.get_ref().get_stat('physics')/110.0)
+	return parent.get_ref().get_stat('mod_dancer') * _non_sex_service_base_income()
 
 func gold_stripper():
-	return parent.get_ref().get_stat('mod_strip') * (1.3 * _sex_training_mult('petting'))
+	return parent.get_ref().get_stat('mod_strip') * _non_sex_service_base_income()
 
 func _sex_training_mult(skill_name):
 	var level = parent.get_ref().get_stat('sex_training_' + skill_name)
-	if level == 'mastered': return 1.8
-	elif level == 'skilled': return 1.35
-	return 1.0
+	return variables.sex_training_gold_multiplier.get(level, variables.sex_training_gold_multiplier.novice)
+
+func _sex_factor_income():
+	return variables.sex_service_base_income_mult * parent.get_ref().get_stat('sexuals_factor')
 
 func gold_petting():
-	return 0.99 * _sex_training_mult('petting')
+	return _sex_factor_income() * _sex_training_mult('petting')
 
 func gold_oral():
-	return 1.03 * _sex_training_mult('oral')
+	return _sex_factor_income() * _sex_training_mult('oral')
 
 func gold_pussy():
-	return 1.17 * _sex_training_mult('pussy')
+	return _sex_factor_income() * _sex_training_mult('pussy')
 
 func gold_penetration():
-	return 1.40 * _sex_training_mult('penetration')
+	return _sex_factor_income() * _sex_training_mult('penetration')
 
 func gold_anal():
-	return 1.24 * _sex_training_mult('anal')
+	return _sex_factor_income() * _sex_training_mult('anal')
 
-func gold_group():
-	var mult = (_sex_training_mult('anal') + _sex_training_mult('pussy')) / 2.0
-	return 2.69 * mult
-
-func gold_sextoy():
-	var bonus = 0.0
+func _group_skill_level():#best training among all sex skills
+	var best = 'novice'
 	for skill in ['petting', 'oral', 'pussy', 'anal', 'penetration', 'tail']:
 		var level = parent.get_ref().get_stat('sex_training_' + skill)
-		if level == 'mastered': bonus += 0.35
-		elif level == 'skilled': bonus += 0.15
-	return 2.5 + bonus
+		if level == 'mastered':
+			return 'mastered'
+		elif level == 'skilled':
+			best = 'skilled'
+	return best
+
+func gold_group():
+	return _sex_factor_income() * variables.group_base_mult * (1.0 + variables.group_skill_income_bonus[_group_skill_level()])
+
+func gold_sextoy():
+	return _sex_factor_income() * variables.sextoy_base_mult * (1.0 + variables.sextoy_tame_factor_bonus * (parent.get_ref().get_stat('tame_factor') - 1))
 
 func cooking_progress():
 	return variables.base_work_increment + (variables.stat_work_increment * (parent.get_ref().get_stat('wits')/50.0))

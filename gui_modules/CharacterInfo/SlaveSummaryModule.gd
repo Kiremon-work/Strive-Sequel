@@ -177,7 +177,7 @@ func check_date_button():
 	elif selected_person.has_status("no_date"):
 		value = false
 		descript = "NODATEUNIQUE"
-	elif !selected_person.has_status("relation"):
+	elif selected_person.get_stat('slave_class') in ['servant', 'servant_notax', 'heir'] and !selected_person.has_status("relation"):
 		value = false
 		descript = "NODATERELATION"
 	elif selected_person.tags.has("no_date_day") && !ResourceScripts.game_globals.unlimited_date_sex:

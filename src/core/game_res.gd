@@ -475,7 +475,7 @@ func tasks_cleanup():
 func remove_tasks_for_location(location):
 	for id in tasks_progresses.keys().duplicate():
 		var val = tasks_progresses[id]
-		if val.location == location:
+		if val.has("location") and val.location == location:
 			clean_task(id)
 
 

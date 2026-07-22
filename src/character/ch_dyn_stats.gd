@@ -1214,27 +1214,16 @@ func has_skill(id):
 
 func get_buff_number(status):
 	var result = 0
-	var id_checkable = false
-	for buff in buffs:
-		if buff.parent == null:
+	for buff in effects_temp_real:
+		var ef_stack = effects_temp_real[buff]
+		if ef_stack.code != status:
 			continue
-		id_checkable = false
-		if "code" in buff.parent:
-			id_checkable = true
-			if buff.parent.code != status:
+		if ef_stack.template['type'] == 'stack_a':
+			if ef_stack.buffs.empty():
 				continue
-		elif 'template_id' in buff.parent:
-			id_checkable = true
-			if buff.parent.template_id != status:
-				continue
-		if !id_checkable:
-			continue
-		if buff.tags.has('show_amount'):
-			if buff.get_stacks() != null:
-				result += buff.get_stacks()
+			result += ef_stack.buffs[0].get_stacks()
 		else:
-			if buff.get_duration() != null:
-				result += buff.get_duration().count
+			result += ef_stack.get_duration().count
 	return result
 
 func has_info_bonus_mastery(mastery):

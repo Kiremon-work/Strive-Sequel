@@ -70,6 +70,36 @@ var traits = {
 		bonusstats = {wits_factor = 1, wits_bonus = 10, exp_gain_mod = 0.2},
 		tags = ['simple_icon', 'mansion_only']
 	},
+	harlot = {
+		code = 'harlot',
+		name = '',
+		descript = '',
+		visible = false,
+		icon = "res://assets/images/iconsclasses/Whore.png",
+		effects = [],
+		bonusstats = {},
+		tags = ['simple_icon']
+	},
+	courtesan = {
+		code = 'courtesan',
+		name = '',
+		descript = '',
+		visible = false,
+		icon = "res://assets/images/iconsclasses/Geisha.png",
+		effects = [],
+		bonusstats = {},
+		tags = ['simple_icon']
+	},
+	petbeast = {
+		code = 'petbeast',
+		name = '',
+		descript = '',
+		visible = false,
+		icon = "res://assets/images/iconsclasses/Pet.png",
+		effects = [],
+		bonusstats = {},
+		tags = ['simple_icon']
+	},
 	#body upgrades
 	upgrade_thick_skin = {
 		name = '',
@@ -96,8 +126,8 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/l_pregnancy.png",
 		effects = [],
-		bonusstats = {mod_pros = 0.1}, 
-		reqs = [],  
+		bonusstats = {mod_pros = 0.1, desirability_bonus = 5},
+		reqs = [],
 		visible = false,
 		tags = ['body_upgrade']
 	},
@@ -106,8 +136,8 @@ var traits = {
 		descript = '',
 		icon = "res://assets/images/iconstraits/l_pregnancy.png",
 		effects = [],
-		bonusstats = {mod_pros = 0.1}, 
-		reqs = [],  
+		bonusstats = {mod_pros = 0.1, desirability_bonus = 5},
+		reqs = [],
 		visible = false,
 		tags = ['body_upgrade']
 	},
@@ -2049,7 +2079,60 @@ var traits = {
 		effects = ['slippery_thick_skin_desc','slippery_thick_skin_tr'],
 		tags = ['slippery_thick_skin'],
 	},
-	
+	nixx_trait = {
+		code = 'nixx_trait',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['nixx_trait','nixx_trait_combat_s','hide_evade_pierce'],
+		tags = [],
+	},
+	environmental_object = {
+		code = 'environmental_object',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['environmental_object'],
+		tags = [],
+	},
+	unlit_brazier = {
+		code = 'unlit_brazier',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['unlit_brazier_display','unlit_brazier_combat_s','unlit_brazier_transform'],
+		tags = [],
+	},
+	light_brazier = {
+		code = 'light_brazier',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['light_brazier_display','light_brazier_combat_s','light_brazier_transform'],
+		tags = [],
+	},
+	intangible_shadow = {
+		code = 'intangible_shadow',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['intangible_shadow','intangible_shadow_combat_s','intangible_shadow_evade','intangible_shadow_terror','intangible_shadow_degen','nixx_perma_hide'],
+		tags = [],
+	},
+	nixx_malleable_creation = {
+		code = 'nixx_malleable_creation',
+		name = '',
+		descript = '',
+		icon = null,
+		visible = false,
+		effects = ['nixx_malleable_creation'],
+		tags = [],
+	},
 	#exploration related traits
 	#needs to hardcode most of traits
 	medium_armor = {#removes penalty from medium armor

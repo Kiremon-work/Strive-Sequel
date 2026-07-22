@@ -101,6 +101,50 @@ var booster_value = [2.0, 4.0, 8.0]
 var farm_produce_slots = 2
 var farm_produce_slots_per_upgrade = 1
 
+#desirability & sex service gold
+var desirability_base = 25.0
+var desirability_per_charm_factor = 7.0
+var desirability_per_charm_stat = 0.3
+var desirability_per_enabled_action = 4.0
+var desirability_gold_cap = 100.0 #desirability above this no longer affects full-gold chance, only the gold bonus below
+var desirability_overcap_gold_bonus = 0.01 #gold income % per point of desirability above desirability_gold_cap
+var sex_service_base_income_mult = 5.0
+var sex_service_partial_gold_mult = 0.5 #gold received when the desirability roll fails
+var sex_service_fluctuation = 0.2 #+-20% randomness on sex service base value
+var consent_lock_gold_mult = 0.6 #gold received when performing a sex action above the character's consent level
+var sex_training_gold_multiplier = {
+	'novice': 0.75,
+	'skilled': 1.0,
+	'mastered': 1.2,
+}
+var group_base_mult = 1.5
+var group_skill_income_bonus = {
+	'novice': 0.0,
+	'skilled': 0.05,
+	'mastered': 0.10,
+}
+var sextoy_base_mult = 0.9
+var sextoy_tame_factor_bonus = 0.10 #income % per point of tame factor above 1
+
+#non-sex service gold
+var non_sex_service_charm_factor_mult = 3.0
+var non_sex_service_tame_factor_mult = 2.5
+var non_sex_desirability_threshold = 50.0 #desirability above this boosts non-sex service income
+var non_sex_desirability_gold_bonus = 0.02 #gold income % per point of desirability above non_sex_desirability_threshold
+var waitress_training_point_chance = 0.5 #chance for a slave currently in training to gain 1 training point from waitress work
+var petbeast_desirability_per_tame_factor = 2.0 #extra desirability per tame factor, petbeast class only
+var petbeast_service_tame_factor_mult = 1.0 #extra non-sex service income per tame factor, petbeast class only
+
+#harlot & courtesan trait perks
+var harlot_desirability_cap = 75.0
+var harlot_proc_chance = 0.5
+var harlot_proc_multiplier = {
+	'skilled': 2.0, #+100% end value
+	'mastered': 3.0, #+200% end value
+}
+var courtesan_fame_rise_service_cap = 5
+var courtesan_fame_desirability_mult = 2.0
+
 var system_messages = {
 	no_resources = "MESSAGE_NORESOURCE",
 	no_crafting_item = "MESSAGE_NOCRAFTINGITEM",
@@ -620,20 +664,23 @@ var fame_tiers = {
 		name = "FAME0_NAME",
 		desc = "FAME0_DESC",
 		price_bonus = 0.0,
-		upkeep = 5
+		upkeep = 5,
+		desirability_bonus = 0
 	},
 	1 : {
 		name = "FAME1_NAME",
 		desc = "FAME1_DESC",
 		price_bonus = 0.15,
-		upkeep = 15
+		upkeep = 15,
+		desirability_bonus = 0
 	},
 	2 : {
 		name = "FAME2_NAME",
 		desc = "FAME2_DESC",
 		price_bonus = 0.25,
 		upkeep = 30,
-		loyalty_bonus = 0.1
+		loyalty_bonus = 0.1,
+		desirability_bonus = 5
 	},
 	3 : {
 		name = "FAME3_NAME",
@@ -641,7 +688,8 @@ var fame_tiers = {
 		price_bonus = 0.4,
 		upkeep = 60,
 		loyalty_bonus = 0.2,
-		manhunt_bonus = 1
+		manhunt_bonus = 1,
+		desirability_bonus = 10
 	},
 	4 : {
 		name = "FAME4_NAME",
@@ -649,7 +697,8 @@ var fame_tiers = {
 		price_bonus = 0.6,
 		upkeep = 80,
 		loyalty_bonus = 0.3,
-		manhunt_bonus = 2
+		manhunt_bonus = 2,
+		desirability_bonus = 15
 	},
 	5 : {
 		name = "FAME5_NAME",
@@ -657,7 +706,8 @@ var fame_tiers = {
 		price_bonus = 0.75,
 		upkeep = 125,
 		loyalty_bonus = 0.4,
-		manhunt_bonus = 3
+		manhunt_bonus = 3,
+		desirability_bonus = 20
 	},
 	6 : {
 		name = "FAME6_NAME",
@@ -665,7 +715,8 @@ var fame_tiers = {
 		price_bonus = 0.75,
 		upkeep = 175,
 		loyalty_bonus = 0.5,
-		manhunt_bonus = 5
+		manhunt_bonus = 5,
+		desirability_bonus = 20
 	}
 }
 const fame_degrade_time = 7

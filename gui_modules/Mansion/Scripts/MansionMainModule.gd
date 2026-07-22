@@ -456,7 +456,7 @@ func update_sex_date_buttons():
 	
 	for i in sex_participants:
 		if i.is_master(): continue
-		if i.has_status("no_date") or !i.has_status("relation") or (i.tags.has("no_date_day") and !ResourceScripts.game_globals.unlimited_date_sex):
+		if i.has_status("no_date") or (i.get_stat('slave_class') in ['servant', 'servant_notax', 'heir'] and !i.has_status("relation")) or (i.tags.has("no_date_day") and !ResourceScripts.game_globals.unlimited_date_sex):
 			SexSelect.get_node("DateButton").disabled = true
 
 func set_hovered_person(node, person):

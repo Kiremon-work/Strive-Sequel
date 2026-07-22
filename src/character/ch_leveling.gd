@@ -621,74 +621,80 @@ func select_brothel_activity():
 		parent.get_ref().add_stat('metrics_serviceperformed', 1)
 		if parent.get_ref().has_status('harlotry'):
 			parent.get_ref().rest_tick()
-		#pick chance
-		var _sex_skilled_count = 0
-		for _skill in ['petting', 'oral', 'pussy', 'anal', 'penetration', 'tail']:
-			var _lvl = parent.get_ref().get_stat('sex_training_' + _skill)
-			if _lvl == 'skilled' || _lvl == 'mastered':
-				_sex_skilled_count += 1
-		if 50 + max(_sex_skilled_count * 10, parent.get_ref().get_stat('charm')/2) > randf()*100:
-			var remove_from_sex = []
-			
-			#every rule toggled only has 50% chance to be picked by default
-			for i in sex_rules:
-				if randf() >= 0.5:
-					remove_from_sex.append(i)
-			if remove_from_sex.size() == sex_rules.size(): #make sure at least 1 option is sill available in the end
-				remove_from_sex.remove(randi() % remove_from_sex.size())
-			for i in remove_from_sex:
-				sex_rules.erase(i)
-			
-			var highest_value = get_highest_value(sex_rules)
-			var data = tasks.gold_tasks_data[highest_value.code]
-			var bonus_gold = 0
-			
-			var possible_customer_genders = []
-			if brothel_rules.males:
-				possible_customer_genders.append('male')
-			if brothel_rules.females:
-				possible_customer_genders.append('female')
-			if brothel_rules.futa:
-				possible_customer_genders.append('futa')
-			var brothel_customer_gender = possible_customer_genders[randi() % possible_customer_genders.size()]
-				
-			
-			var penis_check = ((brothel_rules.males || brothel_rules.futa) && brothel_customer_gender in ["male", "futa"])
-			
-			if sex_rules.has('pussy') && penis_check:
-				parent.get_ref().take_virginity('vaginal', 'brothel_customer')
-				bonus_gold += parent.get_ref().calculate_price(false, true) * 0.01
-			if sex_rules.has('pussy') && penis_check:
-				var tmpchar = ResourceScripts.scriptdict.class_slave.new("test_main")
-				tmpchar.create('random', 'male', 'random')
-				if randf() < variables.brothel_pregnancy_chance:
-					globals.impregnate(tmpchar, parent.get_ref())
-				tmpchar.is_active = false
-			if sex_rules.has('anal') && penis_check:
-				parent.get_ref().take_virginity('anal', 'brothel_customer')
-			
-			if data.workstats.size() > 0:
-				work_tick_values(input_handler.random_from_array(data.workstats))
-			parent.get_ref().try_rise_fame('service')
 
-			parent.get_ref().add_stat('metrics_randompartners', globals.fastif(sex_rules.has('group'), 2, 1))
-			
-			var goldearned = highest_value.value * (1 + (0.1 * sex_rules.size())) * min(5, (1 + 0.01 * parent.get_ref().calculate_price(false, true))) + bonus_gold# 10% percent for every toggled sex service + 1% of slave's value up to 500%
-			if parent.get_ref().get_stat('consent') < data.min_consent == true:
-				goldearned = goldearned - goldearned/3
-			
-			goldearned = apply_boosters(goldearned)
-			goldearned = round(goldearned)
-			
-			
-			parent.get_ref().add_stat('metrics_goldearn', goldearned)
-			
-			ResourceScripts.game_res.money += goldearned
-			
-			
-			#TODO add decriptions and impregnation
-			update_brothel_log(parent.get_ref().get_stat('name'), goldearned, data, brothel_customer_gender)
-			return
+		var remove_from_sex = []
+
+		#every rule toggled only has 50% chance to be picked by default
+		for i in sex_rules:
+			if randf() >= 0.5:
+				remove_from_sex.append(i)
+		if remove_from_sex.size() == sex_rules.size(): #make sure at least 1 option is sill available in the end
+			remove_from_sex.remove(randi() % remove_from_sex.size())
+		for i in remove_from_sex:
+			sex_rules.erase(i)
+
+		var highest_value = get_highest_value(sex_rules)
+		var data = tasks.gold_tasks_data[highest_value.code]
+		var bonus_gold = 0
+
+		var possible_customer_genders = []
+		if brothel_rules.males:
+			possible_customer_genders.append('male')
+		if brothel_rules.females:
+			possible_customer_genders.append('female')
+		if brothel_rules.futa:
+			possible_customer_genders.append('futa')
+		var brothel_customer_gender = possible_customer_genders[randi() % possible_customer_genders.size()]
+
+
+		var penis_check = ((brothel_rules.males || brothel_rules.futa) && brothel_customer_gender in ["male", "futa"])
+
+		if sex_rules.has('pussy') && penis_check:
+			parent.get_ref().take_virginity('vaginal', 'brothel_customer')
+			bonus_gold += parent.get_ref().calculate_price(false, true) * 0.01
+		if sex_rules.has('pussy') && penis_check:
+			var tmpchar = ResourceScripts.scriptdict.class_slave.new("test_main")
+			tmpchar.create('random', 'male', 'random')
+			if randf() < variables.brothel_pregnancy_chance:
+				globals.impregnate(tmpchar, parent.get_ref())
+			tmpchar.is_active = false
+		if sex_rules.has('anal') && penis_check:
+			parent.get_ref().take_virginity('anal', 'brothel_customer')
+
+		if data.workstats.size() > 0:
+			work_tick_values(input_handler.random_from_array(data.workstats))
+		parent.get_ref().try_rise_fame('service')
+
+		parent.get_ref().add_stat('metrics_randompartners', globals.fastif(sex_rules.has('group'), 2, 1))
+
+		var desirability = get_service_desirability(sex_rules)
+		var goldearned = highest_value.value
+		goldearned *= 1.0 + max(0, desirability - variables.desirability_gold_cap) * variables.desirability_overcap_gold_bonus #every point of desirability above cap gives +gold%
+		var full_gold_chance = clamp(desirability, 0.0, variables.desirability_gold_cap) / 100.0
+		var full_gold = randf() < full_gold_chance
+		if !full_gold:
+			goldearned *= variables.sex_service_partial_gold_mult
+		goldearned += bonus_gold
+		if parent.get_ref().get_stat('consent') < data.min_consent:
+			goldearned *= variables.consent_lock_gold_mult
+
+		if parent.get_ref().check_trait('harlot'):
+			var proc_skill_level = get_action_skill_level(data.code)
+			if variables.harlot_proc_multiplier.has(proc_skill_level) and randf() < variables.harlot_proc_chance:
+				goldearned *= variables.harlot_proc_multiplier[proc_skill_level]
+
+		goldearned = apply_boosters(goldearned)
+		goldearned = round(goldearned)
+
+
+		parent.get_ref().add_stat('metrics_goldearn', goldearned)
+
+		ResourceScripts.game_res.money += goldearned
+
+
+		#TODO add decriptions and impregnation
+		update_brothel_log(parent.get_ref().get_stat('name'), goldearned, data, brothel_customer_gender, full_gold)
+		return
 	elif non_sex_rules.size() > 0:
 		parent.get_ref().add_stat('metrics_serviceperformed', 1)
 		if parent.get_ref().has_status('harlotry'):
@@ -701,9 +707,14 @@ func select_brothel_activity():
 			work_tick_values(input_handler.random_from_array(data.workstats))
 		parent.get_ref().try_rise_fame('service')
 		
-		var goldearned = highest_value.value * min(4, (1 + 0.001 * parent.get_ref().calculate_price(false, true)))
-		
-		
+		var goldearned = highest_value.value
+		if highest_value.code == 'waitress':
+			if parent.get_ref().get_trainer() != null and randf() < variables.waitress_training_point_chance:
+				parent.get_ref().add_stat('training_points', 1)
+		else:
+			var desirability = parent.get_ref().get_stat('desirability')
+			goldearned *= 1.0 + max(0, desirability - variables.non_sex_desirability_threshold) * variables.non_sex_desirability_gold_bonus
+
 		goldearned = apply_boosters(goldearned)
 		goldearned = round(goldearned)
 		
@@ -716,13 +727,16 @@ func select_brothel_activity():
 		parent.get_ref().rest_tick()
 	
 
-func update_brothel_log(ch_name, gold, data, customer_gender = ""):
+func update_brothel_log(ch_name, gold, data, customer_gender = "", full_gold = true):
 	if globals.log_node != null && weakref(globals.log_node).get_ref():
 #		if ResourceScripts.game_globals.hour == 4:
 #			globals.log_node.clean_log()
 		var text = ""
 		if customer_gender != "":
-			text = tr("BROTHELLOGSEX")  % [tr(ch_name), str(gold), tr("BROTHEL" + data.code.to_upper()), customer_gender.capitalize()]
+			if full_gold:
+				text = tr("BROTHELLOGSEX")  % [tr(ch_name), str(gold), tr("BROTHEL" + data.code.to_upper()), customer_gender.capitalize()]
+			else:
+				text = tr("BROTHELLOGSEXPARTIAL")  % [tr(ch_name), str(gold), tr("BROTHEL" + data.code.to_upper()), customer_gender.capitalize()]
 			#text = tr(ch_name) + " earned " + str(gold) + " gold doing " + tr("BROTHEL" + data.code.to_upper()) + " with a " + customer_gender
 		else:
 			text = tr("BROTHELLOGNO_SEX")  % [tr(ch_name), str(gold), tr("BROTHEL" + data.code.to_upper())]
@@ -759,19 +773,113 @@ func get_highest_value(array):#find highest profit option
 	var values = {}
 	var highest_value = {code = '', value = 0}
 	for i in array:
-		values[i] = max(1,round(get_gold_value(i) * (0.8 + randf() * 0.4))) #20% randomness to value
+		values[i] = max(1,round(get_gold_value(i) * (1.0 - variables.sex_service_fluctuation + randf() * variables.sex_service_fluctuation * 2))) #fluctuation randomness to value
 		if highest_value.value < values[i]:
 			highest_value.code = i
 			highest_value.value = values[i]
-	
+
 	return highest_value
 
 
 func get_gold_value(task):
 	var value = call(tasks.gold_tasks_data[task].formula)
 	value = value * (parent.get_ref().get_stat('productivity') * parent.get_ref().get_stat(tasks.gold_tasks_data[task].workmod)/100.0)
-	
+
 	return value
+
+
+func get_enabled_sex_actions():
+	var res = []
+	for i in variables.brothel_rules:
+		if variables.brothel_non_sex_options.has(i) or i in ['males','futa','females']:
+			continue
+		if brothel_rules.get(i, false):
+			res.append(i)
+	return res
+
+
+func get_action_skill_level(action):#best sex_training level among the skill(s) relevant to this action
+	var relevant_skills = [action]
+	if action == 'group':
+		relevant_skills = ['anal', 'pussy']
+	elif action == 'sextoy':
+		relevant_skills = ['petting', 'oral', 'pussy', 'anal', 'penetration', 'tail']
+	var best = 'novice'
+	for skill in relevant_skills:
+		var level = parent.get_ref().get_stat('sex_training_' + skill)
+		if level == 'mastered':
+			return 'mastered'
+		if level == 'skilled':
+			best = 'skilled'
+	return best
+
+
+func is_action_trained(action):#at least skilled in the skill(s) relevant to this action
+	return get_action_skill_level(action) != 'novice'
+
+
+func get_service_desirability(enabled_actions = null):
+	if enabled_actions == null:
+		enabled_actions = get_enabled_sex_actions()
+	var trained_count = 0
+	for i in enabled_actions:
+		if is_action_trained(i):
+			trained_count += 1
+	var desirability = parent.get_ref().get_stat('desirability')
+	desirability += variables.desirability_per_enabled_action * trained_count
+	if parent.get_ref().check_trait('harlot'):
+		desirability = min(desirability, variables.harlot_desirability_cap)
+	return desirability
+
+
+func get_booster_multiplier_preview():#same as apply_boosters, but doesn't consume materials
+	var mul = 1.0
+	for i in range(3):
+		var id = 'boost%d' % (i + 1)
+		var res = service_boosters[id].res
+		if !service_boosters[id].value:
+			break
+		if ResourceScripts.game_res.materials.has(res) and ResourceScripts.game_res.materials[res] > 1:
+			mul = variables.booster_value[i]
+		else:
+			break
+	return mul
+
+
+func get_estimated_service_value():#best-case gold per tick for the currently toggled sex actions, incl. boosters/service/productivity bonuses and the over-cap desirability bonus, but not the full/half gold roll
+	var enabled = get_enabled_sex_actions()
+	if enabled.size() == 0:
+		return 0
+	var best = 0
+	for i in enabled:
+		best = max(best, get_gold_value(i))
+	var desirability = get_service_desirability(enabled)
+	best *= 1.0 + max(0, desirability - variables.desirability_gold_cap) * variables.desirability_overcap_gold_bonus
+	best *= get_booster_multiplier_preview()
+	return best
+
+
+func get_enabled_non_sex_actions():
+	var res = []
+	for i in variables.brothel_non_sex_options:
+		if brothel_rules.get(i, false):
+			res.append(i)
+	return res
+
+
+func get_estimated_non_sex_service_value():#best-case gold per tick for the currently toggled non-sex actions, incl. boosters/service/productivity bonuses and the desirability bonus (waitress excluded)
+	var enabled = get_enabled_non_sex_actions()
+	if enabled.size() == 0:
+		return 0
+	var best = 0
+	for i in enabled:
+		var value = get_gold_value(i)
+		if i != 'waitress':
+			var desirability = parent.get_ref().get_stat('desirability')
+			value *= 1.0 + max(0, desirability - variables.non_sex_desirability_threshold) * variables.non_sex_desirability_gold_bonus
+		best = max(best, value)
+	best *= get_booster_multiplier_preview()
+	return best
 
 
 func quest_tick():
