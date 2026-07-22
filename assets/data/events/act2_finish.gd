@@ -3865,7 +3865,8 @@ var data = {
 				],
 				previous_dialogue_option = 2,
 				bonus_effects = [
-					{code = "make_story_character", value = "Lira", recruit_from_location = true}
+					{code = "make_story_character", value = "Lira", recruit_from_location = true},
+					{code = "add_timed_event", value = "lira_quest_1_intro", args = [{type = "add_to_date", date = [3, 3], hour = 1}]},
 				]
 			}
 		],

@@ -16,7 +16,7 @@ var _offset
 
 var character
 var test_template = {
-	sex = 'male', 
+	sex = 'female', 
 	race = 'Kobold', 
 	horns = 'short', 
 	ears = 'bunny_standing', 
@@ -45,7 +45,7 @@ var test_template = {
 	hair_base = 'dopple', 
 	hair_fringe = 'dopple', 
 	hair_assist = 'braid', 
-	hair_back = 'very_long', 
+	hair_back = 'double_tail', 
 	hair_back_color_1 = 'green_1',
 	hair_back_color_2 = 'red_3',
 	hair_assist_color_1 = 'yellow_1',
@@ -269,6 +269,16 @@ func rebuild_underwear():
 			if !(transform.type in ['texture']):
 				continue
 			apply_transform(transform)
+	for stat in ['armor_weapon']:
+		if !GeneratorData.transforms.has(stat):
+			continue
+		var st_val = null
+		if !GeneratorData.transforms[stat].has(st_val):
+			continue
+		for transform in GeneratorData.transforms[stat][st_val]:
+			if !(transform.type in ['texture']):
+				continue
+			apply_transform(transform)
 	for stat in [
 		'armor_base_underwear', 
 		'armor_lower_underwear', 'armor_collar']:
@@ -287,6 +297,16 @@ func rebuild_underwear():
 		if !GeneratorData.transforms.has(stat):
 			continue
 		var st_val = true
+		if !GeneratorData.transforms[stat].has(st_val):
+			continue
+		for transform in GeneratorData.transforms[stat][st_val]:
+			if (transform.type in ['texture']):
+				continue
+			apply_transform(transform)
+	for stat in ['armor_weapon']:
+		if !GeneratorData.transforms.has(stat):
+			continue
+		var st_val = null
 		if !GeneratorData.transforms[stat].has(st_val):
 			continue
 		for transform in GeneratorData.transforms[stat][st_val]:
