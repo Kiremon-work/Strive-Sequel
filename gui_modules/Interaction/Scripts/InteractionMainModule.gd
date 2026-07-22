@@ -125,7 +125,7 @@ func _ready():
 	$OrgasmDenial/ScrollContainer/VBoxContainer/Deny.connect('pressed', self, "OrgasmDenialDeny")
 	$EnthusiasmSelect/MarkWrongButton.connect("pressed", self, "EnthusiasmMarkWrong")
 	$EnthusiasmSelect/AllCorrectButton.connect("pressed", self, "EnthusiasmAllCorrect")
-
+	
 	var i = 4
 	if input_handler.CurrentScene == null:
 		modding_core.handle_test_mode()
@@ -141,8 +141,12 @@ func _ready():
 		sex_minigame_points = 10
 		changecategory('caress')
 		clearstate()
-
+	
 		rebuildparticipantslist()
+	
+	$Panel/BodyDisplay/ragdoll/VPC.light_mask = 16
+	$Panel/BodyDisplay/ragdoll.light_mask = 16
+	$Panel/BodyDisplay/bodymask.range_item_cull_mask = 16
 
 
 var OrgasmDenyVictim
