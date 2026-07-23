@@ -7,6 +7,7 @@ var target_node
 var target_function
 
 signal mouse_exited_custom
+signal dropped
 
 func get_drag_data(position):
 	set_drag_preview(self.duplicate())
@@ -24,6 +25,7 @@ func drop_data(position, data):
 	parentnodearray.erase(data)
 	parentnodearray.insert(order2, data)
 	target_node.call(target_function)
+	emit_signal("dropped")
 	#get_parent().get_parent().get_parent().get_parent().change_order()
 
 func _ready():

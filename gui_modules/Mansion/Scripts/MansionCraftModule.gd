@@ -55,10 +55,20 @@ func _ready():
 	input_handler.register_btn_source('craft_plus_button', self, 'tut_get_plus_btn')
 	input_handler.register_btn_source('craft_confirm2_button', self, 'tut_get_confirm2_btn')
 	input_handler.register_btn_source('craft_back_button', self, 'tut_get_back_btn')
+	input_handler.register_btn_source('smith_button', self, 'tut_get_smith_cat_btn')
+	input_handler.register_btn_source('cooking_button', self, 'tut_get_cooking_cat_btn')
+	input_handler.register_btn_source('craft_matfilter_button', self, 'tut_get_mat_filter_btn')
+	input_handler.register_btn_source('steel_button', self, 'tut_get_steel_btn')
+	input_handler.register_btn_source('bread_delete', self, 'tut_get_bread_delete_btn')
+
 
 func tut_get_bread_btn():
+	return tut_get_recipe_btn("bread")
+func tut_get_steel_btn():
+	return tut_get_recipe_btn("steel")
+func tut_get_recipe_btn(recipe):
 	for btn in $CraftSelect/ScrollContainer/VBoxContainer.get_children():
-		if btn.get_meta('item', {code = ""}).code == "bread":
+		if btn.get_meta('item', {code = ""}).code == recipe:
 			return btn
 func tut_get_confirm_btn():
 	return $NumberSelect/NumberConfirm
@@ -68,6 +78,19 @@ func tut_get_confirm2_btn():
 	return $NumberSelect2/VBoxContainer/Button
 func tut_get_back_btn():
 	return $CraftSelect/BackButton
+func tut_get_smith_cat_btn():
+	return $categories/smith
+func tut_get_cooking_cat_btn():
+	return $categories/cooking
+func tut_get_mat_filter_btn():
+	return $filter/materials
+func tut_get_bread_delete_btn():
+	for btn in $CraftSchedule/ScrollContainer/VBoxContainer.get_children():
+		var selected_craft = btn.get_meta("selected_craft", "")
+		if !selected_craft.empty():
+			var pdata = ResourceScripts.game_res.tasks_progresses[selected_craft]
+			if pdata.id == "bread":
+				return btn.get_node("DeleteButton")
 
 func set_filter(type):
 	item_filter = type

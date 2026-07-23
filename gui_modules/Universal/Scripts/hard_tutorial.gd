@@ -17,8 +17,7 @@ var prepare_tutorial_funcs = {
 
 var tutorial_sequence = [
 	'training', 'work_intermedia', 'work',
-#	'leveling_intermedia',
-	'leveling',
+	'leveling_intermedia', 'leveling',
 	'quest_and_combat_intermedia', 'quest_and_combat']
 
 var tutorials = {
@@ -186,6 +185,8 @@ var tutorials = {
 			panel_pos = Vector2(733,50)
 		},{
 			buttons = ['craft_back_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
 			text = "TUTORIAL_WORK18",
 			panel_pos = Vector2(733,50)
 		},{
@@ -210,7 +211,77 @@ var tutorials = {
 			buttons = ['finish_turn'],
 			text = "TUTORIAL_WORK9",
 			panel_pos = Vector2(733,150)
-		},
+		},{
+			buttons = ['craft_button'],
+			text = "TUTORIAL_WORK21",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['smith_button'],
+			text = "TUTORIAL_WORK22",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['craft_matfilter_button'],
+			text = "TUTORIAL_WORK23",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['steel_button'],
+			text = "TUTORIAL_WORK24",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['craft_confirm_button'],
+			text = "TUTORIAL_WORK24_1",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['craft_confirm2_button'],
+			text = "TUTORIAL_WORK24_2",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['craft_back_button'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
+			text = "TUTORIAL_WORK24_3",
+			panel_pos = Vector2(733,50)
+		},{
+			buttons = ['work_button'],
+			text = "TUTORIAL_WORK25",
+			panel_pos = Vector2(733,50)
+		},{
+			buttons = ['craft_work'],
+			text = "TUTORIAL_WORK25_1",
+			panel_pos = Vector2(500,150)
+		},{
+			buttons = ['daisy_work'],
+			text = "TUTORIAL_WORK25_2",
+			panel_pos = Vector2(500,150)
+		},{
+			buttons = ['mat_order_cooking', 'mat_order_smith', 'mat_order_tailor', 'mat_order_alchemy'],
+			highlight = ['mat_order_highlight'],
+			text = 'TUTORIAL_WORK26',
+			condition_func = "check_mat_order",
+			panel_pos = Vector2(500,150)
+		},{
+			buttons = ['close_work'],
+			listen = ['close_by_RMB_sig'],
+			pass_RMB = true,
+			text = "TUTORIAL_WORK26_1",
+			panel_pos = Vector2(500,150)
+		},{
+			buttons = ['craft_button'],
+			text = "TUTORIAL_WORK27",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['cooking_button'],
+			text = "TUTORIAL_WORK27_1",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['bread_delete'],
+			text = "TUTORIAL_WORK28",
+			panel_pos = Vector2(733,150)
+		},{
+			buttons = ['alert_panel_yes'],
+			text = "TUTORIAL_WORK29",
+			panel_pos = Vector2(733,50)
+		}
 		#service, uncomment when service will be fixed
 #		{
 #			buttons = ['service_mode'],
@@ -237,12 +308,19 @@ var tutorials = {
 	],
 	leveling_intermedia = [
 		{
-			buttons = ['close_work'],
+			buttons = ['craft_back_button'],
 			listen = ['close_by_RMB_sig'],
 			pass_RMB = true,
 			text = "TUTORIAL_LEVELING0",
 			panel_pos = Vector2(500,150)
 		}
+#		{
+#			buttons = ['close_work'],
+#			listen = ['close_by_RMB_sig'],
+#			pass_RMB = true,
+#			text = "TUTORIAL_LEVELING0",
+#			panel_pos = Vector2(500,150)
+#		}
 	],
 	leveling = [
 		#4
@@ -684,6 +762,10 @@ func check_turn_servent():
 
 func check_travel_select():
 	return (active_btns['travel_master'].pressed and active_btns['travel_servant'].pressed)
+
+func check_mat_order():
+	var character = ResourceScripts.game_party.get_unique_slave('daisy')
+	return character.get_job_priority("smith", true) > character.get_job_priority("cooking", true)
 #--------------
 
 func tutorial_menu():
@@ -749,14 +831,15 @@ func prepare_general_tut():
 	character.add_stat('training_points', 40)
 	character.set_brothel_rule('waitress', false)
 	ResourceScripts.game_res.money = 800
-	ResourceScripts.game_res.materials['wood'] = 10
+	ResourceScripts.game_res.materials['wood'] = 30
 	ResourceScripts.game_res.materials['stone'] = 25
-	ResourceScripts.game_res.materials['iron'] = 10
+	ResourceScripts.game_res.materials['iron'] = 20
 	ResourceScripts.game_res.materials['meat'] = 50
 	ResourceScripts.game_res.materials['fish'] = 50
 	ResourceScripts.game_res.materials['bread'] = 50
 	ResourceScripts.game_res.materials['vegetables'] = 50
 	ResourceScripts.game_res.materials['grain'] = 50
+	ResourceScripts.game_res.upgrades.forge = 1
 	globals.AddItemToInventory(globals.CreateUsableItem("exp_scroll", 1))
 #	var has_tut_quest = false
 #	for quest_id in ResourceScripts.game_world.areas['plains'].quests.factions['workers']:
