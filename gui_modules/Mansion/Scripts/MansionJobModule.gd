@@ -997,8 +997,8 @@ func build_predicted(root):
 	else:
 		var task = ResourceScripts.game_res.tasks_progresses[task_id]
 		if task.job == 'building':
-			var udata = upgradedata.upgradelist[task.id]
-			root.get_node('icon').texture = images.get_icon(udata.icon)
+			var udata = upgradedata.upgradelist[task_id]
+			root.get_node('icon').texture = images.upgrade_icons[udata.icon]
 		else:
 			var recipe_data = Items.recipes[task.id]
 			var item_data
@@ -1009,6 +1009,8 @@ func build_predicted(root):
 			root.get_node('icon').texture = item_data.icon
 			if recipe_data.crafttype == 'modular':
 				root.get_node('icon').material = load("res://assets/ItemShader.tres").duplicate()
+			else:
+				root.get_node('icon').material = null
 	root.get_node('icon').visible = true
 
 
