@@ -240,10 +240,25 @@ func build_training():
 const SERVANT_UNLOCK_LIST = [
 	{code = 'training_s_working', label = 'SERVANTUNLOCK_WORKING', node = 'working', select_code = 'negotiation_select_working'},
 	{code = 'training_s_combat', label = 'SERVANTUNLOCK_COMBAT', node = 'combat', select_code = 'negotiation_select_combat'},
-	{code = 'training_s_relation', label = 'SERVANTUNLOCK_DATING', node = 'dating', select_code = 'negotiation_select_dating', hard_req = {code = 'stat', stat = 'affection', operant = 'gte', value = 25}, hard_req_text = 'SERVANTUNLOCK_REQ_AFFECTION'},
-	{code = 'training_s_sexservice', label = 'SERVANTUNLOCK_SEX', node = 'sex', select_code = 'negotiation_select_sex'},
-	{code = 'training_s_sexservice_adv', label = 'SERVANTUNLOCK_SEXSERVICE', node = 'sexservice', select_code = 'negotiation_select_sexservice', hard_req = {code = 'stat', stat = 'consent', operant = 'gte', value = 2}, hard_req_text = 'SERVANTUNLOCK_REQ_CONSENT'},
+	{code = 'training_s_relation', label = 'SERVANTUNLOCK_DATING', node = 'dating', select_code = 'negotiation_select_dating', extra_reqs = [
+		{req = {code = 'stat', stat = 'affection', operant = 'gte', value = 25}, text = 'SERVANTUNLOCK_REQ_AFFECTION'},
+	]},
+	{code = 'training_s_sexservice', label = 'SERVANTUNLOCK_SEX', node = 'sex', select_code = 'negotiation_select_sex', extra_reqs = [
+		{req = {code = 'has_status', status = 'no_sex', check = false}, text = 'SERVANTUNLOCK_REQ_SEX_ACCESS'},
+	]},
+	{code = 'training_s_sexservice_adv', label = 'SERVANTUNLOCK_SEXSERVICE', node = 'sexservice', select_code = 'negotiation_select_sexservice', extra_reqs = [
+		{req = {code = 'stat', stat = 'consent', operant = 'gte', value = 2}, text = 'SERVANTUNLOCK_REQ_CONSENT'},
+		{req = {code = 'has_status', status = 'no_sex', check = false}, text = 'SERVANTUNLOCK_REQ_SEX_ACCESS'},
+	]},
 ]
+
+
+func get_missing_req_texts(entry):
+	var texts = []
+	for extra_req in entry.get('extra_reqs', []):
+		if !person.checkreqs(extra_req.req):
+			texts.append(tr(extra_req.text))
+	return texts
 
 
 func build_training_servant():
@@ -266,6 +281,9 @@ func build_training_servant():
 			all_unlocked = false
 			status_label.text = tr('SERVANTUNLOCK_LOCKED')
 			status_label.set("custom_colors/font_color", Color(variables.hexcolordict.red))
+			var missing_texts = get_missing_req_texts(entry)
+			if !missing_texts.empty():
+				globals.connecttexttooltip(row, PoolStringArray(missing_texts).join("\n"))
 
 	if all_unlocked:
 		$training_servant/TalkButton.visible = false
@@ -286,10 +304,10 @@ func open_servant_unlock_dialogue():
 			continue
 		var option_text = tr(entry.label)
 		var reqs = []
-		if entry.has('hard_req'):
-			reqs.append({type = 'active_character_checks', value = [entry.hard_req]})
-			if !person.checkreqs(entry.hard_req):
-				option_text += " (%s)" % tr(entry.hard_req_text)
+		for extra_req in entry.get('extra_reqs', []):
+			reqs.append({type = 'active_character_checks', value = [extra_req.req]})
+		for missing_text in get_missing_req_texts(entry):
+			option_text += " (%s)" % missing_text
 		options.append({code = entry.select_code, text = option_text, reqs = reqs, not_hide = true})
 	options.append({code = 'close', text = tr('SERVANTUNLOCK_LEAVE'), reqs = []})
 	var dialogue_data = {

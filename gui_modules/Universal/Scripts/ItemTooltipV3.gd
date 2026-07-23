@@ -242,7 +242,10 @@ func geartemplete_tooltip(data):
 	for i in item.effects:
 		if Effectdata.effect_table[i].has('descript'):
 			text += "\n" + tr(Effectdata.effect_table[i].descript)
-	
+
+	if data.has('amount') and data.amount > 0:
+		text += "\n\n" + tr("CURRENTLYINPOSSESSION") + ": " + str(data.amount)
+
 #	item.set_icon(iconnode)
 	iconnode.texture = item.icon
 	if item.get('partcolororder') != null:

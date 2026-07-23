@@ -4050,7 +4050,6 @@ margin_bottom = 504.0
 rect_min_size = Vector2( 0, 44 )
 
 [node name="foodliked" type="TextureRect" parent="SlaveSiblingsModule/food"]
-margin_left = 0.0
 margin_top = 5.0
 margin_right = 35.0
 margin_bottom = 34.0

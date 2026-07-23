@@ -1,5 +1,5 @@
 extends Node
-const gameversion = '0.15.0'
+const gameversion = '0.15.0a'
 
 #time
 signal hour_tick
@@ -407,6 +407,7 @@ func tempitemtooltip(targetnode, item, mode):
 	data.item = item
 	data.icon = item.icon
 	data.price = str(item.price)
+	data.amount = ResourceScripts.game_res.get_item_amount(item.code)
 	node.showup(targetnode, data, mode)
 
 func connectskilltooltip(node, skill, character):
@@ -2178,7 +2179,7 @@ func common_effects(effects, from_event = false):
 							'remove':
 								character.tags.erase(k.value)
 								if k.value == 'no_sex' and !character.has_status('no_sex'):
-									var text = character.get_short_name() + ": " + "Sex unlocked"
+									var text = character.get_short_name() + ": " + tr("CHARLOG_SEX_ACCESS_UNLOCKED")
 									text_log_add('char', text)
 #									manifest(text, character)
 								
@@ -3157,9 +3158,6 @@ func update_localization_file(update_loc: String, primary_loc = "en"):
 			
 			# if it's a missing key, insert keys
 			if key in missing_keys.keys():
-				# strip a trailing auto-inserted "# MISSING TRANSLATION" marker before checking
-				# for the line-ending comma, otherwise a previously auto-inserted anchor line
-				# would never match and every key after it would silently stop being inserted
 				var check_line = cleared_line
 				if check_line.ends_with("#MISSINGTRANSLATION"):
 					check_line = check_line.substr(0, check_line.length() - "#MISSINGTRANSLATION".length())

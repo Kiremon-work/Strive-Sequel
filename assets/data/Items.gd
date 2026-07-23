@@ -1975,7 +1975,7 @@ var itemlist = {
 		reqs = [{code = 'unique', value = 'cali'}],
 		effects = [],#'e_maid_dress_effect'],
 		tags = ['no_random'],
-		basestats = {training_loyalty = 5, mod_serivce = 0.15},
+		basestats = {training_loyalty = 5, mod_service = 0.15},
 	},
 	enslaving_collar = {
 		code = 'enslaving_collar',
@@ -6258,6 +6258,16 @@ var fixed_quality_stats = {
 		
 	},
 	
+}
+
+
+#Bonus-stat keys saved on old gear (including costumes) that no longer match a current
+#stat code - e.g. a designer renamed/retired a stat after items with it were already saved.
+#Map old_key -> new_key to rename on load, or old_key -> null to drop it with no replacement.
+var obsolete_bonusstats = {
+	'mod_serivce': 'mod_service', #legacy typo in cali_collar_enchanted_2, fixed post-0.15.0
+	'training_spirit': 'training_points_bonus', #renamed in the training rework (b51a4fb61)
+	'resistance_red': null, #dropped in the training rework (b51a4fb61), no replacement stat
 }
 
 

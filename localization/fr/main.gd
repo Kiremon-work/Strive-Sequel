@@ -2086,6 +2086,8 @@ Improves disposition towards {color=yellow|Random} actions. Costs 5 Mana.""", # 
 	SERVANTUNLOCK_DIALOGUE_TEXT = """What would you like %s to learn?""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_AFFECTION = """needs 25+ Affection""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_CONSENT = """needs 2+ Consent""", # MISSING TRANSLATION
+	SERVANTUNLOCK_REQ_SEX_ACCESS = """[name] isn't ready to engage with these topics at this moment""", # MISSING TRANSLATION
+	CHARLOG_SEX_ACCESS_UNLOCKED = """has opened to more intimate options.""", # MISSING TRANSLATION
 	NEGOTIATION_PAY = """Offer %d gold for this""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_CHARGE = """[Persuasion Challenge] Try to convince [him]""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_BREAK = """Offer [him] a couple days off first""", # MISSING TRANSLATION
@@ -2931,6 +2933,7 @@ You won't be able to finish turn if your total number of characters is bigger th
 	STATWITS_BONUS = "Esprit",
 	STATCHARM_BONUS = "Charme",
 	STATSEXUALS_BONUS = "Sexuel",
+	STATDESIRABILITY_BONUS = """Desirability""", # MISSING TRANSLATION
 	STATTRAINEE_AMOUNT = """Training Slots""", # MISSING TRANSLATION
 	STATTRAINING_LOYALTY = """Loyalty from Training""", # MISSING TRANSLATION
 	STATTRAINING_POINTS_BONUS = """Training Points from Training""", # MISSING TRANSLATION
@@ -3116,6 +3119,7 @@ Damage +15%, Health +20.""", # MISSING TRANSLATION
 	STATPRICE = "Valeur",
 	STATCOUNTERATTACKS = """Counterattacks remained""", # MISSING TRANSLATION
 	STATCOUNTERATTACKS_MAX = """Counterattacks per turn""", # MISSING TRANSLATION
+	STATCOUNTERATTACKS_MAXDESCRIPT = """Maximal number of counterattacks this character can perform per turn.""", # MISSING TRANSLATION
 	STATCHG_STRENGTH = """Strength Charges""", # MISSING TRANSLATION
 	STATCHG_STRENGTH_MAX = """Strength Max. Charges""", # MISSING TRANSLATION
 	STATCHG_PERSUASION = """Persuasion Charges""", # MISSING TRANSLATION

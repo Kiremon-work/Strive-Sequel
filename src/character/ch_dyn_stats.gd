@@ -923,7 +923,7 @@ func generate_random_character_from_data(desired_class = null, adjust_difficulty
 	var bonus_counter = 0
 	while difficulty > 0 && bonus_counter < 10:
 		var array = []
-		array = ['physics_factor', 'magic_factor', 'wits_factor','sexuals_factor', 'charm_factor']
+		array = ['physics_factor', 'magic_factor', 'wits_factor','sexuals_factor', 'charm_factor', 'tame_factor', 'authority_factor']
 		array = input_handler.random_from_array(array)
 		if randf() >= 0.2:
 			statlist[array] += globals.rng.randi_range(0, 2)
@@ -931,7 +931,7 @@ func generate_random_character_from_data(desired_class = null, adjust_difficulty
 			statlist[array] += globals.rng.randi_range(-1, 1)
 		difficulty -= 1
 		bonus_counter += 1
-	for st in ['physics_factor', 'magic_factor', 'wits_factor','sexuals_factor', 'charm_factor']:
+	for st in ['physics_factor', 'magic_factor', 'wits_factor','sexuals_factor', 'charm_factor', 'tame_factor', 'authority_factor']:
 		if statlist[st] < 1:
 			statlist[st] = 1
 		if statlist[st] > 6:

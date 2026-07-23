@@ -2110,12 +2110,18 @@ var data = {
 					{
 						code = "sex_training_oral",
 						operant = "=",
-						value = "skilled"
+						value = "skilled",
+						reqs = [
+							{code = "stat", stat = "sex_training_oral", operant = "neq", value = "mastered"}
+						]
 					},
 					{
 						code = "sex_training_petting",
 						operant = "=",
-						value = "skilled"
+						value = "skilled",
+						reqs = [
+							{code = "stat", stat = "sex_training_petting", operant = "neq", value = "mastered"}
+						]
 					}
 				]
 			}
@@ -2416,17 +2422,26 @@ var data = {
 					{
 						code = "sex_training_oral",
 						operant = "=",
-						value = "skilled"
+						value = "skilled",
+						reqs = [
+							{code = "stat", stat = "sex_training_oral", operant = "neq", value = "mastered"}
+						]
 					},
 					{
 						code = "sex_training_pussy",
 						operant = "=",
-						value = "skilled"
+						value = "skilled",
+						reqs = [
+							{code = "stat", stat = "sex_training_pussy", operant = "neq", value = "mastered"}
+						]
 					},
 					{
 						code = "sex_training_anal",
 						operant = "=",
-						value = "skilled"
+						value = "skilled",
+						reqs = [
+							{code = "stat", stat = "sex_training_anal", operant = "neq", value = "mastered"}
+						]
 					}
 				]
 			}

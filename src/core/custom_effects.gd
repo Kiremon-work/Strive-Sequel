@@ -287,6 +287,8 @@ func writ_of_exemption_use(): #possibly rework
 	if acceptance_chance >= randf()*acceptance_req:
 		input_handler.interactive_message_follow("writ_of_exemption_success",'char_translate',{ch = character})
 		character.set_slave_category('servant')
+		character.add_trait('training_s_combat')
+		character.add_trait('training_s_working')
 		if character.has_status('relation'):
 			character.add_trait('training_s_relation')
 #		character.add_stat('loyalty', 25)

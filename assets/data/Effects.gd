@@ -320,7 +320,6 @@ var effect_table = {
 		type = 'simple',
 		conditions = [{code = 'workrule', check = true, value = 'constrain'}],
 		statchanges = {productivity = 0.15},
-		tags = ['no_loyalty_growth'],
 	},
 	work_rule_masturbation = {
 		type = 'simple',

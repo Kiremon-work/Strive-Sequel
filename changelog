@@ -1,4 +1,7 @@
-Fixed Lira's quest not triggering properly
+Added minor affection bonus to master's social skill
+Fixed Lira's quest not triggering
+Fixed story characters not preventing sex unlocks before progressing their story
+0.15.1a
 Fixed some key localization issues which should make other localizations more stable with missing translations
 Fixed some missing events keys
 Fixed wave skill type not working correctly in some cases

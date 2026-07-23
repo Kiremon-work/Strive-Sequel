@@ -389,10 +389,27 @@ func fix_gear():
 
 			if owner != null:
 				owner = null
+	fix_obsolete_bonusstats()
 	for id in enchants:
 		enchants[id] = int(enchants[id])
 	if !bonusstats.has('enchant_capacity') and template.basestats.has('enchant_capacity'):
 		bonusstats['enchant_capacity'] = template.basestats['enchant_capacity']
+
+
+func fix_obsolete_bonusstats():
+	for old_key in Items.obsolete_bonusstats:
+		if !bonusstats.has(old_key):
+			continue
+		var value = bonusstats[old_key]
+		bonusstats.erase(old_key)
+		var new_key = Items.obsolete_bonusstats[old_key]
+		if new_key == null:
+			continue #stat retired outright, nothing to migrate it to
+		var is_numeric = (value is int or value is float)
+		if bonusstats.has(new_key) and is_numeric and (bonusstats[new_key] is int or bonusstats[new_key] is float):
+			bonusstats[new_key] += value
+		else:
+			bonusstats[new_key] = value
 
 
 func substractitemcost():

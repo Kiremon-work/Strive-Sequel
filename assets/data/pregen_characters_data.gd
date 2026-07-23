@@ -55,7 +55,7 @@ var pregen_characters = {
 			magic = 'weak',
 		},
 		blocked_training_traits = {
-			training_sex_service = ['DaisyTrainingFinished'],
+			training_sexservice = ['DaisyTrainingFinished'],
 			training_sexservice_adv = ["DaisyTrainingFinished"],
 			training_callmaster = ['DaisyQuestlineFinished'],
 		},
@@ -532,7 +532,7 @@ var pregen_characters = {
 		},
 		blocked_training_traits = {
 			training_relation = ['cali_dating_unlocked'],
-			training_sex_service = ['cali_dating_unlocked'],
+			training_sexservice = ['cali_dating_unlocked'],
 			training_callmaster = ['cali_training_unlocked'],
 			training_sexservice_adv = ['cali_training_unlocked'],
 		},

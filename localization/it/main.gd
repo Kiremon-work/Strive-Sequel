@@ -2091,6 +2091,8 @@ Migliora la disposizione verso {color=yellow|Azioni Casuali}. Costa 5 Mana.""",
 	SERVANTUNLOCK_DIALOGUE_TEXT = """What would you like %s to learn?""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_AFFECTION = """needs 25+ Affection""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_CONSENT = """needs 2+ Consent""", # MISSING TRANSLATION
+	SERVANTUNLOCK_REQ_SEX_ACCESS = """[name] isn't ready to engage with these topics at this moment""", # MISSING TRANSLATION
+	CHARLOG_SEX_ACCESS_UNLOCKED = """has opened to more intimate options.""", # MISSING TRANSLATION
 	NEGOTIATION_PAY = """Offer %d gold for this""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_CHARGE = """[Persuasion Challenge] Try to convince [him]""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_BREAK = """Offer [him] a couple days off first""", # MISSING TRANSLATION
@@ -2746,6 +2748,7 @@ Non potrai completare il turno se il numero totale dei tuoi personaggi è superi
 	STATWITS_BONUS = "Ingegno",
 	STATCHARM_BONUS = "Fascino",
 	STATSEXUALS_BONUS = "Sessuali",
+	STATDESIRABILITY_BONUS = """Desirability""", # MISSING TRANSLATION
 	STATTRAINEE_AMOUNT = "Slot di Allenamento",
 	STATTRAINING_LOYALTY = "Fedeltà dall'Addestramento",
 	STATTRAINING_POINTS_BONUS = """Training Points from Training""", # MISSING TRANSLATION
@@ -2924,6 +2927,7 @@ Danno +15%, Salute +20.""",
 	STATPRICE = "Valore",
 	STATCOUNTERATTACKS = "Contrattacchi rimasti",
 	STATCOUNTERATTACKS_MAX = "Contrattacchi per turno",
+	STATCOUNTERATTACKS_MAXDESCRIPT = "Maximal number of counterattacks this character can perform per turn.", # MISSING TRANSLATION
 	STATCHG_STRENGTH = "Cariche di Forza",
 	STATCHG_STRENGTH_MAX = "Forza Max. Cariche",
 	STATCHG_PERSUASION = "Cariche di Persuasione",

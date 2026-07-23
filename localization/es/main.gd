@@ -2143,6 +2143,8 @@ Mejora la disposición hacia acciones de {color=yellow|Aleatorio}. Costs 5 Mana.
 	SERVANTUNLOCK_DIALOGUE_TEXT = """What would you like %s to learn?""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_AFFECTION = """needs 25+ Affection""", # MISSING TRANSLATION
 	SERVANTUNLOCK_REQ_CONSENT = """needs 2+ Consent""", # MISSING TRANSLATION
+	SERVANTUNLOCK_REQ_SEX_ACCESS = """[name] isn't ready to engage with these topics at this moment""", # MISSING TRANSLATION
+	CHARLOG_SEX_ACCESS_UNLOCKED = """has opened to more intimate options.""", # MISSING TRANSLATION
 	NEGOTIATION_PAY = """Offer %d gold for this""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_CHARGE = """[Persuasion Challenge] Try to convince [him]""", # MISSING TRANSLATION
 	NEGOTIATION_PERSUADE_BREAK = """Offer [him] a couple days off first""", # MISSING TRANSLATION
@@ -2789,6 +2791,7 @@ Servicio es un modificador global para esta asignación.""",
 	STATWITS_BONUS = "Ingenio",
 	STATCHARM_BONUS = "Encanto",
 	STATSEXUALS_BONUS = "Sexuales",
+	STATDESIRABILITY_BONUS = """Desirability""", # MISSING TRANSLATION
 	STATTRAINEE_AMOUNT = "Espacios de entrenamiento",
 	STATTRAINING_LOYALTY = "Lealtad de formación",
 	STATTRAINING_POINTS_BONUS = """Training Points from Training""", # MISSING TRANSLATION
@@ -2967,6 +2970,7 @@ Daño +15%, Salud +20.""",
 	STATPRICE = "Valor",
 	STATCOUNTERATTACKS = """Counterattacks remained""", # MISSING TRANSLATION
 	STATCOUNTERATTACKS_MAX = """Counterattacks per turn""", # MISSING TRANSLATION
+	STATCOUNTERATTACKS_MAXDESCRIPT = """Maximal number of counterattacks this character can perform per turn.""", # MISSING TRANSLATION
 	STATCHG_STRENGTH = "Cargas de fuerza",
 	STATCHG_STRENGTH_MAX = "Fuerza Máxima. Cargas",
 	STATCHG_PERSUASION = "Cargos de persuasión",

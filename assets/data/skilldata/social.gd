@@ -9,7 +9,7 @@ var skills = {
 		social_skill_stats = [],
 		reqs = [],
 		targetreqs = [{code = 'is_master', check = false}],
-		effects = [Effectdata.rebuild_template({effect = 'e_mastermentor'})],
+		effects = [Effectdata.rebuild_template({effect = 'e_mastermentor'}), Effectdata.rebuild_template({effect = 'e_mastermentor_affection'})],
 		cost = {},
 		charges = 1,
 		cooldown = 1,
@@ -354,6 +354,12 @@ var effects = {
 		tags = ['positive', 'buff'],
 		statchanges = {exp_gain_mod = 1},
 		buffs = ['b_mastermentor'],
+	},
+	e_mastermentor_affection = {
+		type = 'oneshot',
+		target = 'target',
+		tags = [],
+		atomic = [{type = 'stat_add', stat = 'affection', value = ['random', 10, 15]}],
 	},
 	e_t_hardwork = {
 		type = 'temp_s',
