@@ -31,24 +31,44 @@ func _ready():
 	input_handler.register_btn_source('craft_work', self, 'tut_get_craftbutton')
 	input_handler.register_btn_source('daisy_work', self, 'tut_get_daisy_work')
 	input_handler.register_btn_source('close_work', self, 'tut_get_CloseButton')
+	input_handler.register_btn_source('mat_order_highlight', self, null, self, 'tut_get_mat_order_highlight')
+	input_handler.register_btn_source('mat_order_cooking', self, 'tut_get_order_cooking_btn', null, null, 'dropped')
+	input_handler.register_btn_source('mat_order_smith', self, 'tut_get_order_smith_btn', null, null, 'dropped')
+	input_handler.register_btn_source('mat_order_tailor', self, 'tut_get_order_tailor_btn', null, null, 'dropped')
+	input_handler.register_btn_source('mat_order_alchemy', self, 'tut_get_order_alchemy_btn', null, null, 'dropped')
 
 
 func tut_get_building():
 	for work in $Resourses/GridContainer.get_children():
 		if work.get_meta('work', {code = ''}).code == 'building':
 			return work
-
 func tut_get_servicebutton():
 	return servicebutton
 func tut_get_craftbutton():
 	return craftbutton
-
 func tut_get_daisy_work():
 	for line in $CharacterList/GridContainer.get_children():
 		if line.get_meta('slave').get_stat('unique') == 'daisy':
 			return line
 func tut_get_CloseButton():
 	return $CloseButton
+func tut_get_mat_order_highlight():
+	var rect = $CraftRules2/filters/order1.get_global_rect()
+#	rect.end = tut_get_front3().get_global_rect().end
+	return rect
+func tut_get_mat_order_btn(type):
+	for btn in $CraftRules2/filters/order1.get_children():
+		var job = btn.get("arraydata")
+		if job and job == type:
+			return btn
+func tut_get_order_cooking_btn():
+	return tut_get_mat_order_btn("cooking")
+func tut_get_order_smith_btn():
+	return tut_get_mat_order_btn("smith")
+func tut_get_order_tailor_btn():
+	return tut_get_mat_order_btn("tailor")
+func tut_get_order_alchemy_btn():
+	return tut_get_mat_order_btn("alchemy")
 
 #func raise_clock():
 #	gui_controller.clock.raise()
